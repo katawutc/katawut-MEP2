@@ -1,0 +1,26 @@
+{
+  "name": "mep2",
+  "version": "1.0.0",
+  "description": "MEP2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katawutc/katawut-MEP2.git"
+  },
+  "keywords": [
+    "MEP2"
+  ],
+  "author": "Katawut Chuasiripattana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katawutc/katawut-MEP2/issues"
+  },
+  "homepage": "https://github.com/katawutc/katawut-MEP2#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
