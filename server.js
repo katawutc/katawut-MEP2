@@ -8,9 +8,9 @@ var port = 5000;
 
 var app = express();
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+// use plain html and angular js
+// set static folder to render the page
+app.use(express.static('app'));
 
 app.listen(port, function(){
 	console.log('Server starts on port '+ port);
