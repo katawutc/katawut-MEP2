@@ -4,4 +4,8 @@ angular.module('app')
     .when("/", {
       templateUrl : 'main.html'
     })
+    .when("/logIn", {
+      templateUrl : 'logIn.html',
+      controller : 'logInCtrl'
+    })
 });
