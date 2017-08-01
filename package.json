@@ -22,6 +22,7 @@
   "homepage": "https://github.com/katawutc/katawut-MEP2#readme",
   "dependencies": {
     "ejs": "^2.5.7",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mongoose": "^4.11.5"
   }
 }
