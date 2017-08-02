@@ -12,4 +12,11 @@ angular.module('app')
       templateUrl : 'signUp.html',
       controller : 'signUpCtrl'
     })
+    .when("/unSubscribeTestContent", {
+      templateUrl : 'unSubscribeTestContent.html'
+    })
+    .when("/unSubscribeTestMain/:testID", {
+      templateUrl : 'unSubscribeTestMain.html',
+      controller : 'unSubscribeTestMainCtrl'
+    })
 });
