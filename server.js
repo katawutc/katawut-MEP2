@@ -35,13 +35,8 @@ app.listen(port, function(){
 	console.log('Server starts on port '+ port);
 });
 
-
 /** sign up */
 app.post('/signUp', function(req, res) {
-  console.log('Sign up post reach the server')
-  console.log(req.body.name);
-  console.log(req.body.email);
-  console.log(req.body.password);
 
   plainPassword = req.body.password;
 
