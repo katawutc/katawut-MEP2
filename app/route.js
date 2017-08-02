@@ -8,4 +8,8 @@ angular.module('app')
       templateUrl : 'logIn.html',
       controller : 'logInCtrl'
     })
+    .when("/signUp", {
+      templateUrl : 'signUp.html',
+      controller : 'signUpCtrl'
+    })
 });
