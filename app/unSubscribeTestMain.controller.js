@@ -32,10 +32,6 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams, $window, $location
                          accessTime: $window.sessionStorage.testStartAt
                         }
 
-   /**
-    * should register the unSubscribeUser here to get the user ID here \
-    * using POST or POST service to insert unSubscribeUser
-    */
     $http({
     url: 'unSubscribeUser/register',
     method: 'POST',

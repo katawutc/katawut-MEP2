@@ -84,3 +84,36 @@ app.get('/testHeader/:testID', function(req, res) {
   }
 })
 /** */
+
+/** unSubscribeUser register*/
+app.post('/unSubscribeUser/register', function(req, res) {
+  db.collection('unSubscribeUser').insert({userName: 'unSubscribe',
+                                         testID: req.body.testID,
+                                         testMode: req.body.testMode,
+                                         accessTime: req.body.accessTime}, cb);
+  function cb(err, doc) {
+    if (err) throw err;
+    else {
+      var userID = doc.insertedIds[0];
+      db.collection('unSubscribeUser').update({_id:userID}, {$set:{userID: userID}});
+      res.json({userName: 'unSubscribe',
+                userID: userID});
+              }
+            }
+})
+/** */
+
+/** To get exam question both tutorial and exam mode */
+app.get('/unSubscribeTest/:mode/:testID/:questionNumber', function(req, res) {
+
+  db.collection('unSubscribeTestContent').findOne({testID: req.params.testID,
+                                                   questionNumber: req.params.questionNumber}, cb);
+
+    function cb(err, doc) {
+      if (err) res.json(err);
+      else {
+        res.json(doc);
+      }
+    }
+})
+/** */

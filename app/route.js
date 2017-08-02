@@ -19,4 +19,8 @@ angular.module('app')
       templateUrl : 'unSubscribeTestMain.html',
       controller : 'unSubscribeTestMainCtrl'
     })
+    .when("/unSubscribeTest/tutorial/:testID/:questionNumber", {
+      templateUrl : 'unSubscribeTutorialMode.html',
+      controller : 'unSubscribeTutorialModeCtrl'
+    })
 });
