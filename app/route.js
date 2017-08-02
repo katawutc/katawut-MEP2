@@ -27,5 +27,8 @@ angular.module('app')
       templateUrl : 'testSummaryUnSubscribeUser.html',
       controller : 'testSummaryUnSubscribeUserCtrl'
     })
-
+    .when("/reviewUnSubscribeTest/:testID/:questionNumber", {
+      templateUrl : 'reviewUnSubscribeTest.html',
+      controller : 'reviewUnSubscribeTestCtrl'
+    })
 });
