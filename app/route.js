@@ -23,4 +23,9 @@ angular.module('app')
       templateUrl : 'unSubscribeTutorialMode.html',
       controller : 'unSubscribeTutorialModeCtrl'
     })
+    .when("/testSummaryUnSubscribeUser", {
+      templateUrl : 'testSummaryUnSubscribeUser.html',
+      controller : 'testSummaryUnSubscribeUserCtrl'
+    })
+
 });

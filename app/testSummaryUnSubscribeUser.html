@@ -1,0 +1,20 @@
+<nav-bar></nav-bar>
+<h1> Test Summary</h1>
+<h2>Score: {{score}}</h2>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+  <th>Question number</th>
+  <th>Result</th>
+  <th>Review</th>
+    </tr>
+  </thead>
+      <tbody>
+        <tr ng-repeat="res in result">
+          <td>{{ res.questionNumber }}</td>
+          <td>{{ res.result }}</td>
+          <td><a ng-href="#!/reviewUnSubscribeTest/{{res.testID}}/{{res.questionNumber}}">Review solution</a></td>
+        </tr>
+      </tbody>
+</table>

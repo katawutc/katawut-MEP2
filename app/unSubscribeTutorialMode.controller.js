@@ -101,7 +101,6 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
       });
     }
 
-
     $scope.nextQuestion = function() {
       console.log('Next question, please ...');
       ++$scope.questionNumber;
@@ -125,5 +124,4 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
   $scope.showTestSummary = function() {
     $location.path('/testSummaryUnSubscribeUser');
   }
-
 }
