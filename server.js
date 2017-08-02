@@ -256,3 +256,34 @@ app.get('/getTestScoreUnSubscribeUser/:userID/:testID/:testMode/:testStartAt',
     }
 })
 /** */
+
+/** get test summary UnSubscribeUser*/
+app.get('/getTestSummaryUnSubscribeUser/:userID/:testID/:testMode/:testStartAt', function (req, res) {
+
+  db.collection('unSubscribeUserTestResult').find({userID: req.params.userID,
+                                                   testID: req.params.testID,
+                                                   testMode: req.params.testMode,
+                                                   testStartAt: req.params.testStartAt}).toArray(cb);
+
+    function cb(err, doc) {
+      if (err) throw err;
+      else {
+        res.json(doc);
+      }
+    }
+})
+/** */
+
+/** review solutuon UnSubscribeUser*/
+app.get('/reviewUnSubscribeTest/:testID/:questionNumber', function(req, res) {
+  db.collection('unSubscribeSolutionContent').findOne({solutionID: req.params.testID,
+                                            solQuestionNumber: req.params.questionNumber},
+                                            cb);
+    function cb(err, doc) {
+      if (err) throw err;
+      else {
+        res.json(doc);
+      }
+    }
+})
+/** */
