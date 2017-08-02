@@ -72,7 +72,7 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
       // use service to check the answer on the server
       // http get to retrieve Exam question
 
-      var urlCheckAnswer = '/unSubscribeTest/checkAnswer/'+$window.sessionStorage.testMode
+      var urlCheckAnswer = '/unSubscribeTest/checkAnswer/'+$window.sessionStorage.testMode;
 
       $http({
       url: urlCheckAnswer,
@@ -104,7 +104,7 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
 
     $scope.nextQuestion = function() {
       console.log('Next question, please ...');
-      ++$scope.questionNo;
+      ++$scope.questionNumber;
       console.log($scope.questionNumber);
 
       // looping through to get the next question in the test
