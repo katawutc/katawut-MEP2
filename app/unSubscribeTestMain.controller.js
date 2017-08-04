@@ -4,13 +4,13 @@ angular.module('app').controller('unSubscribeTestMainCtrl', unSubscribeTestMainC
 function unSubscribeTestMainCtrl($scope, $http, $routeParams,
                                   $window, $location, testHeader) {
 
-  console.log(testHeader);
-
+  // write the testHeader information after resolve
   $scope.testDescription = testHeader.testDescription;
   $window.sessionStorage.setItem('testID', testHeader.testID);
   $window.sessionStorage.setItem('testDescription', testHeader.testDescription);
   $window.sessionStorage.setItem('numberOfQuestion', testHeader.numberOfQuestion);
 
+  // user selects tutorial mode
   $scope.startTestTutorialMode = function() {
     // log mode in sessionStorage
     $window.sessionStorage.setItem('testMode', 'tutorial');
@@ -32,7 +32,6 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
       $window.sessionStorage.setItem('userID', response.data.userID);
 
     }, function errorCallback(response) {
-      console.log(response.status);
       $location.path('/errorPage');
     });
 

@@ -19,21 +19,39 @@ angular.module('app')
       templateUrl : 'unSubscribeTestMain.html',
       controller : 'unSubscribeTestMainCtrl',
       resolve : {
-        testHeader: function(testHeaderService) {
+        testHeader : function(testHeaderService) {
           return testHeaderService.getTestHeader();
         }
       }
     })
     .when("/unSubscribeTest/tutorial/:testID/:questionNumber", {
       templateUrl : 'unSubscribeTutorialMode.html',
-      controller : 'unSubscribeTutorialModeCtrl'
+      controller : 'unSubscribeTutorialModeCtrl',
+      resolve : {
+        testQuestion : function(testQuestionService) {
+          return testQuestionService.getTestQuestion();
+        }
+      }
     })
     .when("/testSummaryUnSubscribeUser", {
       templateUrl : 'testSummaryUnSubscribeUser.html',
-      controller : 'testSummaryUnSubscribeUserCtrl'
+      controller : 'testSummaryUnSubscribeUserCtrl',
+      resolve : {
+        testScore : function(testScoreService) {
+          return testScoreService.getTestScore();
+        },
+        testSummary : function(testSummaryService) {
+          return testSummaryService.getTestSummary();
+        }
+      }
     })
     .when("/reviewUnSubscribeTest/:testID/:questionNumber", {
       templateUrl : 'reviewUnSubscribeTest.html',
-      controller : 'reviewUnSubscribeTestCtrl'
+      controller : 'reviewUnSubscribeTestCtrl',
+      resolve : {
+        reviewUnSubscribeTest : function (reviewUnSubscribeTestService) {
+          return reviewUnSubscribeTestService.getReviewQuestion();
+        }
+      }
     })
 });

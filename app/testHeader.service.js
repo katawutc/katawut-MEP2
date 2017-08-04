@@ -5,13 +5,13 @@ function testHeaderService($http, $route, $q) {
   return {
     getTestHeader : function() {
 
-      var testHeaderURL = '/testHeader/'+ $route.current.params.testID;
+      var testHeaderUrl = '/testHeader/'+ $route.current.params.testID;
 
       var deferred = $q.defer();
 
       $http({
         method: 'GET',
-        url: testHeaderURL
+        url: testHeaderUrl
       }).then(function successCallback(response) {
         deferred.resolve(response.data);
       },function errorCallback(response){

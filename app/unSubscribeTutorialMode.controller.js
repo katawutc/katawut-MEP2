@@ -1,6 +1,6 @@
 angular.module('app').controller('unSubscribeTutorialModeCtrl', unSubscribeTutorialModeCtrl);
 
-function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $location) {
+function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
 
   // use for showing submit answer or next question button
   $scope.submitted = true;
@@ -21,32 +21,19 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
 
   var testUrl = '/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+$routeParams.questionNumber;
 
+  var currentQuestionNumber = testQuestion.questionNumber;
+
   $scope.numberOfQuestion = $window.sessionStorage.numberOfQuestion;
 
-  // http get to retrieve Exam question
-  $http({
-  url: testUrl,
-  method: 'GET'
-  }).then(function successCallback(response) {
-    // this callback will be called asynchronously
-    // when the response is available
+  $scope.questionNumber = testQuestion.questionNumber;
+  $scope.question = testQuestion.question;
+  $scope.choice1 = testQuestion.answerChoice[0];
+  $scope.choice2 = testQuestion.answerChoice[1];
+  $scope.choice3 = testQuestion.answerChoice[2];
+  $scope.choice4 = testQuestion.answerChoice[3];
 
-    $scope.questionNumber = response.data.questionNumber;
-    $scope.question = response.data.question;
-    $scope.choice1 = response.data.answerChoice[0];
-    $scope.choice2 = response.data.answerChoice[1];
-    $scope.choice3 = response.data.answerChoice[2];
-    $scope.choice4 = response.data.answerChoice[3];
-
-    // where to clock question starts ?
-    $window.sessionStorage.setItem('currentQuestionStartAt', Date.now());
-
-  }, function errorCallback(response) {
-    // called asynchronously if an error occurs
-    // or server returns response with an error status.
-    console.log(response.status);
-    $location.path('/errorPage');
-  });
+  // where to clock question starts ?
+  $window.sessionStorage.setItem('currentQuestionStartAt', Date.now());
 
   $scope.submitAnswer = function() {
 
@@ -102,20 +89,18 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
     }
 
     $scope.nextQuestion = function() {
-      console.log('Next question, please ...');
-      ++$scope.questionNumber;
-      console.log($scope.questionNumber);
 
-      // looping through to get the next question in the test
-      if ($scope.questionNumber <= $window.sessionStorage.getItem('numberOfQuestion')) {
+      ++currentQuestionNumber;
+
+        if (currentQuestionNumber <= $window.sessionStorage.getItem('numberOfQuestion')) {
         // change button type to display
         $scope.submitted = true;
         $scope.next = false;
         $scope.testFinished = false;
         // Fetching a new question from the DB by routing
-        var url = '/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+$scope.questionNumber;
+        var url = '/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+currentQuestionNumber;
         console.log(url);
-        $location.path('/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+$scope.questionNumber);
+        $location.path('/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+currentQuestionNumber);
     } else {
       console.log('To show the summary page');
     }
