@@ -1,24 +1,15 @@
 angular.module('app').controller('unSubscribeTestMainCtrl', unSubscribeTestMainCtrl);
 
-function unSubscribeTestMainCtrl($scope, $http, $routeParams, $window, $location) {
+// put resolve with testHeader
+function unSubscribeTestMainCtrl($scope, $http, $routeParams,
+                                  $window, $location, testHeader) {
 
-  // Refactor test header to be service
-  var url = '/testHeader/'+$routeParams.testID;
+  console.log(testHeader);
 
-  // Test Header and description will be displayed here.
-  $http({
-  url: url,
-  method: 'GET',
-  }).then(function successCallback(response) {
-    $scope.testDescription = response.data.testDescription;
-    $window.sessionStorage.setItem('testID', response.data.testID);
-    $window.sessionStorage.setItem('testDescription', response.data.testDescription);
-    $window.sessionStorage.setItem('numberOfQuestion', response.data.numberOfQuestion);
-
-  }, function errorCallback(response) {
-    console.log(response.status);
-    $location.path('/errorPage');
-  });
+  $scope.testDescription = testHeader.testDescription;
+  $window.sessionStorage.setItem('testID', testHeader.testID);
+  $window.sessionStorage.setItem('testDescription', testHeader.testDescription);
+  $window.sessionStorage.setItem('numberOfQuestion', testHeader.numberOfQuestion);
 
   $scope.startTestTutorialMode = function() {
     // log mode in sessionStorage

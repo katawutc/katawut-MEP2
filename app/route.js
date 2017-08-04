@@ -17,7 +17,12 @@ angular.module('app')
     })
     .when("/unSubscribeTestMain/:testID", {
       templateUrl : 'unSubscribeTestMain.html',
-      controller : 'unSubscribeTestMainCtrl'
+      controller : 'unSubscribeTestMainCtrl',
+      resolve : {
+        testHeader: function(testHeaderService) {
+          return testHeaderService.getTestHeader();
+        }
+      }
     })
     .when("/unSubscribeTest/tutorial/:testID/:questionNumber", {
       templateUrl : 'unSubscribeTutorialMode.html',
