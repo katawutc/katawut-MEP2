@@ -37,11 +37,18 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
 
   $scope.submitAnswer = function() {
 
-      console.log($scope.formData.answer);
+      // defect when question reach the end of test; still show next button
 
+      if ($routeParams.questionNumber === $window.sessionStorage.getItem('numberOfQuestion')) {
+        $scope.submitted = false;
+        $scope.next = false;
+        $scope.testFinished = true;
+      }
+      else {
       $scope.submitted = false;
       $scope.next = true;
       $scope.testFinished = false;
+    }
 
       // where to clock question finishes ?
       $window.sessionStorage.setItem('currentQuestionFinishAt', Date.now());
@@ -74,11 +81,13 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
           * 1. Not to display next question button
           * 2. Instead show end of test and go to Test summary button here
           */
+          /*
         if ($routeParams.questionNumber === $window.sessionStorage.getItem('numberOfQuestion')) {
           $scope.submitted = false;
           $scope.next = false;
           $scope.testFinished = true;
         }
+        */
 
       }, function errorCallback(response) {
         // called asynchronously if an error occurs
