@@ -4,10 +4,14 @@ function testHeaderService($http, $route, $q) {
 
   return {
     getTestHeader : function() {
+
+      var testHeaderURL = '/testHeader/'+ $route.current.params.testID;
+
       var deferred = $q.defer();
+
       $http({
         method: 'GET',
-        url: '/testHeader/ONET-P6-Math-0001'
+        url: testHeaderURL
       }).then(function successCallback(response) {
         deferred.resolve(response.data);
       },function errorCallback(response){
