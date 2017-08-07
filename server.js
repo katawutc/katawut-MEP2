@@ -2,8 +2,10 @@
 // Katawut Chuasiripattana
 
 var express = require('express');
-var port = 5000; // set listening port
+//var port = 5000; // set listening port
+var port;
 var app = express();
+app.set('port', (process.env.PORT || 5000));
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -31,9 +33,14 @@ mongoClient.connect(mlabDB, function(err, database){
   db = database;
 });
 
+/*
 app.listen(port, function(){
 	console.log('Server starts on port '+ port);
 });
+*/
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'))});
 
 /** sign up */
 app.post('/signUp', function(req, res) {
