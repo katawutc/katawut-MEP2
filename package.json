@@ -23,9 +23,7 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
-    "ejs": "^2.5.7",
     "express": "^4.15.3",
-    "mongodb": "^2.2.30",
-    "mongoose": "^4.11.5"
+    "mongodb": "^2.2.30"
   }
 }
