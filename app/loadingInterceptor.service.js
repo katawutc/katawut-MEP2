@@ -2,17 +2,17 @@ angular.module('app').factory('loadingInterceptorService', loadingInterceptorSer
 
 function loadingInterceptorService($q, $rootScope, $log) {
   var xhrCreations = 0;
- var xhrResolutions = 0;
+  var xhrResolutions = 0;
 
- function isLoading() {
-     return xhrResolutions < xhrCreations;
- }
+  function isLoading() {
+      return xhrResolutions < xhrCreations;
+    }
 
- function updateStatus() {
+  function updateStatus() {
      $rootScope.loading = isLoading();
- }
+    }
 
- return {
+  return {
      request: function (config) {
          xhrCreations++;
          updateStatus();
@@ -25,15 +25,15 @@ function loadingInterceptorService($q, $rootScope, $log) {
          return $q.reject(rejection);
      },
      response: function (response) {
-     xhrResolutions++;
-     updateStatus();
-     return response;
+       xhrResolutions++;
+       updateStatus();
+       return response;
  },
- responseError: function (rejection) {
-     xhrResolutions++;
-     updateStatus();
-     $log.error('Response error:', rejection);
-     return $q.reject(rejection);
+    responseError: function (rejection) {
+      xhrResolutions++;
+      updateStatus();
+      $log.error('Response error:', rejection);
+      return $q.reject(rejection);
    }
  }
 }
