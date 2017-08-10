@@ -5,6 +5,10 @@ function testQuestionService($http, $route, $q) {
   return {
     getTestQuestion : function() {
 
+      /**
+       * still need to fix the mode of test in the parameter to retrieve \
+       * question
+       */
       var testQuestionUrl = '/unSubscribeTest/tutorial/'
         +$route.current.params.testID+'/'+$route.current.params.questionNumber;
 
