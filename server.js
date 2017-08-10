@@ -198,8 +198,12 @@ if (req.body.testMode === 'tutorial') {
     db.collection('unSubscribeSolutionContent').findOne({solutionID: solutionID,
                                               solQuestionNumber: questionNumber},
                                               cb); /*function (err, doc) { */
+
       function cb(err, doc) {
         if (err) throw err;
+
+        solution = doc.solution;
+        explanation = doc.explanation;
 
       /** Record user Test result in the DB somewhere here
         * 1. score and count score
@@ -218,7 +222,7 @@ if (req.body.testMode === 'tutorial') {
                      testStartAt: req.body.testStartAt,
                      questionStartAt: req.body.currentQuestionStartAt,
                      questionFinishAt: req.body.currentQuestionFinishAt,
-                     questionNo: req.body.questionNumber,
+                     questionNumber: req.body.questionNumber,
                      userAnswer:req.body.answer,
                      result: 'correct'})
 
@@ -234,7 +238,7 @@ if (req.body.testMode === 'tutorial') {
                      testStartAt: req.body.testStartAt,
                      questionStartAt: req.body.currentQuestionStartAt,
                      questionFinishAt: req.body.currentQuestionFinishAt,
-                     questionNo: req.body.questionNumber,
+                     questionNumber: req.body.questionNumber,
                      userAnswer:req.body.answer,
                      result: 'wrong'});
 

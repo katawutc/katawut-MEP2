@@ -2,8 +2,6 @@ angular.module('app').controller('unSubscribeExamModeCtrl', unSubscribeExamModeC
 
 function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
 
-  var testUrl = '/unSubscribeTest/exam/'+$routeParams.testID+'/'+$routeParams.questionNo;
-
   $scope.testID = $routeParams.testID;
   $scope.questionNo = $routeParams.questionNo;
 
@@ -36,7 +34,7 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
                         testID: $routeParams.testID,
                         testMode: $window.sessionStorage.testMode,
                         testStartAt: $window.sessionStorage.testStartAt,
-                        questionNumber: $routeParams.questionNo,
+                        questionNumber: $routeParams.questionNumber,
                         answer: $scope.formData.answer,
                         currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
                         currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
