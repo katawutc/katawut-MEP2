@@ -8,6 +8,10 @@ angular.module('app')
       templateUrl : 'logIn.html',
       controller : 'logInCtrl'
     })
+    .when("/logOut", {
+    templateUrl : 'logOut.html',
+    controller : 'logOutCtrl'
+    })
     .when("/signUp", {
       templateUrl : 'signUp.html',
       controller : 'signUpCtrl'
