@@ -54,4 +54,8 @@ angular.module('app')
         }
       }
     })
+    .when("/dashboard/:userID", {
+      templateUrl : 'dashboard.html',
+      controller :'dashboardCtrl'
+    })
 });

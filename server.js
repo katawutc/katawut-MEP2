@@ -10,6 +10,14 @@ app.set('port', (process.env.PORT || 5000));
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+/** jwt */
+var jwt = require('jsonwebtoken');
+var passport = require('passport');
+var passportJWT = require("passport-jwt");
+var ExtractJwt = passportJWT.ExtractJwt;
+var JwtStrategy = passportJWT.Strategy;
+
+
 // use plain html and angular js
 // set static folder to render the page
 app.use(express.static('app'));
@@ -38,6 +46,31 @@ app.listen(port, function(){
 	console.log('Server starts on port '+ port);
 });
 */
+
+// JWT Strategy
+var opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+opts.secretOrKey = 'secret';
+
+var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
+   console.log('payload received', jwt_payload);
+
+   // Need to refactor to _id
+   var query = {_id: objectID(jwt_payload.id)};
+
+   db.collection('user').findOne(query, function(err, result) {
+     if (result) {
+       console.log(result);
+       next(null, result);
+     } else {
+       console.log('Fail Fail Fail');
+       next(null, false);
+     }
+   });
+});
+
+passport.use(strategy);
+/** */
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'))});
@@ -293,4 +326,52 @@ app.get('/reviewUnSubscribeTest/:testID/:questionNumber', function(req, res) {
       }
     }
 })
+/** */
+
+app.get('/dashboard/:userID', passport.authenticate('jwt', {session: false}),
+  function(req, res) {
+    // require ObjectID function for express
+  console.log(req.params.userID);
+  db.collection('user').findOne({_id : objectID(req.params.userID)}, function(err, docs) {
+    if (err) {
+      console.log(err);
+      res.json(err);
+    }
+    else {
+      console.log(docs);
+      res.json(docs);
+    }
+  })
+})
+
+/** logIn */
+app.post('/logIn', function(req, res) {
+
+  var query = {userEmail: req.body.email};
+  var loginSuccess;
+
+  // connect to the DB
+  db.collection('user').findOne(query, function(err, result) {
+    if (err) throw err;
+
+    var hashedPassword = result.userHashedPassword;
+
+    bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
+
+      if (pass) {
+        // need to refactor to _id instead of result.userName
+        var payload = { id: result._id };
+        var token = jwt.sign(payload, opts.secretOrKey);
+
+        res.json({userName: result.userName,
+                  userID: result._id,
+                  token: token,
+                  message: 'login success'});
+                } else {
+
+                  res.json({message: 'login fail'});
+                }
+              });
+            });
+});
 /** */
