@@ -328,21 +328,21 @@ app.get('/reviewUnSubscribeTest/:testID/:questionNumber', function(req, res) {
 })
 /** */
 
+/** get dashboard data */
 app.get('/dashboard/:userID', passport.authenticate('jwt', {session: false}),
   function(req, res) {
-    // require ObjectID function for express
-  console.log(req.params.userID);
+
   db.collection('user').findOne({_id : objectID(req.params.userID)}, function(err, docs) {
     if (err) {
-      console.log(err);
       res.json(err);
     }
     else {
-      console.log(docs);
+      // To refactor not to send hashedPassword
       res.json(docs);
     }
   })
 })
+/** */
 
 /** logIn */
 app.post('/logIn', function(req, res) {

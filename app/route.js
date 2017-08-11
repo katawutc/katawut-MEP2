@@ -56,6 +56,11 @@ angular.module('app')
     })
     .when("/dashboard/:userID", {
       templateUrl : 'dashboard.html',
-      controller :'dashboardCtrl'
+      controller :'dashboardCtrl',
+      resolve : {
+        dashboardData : function (dashboardService){
+          return dashboardService.getDashboardData();
+        }
+      }
     })
 });
