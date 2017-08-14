@@ -25,15 +25,19 @@
 <!-- bootstrap3 -->
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <!-- -->
 <!-- social login button -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <!-- -->
-
+<link rel = "stylesheet" type = "text/css" href = "mep.css"/>
 
 <body ng-app='app'>
+
+<div id="loaderdiv" data-ng-if="loading">
+    <img src="ajax-loader.gif" class="ajax-loader"/>
+</div>
 
 <div ng-view></div>
 
