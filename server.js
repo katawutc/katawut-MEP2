@@ -22,6 +22,7 @@ var JwtStrategy = passportJWT.Strategy;
 // set static folder to render the page
 app.use(express.static('app'));
 app.use(express.static('public'));
+app.use(express.static('public/html'));
 
 // Body Parser Middleware
 var bodyParser = require('body-parser');
