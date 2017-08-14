@@ -21,6 +21,7 @@ var JwtStrategy = passportJWT.Strategy;
 // use plain html and angular js
 // set static folder to render the page
 app.use(express.static('app'));
+app.use(express.static('public'));
 
 // Body Parser Middleware
 var bodyParser = require('body-parser');
@@ -40,12 +41,6 @@ mongoClient.connect(mlabDB, function(err, database){
   }
   db = database;
 });
-
-/*
-app.listen(port, function(){
-	console.log('Server starts on port '+ port);
-});
-*/
 
 // JWT Strategy
 var opts = {};
