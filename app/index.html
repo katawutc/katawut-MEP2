@@ -52,7 +52,7 @@
   100% { transform: rotate(360deg); }
 }
 
-#mydiv {
+#loaderdiv {
     position:absolute;
     top:0;
     left:0;
@@ -64,12 +64,16 @@
  }
 
 .ajax-loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -32px; /* -1 * image width / 2 */
-    margin-top: -32px;  /* -1 * image height / 2 */
-    display: block;
+  position: fixed;
+  z-index: 999;
+  height: 15em;
+  width: 15em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 </style>
@@ -77,7 +81,7 @@
 
 <body ng-app='app'>
 
-<div id="mydiv" data-ng-if="loading">
+<div id="loaderdiv" data-ng-if="loading">
     <img src="ajax-loader.gif" class="ajax-loader"/>
 </div>
 
