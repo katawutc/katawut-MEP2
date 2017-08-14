@@ -37,6 +37,15 @@ angular.module('app')
         }
       }
     })
+    .when("/unSubscribeTest/exam/:testID/:questionNumber", {
+      templateUrl : 'unSubscribeExamMode.html',
+      controller : 'unSubscribeExamModeCtrl',
+      resolve : {
+        testQuestion : function(testQuestionService) {
+          return testQuestionService.getTestQuestion();
+        }
+      }
+    })
     .when("/testSummaryUnSubscribeUser", {
       templateUrl : 'testSummaryUnSubscribeUser.html',
       controller : 'testSummaryUnSubscribeUserCtrl',
