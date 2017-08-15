@@ -384,10 +384,11 @@ app.post('/examAnswerSummary', function(req, res) {
                                               testID: req.body.testID,
                                               testMode: req.body.testMode,
                                               testStartAt: req.body.testStartAt,
-                                              questionStartAt: req.body.currentQuestionStartAt,
-                                              questionFinishAt: req.body.currentQuestionFinishAt,
                                               questionNumber: req.body.questionNumber,
-                                              userAnswer:req.body.answer}, cb);
+                                              status: req.body.status,
+                                              userAnswer:req.body.answer,
+                                              questionStartAt: req.body.currentQuestionStartAt,
+                                              questionFinishAt: req.body.currentQuestionFinishAt}, cb);
     function cb (err, doc) {
       if (err) throw err;
       else {

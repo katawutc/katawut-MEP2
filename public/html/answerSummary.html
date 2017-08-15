@@ -6,6 +6,7 @@
   <thead>
     <tr>
   <th>Question number</th>
+  <th>Status</th>
   <th>Answer</th>
   <th>Review</th>
     </tr>
@@ -13,8 +14,9 @@
       <tbody>
         <tr ng-repeat="res in result">
           <td>{{ res.questionNumber }}</td>
+          <td>{{ res.status }}</td>
           <td>{{ res.userAnswer }}</td>
-          <td><a ng-href="#">Review answer</a></td>
+          <td><a ng-href="#">Revise answer</a></td>
         </tr>
       </tbody>
 </table>

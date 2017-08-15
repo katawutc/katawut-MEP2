@@ -24,12 +24,13 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
       // clock question finishes
       $window.sessionStorage.setItem('currentQuestionFinishAt', Date.now());
 
-      var answerJSON = {userName: 'unSubscribe',
+      var answerJSON = {userName: $window.sessionStorage.userName,
                         userID: $window.sessionStorage.userID,
                         testID: $routeParams.testID,
                         testMode: $window.sessionStorage.testMode,
                         testStartAt: $window.sessionStorage.testStartAt,
                         questionNumber: $routeParams.questionNumber,
+                        status: 'answered',
                         answer: $scope.formData.answer,
                         currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
                         currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
@@ -64,96 +65,55 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
       });
     }
 
-    $scope.skipQuestion = function() {
+    //markQuestion()
+    $scope.markQuestion = function() {
 
       /**
        * modal dialog to show user that the question is skipped
        */
-      console.log('Skip this question');
+      console.log('mark this question');
 
       /** mark the question as unAnswered
        * $scope.formData.answer = 'unAnswered';
        */
 
-       var answerJSON = {userName: 'unSubscribe',
+       var answerJSON = {userName: $window.sessionStorage.userName,
                          userID: $window.sessionStorage.userID,
                          testID: $routeParams.testID,
                          testMode: $window.sessionStorage.testMode,
                          testStartAt: $window.sessionStorage.testStartAt,
-                         questionNumber: $routeParams.questionNo,
-                         answer: 'unAnswered',
+                         questionNumber: $routeParams.questionNumber,
+                         status: 'marked',
+                         answer: $scope.formData.answer,
                          currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
-                         currentQuestionFinishAt: 'unAnswered'};
+                         currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
 
-       var urlUnAnswered = '/questionStatusUnAnswered';
+        var examAnswerSummaryUrl = '/examAnswerSummary';
 
-       $http({
-       url: urlUnAnswered,
-       method: 'POST',
-       data: answerJSON /*,
-       headers: {
-         'Authorization': 'JWT ' + $window.sessionStorage.token
-       } */
-       }).then(function successCallback(response) {
-         // this callback will be called asynchronously
-         // when the response is available
-         console.log('Remark unAnswered question is returned.')
+        $http({
+        url: examAnswerSummaryUrl,
+        method: 'POST',
+        data: answerJSON
+        }).then(function successCallback(response) {
 
-         /** The logic to check if it is the end of the test here
-           * 1. Not to display next question button
-           * 2. Instead show end of test and go to Test summary button here
-           */
-         if ($routeParams.questionNo !== $window.sessionStorage.getItem('numberOfQuestion')) {
-           ++$routeParams.questionNo;
+        console.log(response.data);
 
-           console.log('/unSubscribeTest/exam/'+$routeParams.testID+'/'+$routeParams.questionNo);
+        if (currentQuestionNumber < $window.sessionStorage.getItem('numberOfQuestion')) {
+          ++currentQuestionNumber;
 
-           $location.path('/unSubscribeTest/exam/'+$routeParams.testID+'/'+$routeParams.questionNo);
-         }
-         else {
-           /**
-            * To check if there are some unAnswered question
-            */
+          console.log('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
 
-            var urlGetQuestionStatusUnAnswered = '/getQuestionStatusUnAnswered/'
-                                                  +$window.sessionStorage.userID+'/'
-                                                  +$window.sessionStorage.testID+'/'
-                                                  +$window.sessionStorage.testMode+'/'
-                                                  +$window.sessionStorage.testStartAt
-
-            $http({
-            url: urlGetQuestionStatusUnAnswered,
-            method: 'GET',
-            /*,
-            headers: {
-              'Authorization': 'JWT ' + $window.sessionStorage.token
-            } */
-            }).then(function successCallback(response) {
-              if(response.data !== 0) {
-                console.log('there are some unAnswered question');
-                console.log(response.data);
-
-                // call function to display unAnswered question
-                $location.path('/unAnsweredQuestion');
-              }
-
-            }, function errorCallback(response) {
-              // called asynchronously if an error occurs
-              // or server returns response with an error status.
-
-            });
-
-         }
-       }, function errorCallback(response) {
-         // called asynchronously if an error occurs
-         // or server returns response with an error status.
-         console.log(response.status);
-         $location.path('/errorPage');
-       });
-
-
-
-    }
+          $location.path('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
+          }
+        else {
+          console.log(currentQuestionNumber);
+          $location.path('/answerSummary');
+        }
+      }, function errorCallback(response) {
+        console.log(response.status);
+        $location.path('/errorPage');
+    });
+  }
 
     $scope.stopTheTest = function() {
       /**
