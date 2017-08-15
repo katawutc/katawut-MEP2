@@ -375,3 +375,43 @@ app.post('/logIn', function(req, res) {
             });
 });
 /** */
+
+/** to record exam answer to review and modify later*/
+app.post('/examAnswerSummary', function(req, res) {
+  console.log('arrive at examAnswerSummary');
+  db.collection('examAnswerSummary').insert({userName: req.body.userName,
+                                              userID: req.body.userID,
+                                              testID: req.body.testID,
+                                              testMode: req.body.testMode,
+                                              testStartAt: req.body.testStartAt,
+                                              questionStartAt: req.body.currentQuestionStartAt,
+                                              questionFinishAt: req.body.currentQuestionFinishAt,
+                                              questionNumber: req.body.questionNumber,
+                                              userAnswer:req.body.answer}, cb);
+    function cb (err, doc) {
+      if (err) throw err;
+      else {
+        console.log(doc);
+        res.json('answer recorded');
+      }
+    }
+})
+/** */
+
+/** get answer sheet summary to display and modify */
+app.get('/getAnswerSummary/:userID/:testID/:testMode/:testStartAt',
+          function (req, res) {
+  console.log('arrive at get answer summary');
+  db.collection('examAnswerSummary').find({userID: req.params.userID,
+                                            testID: req.params.testID,
+                                            testMode: req.params.testMode,
+                                            testStartAt: req.params.testStartAt}).toArray(cb);
+  function cb(err, doc) {
+    if (err) throw err;
+    else {
+      console.log(doc);
+      res.json(doc);
+    }
+  }
+})
+/** */

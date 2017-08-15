@@ -21,11 +21,6 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
 
   $scope.submitAnswerExamMode = function() {
 
-      /**
-       *  1. check if the question is unanswered e.g. $scope.formData.answer === null
-       */
-      //----
-
       // clock question finishes
       $window.sessionStorage.setItem('currentQuestionFinishAt', Date.now());
 
@@ -39,28 +34,17 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
                         currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
                         currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
 
-      // use service to check the answer on the server
-      // http get to retrieve Exam question
-      var urlCheckAnswer = '/unSubscribeTest/checkAnswer/'+$window.sessionStorage.testMode
+      var examAnswerSummaryUrl = '/examAnswerSummary';
 
       $http({
-      url: urlCheckAnswer,
+      url: examAnswerSummaryUrl,
       method: 'POST',
-      data: answerJSON /*,
-      headers: {
-        'Authorization': 'JWT ' + $window.sessionStorage.token
-      } */
+      data: answerJSON
       }).then(function successCallback(response) {
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log('Checked answer is returned.')
 
-        /** The logic to check if it is the end of the test here
-          * 1. Not to display next question button
-          * 2. Instead show end of test and go to Test summary button here
-          */
+        console.log(response.data);
 
-        if (currentQuestionNumber !== $window.sessionStorage.getItem('numberOfQuestion')) {
+        if (currentQuestionNumber < $window.sessionStorage.getItem('numberOfQuestion')) {
           ++currentQuestionNumber;
 
           console.log('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
@@ -68,12 +52,9 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
           $location.path('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
         }
         else {
+          console.log(currentQuestionNumber);
+          $location.path('/answerSummary');
 
-          /**
-           * To check if there are unAnswered question before go to test summary page
-           */
-
-          $location.path('/testSummaryUnSubscribeUser');
         }
       }, function errorCallback(response) {
         // called asynchronously if an error occurs

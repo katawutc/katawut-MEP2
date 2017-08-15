@@ -1,1 +1,22 @@
-<h1> Answer sheet summary page </h1>
+<nav-bar></nav-bar>
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+<h1> Answer sheet summary</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+  <th>Question number</th>
+  <th>Answer</th>
+  <th>Review</th>
+    </tr>
+  </thead>
+      <tbody>
+        <tr ng-repeat="res in result">
+          <td>{{ res.questionNumber }}</td>
+          <td>{{ res.userAnswer }}</td>
+          <td><a ng-href="#">Review answer</a></td>
+        </tr>
+      </tbody>
+</table>
+</div>
+<div class="col-sm-1"></div>

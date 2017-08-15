@@ -76,4 +76,13 @@ angular.module('app')
         }
       }
     })
+    .when('/answerSummary', {
+      templateUrl : 'answerSummary.html',
+      controller : 'answerSummaryCtrl',
+      resolve : {
+        answerSummary : function (answerSummaryService) {
+          return answerSummaryService.getAnswerSummary();
+        }
+      }
+    })
 });
