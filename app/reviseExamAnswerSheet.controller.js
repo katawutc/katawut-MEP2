@@ -5,10 +5,6 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
                                     $location, currentUserAnswerExam,
                                     reviseExamQuestion) {
 
-  console.log(currentUserAnswerExam);
-
-  console.log(reviseExamQuestion);
-
   $scope.currentUserAnswer = currentUserAnswerExam;
 
   $scope.questionNumber = reviseExamQuestion.questionNumber;
@@ -18,20 +14,18 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
   $scope.choice3 = reviseExamQuestion.answerChoice[2];
   $scope.choice4 = reviseExamQuestion.answerChoice[3];
 
-  //$scope.formData.answer = currentUserAnswerExam;
+  /**
+   * To implement re-submit the answer to update the DB
+   */
+
+
+  /**
+   * To implement the answer sheet function
+   */
+
+
+   /**
+    * what to do with marked function ?
+    */
 
 }
-
-  //$scope.formData = currentUserAnswerExam;
-
-
-  // get the question first
-  /*
-  var getQuestionUrl = 'unSubscribeTest/'+$routeParams.testMode+'/'
-                        +$routeParams.testID+'/'
-                        +$routeParams.questionNumber;
-
-  console.log(getQuestionUrl);
-  */
-
-  // get the user answer to populate the question

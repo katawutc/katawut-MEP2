@@ -72,6 +72,8 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
       $window.sessionStorage.setItem('userName', response.data.userName);
       $window.sessionStorage.setItem('userID', response.data.userID);
 
+      createAnswerSheetExam();
+
     }, function errorCallback(response) {
       console.log(response.status);
       $location.path('/errorPage');
@@ -82,6 +84,18 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
      * in the exam mode
      * then use update later for the real user answer
      */
+     function createAnswerSheetExam() {
+       console.log('creating createAnswerSheetExam');
+
+       var answerSheetExamData = {userName: $window.sessionStorage.userName,
+                                    userID: $window.sessionStorage.userID,
+                                    testID: $window.sessionStorage.testID,
+                                    testMode: $window.sessionStorage.testMode,
+                                    testStartAt: $window.sessionStorage.testStartAt};
+
+       console.log(answerSheetExamData);
+
+     }
 
     // use $location here
     var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID

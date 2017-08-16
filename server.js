@@ -124,9 +124,9 @@ app.get('/testHeader/:testID', function(req, res) {
 /** unSubscribeUser register*/
 app.post('/unSubscribeUser/register', function(req, res) {
   db.collection('unSubscribeUser').insert({userName: 'unSubscribe',
-                                         testID: req.body.testID,
-                                         testMode: req.body.testMode,
-                                         accessTime: req.body.accessTime}, cb);
+                                            testID: req.body.testID,
+                                            testMode: req.body.testMode,
+                                            accessTime: req.body.accessTime}, cb);
   function cb(err, doc) {
     if (err) throw err;
     else {
@@ -138,6 +138,10 @@ app.post('/unSubscribeUser/register', function(req, res) {
             }
 })
 /** */
+
+
+
+
 
 /** To get exam question both tutorial and exam mode */
 app.get('/unSubscribeTest/:mode/:testID/:questionNumber', function(req, res) {
