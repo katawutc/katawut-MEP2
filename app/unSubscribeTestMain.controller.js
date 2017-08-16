@@ -90,10 +90,24 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
        var answerSheetExamData = {userName: $window.sessionStorage.userName,
                                     userID: $window.sessionStorage.userID,
                                     testID: $window.sessionStorage.testID,
+                                    numberOfQuestion: $window.sessionStorage.numberOfQuestion,
                                     testMode: $window.sessionStorage.testMode,
                                     testStartAt: $window.sessionStorage.testStartAt};
 
        console.log(answerSheetExamData);
+
+       $http({
+       url: 'createAnswerSheetExam',
+       method: 'POST',
+       data: answerSheetExamData
+       }).then(function successCallback(response) {
+         console.log('return from create the answer sheet');
+
+       }, function errorCallback(response) {
+         console.log(response.status);
+         $location.path('/errorPage');
+       });
+
 
      }
 

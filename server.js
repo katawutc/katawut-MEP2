@@ -380,6 +380,19 @@ app.post('/logIn', function(req, res) {
 });
 /** */
 
+
+/** create answer sheet */
+app.post('/createAnswerSheetExam', function(req, res) {
+  console.log('arrive createAnswerSheetExam');
+
+  console.log(req.body.numberOfQuestion);
+
+  // loop in js to insert answer sheet
+
+  res.json('return createAnswerSheetExam');
+})
+
+
 /** to record exam answer to review and modify later*/
 app.post('/examAnswerSummary', function(req, res) {
   console.log('arrive at examAnswerSummary');
