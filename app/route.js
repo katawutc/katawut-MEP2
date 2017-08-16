@@ -92,6 +92,9 @@ angular.module('app')
       resolve : {
         currentUserAnswerExam : function(reviseExamAnswerSheetService) {
           return reviseExamAnswerSheetService.getCurrentUserAnswer();
+        },
+        reviseExamQuestion : function(reviseExamAnswerSheetService) {
+          return reviseExamAnswerSheetService.getReviseExamQuestion();
         }
       }
     })
