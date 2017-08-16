@@ -383,7 +383,7 @@ app.post('/examAnswerSummary', function(req, res) {
   /**
    * need to change to update instead if at first insert all the \
    * question number into the DB
-    */ 
+    */
   db.collection('examAnswerSummary').insert({userName: req.body.userName,
                                               userID: req.body.userID,
                                               testID: req.body.testID,
@@ -417,6 +417,30 @@ app.get('/getAnswerSummary/:userID/:testID/:testMode/:testStartAt',
     else {
       console.log(doc);
       res.json(doc);
+    }
+  }
+})
+/** */
+
+/** get answer from the answer sheet to revise/review */
+app.get('/reviseExamAnswerSheet/:userID/:testMode/:testStartAt/:testID/:questionNumber',
+          function(req, res) {
+  console.log('arrive reviseExamAnswerSheet');
+
+  console.log(req.params.userID);
+  console.log(req.params.testMode);
+
+  db.collection('examAnswerSummary').findOne({userID: req.params.userID,
+                                              testMode: req.params.testMode,
+                                              testStartAt: req.params.testStartAt,
+                                              testID: req.params.testID,
+                                              questionNumber: req.params.questionNumber}, cb);
+
+  function cb(err, doc) {
+    if (err) throw err;
+    else {
+      console.log(doc.userAnswer);
+        res.json(doc.userAnswer);
     }
   }
 })

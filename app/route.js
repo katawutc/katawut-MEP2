@@ -85,4 +85,14 @@ angular.module('app')
         }
       }
     })
+    /** revise answer sheet routing */
+    .when('/reviseExamAnswerSheet/:userID/:testMode/:testStartAt/:testID/:questionNumber', {
+      templateUrl : 'reviseExamAnswerSheet.html',
+      controller : 'reviseExamAnswerSheetCtrl',
+      resolve : {
+        currentUserAnswerExam : function(reviseExamAnswerSheetService) {
+          return reviseExamAnswerSheetService.getCurrentUserAnswer();
+        }
+      }
+    })
 });
