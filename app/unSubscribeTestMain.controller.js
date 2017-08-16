@@ -12,6 +12,10 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
 
   // user selects tutorial mode
   $scope.startTestTutorialMode = function() {
+
+    // defect when user log in but select the unSubscribe content, \
+    // userName change to unSubscribe
+
     // log mode in sessionStorage
     $window.sessionStorage.setItem('testMode', 'tutorial');
 
@@ -41,6 +45,11 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
   }
 
   $scope.startTestExamMode = function() {
+
+    // defect when user log in but select the unSubscribe content, \
+    // userName change to unSubscribe
+    // if (loggin) use userName login
+
     // log mode in sessionStorage
     $window.sessionStorage.setItem('testMode', 'exam');
 
@@ -67,6 +76,12 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
       console.log(response.status);
       $location.path('/errorPage');
     });
+
+    /**
+     * Another http post here to insert answer sheet to all the question \
+     * in the exam mode
+     * then use update later for the real user answer
+     */
 
     // use $location here
     var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID

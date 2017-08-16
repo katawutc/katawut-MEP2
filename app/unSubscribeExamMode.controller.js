@@ -115,13 +115,18 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
     });
   }
 
+  $scope.answerSheetSummary = function() {
+    console.log('go to answerSheetSummary');
+    $location.path('/answerSummary');
+  }
+
     $scope.stopTheTest = function() {
       /**
        * Modal dialog to show user the test will be stopped
        * and reset
        */
       console.log('Stop the test');
-      $location.path('/unSubscribeTestContent');
+      $location.path('/answerSummary');
     }
 
 }

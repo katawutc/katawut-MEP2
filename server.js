@@ -379,6 +379,11 @@ app.post('/logIn', function(req, res) {
 /** to record exam answer to review and modify later*/
 app.post('/examAnswerSummary', function(req, res) {
   console.log('arrive at examAnswerSummary');
+
+  /**
+   * need to change to update instead if at first insert all the \
+   * question number into the DB
+    */ 
   db.collection('examAnswerSummary').insert({userName: req.body.userName,
                                               userID: req.body.userID,
                                               testID: req.body.testID,
