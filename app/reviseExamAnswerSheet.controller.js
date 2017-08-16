@@ -9,6 +9,8 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
 
   console.log(reviseExamQuestion);
 
+  $scope.currentUserAnswer = currentUserAnswerExam;
+
   $scope.questionNumber = reviseExamQuestion.questionNumber;
   $scope.question = reviseExamQuestion.question;
   $scope.choice1 = reviseExamQuestion.answerChoice[0];
