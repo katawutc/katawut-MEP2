@@ -389,17 +389,19 @@ app.post('/createAnswerSheetExam', function(req, res) {
 
   // loop in js to insert answer sheet
   for(var i = 1; i <= req.body.numberOfQuestion; i++) {
+
+    var questionNumber = i.toString();
+
     db.collection('examAnswerSummary').insert({userName: req.body.userName,
                                                 userID: req.body.userID,
                                                 testID: req.body.testID,
                                                 testMode: req.body.testMode,
                                                 testStartAt: req.body.testStartAt,
-                                                questionNumber: i}, cb);
-
+                                                questionNumber: questionNumber}, cb);
     function cb(err, doc) {
       if (err) throw err;
       else {
-        console.log(doc);
+        console.log('empty answer sheet is created');
       }
     }
   }
@@ -415,7 +417,10 @@ app.post('/examAnswerSummary', function(req, res) {
   /**
    * need to change to update instead if at first insert all the \
    * question number into the DB
-    */
+   *
+   * to use find and update instead of insert
+   *
+   */
   db.collection('examAnswerSummary').insert({userName: req.body.userName,
                                               userID: req.body.userID,
                                               testID: req.body.testID,
@@ -460,20 +465,15 @@ app.get('/reviseExamAnswerSheet/:userID/:testMode/:testStartAt/:testID/:question
           function(req, res) {
   console.log('arrive reviseExamAnswerSheet');
 
-  console.log(req.params.userID);
-  console.log(req.params.testMode);
-
   db.collection('examAnswerSummary').findOne({userID: req.params.userID,
                                               testMode: req.params.testMode,
                                               testStartAt: req.params.testStartAt,
                                               testID: req.params.testID,
                                               questionNumber: req.params.questionNumber}, cb);
-
   function cb(err, doc) {
     if (err) throw err;
     else {
-      console.log(doc.userAnswer);
-        res.json(doc.userAnswer);
+      res.json(doc.userAnswer);
     }
   }
 })
