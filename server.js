@@ -421,6 +421,7 @@ app.post('/examAnswerSummary', function(req, res) {
    * to use find and update instead of insert
    *
    */
+   /*
   db.collection('examAnswerSummary').insert({userName: req.body.userName,
                                               userID: req.body.userID,
                                               testID: req.body.testID,
@@ -430,7 +431,19 @@ app.post('/examAnswerSummary', function(req, res) {
                                               status: req.body.status,
                                               userAnswer:req.body.answer,
                                               questionStartAt: req.body.currentQuestionStartAt,
-                                              questionFinishAt: req.body.currentQuestionFinishAt}, cb);
+                                              questionFinishAt: req.body.currentQuestionFinishAt}, cb);*/
+
+  db.collection('examAnswerSummary').update({userName: req.body.userName,
+                                              userID: req.body.userID,
+                                              testID: req.body.testID,
+                                              testMode: req.body.testMode,
+                                              testStartAt: req.body.testStartAt,
+                                              questionNumber: req.body.questionNumber},
+                                              { $set: { status: req.body.status,
+                                              userAnswer:req.body.answer,
+                                              questionStartAt: req.body.currentQuestionStartAt,
+                                              questionFinishAt: req.body.currentQuestionFinishAt}
+                                            }, cb);
     function cb (err, doc) {
       if (err) throw err;
       else {
