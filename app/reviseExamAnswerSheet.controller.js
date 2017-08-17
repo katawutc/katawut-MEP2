@@ -18,10 +18,71 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
    * To implement re-submit the answer to update the DB
    */
 
+   var currentQuestionNumber = $routeParams.questionNumber;
+
+   $scope.submitAnswerExamMode = function() {
+
+       // clock question finishes
+       $window.sessionStorage.setItem('currentQuestionFinishAt', Date.now());
+
+       var answerJSON = {userName: $window.sessionStorage.userName,
+                         userID: $window.sessionStorage.userID,
+                         testID: $routeParams.testID,
+                         testMode: $window.sessionStorage.testMode,
+                         testStartAt: $window.sessionStorage.testStartAt,
+                         questionNumber: $routeParams.questionNumber,
+                         status: 'answered',
+                         answer: $scope.formData.answer,
+                         currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
+                         currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
+
+       var examAnswerSummaryUrl = '/examAnswerSummary';
+
+       $http({
+       url: examAnswerSummaryUrl,
+       method: 'POST',
+       data: answerJSON
+       }).then(function successCallback(response) {
+
+         console.log(response.data);
+
+         if (currentQuestionNumber < $window.sessionStorage.getItem('numberOfQuestion')) {
+           ++currentQuestionNumber;
+
+           //console.log('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
+
+           var reviseAnswerUrl = '/reviseExamAnswerSheet/'+
+                                  $window.sessionStorage.userID+'/'+
+                                  $window.sessionStorage.testMode+'/'+
+                                  $window.sessionStorage.testStartAt+'/'+
+                                  $window.sessionStorage.testID+'/'+
+                                  currentQuestionNumber;
+
+           $location.path(reviseAnswerUrl);
+         }
+         else {
+           console.log(currentQuestionNumber);
+           $location.path('/answerSummary');
+
+         }
+       }, function errorCallback(response) {
+         // called asynchronously if an error occurs
+         // or server returns response with an error status.
+         console.log(response.status);
+         $location.path('/errorPage');
+       });
+     }
+
+   /** */
+
 
   /**
    * To implement the answer sheet function
    */
+   $scope.answerSheetSummary = function() {
+     console.log('go to answerSheetSummary');
+     $location.path('/answerSummary');
+   }
 
 
    /**

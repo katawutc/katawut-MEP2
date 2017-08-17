@@ -414,36 +414,18 @@ app.post('/createAnswerSheetExam', function(req, res) {
 app.post('/examAnswerSummary', function(req, res) {
   console.log('arrive at examAnswerSummary');
 
-  /**
-   * need to change to update instead if at first insert all the \
-   * question number into the DB
-   *
-   * to use find and update instead of insert
-   *
-   */
-   /*
-  db.collection('examAnswerSummary').insert({userName: req.body.userName,
-                                              userID: req.body.userID,
-                                              testID: req.body.testID,
-                                              testMode: req.body.testMode,
-                                              testStartAt: req.body.testStartAt,
-                                              questionNumber: req.body.questionNumber,
-                                              status: req.body.status,
-                                              userAnswer:req.body.answer,
-                                              questionStartAt: req.body.currentQuestionStartAt,
-                                              questionFinishAt: req.body.currentQuestionFinishAt}, cb);*/
-
   db.collection('examAnswerSummary').update({userName: req.body.userName,
                                               userID: req.body.userID,
                                               testID: req.body.testID,
                                               testMode: req.body.testMode,
                                               testStartAt: req.body.testStartAt,
                                               questionNumber: req.body.questionNumber},
-                                              { $set: { status: req.body.status,
-                                              userAnswer:req.body.answer,
-                                              questionStartAt: req.body.currentQuestionStartAt,
-                                              questionFinishAt: req.body.currentQuestionFinishAt}
-                                            }, cb);
+                                              { $set:
+                                                { status: req.body.status,
+                                                  userAnswer:req.body.answer,
+                                                  questionStartAt: req.body.currentQuestionStartAt,
+                                                  questionFinishAt: req.body.currentQuestionFinishAt}
+                                              }, cb);
     function cb (err, doc) {
       if (err) throw err;
       else {
