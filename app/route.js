@@ -99,4 +99,9 @@ angular.module('app')
         }
       }
     })
+    /** submit anser sheet exam mode for score and review solution */
+    .when('/testSummaryExamMode', {
+      templateUrl : 'testSummaryExamMode.html',
+      controller : 'testSummaryExamModeCtrl'
+    })
 });

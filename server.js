@@ -388,6 +388,12 @@ app.post('/createAnswerSheetExam', function(req, res) {
   console.log(req.body.numberOfQuestion);
 
   // loop in js to insert answer sheet
+
+  /**
+   * still need to fix defect on asynchronous call \
+   * return only when all inserted
+   */
+
   for(var i = 1; i <= req.body.numberOfQuestion; i++) {
 
     var questionNumber = i.toString();
@@ -405,7 +411,6 @@ app.post('/createAnswerSheetExam', function(req, res) {
       }
     }
   }
-
   res.json('return createAnswerSheetExam');
 })
 
