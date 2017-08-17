@@ -388,6 +388,21 @@ app.post('/createAnswerSheetExam', function(req, res) {
   console.log(req.body.numberOfQuestion);
 
   // loop in js to insert answer sheet
+  for(var i = 1; i <= req.body.numberOfQuestion; i++) {
+    db.collection('examAnswerSummary').insert({userName: req.body.userName,
+                                                userID: req.body.userID,
+                                                testID: req.body.testID,
+                                                testMode: req.body.testMode,
+                                                testStartAt: req.body.testStartAt,
+                                                questionNumber: i}, cb);
+
+    function cb(err, doc) {
+      if (err) throw err;
+      else {
+        console.log(doc);
+      }
+    }
+  }
 
   res.json('return createAnswerSheetExam');
 })
@@ -428,7 +443,8 @@ app.get('/getAnswerSummary/:userID/:testID/:testMode/:testStartAt',
   db.collection('examAnswerSummary').find({userID: req.params.userID,
                                             testID: req.params.testID,
                                             testMode: req.params.testMode,
-                                            testStartAt: req.params.testStartAt}).toArray(cb);
+                                            testStartAt: req.params.testStartAt})
+                                            .sort({"questionNumber":1}).toArray(cb);
   function cb(err, doc) {
     if (err) throw err;
     else {
