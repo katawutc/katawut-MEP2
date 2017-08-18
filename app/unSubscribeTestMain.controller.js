@@ -103,6 +103,10 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
        }).then(function successCallback(response) {
          console.log('return from create the answer sheet');
 
+         var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID
+                                          +'/1'
+         $location.path(url);
+
        }, function errorCallback(response) {
          console.log(response.status);
          $location.path('/errorPage');
@@ -112,8 +116,8 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
      }
 
     // use $location here
-    var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID
-                                     +'/1'
-    $location.path(url);
+    //var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID
+    //                                 +'/1'
+    //$location.path(url);
   }
 }
