@@ -391,6 +391,7 @@ app.post('/createAnswerSheetExam', function(req, res) {
   /**
    * still need to fix defect on asynchronous call \
    * return only when all inserted
+   * async js; promise
    */
 
   for(var i = 1; i <= req.body.numberOfQuestion; i++) {
@@ -542,7 +543,8 @@ app.get('/getExamSummary/:userID/:testID/:testMode/:testStartAt', function(req, 
   db.collection('examAnswerSummary').find({ userID: req.params.userID,
                                             testID: req.params.testID,
                                             testMode: req.params.testMode,
-                                            testStartAt: req.params.testStartAt}).toArray(cb);
+                                            testStartAt: req.params.testStartAt})
+                                            .sort({"questionNumber":1}).toArray(cb);
   function cb(err, doc) {
     if (err) throw err;
     else {
@@ -554,7 +556,7 @@ app.get('/getExamSummary/:userID/:testID/:testMode/:testStartAt', function(req, 
 
 /** get test solution */
 app.get('/reviewTestSolution/:testID/:questionNumber', function(req, res) {
-  
+
   db.collection('unSubscribeSolutionContent').findOne({solutionID: req.params.testID,
                                             solQuestionNumber: req.params.questionNumber},
                                             cb);
