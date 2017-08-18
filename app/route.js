@@ -107,6 +107,19 @@ angular.module('app')
       {
         examScore : function(examScoreService) {
           return examScoreService.getExamScore();
+        },
+        examSummary : function(examSummaryService) {
+          return examSummaryService.getExamSummary();
+        }
+      }
+    })
+    /** review test solution */
+    .when('/reviewTestSolution/:testID/:questionNumber', {
+      templateUrl : 'reviewTestSolution.html',
+      controller : 'reviewTestSolutionCtrl',
+      resolve : {
+        reviewTestSolution : function(reviewTestSolutionService) {
+          return reviewTestSolutionService.getTestSolution();
         }
       }
     })

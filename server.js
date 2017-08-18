@@ -534,3 +534,34 @@ app.get('/getExamScore/:userID/:testID/:testMode/:testStartAt', function(req, re
     }
   }
 })
+
+/** get exam summary */
+app.get('/getExamSummary/:userID/:testID/:testMode/:testStartAt', function(req, res) {
+  console.log('arrive at get exam summary');
+
+  db.collection('examAnswerSummary').find({ userID: req.params.userID,
+                                            testID: req.params.testID,
+                                            testMode: req.params.testMode,
+                                            testStartAt: req.params.testStartAt}).toArray(cb);
+  function cb(err, doc) {
+    if (err) throw err;
+    else {
+      // still need to refactor on what specifically to return
+      res.json(doc);
+    }
+  }
+})
+
+/** get test solution */
+app.get('/reviewTestSolution/:testID/:questionNumber', function(req, res) {
+  
+  db.collection('unSubscribeSolutionContent').findOne({solutionID: req.params.testID,
+                                            solQuestionNumber: req.params.questionNumber},
+                                            cb);
+    function cb(err, doc) {
+      if (err) throw err;
+      else {
+        res.json(doc);
+      }
+    }
+})
