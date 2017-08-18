@@ -516,3 +516,21 @@ app.get('/reviseExamAnswerSheet/:userID/:testMode/:testStartAt/:testID/:question
   }
 })
 /** */
+
+/** get exam score */
+app.get('/getExamScore/:userID/:testID/:testMode/:testStartAt', function(req, res) {
+  console.log('arrive at get exam score');
+
+  db.collection('examAnswerSummary').find({ userID: req.params.userID,
+                                            testID: req.params.testID,
+                                            testMode: req.params.testMode,
+                                            testStartAt: req.params.testStartAt,
+                                            result: 'correct'
+                                            }).count(cb);
+  function cb(err, score) {
+    if (err) throw error;
+    else {
+      res.json(score);
+    }
+  }
+})
