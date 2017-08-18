@@ -388,7 +388,6 @@ app.post('/createAnswerSheetExam', function(req, res) {
   console.log(req.body.numberOfQuestion);
 
   // loop in js to insert answer sheet
-
   /**
    * still need to fix defect on asynchronous call \
    * return only when all inserted
@@ -407,7 +406,7 @@ app.post('/createAnswerSheetExam', function(req, res) {
     function cb(err, doc) {
       if (err) throw err;
       else {
-        console.log('empty answer sheet is created');
+        console.log('empty answer sheet is created for '+questionNumber);
       }
     }
   }
@@ -434,7 +433,46 @@ app.post('/examAnswerSummary', function(req, res) {
     function cb (err, doc) {
       if (err) throw err;
       else {
-        console.log(doc);
+        //console.log(doc);
+
+        // checking answer and update the score here
+
+        var solutionID = req.body.testID;
+        var questionNumber = req.body.questionNumber;
+        var solution;
+        var userAnswer = req.body.answer;
+
+        // Retrieve Solution from the DB
+        db.collection('unSubscribeSolutionContent').findOne({solutionID: solutionID,
+                                                  solQuestionNumber: questionNumber},
+                                                  cb); /*function (err, doc) { */
+        function cb(err, solDoc) {
+          console.log(solDoc);
+          if (err) throw err;
+          else {
+            solution = solDoc.solution;
+
+            console.log(userAnswer);
+            if (solution === userAnswer) {
+              db.collection('examAnswerSummary').update({userName: req.body.userName,
+                                                          userID: req.body.userID,
+                                                          testID: req.body.testID,
+                                                          testMode: req.body.testMode,
+                                                          testStartAt: req.body.testStartAt,
+                                                          questionNumber: req.body.questionNumber},
+                                                          { $set: {result: 'correct'}});
+            }
+            else {
+              db.collection('examAnswerSummary').update({userName: req.body.userName,
+                                                          userID: req.body.userID,
+                                                          testID: req.body.testID,
+                                                          testMode: req.body.testMode,
+                                                          testStartAt: req.body.testStartAt,
+                                                          questionNumber: req.body.questionNumber},
+                                                          { $set: {result: 'wrong'}});
+            }
+          }
+        }
         res.json('answer recorded');
       }
     }
