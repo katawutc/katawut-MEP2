@@ -103,6 +103,7 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
        }).then(function successCallback(response) {
          console.log('return from create the answer sheet');
 
+         // go to the 1st question after empty answer sheet is created
          var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID
                                           +'/1'
          $location.path(url);
@@ -111,13 +112,6 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
          console.log(response.status);
          $location.path('/errorPage');
        });
-
-
      }
-
-    // use $location here
-    //var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID
-    //                                 +'/1'
-    //$location.path(url);
   }
 }
