@@ -43,7 +43,7 @@ mongoClient.connect(mlabDB, function(err, database){
   db = database;
 });
 
-// JWT Strategy
+/**  JWT Strategy */
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = 'secret';
@@ -51,8 +51,10 @@ opts.secretOrKey = 'secret';
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
    console.log('payload received', jwt_payload);
 
-   // Need to refactor to _id
-   var query = {_id: objectID(jwt_payload.id)};
+   // Need to refactor to userID
+   /** to refactor to have user role in here */
+   var query = {userID: objectID(jwt_payload.userID),
+                userRole: jwt_payload.userRole};
 
    db.collection('user').findOne(query, function(err, result) {
      if (result) {
@@ -68,9 +70,6 @@ var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 passport.use(strategy);
 /** */
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'))});
-
 /** sign up */
 app.post('/signUp', function(req, res) {
 
@@ -81,9 +80,13 @@ app.post('/signUp', function(req, res) {
   var hash = bcrypt.hashSync(plainPassword, salt);
 
   // connect to the DB
+  // add user role for authorization access
+  /** su: subscribed user; pu: paid user; test writer: tw; platform admin: ad */
   db.collection('user').insert({userName: req.body.name,
                                userEmail: req.body.email,
-                               userHashedPassword: hash}, cb);
+                               userHashedPassword: hash,
+                               userRole: 'su'}, /* subscribed user by default */
+                               cb);
   function cb(err, result) {
     if (err) {
       if (err.name === 'MongoError' && err.code === 11000) {
@@ -96,16 +99,68 @@ app.post('/signUp', function(req, res) {
     }
   }
     else {
-
       var userID = result.insertedIds[0];
-
       db.collection('user').update({_id:userID}, {$set:{userID: userID}});
-
       res.json({success: true,
                 message:'sign up success'});
               }
   }
 });
+/** */
+
+/** logIn */
+app.post('/logIn', function(req, res) {
+
+  var query = {userEmail: req.body.email};
+  var loginSuccess;
+
+  // connect to the DB
+  db.collection('user').findOne(query, function(err, result) {
+    if (err) throw err;
+
+    var hashedPassword = result.userHashedPassword;
+
+    bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
+
+      if (pass) {
+        // need to refactor to _id instead of result.userName
+        /** to add user role in the payload to check the authorization logic */
+        var payload = { userID: result.userID,
+                        userRole: result.userRole};
+        var token = jwt.sign(payload, opts.secretOrKey);
+
+        res.json({userName: result.userName,
+                  userID: result.userID,
+                  userRole: result.userRole,
+                  token: token,
+                  message: 'login success'});
+                } else {
+                  res.json({message: 'login fail'});
+                }
+              });
+            });
+});
+/** */
+
+/** get dashboard data */
+app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+  function(req, res) {
+
+  db.collection('user').findOne({userID : objectID(req.params.userID)}, function(err, doc) {
+    if (err) {
+      res.json(err);
+    }
+    else {
+      // To refactor not to send hashedPassword
+      res.json(doc);
+    }
+  })
+})
+/** */
+
+/** start node server */
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'))});
 /** */
 
 /** test header */
@@ -138,10 +193,6 @@ app.post('/unSubscribeUser/register', function(req, res) {
             }
 })
 /** */
-
-
-
-
 
 /** To get exam question both tutorial and exam mode */
 app.get('/unSubscribeTest/:mode/:testID/:questionNumber', function(req, res) {
@@ -331,55 +382,6 @@ app.get('/reviewUnSubscribeTest/:testID/:questionNumber', function(req, res) {
     }
 })
 /** */
-
-/** get dashboard data */
-app.get('/dashboard/:userID', passport.authenticate('jwt', {session: false}),
-  function(req, res) {
-
-  db.collection('user').findOne({_id : objectID(req.params.userID)}, function(err, docs) {
-    if (err) {
-      res.json(err);
-    }
-    else {
-      // To refactor not to send hashedPassword
-      res.json(docs);
-    }
-  })
-})
-/** */
-
-/** logIn */
-app.post('/logIn', function(req, res) {
-
-  var query = {userEmail: req.body.email};
-  var loginSuccess;
-
-  // connect to the DB
-  db.collection('user').findOne(query, function(err, result) {
-    if (err) throw err;
-
-    var hashedPassword = result.userHashedPassword;
-
-    bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
-
-      if (pass) {
-        // need to refactor to _id instead of result.userName
-        var payload = { id: result._id };
-        var token = jwt.sign(payload, opts.secretOrKey);
-
-        res.json({userName: result.userName,
-                  userID: result._id,
-                  token: token,
-                  message: 'login success'});
-                } else {
-
-                  res.json({message: 'login fail'});
-                }
-              });
-            });
-});
-/** */
-
 
 /** create answer sheet */
 app.post('/createAnswerSheetExam', function(req, res) {

@@ -2,7 +2,7 @@ angular.module('app').controller('dashboardCtrl', dashboardCtrl);
 
 function dashboardCtrl($scope, $http, $location, $window, $routeParams, dashboardData) {
 
-    $scope.user = dashboardData.userName;
-    $scope.email = dashboardData.userEmail;
-    $scope.id = dashboardData._id;
+    $scope.userName = dashboardData.userName;
+    $scope.userEmail = dashboardData.userEmail;
+    $scope.userID = dashboardData.userID;
   }

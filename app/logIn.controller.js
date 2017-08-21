@@ -14,13 +14,16 @@ function logInCtrl ($scope, $http, $location, $window) {
 
         $window.sessionStorage.setItem('userName', response.data.userName);
         $window.sessionStorage.setItem('userID', response.data.userID);
+        $window.sessionStorage.setItem('userRole', response.data.userRole);
         $window.sessionStorage.setItem('token', response.data.token);
         $window.sessionStorage.setItem('message', response.data.message);
 
         // Get userID here to start dashboard controller
         if ($window.sessionStorage.getItem('message') === 'login success') {
           //$location.path('/dashboard'+'/'+$window.sessionStorage.getItem('user'));
-          $location.path('/dashboard'+'/'+$window.sessionStorage.getItem('userID'));
+          $location.path('/dashboard'+'/'+
+                          $window.sessionStorage.getItem('userRole')+'/'+
+                          $window.sessionStorage.getItem('userID'));
         }
         else if ($window.sessionStorage.getItem('message') === 'login fail') {
           $location.path('/login');

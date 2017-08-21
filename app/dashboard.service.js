@@ -3,7 +3,9 @@ angular.module('app').factory('dashboardService', dashboardService);
 function dashboardService($http, $route, $window, $q) {
   return {
     getDashboardData : function() {
-      var dashboardDataUrl = '/dashboard/' + $window.sessionStorage.getItem('userID');
+      var dashboardDataUrl = '/dashboard/'+
+                              $window.sessionStorage.getItem('userRole')+'/'+
+                              $window.sessionStorage.getItem('userID');
 
       var deferred = $q.defer();
 
