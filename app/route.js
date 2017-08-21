@@ -68,9 +68,9 @@ angular.module('app')
         }
       }
     })
-    .when("/dashboard/:userRole/:userID", {
-      templateUrl : 'dashboard.html',
-      controller :'dashboardCtrl',
+    .when("/dashboard/su/:userID", {
+      templateUrl : 'dashboard.su.html',
+      controller :'dashboardSuCtrl',
       resolve : {
         dashboardData : function (dashboardService){
           return dashboardService.getDashboardData();

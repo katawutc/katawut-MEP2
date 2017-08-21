@@ -20,7 +20,6 @@ function logInCtrl ($scope, $http, $location, $window) {
 
         // Get userID here to start dashboard controller
         if ($window.sessionStorage.getItem('message') === 'login success') {
-          //$location.path('/dashboard'+'/'+$window.sessionStorage.getItem('user'));
           $location.path('/dashboard'+'/'+
                           $window.sessionStorage.getItem('userRole')+'/'+
                           $window.sessionStorage.getItem('userID'));

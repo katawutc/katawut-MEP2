@@ -146,12 +146,16 @@ app.post('/logIn', function(req, res) {
 app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   function(req, res) {
 
-  db.collection('user').findOne({userID : objectID(req.params.userID)}, function(err, doc) {
+  var query = {userID : objectID(req.params.userID),
+                userRole: req.params.userRole};
+
+  db.collection('user').findOne(query, function(err, doc) {
     if (err) {
       res.json(err);
     }
     else {
       // To refactor not to send hashedPassword
+      // if (doc === null) {}
       res.json(doc);
     }
   })
