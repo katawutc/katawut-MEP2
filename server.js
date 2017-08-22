@@ -51,6 +51,9 @@ opts.secretOrKey = 'secret';
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
    console.log('payload received', jwt_payload);
 
+   console.log(jwt_payload.userID);
+   console.log(jwt_payload.userRole);
+
    // Need to refactor to userID
    /** to refactor to have user role in here */
    var query = {userID: objectID(jwt_payload.userID),
@@ -118,6 +121,9 @@ app.post('/logIn', function(req, res) {
   db.collection('user').findOne(query, function(err, result) {
     if (err) throw err;
 
+    console.log(result.userID);
+    console.log(result.userRole);
+
     var hashedPassword = result.userHashedPassword;
 
     bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
@@ -155,7 +161,8 @@ app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: f
     }
     else {
       // To refactor not to send hashedPassword
-      // if (doc === null) {}
+      // if (doc === null)
+      console.log(doc);
       res.json(doc);
     }
   })

@@ -123,4 +123,9 @@ angular.module('app')
         }
       }
     })
+    /** error page route */
+    .when('/errorPage', {
+      templateUrl : 'errorPage.html',
+      controller : 'errorPageCtrl'
+    })
 });
