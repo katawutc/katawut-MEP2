@@ -17,6 +17,11 @@ var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
 
+/** helmet part */
+var helmet = require('helmet');
+app.use(helmet());
+/** */
+
 
 // use plain html and angular js
 // set static folder to render the page
