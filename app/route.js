@@ -72,8 +72,17 @@ angular.module('app')
       templateUrl : 'dashboard.su.html',
       controller :'dashboardSuCtrl',
       resolve : {
-        dashboardData : function (dashboardService){
-          return dashboardService.getDashboardData();
+        dashboardData : function (dashboardSuService){
+          return dashboardSuService.getDashboardData();
+        }
+      }
+    })
+    .when("/dashboard/pu/:userID", {
+      templateUrl : 'dashboard.pu.html',
+      controller :'dashboardPuCtrl',
+      resolve : {
+        dashboardData : function (dashboardPuService){
+          return dashboardPuService.getDashboardData();
         }
       }
     })

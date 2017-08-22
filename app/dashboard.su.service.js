@@ -1,14 +1,9 @@
-angular.module('app').factory('dashboardService', dashboardService);
+angular.module('app').factory('dashboardSuService', dashboardSuService);
 
-function dashboardService($http, $route, $window, $q) {
+function dashboardSuService($http, $route, $window, $q) {
   return {
       getDashboardData : function() {
-      /*
-      var dashboardDataUrl = '/dashboard/'+
-                              $window.sessionStorage.getItem('userRole')+'/'+
-                              $window.sessionStorage.getItem('userID');
-                              */
-      //var dashboardDataUrl = '/dashboard/su/'+$window.sessionStorage.getItem('userID');
+
       var dashboardDataUrl = '/dashboard/su/'+$route.current.params.userID;
 
       var deferred = $q.defer();

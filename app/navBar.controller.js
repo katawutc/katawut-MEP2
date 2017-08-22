@@ -7,7 +7,7 @@ function navBarController ($scope, $http, $location, $window) {
       return $scope.logIn;
     }
 
-    if ($window.sessionStorage.getItem('message') === 'login success') {
+    if ($window.sessionStorage.getItem('logInmessage') === 'login success') {
       $scope.logIn = true;
     } else { $scope.logIn = false; }
 }

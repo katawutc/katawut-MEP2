@@ -160,8 +160,7 @@ app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: f
       res.json(err);
     }
     else {
-      // To refactor not to send hashedPassword
-      // if (doc === null)
+
       console.log(doc);
       res.json(doc);
     }

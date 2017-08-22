@@ -1,6 +1,6 @@
-angular.module('app').controller('dashboardSuCtrl', dashboardSuCtrl);
+angular.module('app').controller('dashboardPuCtrl', dashboardPuCtrl);
 
-function dashboardSuCtrl($scope, $http, $location, $window, $routeParams, dashboardData) {
+function dashboardPuCtrl($scope, $http, $location, $window, $routeParams, dashboardData) {
 
     if (dashboardData) {
     $scope.userName = dashboardData.userName;
