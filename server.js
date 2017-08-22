@@ -156,20 +156,19 @@ app.post('/logIn', function(req, res) {
 /** get dashboard data */
 app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   function(req, res) {
+    var query = {userID : objectID(req.params.userID),
+                  userRole: req.params.userRole};
 
-  var query = {userID : objectID(req.params.userID),
-                userRole: req.params.userRole};
-
-  db.collection('user').findOne(query, function(err, doc) {
-    if (err) {
-      res.json(err);
-    }
-    else {
-
-      console.log(doc);
-      res.json(doc);
-    }
-  })
+    /** to implement what DB collection to access to get information for the dashboard */
+    db.collection('user').findOne(query, function(err, doc) {
+      if (err) {
+        res.json(err);
+      }
+      else {
+        res.json({userName: doc.userName,
+                  userRole: doc.userRole});
+      }
+    })
 })
 /** */
 

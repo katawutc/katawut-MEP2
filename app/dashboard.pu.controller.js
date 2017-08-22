@@ -4,8 +4,7 @@ function dashboardPuCtrl($scope, $http, $location, $window, $routeParams, dashbo
 
     if (dashboardData) {
     $scope.userName = dashboardData.userName;
-    $scope.userEmail = dashboardData.userEmail;
-    $scope.userID = dashboardData.userID;
+    $scope.userRole = dashboardData.userRole;
   }
   else {
     $window.sessionStorage.setItem('errorMessage', 'No Authorization');
