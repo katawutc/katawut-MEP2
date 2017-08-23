@@ -21,7 +21,7 @@ angular.module('app')
       templateUrl : 'signUpInstruction.html',
       controller : 'signUpInstructionCtrl'
     })
-    .when("/signUpActivate", {
+    .when("/signUpActivate/:userID/:hashActivate", {
       templateUrl : 'signUpActivate.html',
       controller : 'signUpActivateCtrl'
     })

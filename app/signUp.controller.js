@@ -24,7 +24,7 @@ function signUpCtrl ($scope, $http, $location, $window) {
           console.log(response.data);
           console.log(response.data.success);
           console.log(response.data.message);
-          $location.path('/error')
+          $location.path('/errorPage')
         }
     }, function errorCallback(response) {
         console.log(response.data);

@@ -102,7 +102,6 @@ app.post('/signUp', function(req, res) {
 
   // create hashActivate to insert to DB
   var hashActivate = md5(  Math.floor(Math.random() * (1000)) );
-  console.log(hashActivate);
 
   db.collection('user').insert({userName: null,
                                userEmail: req.body.email,
@@ -152,25 +151,30 @@ app.post('/signUp', function(req, res) {
   }
 });
 
-//  var plainPassword = req.body.password;
+/** account activation */
+app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
+
+  var plainPassword = req.body.password;
 
   // use bcrypt to hash and store password
-//  var salt = bcrypt.genSaltSync(saltRounds);
-//  var hash = bcrypt.hashSync(plainPassword, salt);
+  var salt = bcrypt.genSaltSync(saltRounds);
+  var hash = bcrypt.hashSync(plainPassword, salt);
 
-  // connect to the DB
-  // add user role for authorization access
-  /** su: subscribed user; pu: paid user; test writer: tw; platform admin: ad */
+  db.collection('user').update({userID: objectID(req.params.userID),
+                                hashActivate: req.params.hashActivate},
+                                {$set: { userName: req.body.userName,
+                                          userHashedPassword: hash,
+                                          activate: true,
+                                          hashActivate: null}}, cb);
 
+  function cb(err, count, status) {
+    if (err) throw err;
+    else {
+      res.json('the account is activated');
+    }
+  }
 
-  /** send email fro sign up verification and instruction */
-  /**
-   * Hi Katawut,
-   * You recently changed your security settings so that your Google account
-   * modernedu17@gmail.com is no longer protected by modern security standards.
-   */
-
-
+})
 
 /** */
 
