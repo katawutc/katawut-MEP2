@@ -17,6 +17,14 @@ angular.module('app')
       templateUrl : 'signUp.html',
       controller : 'signUpCtrl'
     })
+    .when("/signUpInstruction", {
+      templateUrl : 'signUpInstruction.html',
+      controller : 'signUpInstructionCtrl'
+    })
+    .when("/signUpActivate", {
+      templateUrl : 'signUpActivate.html',
+      controller : 'signUpActivateCtrl'
+    })
     .when("/unSubscribeTestContent", {
       templateUrl : 'unSubscribeTestContent.html'
     })

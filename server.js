@@ -7,8 +7,14 @@ var port;
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
+/** bcrypt */
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+/** */
+
+/** md5 */
+var md5 = require('md5');
+/** */
 
 /** nodemailer */
 var nodemailer = require('nodemailer');
@@ -94,19 +100,16 @@ passport.use(strategy);
 /** sign up */
 app.post('/signUp', function(req, res) {
 
-  var plainPassword = req.body.password;
+  // create hashActivate to insert to DB
+  var hashActivate = md5(  Math.floor(Math.random() * (1000)) );
+  console.log(hashActivate);
 
-  // use bcrypt to hash and store password
-  var salt = bcrypt.genSaltSync(saltRounds);
-  var hash = bcrypt.hashSync(plainPassword, salt);
-
-  // connect to the DB
-  // add user role for authorization access
-  /** su: subscribed user; pu: paid user; test writer: tw; platform admin: ad */
-  db.collection('user').insert({userName: req.body.name,
+  db.collection('user').insert({userName: null,
                                userEmail: req.body.email,
-                               userHashedPassword: hash,
-                               userRole: 'su'}, /* subscribed user by default */
+                               userHashedPassword: null,
+                               userRole: 'su', /* subscribed user by default */
+                               hashActivate: hashActivate,
+                               activate: false},
                                cb);
   function cb(err, result) {
     if (err) {
@@ -122,10 +125,43 @@ app.post('/signUp', function(req, res) {
     else {
       var userID = result.insertedIds[0];
       db.collection('user').update({_id:userID}, {$set:{userID: userID}});
-      res.json({success: true,
-                message:'sign up success'});
-              }
+
+        // activate url to have userID and hashActivate
+        var activateUrl = 'http://localhost:5000/#!/signUpActivate/'+
+                            userID+'/'+hashActivate;
+
+        var mailOptions = {
+          from: 'modernedu17@gmail.com',
+          to: req.body.email,
+          subject: 'Sign up to MEP',
+          html: '<h1>Welcome</h1><p>Please click this <a href='+activateUrl+'>link</a> to activate your account</p>'
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+
+            res.json({success: true,
+                      signUpEmail: req.body.email,
+                      message:'sign up success'});
+          }
+        });
+    }
   }
+});
+
+//  var plainPassword = req.body.password;
+
+  // use bcrypt to hash and store password
+//  var salt = bcrypt.genSaltSync(saltRounds);
+//  var hash = bcrypt.hashSync(plainPassword, salt);
+
+  // connect to the DB
+  // add user role for authorization access
+  /** su: subscribed user; pu: paid user; test writer: tw; platform admin: ad */
+
 
   /** send email fro sign up verification and instruction */
   /**
@@ -134,22 +170,8 @@ app.post('/signUp', function(req, res) {
    * modernedu17@gmail.com is no longer protected by modern security standards.
    */
 
-  var mailOptions = {
-    from: 'modernedu17@gmail.com',
-    to: req.body.email,
-    subject: 'Sign up to MEP',
-    text: 'This is the instruction.'
-  };
 
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
 
-});
 /** */
 
 /** logIn */

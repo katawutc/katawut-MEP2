@@ -26,6 +26,7 @@
     "express": "^4.15.3",
     "helmet": "^3.8.1",
     "jsonwebtoken": "^7.4.2",
+    "md5": "^2.2.1",
     "mongodb": "^2.2.30",
     "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
