@@ -5,11 +5,6 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams, dashbo
     if (dashboardData) {
       $scope.userName = dashboardData.userName;
       $scope.userRole = dashboardData.userRole;
-    /*
-    $scope.userName = dashboardData.userName;
-    $scope.userEmail = dashboardData.userEmail;
-    $scope.userID = dashboardData.userID;
-    */
   }
   else {
     $window.sessionStorage.setItem('errorMessage', 'No Authorization');

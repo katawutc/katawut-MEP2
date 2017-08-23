@@ -175,7 +175,6 @@ app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
   }
 
 })
-
 /** */
 
 /** logIn */
@@ -215,11 +214,51 @@ app.post('/logIn', function(req, res) {
 });
 /** */
 
+/** log in direct */
+app.post('/logInDirect', function(req, res) {
+
+  var query = {userID: objectID(req.body.userID)};
+  var loginSuccess;
+
+  // connect to the DB
+  db.collection('user').findOne(query, function(err, result) {
+    if (err) throw err;
+
+    console.log(result.userID);
+    console.log(result.userRole);
+
+    var hashedPassword = result.userHashedPassword;
+
+    bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
+
+      if (pass) {
+        // need to refactor to _id instead of result.userName
+        /** to add user role in the payload to check the authorization logic */
+        var payload = { userID: result.userID,
+                        userRole: result.userRole};
+        var token = jwt.sign(payload, opts.secretOrKey);
+
+        res.json({userName: result.userName,
+                  userID: result.userID,
+                  userRole: result.userRole,
+                  token: token,
+                  message: 'login success'});
+                } else {
+                  res.json({message: 'login fail'});
+                }
+              });
+            });
+
+})
+/** */
+
 /** get dashboard data */
 app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   function(req, res) {
     var query = {userID : objectID(req.params.userID),
                   userRole: req.params.userRole};
+
+    console.log(query);
 
     /** to implement what DB collection to access to get information for the dashboard */
     db.collection('user').findOne(query, function(err, doc) {
@@ -227,8 +266,8 @@ app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: f
         res.json(err);
       }
       else {
-        res.json({userName: doc.userName,
-                  userRole: doc.userRole});
+        console.log(doc);
+        res.json(doc); /** if (null) it will check at angular js */
       }
     })
 })
