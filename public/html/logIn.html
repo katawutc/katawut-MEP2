@@ -25,6 +25,7 @@
 <br><br>
 <form ng-submit="logInSubmit()">
   <div class="form-group">
+    <p style="color:red">{{logInErrorMessage}}</p>
     <label for="email">Email address</label>
     <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="credentials.email">
   </div>

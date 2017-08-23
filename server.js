@@ -184,33 +184,36 @@ app.post('/logIn', function(req, res) {
   var loginSuccess;
 
   // connect to the DB
-  db.collection('user').findOne(query, function(err, result) {
+  db.collection('user').findOne(query, function(err, doc) {
     if (err) throw err;
 
-    console.log(result.userID);
-    console.log(result.userRole);
-
-    var hashedPassword = result.userHashedPassword;
+    // to check null to prevent crash
+    if (doc) {
+    var hashedPassword = doc.userHashedPassword;
 
     bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
 
       if (pass) {
         // need to refactor to _id instead of result.userName
         /** to add user role in the payload to check the authorization logic */
-        var payload = { userID: result.userID,
-                        userRole: result.userRole};
+        var payload = { userID: doc.userID,
+                        userRole: doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
 
-        res.json({userName: result.userName,
-                  userID: result.userID,
-                  userRole: result.userRole,
+        res.json({userName: doc.userName,
+                  userID: doc.userID,
+                  userRole: doc.userRole,
                   token: token,
                   message: 'login success'});
                 } else {
                   res.json({message: 'login fail'});
                 }
               });
-            });
+          }
+          else {
+            res.json(doc);
+          }
+        });
 });
 /** */
 

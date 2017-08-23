@@ -12,6 +12,7 @@ function logInCtrl ($scope, $http, $location, $window) {
       data: $scope.credentials
     }).then(function successCallback(response) {
 
+        if (response.data) {
         $window.sessionStorage.setItem('userName', response.data.userName);
         $window.sessionStorage.setItem('userID', response.data.userID);
         $window.sessionStorage.setItem('userRole', response.data.userRole);
@@ -27,6 +28,10 @@ function logInCtrl ($scope, $http, $location, $window) {
         else if ($window.sessionStorage.getItem('logInMessage') === 'login fail') {
           $location.path('/login');
         }
+      }
+      else {
+        $scope.logInErrorMessage = 'Wrong Email address or password';
+      }
 
       }, function errorCallback(response) {
           $location.path('/logIn');
