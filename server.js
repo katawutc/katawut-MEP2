@@ -10,6 +10,17 @@ app.set('port', (process.env.PORT || 5000));
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+/** nodemailer */
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'modernedu17@gmail.com',
+    pass: 'Kwfahahcf75!#$'
+  }
+});
+/** */
+
 /** jwt */
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
@@ -23,11 +34,13 @@ app.use(helmet());
 /** */
 
 
-// use plain html and angular js
-// set static folder to render the page
+/**  use plain html and angular js
+ *   set static folder to render the page
+ */
 app.use(express.static('app'));
 app.use(express.static('public'));
 app.use(express.static('public/html'));
+/** */
 
 // Body Parser Middleware
 var bodyParser = require('body-parser');
@@ -81,7 +94,7 @@ passport.use(strategy);
 /** sign up */
 app.post('/signUp', function(req, res) {
 
-  plainPassword = req.body.password;
+  var plainPassword = req.body.password;
 
   // use bcrypt to hash and store password
   var salt = bcrypt.genSaltSync(saltRounds);
@@ -113,6 +126,29 @@ app.post('/signUp', function(req, res) {
                 message:'sign up success'});
               }
   }
+
+  /** send email fro sign up verification and instruction */
+  /**
+   * Hi Katawut,
+   * You recently changed your security settings so that your Google account
+   * modernedu17@gmail.com is no longer protected by modern security standards.
+   */
+
+  var mailOptions = {
+    from: 'modernedu17@gmail.com',
+    to: req.body.email,
+    subject: 'Sign up to MEP',
+    text: 'This is the instruction.'
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
 });
 /** */
 
