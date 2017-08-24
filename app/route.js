@@ -145,4 +145,14 @@ angular.module('app')
       templateUrl : 'errorPage.html',
       controller : 'errorPageCtrl'
     })
+    /** su setting */
+    .when('/setting/su/:userID', {
+      templateUrl : 'suSetting.html',
+      controller : 'suSettingCtrl',
+      resolve : {
+        suSettingData : function(suSettingService) {
+          return suSettingService.getSuSettingData();
+        }
+      }
+    })
 });

@@ -170,11 +170,25 @@ app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
   function cb(err, count, status) {
     if (err) throw err;
     else {
-      res.json('the account is activated');
+
+      userSettingUp1stTime(req.params.userID, res);
+
     }
   }
 
+
 })
+
+/** */
+function userSettingUp1stTime(uID, res) {
+
+  db.collection('userSetting').insert({userID: objectID(uID),
+                                        userRole: 'su'}, cb);
+
+  function cb() {
+    res.json('account is activated and 1st setting is up');
+  }
+}
 /** */
 
 /** logIn */

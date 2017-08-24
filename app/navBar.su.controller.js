@@ -1,6 +1,9 @@
 angular.module('app').controller('navBarSuController', navBarSuController);
 
 function navBarSuController ($scope, $http, $location, $window) {
+
+    $scope.userID = $window.sessionStorage.userID;
+
     $scope.logIn = false;
 
     $scope.isLogIn = function() {
