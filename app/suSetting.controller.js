@@ -9,6 +9,11 @@ function suSettingCtrl ($scope, $http, $routeParams, $window, $location,
    * by service
    */
 
+   if(suSettingData === null) {$location.path('/errorPage');}
+
+   $scope.userID = suSettingData.userID;
+   $scope.userRole = suSettingData.userRole;
+
   $scope.saveSetting = function() {
 
   }

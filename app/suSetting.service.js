@@ -15,11 +15,15 @@ function suSettingService($http, $route, $window, $q) {
             'Authorization': 'JWT ' + $window.sessionStorage.token
             }
         }).then(function successCallback(response) {
+
+          console.log('su setting returns');
+
           deferred.resolve(response.data);
+
         },function errorCallback(response){
 
         });
         return  deferred.promise;
-      };
+      }
   }
 }

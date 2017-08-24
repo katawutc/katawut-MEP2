@@ -182,7 +182,7 @@ app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
 /** */
 function userSettingUp1stTime(uID, res) {
 
-  db.collection('userSetting').insert({userID: objectID(uID),
+  db.collection('userSetting').insert({userID: uID,
                                         userRole: 'su'}, cb);
 
   function cb() {
@@ -701,3 +701,18 @@ app.get('/reviewTestSolution/:testID/:questionNumber', function(req, res) {
       }
     }
 })
+/** */
+
+/** get user setting*/
+app.get('/setting/su/:userID', function(req, res) {
+
+  db.collection('userSetting').findOne({userID: req.params.userID,
+                                        userRole: 'su'}, cb);
+
+  function cb(err, doc) {
+    if (err) throw err;
+    console.log(doc);
+    res.json(doc);
+  }
+})
+/** */
