@@ -7,17 +7,22 @@ var port;
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
+
+var objectID = require('mongodb').ObjectID;
+
 /** bcrypt */
 //var bcrypt = require('bcrypt');
 //const saltRounds = 10;
 /** */
 
 /** jwt */
+
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
+
 
 /** helmet part */
 var helmet = require('helmet');
@@ -47,6 +52,7 @@ mongo.connectMongoDB( function() {
 /** */
 
 /**  JWT Strategy */
+/*
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = 'secret';
@@ -59,6 +65,7 @@ var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 
    // Need to refactor to userID
    /** to refactor to have user role in here */
+   /*
    var query = {userID: objectID(jwt_payload.userID),
                 userRole: jwt_payload.userRole};
 
@@ -83,46 +90,11 @@ app.post('/signUp', require('./server/signUp'));
 app.post('/activateAccount/:userID/:hashActivate', require('./server/activateAccount'));
 /** */
 
-/*
-app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
-
-  var plainPassword = req.body.password;
-
-  // use bcrypt to hash and store password
-  var salt = bcrypt.genSaltSync(saltRounds);
-  var hash = bcrypt.hashSync(plainPassword, salt);
-
-  db.collection('user').update({userID: objectID(req.params.userID),
-                                hashActivate: req.params.hashActivate},
-                                {$set: { userName: req.body.userName,
-                                          userHashedPassword: hash,
-                                          activate: true,
-                                          hashActivate: null}}, cb);
-
-  function cb(err, count, status) {
-    if (err) throw err;
-    else {
-
-      userSettingUp1stTime(req.params.userID, res);
-
-    }
-  }
-
-
-})
-*/
-
+/** login direct */
+app.post('/logInDirect', require('./server/logInDirect'));
 /** */
-function userSettingUp1stTime(uID, res) {
 
-  db.collection('userSetting').insert({userID: uID,
-                                        userRole: 'su'}, cb);
 
-  function cb() {
-    res.json('account is activated and 1st setting is up');
-  }
-}
-/** */
 
 /** logIn */
 app.post('/logIn', function(req, res) {
@@ -165,6 +137,7 @@ app.post('/logIn', function(req, res) {
 /** */
 
 /** log in direct */
+/*
 app.post('/logInDirect', function(req, res) {
 
   var query = {userID: objectID(req.body.userID)};
@@ -184,6 +157,7 @@ app.post('/logInDirect', function(req, res) {
       if (pass) {
         // need to refactor to _id instead of result.userName
         /** to add user role in the payload to check the authorization logic */
+        /*
         var payload = { userID: result.userID,
                         userRole: result.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
