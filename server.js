@@ -54,6 +54,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // MongoDB
+/*
 var mongoClient = require('mongodb');
 var objectID = require('mongodb').ObjectID;
 // user: katawutc
@@ -65,6 +66,13 @@ mongoClient.connect(mlabDB, function(err, database){
     console.log('MongoDB MLab connected ...');
   }
   db = database;
+});
+*/
+
+var mongo = require('./server/mongoDBConnect');
+mongo.connectMongoDB( function() {
+  app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'))});
 });
 
 /**  JWT Strategy */
@@ -98,6 +106,10 @@ passport.use(strategy);
 /** */
 
 /** sign up */
+app.post('/signUp', require('./server/signUp'));
+
+
+/*
 app.post('/signUp', function(req, res) {
 
   // create hashActivate to insert to DB
@@ -107,6 +119,7 @@ app.post('/signUp', function(req, res) {
                                userEmail: req.body.email,
                                userHashedPassword: null,
                                userRole: 'su', /* subscribed user by default */
+                               /*
                                hashActivate: hashActivate,
                                activate: false},
                                cb);
@@ -150,6 +163,8 @@ app.post('/signUp', function(req, res) {
     }
   }
 });
+*/
+
 
 /** account activation */
 app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
@@ -291,8 +306,8 @@ app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: f
 /** */
 
 /** start node server */
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'))});
+//app.listen(app.get('port'), function() {
+//  console.log('Node app is running on port', app.get('port'))});
 /** */
 
 /** test header */
