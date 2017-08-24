@@ -8,8 +8,8 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 /** bcrypt */
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
+//var bcrypt = require('bcrypt');
+//const saltRounds = 10;
 /** */
 
 /** jwt */
@@ -79,8 +79,11 @@ passport.use(strategy);
 /** sign up */
 app.post('/signUp', require('./server/signUp'));
 /** */
-
 /** account activation */
+app.post('/activateAccount/:userID/:hashActivate', require('./server/activateAccount'));
+/** */
+
+/*
 app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
 
   var plainPassword = req.body.password;
@@ -107,6 +110,7 @@ app.post('/activateAccount/:userID/:hashActivate', function(req, res) {
 
 
 })
+*/
 
 /** */
 function userSettingUp1stTime(uID, res) {

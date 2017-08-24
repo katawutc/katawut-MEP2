@@ -14,20 +14,6 @@ module.exports = function signUp(req, res) {
     }
   });
 
-  // MongoDB
-  //var mongoClient = require('mongodb');
-  //var objectID = require('mongodb').ObjectID;
-  // user: katawutc
-  //var mlabDB = 'mongodb://katawut:AccessMongo@ds129023.mlab.com:29023/mep';
-  //var db;
-  //mongoClient.connect(mlabDB, function(err, database){
-  //  if (err) console.log('Error, cannot connect to MongoDB');
-  //  else {
-  //    console.log('MongoDB MLab connected ...');
-  //  }
-  //  db = database;
-  //});
-
   // create hashActivate to insert to DB
   var hashActivate = md5(  Math.floor(Math.random() * (1000)) );
 
