@@ -10,11 +10,6 @@ app.set('port', (process.env.PORT || 5000));
 
 var objectID = require('mongodb').ObjectID;
 
-/** bcrypt */
-//var bcrypt = require('bcrypt');
-//const saltRounds = 10;
-/** */
-
 /** jwt */
 
 var jwt = require('jsonwebtoken');
@@ -51,48 +46,18 @@ mongo.connectMongoDB( function() {
 });
 /** */
 
-/**  JWT Strategy */
-/*
-var opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-opts.secretOrKey = 'secret';
-
-var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
-   console.log('payload received', jwt_payload);
-
-   console.log(jwt_payload.userID);
-   console.log(jwt_payload.userRole);
-
-   // Need to refactor to userID
-   /** to refactor to have user role in here */
-   /*
-   var query = {userID: objectID(jwt_payload.userID),
-                userRole: jwt_payload.userRole};
-
-   db.collection('user').findOne(query, function(err, result) {
-     if (result) {
-       console.log(result);
-       next(null, result);
-     } else {
-       console.log('Fail Fail Fail');
-       next(null, false);
-     }
-   });
-});
-
-passport.use(strategy);
-/** */
-
 /** sign up */
 app.post('/signUp', require('./server/signUp'));
-/** */
+
 /** account activation */
 app.post('/activateAccount/:userID/:hashActivate', require('./server/activateAccount'));
-/** */
 
 /** login direct */
 app.post('/logInDirect', require('./server/logInDirect'));
-/** */
+
+/** dashboard */
+app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/dashboard'));
 
 
 
@@ -134,72 +99,6 @@ app.post('/logIn', function(req, res) {
           }
         });
 });
-/** */
-
-/** log in direct */
-/*
-app.post('/logInDirect', function(req, res) {
-
-  var query = {userID: objectID(req.body.userID)};
-  var loginSuccess;
-
-  // connect to the DB
-  db.collection('user').findOne(query, function(err, result) {
-    if (err) throw err;
-
-    console.log(result.userID);
-    console.log(result.userRole);
-
-    var hashedPassword = result.userHashedPassword;
-
-    bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
-
-      if (pass) {
-        // need to refactor to _id instead of result.userName
-        /** to add user role in the payload to check the authorization logic */
-        /*
-        var payload = { userID: result.userID,
-                        userRole: result.userRole};
-        var token = jwt.sign(payload, opts.secretOrKey);
-
-        res.json({userName: result.userName,
-                  userID: result.userID,
-                  userRole: result.userRole,
-                  token: token,
-                  message: 'login success'});
-                } else {
-                  res.json({message: 'login fail'});
-                }
-              });
-            });
-
-})
-/** */
-
-/** get dashboard data */
-app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
-  function(req, res) {
-    var query = {userID : objectID(req.params.userID),
-                  userRole: req.params.userRole};
-
-    console.log(query);
-
-    /** to implement what DB collection to access to get information for the dashboard */
-    db.collection('user').findOne(query, function(err, doc) {
-      if (err) {
-        res.json(err);
-      }
-      else {
-        console.log(doc);
-        res.json(doc); /** if (null) it will check at angular js */
-      }
-    })
-})
-/** */
-
-/** start node server */
-//app.listen(app.get('port'), function() {
-//  console.log('Node app is running on port', app.get('port'))});
 /** */
 
 /** test header */
