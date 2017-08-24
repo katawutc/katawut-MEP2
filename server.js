@@ -12,21 +12,6 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 /** */
 
-/** md5 */
-var md5 = require('md5');
-/** */
-
-/** nodemailer */
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'modernedu17@gmail.com',
-    pass: 'Kwfahahcf75!#$'
-  }
-});
-/** */
-
 /** jwt */
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
@@ -53,27 +38,13 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// MongoDB
-/*
-var mongoClient = require('mongodb');
-var objectID = require('mongodb').ObjectID;
-// user: katawutc
-var mlabDB = 'mongodb://katawut:AccessMongo@ds129023.mlab.com:29023/mep';
-var db;
-mongoClient.connect(mlabDB, function(err, database){
-  if (err) console.log('Error, cannot connect to MongoDB');
-  else {
-    console.log('MongoDB MLab connected ...');
-  }
-  db = database;
-});
-*/
-
+/** MongoDB */
 var mongo = require('./server/mongoDBConnect');
 mongo.connectMongoDB( function() {
   app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'))});
 });
+/** */
 
 /**  JWT Strategy */
 var opts = {};
@@ -107,64 +78,7 @@ passport.use(strategy);
 
 /** sign up */
 app.post('/signUp', require('./server/signUp'));
-
-
-/*
-app.post('/signUp', function(req, res) {
-
-  // create hashActivate to insert to DB
-  var hashActivate = md5(  Math.floor(Math.random() * (1000)) );
-
-  db.collection('user').insert({userName: null,
-                               userEmail: req.body.email,
-                               userHashedPassword: null,
-                               userRole: 'su', /* subscribed user by default */
-                               /*
-                               hashActivate: hashActivate,
-                               activate: false},
-                               cb);
-  function cb(err, result) {
-    if (err) {
-      if (err.name === 'MongoError' && err.code === 11000) {
-      // duplicate userEMail
-      res.json({ success: false,
-                 message: 'user Email already exist!' });
-    }
-      else {
-        return res.status(500).send(err);
-    }
-  }
-    else {
-      var userID = result.insertedIds[0];
-      db.collection('user').update({_id:userID}, {$set:{userID: userID}});
-
-        // activate url to have userID and hashActivate
-        var activateUrl = 'http://localhost:5000/#!/signUpActivate/'+
-                            userID+'/'+hashActivate;
-
-        var mailOptions = {
-          from: 'modernedu17@gmail.com',
-          to: req.body.email,
-          subject: 'Sign up to MEP',
-          html: '<h1>Welcome</h1><p>Please click this <a href='+activateUrl+'>link</a> to activate your account</p>'
-        };
-
-        transporter.sendMail(mailOptions, function(error, info){
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Email sent: ' + info.response);
-
-            res.json({success: true,
-                      signUpEmail: req.body.email,
-                      message:'sign up success'});
-          }
-        });
-    }
-  }
-});
-*/
-
+/** */
 
 /** account activation */
 app.post('/activateAccount/:userID/:hashActivate', function(req, res) {

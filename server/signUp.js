@@ -2,19 +2,31 @@ module.exports = function signUp(req, res) {
 
   var md5 = require('md5');
 
-  // MongoDB
-  var mongoClient = require('mongodb');
-  var objectID = require('mongodb').ObjectID;
-  // user: katawutc
-  var mlabDB = 'mongodb://katawut:AccessMongo@ds129023.mlab.com:29023/mep';
-  var db;
-  mongoClient.connect(mlabDB, function(err, database){
-    if (err) console.log('Error, cannot connect to MongoDB');
-    else {
-      console.log('MongoDB MLab connected ...');
+  var mongo = require('./mongoDBConnect');
+  var db = mongo.getDB();
+
+  var nodemailer = require('nodemailer');
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'modernedu17@gmail.com',
+      pass: 'Kwfahahcf75!#$'
     }
-    db = database;
   });
+
+  // MongoDB
+  //var mongoClient = require('mongodb');
+  //var objectID = require('mongodb').ObjectID;
+  // user: katawutc
+  //var mlabDB = 'mongodb://katawut:AccessMongo@ds129023.mlab.com:29023/mep';
+  //var db;
+  //mongoClient.connect(mlabDB, function(err, database){
+  //  if (err) console.log('Error, cannot connect to MongoDB');
+  //  else {
+  //    console.log('MongoDB MLab connected ...');
+  //  }
+  //  db = database;
+  //});
 
   // create hashActivate to insert to DB
   var hashActivate = md5(  Math.floor(Math.random() * (1000)) );
