@@ -11,20 +11,13 @@ var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
 
-
 /**  JWT Strategy */
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = 'secret';
 
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
-   console.log('payload received', jwt_payload);
 
-   console.log(jwt_payload.userID);
-   console.log(jwt_payload.userRole);
-
-   // Need to refactor to userID
-   /** to refactor to have user role in here */
    var query = {userID: objectID(jwt_payload.userID),
                 userRole: jwt_payload.userRole};
 
@@ -57,16 +50,12 @@ module.exports = function logInDirect(req, res) {
   db.collection('user').findOne(query, function(err, result) {
     if (err) throw err;
 
-    console.log(result.userID);
-    console.log(result.userRole);
-
     var hashedPassword = result.userHashedPassword;
 
     bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
 
       if (pass) {
-        // need to refactor to _id instead of result.userName
-        /** to add user role in the payload to check the authorization logic */
+        
         var payload = { userID: result.userID,
                         userRole: result.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);

@@ -1,7 +1,4 @@
-/** bcrypt */
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
-/** */
+
 
 var objectID = require('mongodb').ObjectID
 
@@ -11,6 +8,11 @@ module.exports = function activateAccount(req, res) {
   var db = mongo.getDB();
 
   var plainPassword = req.body.password;
+
+  /** bcrypt */
+  var bcrypt = require('bcrypt');
+  const saltRounds = 10;
+  /** */
 
   // use bcrypt to hash and store password
   var salt = bcrypt.genSaltSync(saltRounds);

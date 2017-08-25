@@ -7,16 +7,15 @@ var port;
 var app = express();
 app.set('port', (process.env.PORT || 5000));
 
-
 var objectID = require('mongodb').ObjectID;
 
 /** jwt */
-
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
+
 
 
 /** helmet part */
@@ -62,52 +61,19 @@ app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: f
 /** logIn */
 app.post('/logIn', require('./server/logIn'));
 
-/** */
+/** get user setting*/
+app.get('/setting/su/:userID', require('./server/setting'));
 
 /** test header */
-app.get('/testHeader/:testID', function(req, res) {
-  db.collection('unSubscribeTestHeader').findOne({testID: req.params.testID}, cb);
-                                        /*function(err, docs) {*/
-  function cb(err, doc) {
-    if (err) console.log(err)
-    else {
-      res.json(doc);
-    }
-  }
-})
-/** */
+app.get('/testHeader/:testID', require('./server/testHeader'));
 
 /** unSubscribeUser register*/
-app.post('/unSubscribeUser/register', function(req, res) {
-  db.collection('unSubscribeUser').insert({userName: 'unSubscribe',
-                                            testID: req.body.testID,
-                                            testMode: req.body.testMode,
-                                            accessTime: req.body.accessTime}, cb);
-  function cb(err, doc) {
-    if (err) throw err;
-    else {
-      var userID = doc.insertedIds[0];
-      db.collection('unSubscribeUser').update({_id:userID}, {$set:{userID: userID}});
-      res.json({userName: 'unSubscribe',
-                userID: userID});
-              }
-            }
-})
-/** */
+app.post('/unSubscribeUser/register', require('./server/unSubscribeUserRegister'));
 
 /** To get exam question both tutorial and exam mode */
-app.get('/unSubscribeTest/:mode/:testID/:questionNumber', function(req, res) {
+app.get('/unSubscribeTest/:mode/:testID/:questionNumber', require('./server/unSubscribeTest'));
 
-  db.collection('unSubscribeTestContent').findOne({testID: req.params.testID,
-                                                   questionNumber: req.params.questionNumber}, cb);
 
-    function cb(err, doc) {
-      if (err) res.json(err);
-      else {
-        res.json(doc);
-      }
-    }
-})
 /** */
 
 /** check answer unSubscribe content */
@@ -469,19 +435,5 @@ app.get('/reviewTestSolution/:testID/:questionNumber', function(req, res) {
         res.json(doc);
       }
     }
-})
-/** */
-
-/** get user setting*/
-app.get('/setting/su/:userID', function(req, res) {
-
-  db.collection('userSetting').findOne({userID: req.params.userID,
-                                        userRole: 'su'}, cb);
-
-  function cb(err, doc) {
-    if (err) throw err;
-    console.log(doc);
-    res.json(doc);
-  }
 })
 /** */
