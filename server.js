@@ -93,155 +93,28 @@ app.get('/reviewUnSubscribeTest/:testID/:questionNumber',
 app.post('/createAnswerSheetExam', require('./server/createAnswerSheetExam'));
 
 /** to record exam answer to review and modify later*/
-app.post('/examAnswerSummary', function(req, res) {
-  console.log('arrive at examAnswerSummary');
-
-  db.collection('examAnswerSummary').update({userName: req.body.userName,
-                                              userID: req.body.userID,
-                                              testID: req.body.testID,
-                                              testMode: req.body.testMode,
-                                              testStartAt: req.body.testStartAt,
-                                              questionNumber: req.body.questionNumber},
-                                              { $set:
-                                                { status: req.body.status,
-                                                  userAnswer:req.body.answer,
-                                                  questionStartAt: req.body.currentQuestionStartAt,
-                                                  questionFinishAt: req.body.currentQuestionFinishAt}
-                                              }, cb);
-    function cb (err, doc) {
-      if (err) throw err;
-      else {
-        //console.log(doc);
-
-        // checking answer and update the score here
-
-        var solutionID = req.body.testID;
-        var questionNumber = req.body.questionNumber;
-        var solution;
-        var userAnswer = req.body.answer;
-
-        // Retrieve Solution from the DB
-        db.collection('unSubscribeSolutionContent').findOne({solutionID: solutionID,
-                                                  solQuestionNumber: questionNumber},
-                                                  cb); /*function (err, doc) { */
-        function cb(err, solDoc) {
-          console.log(solDoc);
-          if (err) throw err;
-          else {
-            solution = solDoc.solution;
-
-            console.log(userAnswer);
-            if (solution === userAnswer) {
-              db.collection('examAnswerSummary').update({userName: req.body.userName,
-                                                          userID: req.body.userID,
-                                                          testID: req.body.testID,
-                                                          testMode: req.body.testMode,
-                                                          testStartAt: req.body.testStartAt,
-                                                          questionNumber: req.body.questionNumber},
-                                                          { $set: {result: 'correct'}});
-            }
-            else {
-              db.collection('examAnswerSummary').update({userName: req.body.userName,
-                                                          userID: req.body.userID,
-                                                          testID: req.body.testID,
-                                                          testMode: req.body.testMode,
-                                                          testStartAt: req.body.testStartAt,
-                                                          questionNumber: req.body.questionNumber},
-                                                          { $set: {result: 'wrong'}});
-            }
-          }
-        }
-        res.json('answer recorded');
-      }
-    }
-})
-/** */
+app.post('/examAnswerSummary', require('./server/examAnswerSummary'));
 
 /** get answer sheet summary to display and modify */
+/** this is for exam mode; to refactor the callback name */
 app.get('/getAnswerSummary/:userID/:testID/:testMode/:testStartAt',
-          function (req, res) {
-  console.log('arrive at get answer summary');
-  db.collection('examAnswerSummary').find({userID: req.params.userID,
-                                            testID: req.params.testID,
-                                            testMode: req.params.testMode,
-                                            testStartAt: req.params.testStartAt})
-                                            .sort({"questionNumber":1}).toArray(cb);
-  function cb(err, doc) {
-    if (err) throw err;
-    else {
-      console.log(doc);
-      res.json(doc);
-    }
-  }
-})
-/** */
+          require('./server/getAnswerSummary'));
+
+
+/** get exam score */
+app.get('/getExamScore/:userID/:testID/:testMode/:testStartAt',
+  require('./server/getExamScore'));
+
+
+/** get exam summary */
+app.get('/getExamSummary/:userID/:testID/:testMode/:testStartAt',
+  require('./server/getExamSummary'));
 
 /** get answer from the answer sheet to revise/review */
 app.get('/reviseExamAnswerSheet/:userID/:testMode/:testStartAt/:testID/:questionNumber',
-          function(req, res) {
-  console.log('arrive reviseExamAnswerSheet');
-
-  db.collection('examAnswerSummary').findOne({userID: req.params.userID,
-                                              testMode: req.params.testMode,
-                                              testStartAt: req.params.testStartAt,
-                                              testID: req.params.testID,
-                                              questionNumber: req.params.questionNumber}, cb);
-  function cb(err, doc) {
-    if (err) throw err;
-    else {
-      res.json(doc.userAnswer);
-    }
-  }
-})
-/** */
-
-/** get exam score */
-app.get('/getExamScore/:userID/:testID/:testMode/:testStartAt', function(req, res) {
-  console.log('arrive at get exam score');
-
-  db.collection('examAnswerSummary').find({ userID: req.params.userID,
-                                            testID: req.params.testID,
-                                            testMode: req.params.testMode,
-                                            testStartAt: req.params.testStartAt,
-                                            result: 'correct'
-                                            }).count(cb);
-  function cb(err, score) {
-    if (err) throw error;
-    else {
-      res.json(score);
-    }
-  }
-})
-
-/** get exam summary */
-app.get('/getExamSummary/:userID/:testID/:testMode/:testStartAt', function(req, res) {
-  console.log('arrive at get exam summary');
-
-  db.collection('examAnswerSummary').find({ userID: req.params.userID,
-                                            testID: req.params.testID,
-                                            testMode: req.params.testMode,
-                                            testStartAt: req.params.testStartAt})
-                                            .sort({"questionNumber":1}).toArray(cb);
-  function cb(err, doc) {
-    if (err) throw err;
-    else {
-      // still need to refactor on what specifically to return
-      res.json(doc);
-    }
-  }
-})
+  require('./server/reviseExamAnswerSheet'));
 
 /** get test solution */
-app.get('/reviewTestSolution/:testID/:questionNumber', function(req, res) {
-
-  db.collection('unSubscribeSolutionContent').findOne({solutionID: req.params.testID,
-                                            solQuestionNumber: req.params.questionNumber},
-                                            cb);
-    function cb(err, doc) {
-      if (err) throw err;
-      else {
-        res.json(doc);
-      }
-    }
-})
-/** */
+/** this is probable duplicate withthe tutorial mode; to resue */
+app.get('/reviewTestSolution/:testID/:questionNumber',
+  require('./server/reviewTestSolution'));
