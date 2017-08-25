@@ -79,61 +79,18 @@ app.post('/unSubscribeTest/checkAnswer/:testMode', require('./server/unSubscribe
 /** get test scrore UnSubscribeUser*/
 app.get('/getTestScoreUnSubscribeUser/:userID/:testID/:testMode/:testStartAt',
   require('./server/getTestScoreUnSubscribeUser'));
-/** */
 
 /** get test summary UnSubscribeUser*/
 app.get('/getTestSummaryUnSubscribeUser/:userID/:testID/:testMode/:testStartAt',
   require('./server/getTestSummaryUnSubscribeUser'));
 
-/** */
-
-/** review solutuon UnSubscribeUser*/
-app.get('/reviewUnSubscribeTest/:testID/:questionNumber', function(req, res) {
-  db.collection('unSubscribeSolutionContent').findOne({solutionID: req.params.testID,
-                                            solQuestionNumber: req.params.questionNumber},
-                                            cb);
-    function cb(err, doc) {
-      if (err) throw err;
-      else {
-        res.json(doc);
-      }
-    }
-})
+/** review solution UnSubscribeUser*/
+app.get('/reviewUnSubscribeTest/:testID/:questionNumber',
+  require('./server/reviewUnSubscribeTest'));
 /** */
 
 /** create answer sheet */
-app.post('/createAnswerSheetExam', function(req, res) {
-  console.log('arrive createAnswerSheetExam');
-
-  console.log(req.body.numberOfQuestion);
-
-  // loop in js to insert answer sheet
-  /**
-   * still need to fix defect on asynchronous call \
-   * return only when all inserted
-   * async js; promise
-   */
-
-  for(var i = 1; i <= req.body.numberOfQuestion; i++) {
-
-    var questionNumber = i.toString();
-
-    db.collection('examAnswerSummary').insert({userName: req.body.userName,
-                                                userID: req.body.userID,
-                                                testID: req.body.testID,
-                                                testMode: req.body.testMode,
-                                                testStartAt: req.body.testStartAt,
-                                                questionNumber: questionNumber}, cb);
-    function cb(err, doc) {
-      if (err) throw err;
-      else {
-        console.log('empty answer sheet is created for '+questionNumber);
-      }
-    }
-  }
-  res.json('return createAnswerSheetExam');
-})
-
+app.post('/createAnswerSheetExam', require('./server/createAnswerSheetExam'));
 
 /** to record exam answer to review and modify later*/
 app.post('/examAnswerSummary', function(req, res) {
