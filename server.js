@@ -100,11 +100,9 @@ app.post('/examAnswerSummary', require('./server/examAnswerSummary'));
 app.get('/getAnswerSummary/:userID/:testID/:testMode/:testStartAt',
           require('./server/getAnswerSummary'));
 
-
 /** get exam score */
 app.get('/getExamScore/:userID/:testID/:testMode/:testStartAt',
   require('./server/getExamScore'));
-
 
 /** get exam summary */
 app.get('/getExamSummary/:userID/:testID/:testMode/:testStartAt',
