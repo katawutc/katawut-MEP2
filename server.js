@@ -116,3 +116,33 @@ app.get('/reviseExamAnswerSheet/:userID/:testMode/:testStartAt/:testID/:question
 /** this is probable duplicate withthe tutorial mode; to resue */
 app.get('/reviewTestSolution/:testID/:questionNumber',
   require('./server/reviewTestSolution'));
+
+/** save setting parameters */
+app.post('/saveSetting/:userRole/:userID', function(req, res) {
+
+  console.log('at save setting server');
+
+  console.log(req.params.userID);
+  console.log(req.params.userRole);
+
+  // save setting preference into the DB
+  var mongo = require('./server/mongoDBConnect');
+  var db = mongo.getDB();
+
+  console.log(req.body.userLevel);
+  console.log(req.body.userPreferTest);
+  console.log(req.body.userPreferSubject);
+
+  db.collection('userSetting').findOneAndUpdate({userID: req.params.userID,
+                                                userRole: req.params.userRole},
+                                                  {$set:{userLevel: req.body.userLevel,
+                                                      userPreferTest: req.body.userPreferTest,
+                                                      userPreferSubject: req.body.userPreferSubject}},
+                                                        {new: true},
+                                                        {upsert: true}, cb);
+  function cb(err, doc) {
+    if (err) throw err;
+    console.log(doc);
+    res.json('return from at save setting server');
+  }
+});

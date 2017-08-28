@@ -11,10 +11,37 @@ function firstSettingSuCtrl ($scope, $http, $routeParams, $window,
 
   $scope.subjectList = ['Math', 'English', 'Science', 'others 1'];
 
-  $scope.saveSetting = function(){
-    // save the first setting parameter into the DB
+  $scope.settingData = {userLevel: $scope.selectedLevel,
+                        userPreferTest: $scope.selectedTest,
+                        userPreferSubject: $scope.selectedSubject}
 
-    // route to the dashboard
+  $scope.saveSetting = function(){
+
+    $scope.settingData = {userLevel: $scope.selectedLevel,
+                          userPreferTest: $scope.selectedTest,
+                          userPreferSubject: $scope.selectedSubject}
+
+    console.log($scope.settingData);
+
+    var saveSettingUrl = 'saveSetting/'+$window.sessionStorage.userRole+'/'+
+                          $window.sessionStorage.userID
+
+    // save the first setting parameter into the DB
+    $http({
+      method: 'POST',
+      url: saveSettingUrl,
+      data: $scope.settingData
+    }).then(function successCallback(response) {
+      // route to the dashboard
+
+      console.log('success return from setting parameter');
+
+      $location.path('/dashboard/'+$window.sessionStorage.userRole+'/'+
+                      $window.sessionStorage.userID);
+    },function errorCallback(response){
+
+    });
+
   }
 
 }
