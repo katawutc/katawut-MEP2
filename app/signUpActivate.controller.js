@@ -52,9 +52,21 @@ function directLogIn($window, $http, $location, uID, pass) {
 
       // Get userID here to start dashboard controller
       if ($window.sessionStorage.getItem('logInMessage') === 'login success') {
+
+        /** route to the 1st time setting to get customised and personalized \
+         *  informatiom
+         */
+
+        $location.path('/firstSetting'+'/'+
+                          $window.sessionStorage.getItem('userRole')+'/'+
+                          $window.sessionStorage.getItem('userID'));
+
+        /*
+
         $location.path('/dashboard'+'/'+
                         $window.sessionStorage.getItem('userRole')+'/'+
                         $window.sessionStorage.getItem('userID'));
+                        */
       }
 
   }, function errorCallback(response) {

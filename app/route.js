@@ -155,4 +155,9 @@ angular.module('app')
         }
       }
     })
+    /** 1st time setting for su */
+    .when('/firstSetting/su/:userID', {
+      templateUrl : 'firstSettingSu.html',
+      controller : 'firstSettingSuCtrl',
+    })
 });
