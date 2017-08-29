@@ -170,4 +170,14 @@ angular.module('app')
       templateUrl : 'preferenceSettingSu.html',
       controller : 'preferenceSettingSuCtrl',
     })
+    /** exam list for su */
+    .when('/testList/su/:userID', {
+      templateUrl : 'testListSu.html',
+      controller : 'testListSuCtrl',
+    })
+    /** article list for su */
+    .when('/articleList/su/:userID', {
+      templateUrl : 'articleListSu.html',
+      controller : 'articleListSuCtrl',
+    })
 });
