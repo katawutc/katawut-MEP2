@@ -1,8 +1,8 @@
-angular.module('app').factory('suSettingService', suSettingService);
+angular.module('app').factory('profileSettingSuService', profileSettingSuService);
 
-function suSettingService($http, $route, $window, $q) {
+function profileSettingSuService($http, $route, $window, $q) {
   return {
-      getSuSettingData : function() {
+      getProfileSettingSuData : function() {
 
         var suSettingUrl = 'setting/su/'+$window.sessionStorage.userID;
 

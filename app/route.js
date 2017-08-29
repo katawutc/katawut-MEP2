@@ -145,13 +145,13 @@ angular.module('app')
       templateUrl : 'errorPage.html',
       controller : 'errorPageCtrl'
     })
-    /** su setting */
-    .when('/setting/su/:userID', {
-      templateUrl : 'suSetting.html',
-      controller : 'suSettingCtrl',
+    /** profile setting su*/
+    .when('/profileSetting/su/:userID', {
+      templateUrl : 'profileSettingSu.html',
+      controller : 'profileSettingSuCtrl',
       resolve : {
-        suSettingData : function(suSettingService) {
-          return suSettingService.getSuSettingData();
+        profileSettingSuData : function(profileSettingSuService) {
+          return profileSettingSuService.getProfileSettingSuData();
         }
       }
     })
@@ -159,5 +159,15 @@ angular.module('app')
     .when('/firstSetting/su/:userID', {
       templateUrl : 'firstSettingSu.html',
       controller : 'firstSettingSuCtrl',
+    })
+    /** account setting for su */
+    .when('/accountSetting/su/:userID', {
+      templateUrl : 'accountSettingSu.html',
+      controller : 'accountSettingSuCtrl',
+    })
+    /** preference setting for su */
+    .when('/preferenceSetting/su/:userID', {
+      templateUrl : 'preferenceSettingSu.html',
+      controller : 'preferenceSettingSuCtrl',
     })
 });
