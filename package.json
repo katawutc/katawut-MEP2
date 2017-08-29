@@ -30,6 +30,7 @@
     "mongodb": "^2.2.30",
     "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "passport-jwt": "^2.2.1"
   }
 }

@@ -45,6 +45,34 @@ mongo.connectMongoDB( function() {
 });
 /** */
 
+
+/** fb log in */
+var FacebookStrategy = require('passport-facebook').Strategy;
+
+passport.use(new FacebookStrategy({
+    clientID: '141198316480017',
+    clientSecret: 'dbb7f9659805b136d28f5b576a246c1c',
+    callbackURL: "http://localhost:5000/auth/facebook/callback",
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    /*User.findOrCreate({ facebookId: profile.id*/
+      console.log(profile);
+    }, function (err, user) {
+      return cb(err, user);
+    }));
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login'}),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+/** */
+
+
 /** sign up */
 app.post('/signUp', require('./server/signUp'));
 
