@@ -76,16 +76,18 @@ passport.use(new FacebookStrategy({
                                             if (err) throw err;
                                             console.log('insert new: ');
                                             console.log(doc);
-                                          })
 
-          db.collection('user').findOne({fbID: profile.id}, function(err, doc2) {
-            if (err) throw err;
-            if (doc2) {
-              console.log('insert success: ');
-              console.log(doc2);
-            }
+              db.collection('user').findOne({fbID: profile.id}, function(err, doc2) {
+                if (err) throw err;
+                if (doc2) {
+                  console.log('insert success: ');
+                  console.log(doc2);
+                }
 
-          cb(err, doc2);
+              cb(err, doc2);
+            })
+
+
         })
         // need to understand more on fb log in callback
       }

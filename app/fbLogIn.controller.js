@@ -25,6 +25,8 @@ function fbLogInCtrl ($scope, $http, $routeParams, $window,
       $window.sessionStorage.setItem('token', response.data.token);
       $window.sessionStorage.setItem('logInMessage', response.data.message);
 
+      /*** need to do async here ***/
+
       // Get userID here to start dashboard controller
       if ($window.sessionStorage.getItem('logInMessage') === 'login success') {
         $location.path('/dashboard'+'/'+

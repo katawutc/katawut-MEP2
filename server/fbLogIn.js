@@ -59,18 +59,21 @@ module.exports = function fbLogIn(req, res) {
       // set the userID
       console.log(doc._id);
       db.collection('user').update(query,
-                                  {$set: {userID: doc._id }});
+                                  {$set: {userID: doc._id }}, cb);
+
+        function cb(err, count, obj) {
 
         var payload = { userID: doc._id,
                         userRole: doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
 
         res.json({userName: doc.userName,
-                  userID: doc.userID,
+                  userID: doc._id,
                   userRole: doc.userRole,
                   token: token,
                   message: 'login success'});
-                }
+          }
+        }
     else {res.json('error happens');}
     })
 }
