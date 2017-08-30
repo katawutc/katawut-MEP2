@@ -180,4 +180,9 @@ angular.module('app')
       templateUrl : 'articleListSu.html',
       controller : 'articleListSuCtrl',
     })
+    /** url callback from facebook */
+    .when('/fbLogIn/:fbID', {
+      templateUrl : 'fbLogIn.html',
+      controller : 'fbLogInCtrl',
+    })
 });

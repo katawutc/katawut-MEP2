@@ -54,6 +54,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
     clientID: '141198316480017',
     clientSecret: 'dbb7f9659805b136d28f5b576a246c1c',
+    //callbackURL: "http://localhost:5000/fbLogIn",
     callbackURL: "http://localhost:5000/auth/facebook/callback",
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -64,35 +65,50 @@ passport.use(new FacebookStrategy({
       db.collection('user').findOne({fbID: profile.id}, function(err, doc) {
         if (err) throw err;
         if (doc) {
+          console.log('has FBID: ');
           console.log(doc);
-          return cb(err, user);
+          cb(err, doc);
         }
         else {
           db.collection('user').insert({fbID: profile.id,
-                                          userName: profile.displayName}, function(err, doc) {
+                                          userName: profile.displayName,
+                                          userRole: 'su'}, function(err, doc) {
                                             if (err) throw err;
+                                            console.log('insert new: ');
                                             console.log(doc);
                                           })
-          return cb(err, doc);
-        }
-      }), function (err, user) {
-      return cb(err, user);
-    }
-  }));
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'));
+          db.collection('user').findOne({fbID: profile.id}, function(err, doc2) {
+            if (err) throw err;
+            if (doc2) {
+              console.log('insert success: ');
+              console.log(doc2);
+            }
+
+          cb(err, doc2);
+        })
+        // need to understand more on fb log in callback
+      }
+    })
+    }));
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
 
 /** fb log in callback */
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login'}),
+  passport.authenticate('facebook', { session: false ,failureRedirect: '/#!/errorPage'}),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    //res.redirect('/');
+    console.log(req.user);
+    res.redirect('/#!/fbLogIn/'+req.user.fbID);
   });
 /** */
 
+/** fb log in */
+app.post('/fbLogIn', require('./server/fbLogIn'));
+/** */
 
 /** sign up */
 app.post('/signUp', require('./server/signUp'));
