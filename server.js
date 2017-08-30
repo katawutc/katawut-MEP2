@@ -47,6 +47,8 @@ mongo.connectMongoDB( function() {
 
 
 /** fb log in */
+
+
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 passport.use(new FacebookStrategy({
@@ -55,15 +57,34 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://localhost:5000/auth/facebook/callback",
   },
   function(accessToken, refreshToken, profile, cb) {
-    /*User.findOrCreate({ facebookId: profile.id*/
-      console.log(profile);
-    }, function (err, user) {
+
+      var mongo = require('./server/mongoDBConnect');
+      var db = mongo.getDB();
+
+      db.collection('user').findOne({fbID: profile.id}, function(err, doc) {
+        if (err) throw err;
+        if (doc) {
+          console.log(doc);
+          return cb(err, user);
+        }
+        else {
+          db.collection('user').insert({fbID: profile.id,
+                                          userName: profile.displayName}, function(err, doc) {
+                                            if (err) throw err;
+                                            console.log(doc);
+                                          })
+          return cb(err, doc);
+        }
+      }), function (err, user) {
       return cb(err, user);
-    }));
+    }
+  }));
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
 
+
+/** fb log in callback */
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login'}),
   function(req, res) {
