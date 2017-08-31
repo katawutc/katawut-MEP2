@@ -37,7 +37,8 @@ module.exports = function signUp(req, res) {
   }
     else {
       var userID = result.insertedIds[0];
-      db.collection('user').update({_id:userID}, {$set:{userID: userID}});
+      var userIDString = result.insertedIds[0].toString();
+      db.collection('user').update({_id:userID}, {$set:{userID: userIDString}});
 
         // activate url to have userID and hashActivate
         var activateUrl = 'http://localhost:5000/#!/signUpActivate/'+

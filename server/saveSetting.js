@@ -22,7 +22,7 @@ module.exports = function saveSetting(req, res) {
 
     // update activate if already doen the 1st time setting before
     // need to refactor more
-    db.collection('user').update({userID: objectID(req.params.userID),
+    db.collection('user').update({userID: req.params.userID,
                                     userRole: req.params.userRole},
                                     {$set:{activate: 'true'}}, cb1);
     function cb1(err, doc) {

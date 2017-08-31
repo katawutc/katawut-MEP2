@@ -17,7 +17,7 @@ var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 
    // Need to refactor to userID
    /** to refactor to have user role in here */
-   var query = {userID: objectID(jwt_payload.userID),
+   var query = {userID: jwt_payload.userID,
                 userRole: jwt_payload.userRole};
 
     var mongo = require('./mongoDBConnect');
@@ -74,11 +74,11 @@ module.exports = function fbLogIn(req, res) {
       // need to refactor more when understand async
       // set the userID
       db.collection('user').update(query,
-                                  {$set: {userID: doc._id }}, cb);
+                                  {$set: {userID: doc._id.toString() }}, cb);
 
         function cb(err, count, obj) {
 
-        var payload = { userID: doc._id,
+        var payload = { userID: doc._id.toString(),
                         userRole: doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
 

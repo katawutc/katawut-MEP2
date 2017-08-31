@@ -1,6 +1,6 @@
 
 
-var objectID = require('mongodb').ObjectID
+//var objectID = require('mongodb').ObjectID
 
 module.exports = function activateAccount(req, res) {
 
@@ -18,7 +18,7 @@ module.exports = function activateAccount(req, res) {
   var salt = bcrypt.genSaltSync(saltRounds);
   var hash = bcrypt.hashSync(plainPassword, salt);
 
-  db.collection('user').update({userID: objectID(req.params.userID),
+  db.collection('user').update({userID: req.params.userID,
                                 hashActivate: req.params.hashActivate},
                                 {$set: { userName: req.body.userName,
                                           userHashedPassword: hash,

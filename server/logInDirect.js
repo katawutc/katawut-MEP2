@@ -3,7 +3,7 @@
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-var objectID = require('mongodb').ObjectID;
+//var objectID = require('mongodb').ObjectID;
 
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
@@ -18,7 +18,7 @@ opts.secretOrKey = 'secret';
 
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 
-   var query = {userID: objectID(jwt_payload.userID),
+   var query = {userID: jwt_payload.userID,
                 userRole: jwt_payload.userRole};
 
     var mongo = require('./mongoDBConnect');
@@ -39,7 +39,7 @@ passport.use(strategy);
 
 module.exports = function logInDirect(req, res) {
 
-  var query = {userID: objectID(req.body.userID)};
+  var query = {userID: req.body.userID};
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
@@ -55,7 +55,7 @@ module.exports = function logInDirect(req, res) {
     bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
 
       if (pass) {
-        
+
         var payload = { userID: result.userID,
                         userRole: result.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);

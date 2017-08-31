@@ -1,11 +1,11 @@
-var objectID = require('mongodb').ObjectID;
+//var objectID = require('mongodb').ObjectID;
 
 module.exports = function dashboard(req, res) {
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  var query = {userID : objectID(req.params.userID),
+  var query = {userID : req.params.userID,
                 userRole: req.params.userRole};
 
   console.log(query);

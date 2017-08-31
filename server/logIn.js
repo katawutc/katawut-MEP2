@@ -8,7 +8,7 @@ var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
 
-var objectID = require('mongodb').ObjectID;
+//var objectID = require('mongodb').ObjectID;
 
 /**  JWT Strategy */
 var opts = {};
@@ -23,7 +23,7 @@ var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 
    // Need to refactor to userID
    /** to refactor to have user role in here */
-   var query = {userID: objectID(jwt_payload.userID),
+   var query = {userID: jwt_payload.userID,
                 userRole: jwt_payload.userRole};
 
     var mongo = require('./mongoDBConnect');
