@@ -24,11 +24,21 @@ function fbLogInCtrl ($scope, $http, $routeParams, $window,
       $window.sessionStorage.setItem('userRole', response.data.userRole);
       $window.sessionStorage.setItem('token', response.data.token);
       $window.sessionStorage.setItem('logInMessage', response.data.message);
+      $window.sessionStorage.setItem('activate', response.data.activate);
 
       /*** need to do async here ***/
 
       // Get userID here to start dashboard controller
-      if ($window.sessionStorage.getItem('logInMessage') === 'login success') {
+      if ($window.sessionStorage.logInMessage === 'login success' &&
+            $window.sessionStorage.activate === 'false') {
+
+              $location.path('/firstSetting'+'/'+
+                                $window.sessionStorage.getItem('userRole')+'/'+
+                                $window.sessionStorage.getItem('userID'));
+        }
+      else if ($window.sessionStorage.logInMessage === 'login success' &&
+            $window.sessionStorage.activate === 'true') {
+
         $location.path('/dashboard'+'/'+
                         $window.sessionStorage.getItem('userRole')+'/'+
                         $window.sessionStorage.getItem('userID'));
