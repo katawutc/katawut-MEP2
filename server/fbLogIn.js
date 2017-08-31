@@ -59,6 +59,9 @@ module.exports = function fbLogIn(req, res) {
                         userRole: doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
 
+        console.log('fb re-login: ');
+        console.log(doc.activate);
+
         res.json({userName: doc.userName,
                   userID: doc.userID,
                   userRole: doc.userRole,
@@ -83,6 +86,9 @@ module.exports = function fbLogIn(req, res) {
                                               userRole: doc.userRole},
         function(err, setting) {
           if (err) throw err;
+
+          console.log('fb 1st time log in');
+
           res.json({userName: doc.userName,
                     userID: doc._id.toString(),
                     userRole: doc.userRole,

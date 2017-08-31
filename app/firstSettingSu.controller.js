@@ -35,7 +35,7 @@ function firstSettingSuCtrl ($scope, $http, $routeParams, $window,
       // route to the dashboard
 
       console.log('success return from setting parameter');
-
+      $window.sessionStorage.activate = 'true';
       $location.path('/dashboard/'+$window.sessionStorage.userRole+'/'+
                       $window.sessionStorage.userID);
     },function errorCallback(response){

@@ -1,4 +1,4 @@
-
+var objectID = require('mongodb').ObjectID
 
 module.exports = function saveSetting(req, res) {
 
@@ -19,6 +19,15 @@ module.exports = function saveSetting(req, res) {
   function cb(err, doc) {
     if (err) throw err;
     console.log(doc);
-    res.json('return from at save setting server');
+
+    // update activate if already doen the 1st time setting before
+    // need to refactor more
+    db.collection('user').update({userID: objectID(req.params.userID),
+                                    userRole: req.params.userRole},
+                                    {$set:{activate: 'true'}}, cb1);
+    function cb1(err, doc) {
+      if (err) throw err;
+      res.json('return from at save setting server');
+    }
   }
 }
