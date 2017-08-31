@@ -20,13 +20,17 @@ function logInCtrl ($scope, $http, $location, $window) {
         $window.sessionStorage.setItem('logInMessage', response.data.message);
 
         // Get userID here to start dashboard controller
-        if ($window.sessionStorage.getItem('logInMessage') === 'login success') {
+        if (response.data.message === 'login success') {
           $location.path('/dashboard'+'/'+
                           $window.sessionStorage.getItem('userRole')+'/'+
                           $window.sessionStorage.getItem('userID'));
         }
-        else if ($window.sessionStorage.getItem('logInMessage') === 'login fail') {
+        else if (response.data.message === 'login fail') {
           $location.path('/login');
+        }
+        else if (response.data.message === 'login fail:FB') {
+          $scope.logInErrorMessage = 'You have logged in with Facebook before; please use facebook log in';
+          //$location.path('/login');
         }
       }
       else {
