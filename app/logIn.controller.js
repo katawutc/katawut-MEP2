@@ -12,6 +12,8 @@ function logInCtrl ($scope, $http, $location, $window) {
       data: $scope.credentials
     }).then(function successCallback(response) {
 
+        // to work out on the asynchronous call function
+
         if (response.data) {
         $window.sessionStorage.setItem('userName', response.data.userName);
         $window.sessionStorage.setItem('userID', response.data.userID);
@@ -30,7 +32,6 @@ function logInCtrl ($scope, $http, $location, $window) {
         }
         else if (response.data.message === 'login fail:FB') {
           $scope.logInErrorMessage = 'You have logged in with Facebook before; please use facebook log in';
-          //$location.path('/login');
         }
       }
       else {
