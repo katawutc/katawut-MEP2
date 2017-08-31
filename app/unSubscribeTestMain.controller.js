@@ -5,6 +5,7 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
                                   $window, $location, testHeader) {
 
   // write the testHeader information after resolve
+  // need to check null of testHeader
   $scope.testDescription = testHeader.testDescription;
   $window.sessionStorage.setItem('testID', testHeader.testID);
   $window.sessionStorage.setItem('testDescription', testHeader.testDescription);

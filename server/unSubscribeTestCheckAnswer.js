@@ -22,15 +22,10 @@ module.exports = function unSubscribeTestCheckAnswer(req, res) {
      function cb(err, doc) {
        if (err) throw err;
 
+       if (doc) {
+
        solution = doc.solution;
        explanation = doc.explanation;
-
-       /** Record user Test result in the DB somewhere here
-         * 1. score and count score
-         * 2. cumulative score
-         * 3. time spent on the question
-         * 4. use collection 'userTestResult'
-         */
 
          if (userAnswer === solution) {
 
@@ -66,8 +61,10 @@ module.exports = function unSubscribeTestCheckAnswer(req, res) {
                        res.json({result: 'Wrong',
                        explanation: doc.explanation});
                      }
+                   }
+                   else {res.json('solution not found')};
                  } // function cb
                }
- /** */
 
+ /** */
 }
