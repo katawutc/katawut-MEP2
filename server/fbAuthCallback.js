@@ -18,8 +18,6 @@ passport.use(new FacebookStrategy({
       db.collection('user').findOne({fbID: profile.id}, function(err, doc) {
         if (err) throw err;
         if (doc) {
-          console.log('has FBID: ');
-          console.log(doc);
           cb(err, doc);
         }
         else {
@@ -29,23 +27,21 @@ passport.use(new FacebookStrategy({
 
           db.collection('user').insert({fbID: profile.id,
                                           userName: profile.displayName,
-                                          userRole: 'su'}, function(err, doc) {
-                                            if (err) throw err;
-                                            console.log('insert new: ');
-                                            console.log(doc);
+                                          userRole: 'su'}, insertCallback);
 
-              db.collection('user').findOne({fbID: profile.id}, function(err, doc2) {
-                if (err) throw err;
-                if (doc2) {
-                  console.log('insert success: ');
-                  console.log(doc2);
-                }
+          function insertCallback(err, doc) {
+            if (err) throw err;
 
-              cb(err, doc2);
-            })
+            db.collection('user').findOne({fbID: profile.id}, function(err, doc2) {
+            if (err) throw err;
+            if (doc2) {
+            console.log('insert success: ');
+            console.log(doc2);
+            }
 
-
-        })
+            cb(err, doc2);
+          })
+        }
         // need to understand more on fb log in callback
       }
     })
