@@ -52,7 +52,22 @@ module.exports = function fbLogIn(req, res) {
     if (err) throw err;
 
     if (doc) {
+      // to check if not 1st time log in
+      if (doc.userID) {
 
+        var payload = { userID: doc.userID,
+                        userRole: doc.userRole};
+        var token = jwt.sign(payload, opts.secretOrKey);
+
+        res.json({userName: doc.userName,
+                  userID: doc.userID,
+                  userRole: doc.userRole,
+                  token: token,
+                  activate: doc.activate, // to check 1st time setting
+                  message: 'login success'});
+
+      }
+      else {
       // need to refactor more when understand async
       // set the userID
       db.collection('user').update(query,
@@ -77,6 +92,7 @@ module.exports = function fbLogIn(req, res) {
                   });
                 }
         }
+      }
     else {res.json('error happens');}
     })
 }
