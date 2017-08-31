@@ -20,8 +20,12 @@ function logInCtrl ($scope, $http, $location, $window) {
         $window.sessionStorage.setItem('userRole', response.data.userRole);
         $window.sessionStorage.setItem('token', response.data.token);
         $window.sessionStorage.setItem('logInMessage', response.data.message);
+        $window.sessionStorage.setItem('activate', response.data.activate);
 
         // Get userID here to start dashboard controller
+
+        // need to check activate too if not done 1st time setting
+
         if (response.data.message === 'login success') {
           $location.path('/dashboard'+'/'+
                           $window.sessionStorage.getItem('userRole')+'/'+

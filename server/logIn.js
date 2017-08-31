@@ -55,7 +55,7 @@ module.exports = function logIn(req, res) {
     if (err) throw err;
 
     // to check null to prevent crash
-    if (doc.userEmail && doc.userHashedPassword) {
+    if (doc && doc.userEmail && doc.userHashedPassword) {
     var hashedPassword = doc.userHashedPassword;
 
     bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
@@ -77,7 +77,7 @@ module.exports = function logIn(req, res) {
                 }
               });
           }
-    else if (doc.userEmail && doc.fbID) {
+    else if (doc && doc.userEmail && doc.fbID) {
       res.json({message: 'login fail:FB'})
     }
     else {

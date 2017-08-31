@@ -10,7 +10,6 @@ module.exports = function setting(req, res) {
 
   function cb(err, doc) {
     if (err) throw err;
-    console.log(doc);
     res.json(doc);
   }
 }

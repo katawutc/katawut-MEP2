@@ -60,13 +60,6 @@ function directLogIn($window, $http, $location, uID, pass) {
         $location.path('/firstSetting'+'/'+
                           $window.sessionStorage.getItem('userRole')+'/'+
                           $window.sessionStorage.getItem('userID'));
-
-        /*
-
-        $location.path('/dashboard'+'/'+
-                        $window.sessionStorage.getItem('userRole')+'/'+
-                        $window.sessionStorage.getItem('userID'));
-                        */
       }
 
   }, function errorCallback(response) {
