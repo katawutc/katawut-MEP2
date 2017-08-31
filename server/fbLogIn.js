@@ -51,13 +51,10 @@ module.exports = function fbLogIn(req, res) {
   db.collection('user').findOne(query, function(err, doc) {
     if (err) throw err;
 
-    // to check null to prevent crash
-    console.log(doc);
-
     if (doc) {
 
+      // need to refactor more when understand async
       // set the userID
-      console.log(doc._id);
       db.collection('user').update(query,
                                   {$set: {userID: doc._id }}, cb);
 
@@ -67,12 +64,18 @@ module.exports = function fbLogIn(req, res) {
                         userRole: doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
 
-        res.json({userName: doc.userName,
-                  userID: doc._id,
-                  userRole: doc.userRole,
-                  token: token,
-                  message: 'login success'});
-          }
+        db.collection('userSetting').insert({userID: doc._id.toString(),
+                                              userRole: doc.userRole},
+        function(err, setting) {
+          if (err) throw err;
+          res.json({userName: doc.userName,
+                    userID: doc._id.toString(),
+                    userRole: doc.userRole,
+                    token: token,
+                    activate: doc.activate, // to check 1st time setting
+                    message: 'login success'});
+                  });
+                }
         }
     else {res.json('error happens');}
     })

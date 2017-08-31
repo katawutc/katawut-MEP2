@@ -27,7 +27,8 @@ passport.use(new FacebookStrategy({
 
           db.collection('user').insert({fbID: profile.id,
                                           userName: profile.displayName,
-                                          userRole: 'su'}, insertCallback);
+                                          userRole: 'su',
+                                          activate: false}, insertCallback);
 
           function insertCallback(err, doc) {
             if (err) throw err;
