@@ -155,6 +155,16 @@ angular.module('app')
         }
       }
     })
+    /** preference setting su*/
+    .when('/preferenceSetting/su/:userID', {
+      templateUrl : 'preferenceSettingSu.html',
+      controller : 'preferenceSettingSuCtrl',
+      resolve : {
+        preferenceSettingSuData : function(preferenceSettingSuService) {
+          return preferenceSettingSuService.getPreferenceSettingSuData();
+        }
+      }
+    })
     /** 1st time setting for su */
     .when('/firstSetting/su/:userID', {
       templateUrl : 'firstSettingSu.html',
@@ -164,11 +174,6 @@ angular.module('app')
     .when('/accountSetting/su/:userID', {
       templateUrl : 'accountSettingSu.html',
       controller : 'accountSettingSuCtrl',
-    })
-    /** preference setting for su */
-    .when('/preferenceSetting/su/:userID', {
-      templateUrl : 'preferenceSettingSu.html',
-      controller : 'preferenceSettingSuCtrl',
     })
     /** exam list for su */
     .when('/testList/su/:userID', {

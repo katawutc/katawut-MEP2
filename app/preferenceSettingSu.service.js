@@ -1,15 +1,15 @@
-angular.module('app').factory('profileSettingSuService', profileSettingSuService);
+angular.module('app').factory('preferenceSettingSuService', preferenceSettingSuService);
 
-function profileSettingSuService($http, $route, $window, $q) {
+function preferenceSettingSuService($http, $route, $window, $q) {
   return {
-      getProfileSettingSuData : function() {
+      getPreferenceSettingSuData : function() {
 
-        var profileSettingUrl = 'profileSetting/su/'+$window.sessionStorage.userID;
+        var preferenceSettingUrl = 'preferenceSetting/su/'+$window.sessionStorage.userID;
 
         var deferred = $q.defer();
 
         $http({
-          url: profileSettingUrl,
+          url: preferenceSettingUrl,
           method: 'GET',
           headers: {
             'Authorization': 'JWT ' + $window.sessionStorage.token
@@ -17,7 +17,6 @@ function profileSettingSuService($http, $route, $window, $q) {
         }).then(function successCallback(response) {
 
           deferred.resolve(response.data);
-          console.log(response.data);
 
         },function errorCallback(response){
 

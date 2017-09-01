@@ -1,12 +1,14 @@
 
 
-module.exports = function setting(req, res) {
+module.exports = function preferenceSetting(req, res) {
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
+  console.log('at server preferenceSetting');
+
   db.collection('userSetting').findOne({userID: req.params.userID,
-                                        userRole: 'su'}, cb);
+                                          userRole: 'su'}, cb);
 
   function cb(err, doc) {
     if (err) throw err;

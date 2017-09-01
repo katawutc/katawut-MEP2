@@ -4,17 +4,14 @@ angular.module('app').controller('profileSettingSuCtrl',
 function profileSettingSuCtrl ($scope, $http, $routeParams, $window, $location,
                                 profileSettingSuData) {
 
-  /**
-   * go to the DB to fetch the current user setting to display on the view \
-   * by service
-   */
+    $scope.userID = $window.sessionStorage.userID;
 
-   if(profileSettingSuData === null) {$location.path('/errorPage');}
+    if(profileSettingSuData === null) {$location.path('/errorPage');}
 
-   $scope.userID = profileSettingSuData.userID;
-   $scope.userRole = profileSettingSuData.userRole;
+    $scope.userName = profileSettingSuData.userName;
 
-  $scope.saveSetting = function() {
+
+    $scope.saveSetting = function() {
 
   }
 

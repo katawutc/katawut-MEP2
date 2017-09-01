@@ -70,7 +70,10 @@ app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: f
 app.post('/logIn', require('./server/logIn'));
 
 /** get user setting*/
-app.get('/setting/su/:userID', require('./server/setting'));
+app.get('/profileSetting/su/:userID', require('./server/profileSetting'));
+
+/** get user preference setting*/
+app.get('/preferenceSetting/su/:userID', require('./server/preferenceSetting'));
 
 /** test header */
 app.get('/testHeader/:testID', require('./server/testHeader'));
