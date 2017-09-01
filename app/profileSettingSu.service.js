@@ -17,7 +17,6 @@ function profileSettingSuService($http, $route, $window, $q) {
         }).then(function successCallback(response) {
 
           deferred.resolve(response.data);
-          console.log(response.data);
 
         },function errorCallback(response){
 
