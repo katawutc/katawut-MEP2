@@ -18,6 +18,10 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
 
      $scope.edit = function() {
        console.log('to show modal dialog for setting');
+
+
+
+
      }
 
 }
