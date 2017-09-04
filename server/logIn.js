@@ -13,7 +13,7 @@ var JwtStrategy = passportJWT.Strategy;
 /**  JWT Strategy */
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-opts.secretOrKey = 'secret';
+opts.secretOrKey = 'secret'; /* to create a new secretOrKey */
 
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
    console.log('payload received', jwt_payload);
