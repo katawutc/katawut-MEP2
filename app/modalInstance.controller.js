@@ -15,6 +15,15 @@ function modalInstanceCtrl ($scope, $uibModalInstance, params) {
   $scope.data = params;
 
 $ctrl.ok = function () {
+
+  $scope.newSettingData = {userLevel: $scope.selectedLevel,
+                            userPreferTest: $scope.selectedTest,
+                            userPreferSubject: $scope.selectedSubject}
+
+  console.log('new setting data');
+  console.log($scope.newSettingData);
+
+
   $uibModalInstance.close('ok');
 };
 

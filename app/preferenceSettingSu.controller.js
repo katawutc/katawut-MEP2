@@ -20,11 +20,8 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
      $scope.currentSetting = { currentUserLevel: $scope.userLevel,
                                 currentPrefertest: $scope.userPreferTest,
                                 currentPreferSubject: $scope.userPreferSubject }
-
-
+                                
      /** */
-
-
 
       $scope.open = function (size, parentSelector) {
 
