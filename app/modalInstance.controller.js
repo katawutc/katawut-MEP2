@@ -1,12 +1,13 @@
 angular.module('app').controller('modalInstanceCtrl', modalInstanceCtrl);
 
-function modalInstanceCtrl ($scope, $uibModal) {
+function modalInstanceCtrl ($scope, $uibModalInstance) {
   var $ctrl = this;
 
 $ctrl.ok = function () {
+  $uibModalInstance.close('ok');
 };
 
 $ctrl.cancel = function () {
-  $uibModal.dismiss('cancel');
+  $uibModalInstance.dismiss('cancel');
 };
 }
