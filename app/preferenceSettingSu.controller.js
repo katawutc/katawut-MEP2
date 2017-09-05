@@ -17,15 +17,16 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
      $scope.userPreferTest = preferenceSettingSuData.userPreferTest;
      $scope.userPreferSubject = preferenceSettingSuData.userPreferSubject;
 
+     $scope.currentSetting = { currentUserLevel: $scope.userLevel,
+                                currentPrefertest: $scope.userPreferTest,
+                                currentPreferSubject: $scope.userPreferSubject }
+
 
      /** */
 
 
 
       $scope.open = function (size, parentSelector) {
-
-        var $ctrl = this;
-        $ctrl.items = ['item1', 'item2', 'item3'];
 
         //var parentElem = parentSelector ?
           //angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
@@ -39,7 +40,7 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
           //appendTo: parentElem,
           resolve: {
             params: function () {
-                return $ctrl.items;
+                return $scope.currentSetting;
             }
         }
       });

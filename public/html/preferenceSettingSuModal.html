@@ -1,11 +1,25 @@
 <div class="modal-demo">
 
         <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+            <h3 class="modal-title" id="modal-title">Preference setting</h3>
         </div>
         <div class="modal-body" id="modal-body">
+          <!-- study level -->
+          <h3>Study level</h3>
+          <select ng-model="selectedLevel" ng-init='selectedLevel=levelList[0]'>
+          <option ng-repeat="level in levelList" value="{{level}}">{{level}}</option>
+          </select>
+          <!-- test preference -->
+          <h3>Test Preference</h3>
+          <select ng-model="selectedTest" ng-init='selectedTest=testList[0]'>
+          <option ng-repeat="test in testList" value="{{test}}">{{test}}</option>
+          </select>
+          <!-- subject -->
 
-          {{data}}
+          <h3>Subject Preference</h3>
+          <select ng-model="selectedSubject" ng-init='selectedSubject=subjectList[0]'>
+          <option ng-repeat="subject in subjectList" value="{{subject}}">{{subject}}</option>
+          </select>
 
         </div>
         <div class="modal-footer">
