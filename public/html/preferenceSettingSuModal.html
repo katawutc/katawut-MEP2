@@ -6,24 +6,24 @@
         <div class="modal-body" id="modal-body">
           <!-- study level -->
           <h3>Study level</h3>
-          <select ng-model="selectedLevel" ng-init='selectedLevel=levelList[0]'>
+          <select ng-model="selectedLevel" ng-init='selectedLevel=data.currentUserLevel'>
           <option ng-repeat="level in levelList" value="{{level}}">{{level}}</option>
           </select>
           <!-- test preference -->
           <h3>Test Preference</h3>
-          <select ng-model="selectedTest" ng-init='selectedTest=testList[0]'>
+          <select ng-model="selectedTest" ng-init='selectedTest=data.currentPrefertest'>
           <option ng-repeat="test in testList" value="{{test}}">{{test}}</option>
           </select>
           <!-- subject -->
 
           <h3>Subject Preference</h3>
-          <select ng-model="selectedSubject" ng-init='selectedSubject=subjectList[0]'>
+          <select ng-model="selectedSubject" ng-init='selectedSubject=data.currentPreferSubject'>
           <option ng-repeat="subject in subjectList" value="{{subject}}">{{subject}}</option>
           </select>
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Save</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
 
