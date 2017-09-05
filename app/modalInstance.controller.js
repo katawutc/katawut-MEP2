@@ -15,7 +15,7 @@ function modalInstanceCtrl ($scope, $uibModalInstance, $window,
 
   $scope.data = params;
 
-$ctrl.ok = function () {
+  $ctrl.ok = function () {
 
   $scope.newSettingData = {userLevel: $scope.selectedLevel,
                             userPreferTest: $scope.selectedTest,
@@ -43,7 +43,8 @@ $ctrl.ok = function () {
 
   });
 
-  $uibModalInstance.close('ok');
+  // pass new setting back to parent
+  $uibModalInstance.close($scope.newSettingData);
 
 };
 

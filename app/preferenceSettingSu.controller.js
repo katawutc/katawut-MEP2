@@ -20,7 +20,7 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
      $scope.currentSetting = { currentUserLevel: $scope.userLevel,
                                 currentPrefertest: $scope.userPreferTest,
                                 currentPreferSubject: $scope.userPreferSubject }
-                                
+
      /** */
 
       $scope.open = function (size, parentSelector) {
@@ -45,6 +45,10 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
         modalInstance.result.then(function (result) {
           $log.info(result);
           $log.info('Modal Okay Okay ');
+          $scope.userLevel = result.userLevel;
+          $scope.userPreferTest = result.userPreferTest;
+          $scope.userPreferSubject = result.userPreferSubject;
+
      }, function () {
        $log.info('Modal dismissed at: ' + new Date());
      });
