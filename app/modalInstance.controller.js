@@ -1,6 +1,7 @@
 angular.module('app').controller('modalInstanceCtrl', modalInstanceCtrl);
 
-function modalInstanceCtrl ($scope, $uibModalInstance, params) {
+function modalInstanceCtrl ($scope, $uibModalInstance, $window,
+                            $http, params) {
   var $ctrl = this;
 
   // use DB to fetch this in the future
@@ -23,8 +24,27 @@ $ctrl.ok = function () {
   console.log('new setting data');
   console.log($scope.newSettingData);
 
+  /** save new setting into the DB */
+
+  var saveSettingUrl = 'saveSetting/'+$window.sessionStorage.userRole+'/'+
+                        $window.sessionStorage.userID
+
+  // save the first setting parameter into the DB
+  $http({
+    method: 'POST',
+    url: saveSettingUrl,
+    data: $scope.newSettingData
+  }).then(function successCallback(response) {
+    // route to the dashboard
+
+
+
+  },function errorCallback(response){
+
+  });
 
   $uibModalInstance.close('ok');
+
 };
 
 $ctrl.cancel = function () {
