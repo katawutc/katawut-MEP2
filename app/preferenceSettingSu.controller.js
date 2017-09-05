@@ -39,10 +39,7 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
           //appendTo: parentElem,
           resolve: {
             params: function () {
-                return {
-                    key: 'value',
-                    key2: 'value2'
-                };
+                return $ctrl.items;
             }
         }
       });
