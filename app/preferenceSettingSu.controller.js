@@ -38,14 +38,18 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
           size: size,
           //appendTo: parentElem,
           resolve: {
-                        items: function () {
-              return $ctrl.items;
+            params: function () {
+                return {
+                    key: 'value',
+                    key2: 'value2'
+                };
             }
-          }
-        });
+        }
+      });
 
-        modalInstance.result.then(function (selectedItem) {
-       $ctrl.selected = selectedItem;
+        modalInstance.result.then(function (result) {
+          $log.info(result);
+          $log.info('Modal Okay Okay ');
      }, function () {
        $log.info('Modal dismissed at: ' + new Date());
      });
