@@ -29,7 +29,7 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
           ariaLabelledBy: 'modal-title',
           ariaDescribedBy: 'modal-body',
           templateUrl: 'preferenceSettingSuModal.html',
-          controller: 'modalInstanceCtrl',
+          controller: 'preferenceSettingSuModalCtrl',
           controllerAs: '$ctrl',
           size: size,
           resolve: {
@@ -40,14 +40,13 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
       });
 
         modalInstance.result.then(function (result) {
-          $log.info(result);
-          $log.info('Modal Okay Okay ');
+
           $scope.userLevel = result.userLevel;
           $scope.userPreferTest = result.userPreferTest;
           $scope.userPreferSubject = result.userPreferSubject;
 
      }, function () {
-       $log.info('Modal dismissed at: ' + new Date());
+
      });
    }
  }

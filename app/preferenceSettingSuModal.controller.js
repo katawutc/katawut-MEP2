@@ -1,7 +1,7 @@
-angular.module('app').controller('modalInstanceCtrl', modalInstanceCtrl);
+angular.module('app').controller('preferenceSettingSuModalCtrl', preferenceSettingSuModalCtrl);
 
-function modalInstanceCtrl ($scope, $uibModalInstance, $window,
-                            $http, params) {
+function preferenceSettingSuModalCtrl ($scope, $uibModalInstance, $window,
+                                        $http, params) {
   var $ctrl = this;
 
   // use DB to fetch this in the future
@@ -11,8 +11,6 @@ function modalInstanceCtrl ($scope, $uibModalInstance, $window,
 
   $scope.subjectList = ['Math', 'English', 'Science', 'others 1'];
 
-  console.log(params);
-
   $scope.data = params;
 
   $ctrl.ok = function () {
@@ -20,9 +18,6 @@ function modalInstanceCtrl ($scope, $uibModalInstance, $window,
   $scope.newSettingData = {userLevel: $scope.selectedLevel,
                             userPreferTest: $scope.selectedTest,
                             userPreferSubject: $scope.selectedSubject}
-
-  console.log('new setting data');
-  console.log($scope.newSettingData);
 
   /** save new setting into the DB */
 
