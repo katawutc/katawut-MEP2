@@ -104,6 +104,16 @@ angular.module('app')
         }
       }
     })
+    /** admin dashboard */
+    .when("/dashboard/ad/:userID", {
+      templateUrl : 'dashboard.ad.html',
+      controller :'dashboardAdCtrl',
+      resolve : {
+        dashboardData : function (dashboardAdService){
+          return dashboardAdService.getDashboardData();
+        }
+      }
+    })
     .when('/answerSummary', {
       templateUrl : 'answerSummary.html',
       controller : 'answerSummaryCtrl',
