@@ -45,6 +45,9 @@ function preferenceSettingSuModalCtrl ($scope, $uibModalInstance, $window,
      * params ?
      */
 
+     // if fail reload the existing preference setting
+     $location.path('/preferenceSetting/su/'+$window.sessionStorage.userID);
+
   });
 
   // pass new setting back to parent
