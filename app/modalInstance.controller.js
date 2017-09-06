@@ -35,11 +35,20 @@ function modalInstanceCtrl ($scope, $uibModalInstance, $window,
     url: saveSettingUrl,
     data: $scope.newSettingData
   }).then(function successCallback(response) {
-    // route to the dashboard
-
-
+    /**
+     * use data service to pass new setting to the \
+     * preference page
+     */
 
   },function errorCallback(response){
+    // what to do if fail to save into the DB?
+
+    /**
+     * show modal saying fail to save new data
+     * reverse display setting to the original
+     *
+     * params ?
+     */
 
   });
 

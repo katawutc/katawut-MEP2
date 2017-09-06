@@ -25,8 +25,6 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
 
       $scope.open = function (size, parentSelector) {
 
-        //var parentElem = parentSelector ?
-          //angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
         var modalInstance = $uibModal.open({
           ariaLabelledBy: 'modal-title',
           ariaDescribedBy: 'modal-body',
@@ -34,7 +32,6 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
           controller: 'modalInstanceCtrl',
           controllerAs: '$ctrl',
           size: size,
-          //appendTo: parentElem,
           resolve: {
             params: function () {
                 return $scope.currentSetting;
