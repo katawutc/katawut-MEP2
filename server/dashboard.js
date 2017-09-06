@@ -8,8 +8,6 @@ module.exports = function dashboard(req, res) {
   var query = {userID : req.params.userID,
                 userRole: req.params.userRole};
 
-  console.log(query);
-
   /** to implement what DB collection to access to get information for the dashboard */
   db.collection('user').findOne(query, function(err, doc) {
     if (err) {

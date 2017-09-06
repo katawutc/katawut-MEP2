@@ -94,6 +94,16 @@ angular.module('app')
         }
       }
     })
+    /** test writer dashboard */
+    .when("/dashboard/tw/:userID", {
+      templateUrl : 'dashboard.tw.html',
+      controller :'dashboardTwCtrl',
+      resolve : {
+        dashboardData : function (dashboardTwService){
+          return dashboardTwService.getDashboardData();
+        }
+      }
+    })
     .when('/answerSummary', {
       templateUrl : 'answerSummary.html',
       controller : 'answerSummaryCtrl',

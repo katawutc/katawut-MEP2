@@ -16,10 +16,6 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = 'secret'; /* to create a new secretOrKey */
 
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
-   console.log('payload received', jwt_payload);
-
-   console.log(jwt_payload.userID);
-   console.log(jwt_payload.userRole);
 
    // Need to refactor to userID
    /** to refactor to have user role in here */
@@ -71,6 +67,7 @@ module.exports = function logIn(req, res) {
                   userID: doc.userID,
                   userRole: doc.userRole,
                   token: token,
+                  activate: doc.activate,
                   message: 'login success'});
                 } else {
                   res.json({message: 'login fail'});
