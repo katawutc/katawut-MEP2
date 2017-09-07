@@ -6,24 +6,27 @@
 }
 
 .left-half {
-  background: #DDD;
   position: absolute;
+  border:1px solid #900;
+	padding:40px;
   left: 0px;
   height: 50%;
   width: 50%;
 }
 
 .right-half {
-  background: #AAA;
   position: absolute;
+  border:1px solid #900;
+  padding:40px;
   right: 0px;
   height: 50%;
   width: 50%;
 }
 
 .bottom-left {
-  background: #DDD;
   position: absolute;
+  border:1px solid #900;
+  padding:40px;
   left: 0px;
   top: 50%;
   height: 50%;
@@ -31,8 +34,9 @@
 }
 
 .bottom-right {
-  background: #AAA;
   position: absolute;
+  border:1px solid #900;
+  padding:40px;
   right: 0px;
   top: 50%;
   height: 50%;
