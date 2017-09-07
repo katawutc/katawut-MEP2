@@ -1,48 +1,27 @@
 
 
 <style type="text/css">
+* {
+  box-sizing: border-box;
+}
 
-body {
- margin:0;
- padding:0;
- height:100%;
- }
- #top_div
- {
-   height:25%;
-   width:100%;
-   background-color:#009900;
-   margin:auto;
-   text-align:center;
- }
- #mid1_div
- {
-   height:25%;
-   width:100%;
-   background-color:#990000;
-   margin:auto;
-   text-align:center;
-   color:#FFFFFF;
- }
+div {
+  height: 100%;
+}
 
- #mid2_div
- {
-   height:25%;
-   width:100%;
-   background-color:#000000;
-   margin:auto;
-   text-align:center;
-   color:#FFFFFF;
- }
- #bottom_div
- {
-   height:25%;
-   width:100%;
-   background-color:#990000;
-   margin:auto;
-   text-align:center;
-   color:#FFFFFF;
- }
+.left-half {
+  background-color: #ff9e2c;
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+
+.right-half {
+  background-color: #b6701e;
+  position: absolute;
+  right: 0px;
+  width: 50%;
+}
 
 .loader {
   border: 16px solid #f3f3f3;
