@@ -5,21 +5,37 @@
   box-sizing: border-box;
 }
 
-div {
-  height: 100%;
-}
-
 .left-half {
-  background-color: #ff9e2c;
+  background: #DDD;
   position: absolute;
   left: 0px;
+  height: 50%;
   width: 50%;
 }
 
 .right-half {
-  background-color: #b6701e;
+  background: #AAA;
   position: absolute;
   right: 0px;
+  height: 50%;
+  width: 50%;
+}
+
+.bottom-left {
+  background: #DDD;
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  height: 50%;
+  width: 50%;
+}
+
+.bottom-right {
+  background: #AAA;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  height: 50%;
   width: 50%;
 }
 
