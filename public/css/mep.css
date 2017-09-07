@@ -5,43 +5,36 @@
   box-sizing: border-box;
 }
 
-.left-half {
-  position: absolute;
-  border:1px solid #900;
-	padding:40px;
-  left: 0px;
-  height: 50%;
-  width: 50%;
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-auto-rows: minmax(200px, auto);
+  grid-gap: 10px;
+  grid-template-areas:
+    "d1 d2"
+    "d3 d4";
 }
 
-.right-half {
-  position: absolute;
-  border:1px solid #900;
-  padding:40px;
-  right: 0px;
-  height: 50%;
-  width: 50%;
+.dashboard1 {
+  grid-area: d1;
+  border:solid 1px
 }
 
-.bottom-left {
-  position: absolute;
-  border:1px solid #900;
-  padding:40px;
-  left: 0px;
-  top: 50%;
-  height: 50%;
-  width: 50%;
+.dashboard2 {
+  grid-area: d2;
+  border:solid 1px
 }
 
-.bottom-right {
-  position: absolute;
-  border:1px solid #900;
-  padding:40px;
-  right: 0px;
-  top: 50%;
-  height: 50%;
-  width: 50%;
+.dashboard3 {
+  grid-area: d3;
+  border:solid 1px
 }
+
+.dashboard4 {
+  grid-area: d4;
+  border:solid 1px
+}
+
 
 .loader {
   border: 16px solid #f3f3f3;
