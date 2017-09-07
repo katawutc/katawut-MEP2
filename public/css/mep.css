@@ -1,4 +1,49 @@
-<style>
+
+
+<style type="text/css">
+
+body {
+ margin:0;
+ padding:0;
+ height:100%;
+ }
+ #top_div
+ {
+   height:25%;
+   width:100%;
+   background-color:#009900;
+   margin:auto;
+   text-align:center;
+ }
+ #mid1_div
+ {
+   height:25%;
+   width:100%;
+   background-color:#990000;
+   margin:auto;
+   text-align:center;
+   color:#FFFFFF;
+ }
+
+ #mid2_div
+ {
+   height:25%;
+   width:100%;
+   background-color:#000000;
+   margin:auto;
+   text-align:center;
+   color:#FFFFFF;
+ }
+ #bottom_div
+ {
+   height:25%;
+   width:100%;
+   background-color:#990000;
+   margin:auto;
+   text-align:center;
+   color:#FFFFFF;
+ }
+
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
