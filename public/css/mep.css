@@ -1,4 +1,59 @@
-<style>
+
+
+<style type="text/css">
+* {
+  box-sizing: border-box;
+}
+
+#su_nav_bar {
+  overflow-x: hidden;
+  background-color: #20B2AA;
+  border-color: #20B2AA;
+}
+
+#su_nav_bar a {
+  overflow-x: hidden;
+  color: white;
+}
+
+.su_dashboard_greeting {
+  position: fixed;
+  opacity:1.0;
+  top: 60px;
+  z-index: 999;
+}
+
+.wrapper {
+
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-auto-rows: minmax(2000px, auto);
+  grid-gap: 10px;
+  grid-template-areas:
+    "d1 d2"
+    "d3 d4";
+}
+
+.dashboard1 {
+  grid-area: d1;
+  border:solid 1px
+}
+
+.dashboard2 {
+  grid-area: d2;
+  border:solid 1px
+}
+
+.dashboard3 {
+  grid-area: d3;
+  border:solid 1px
+}
+
+.dashboard4 {
+  grid-area: d4;
+  border:solid 1px
+}
+
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
