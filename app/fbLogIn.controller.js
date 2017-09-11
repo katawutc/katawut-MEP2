@@ -4,20 +4,14 @@ angular.module('app').controller('fbLogInCtrl',
 function fbLogInCtrl ($scope, $http, $routeParams, $window,
                                 $location) {
 
-    console.log('at fb log in controller');
-
-    console.log($routeParams.fbID);
-
     var fbID = {fbID: $routeParams.fbID};
-
-    console.log(fbID);
 
     $http({
       url: 'fbLogIn',
       method: 'POST',
       data: fbID
     }).then(function successCallback(response) {
-      console.log(response.data);
+
       if (response.data) {
       $window.sessionStorage.setItem('userName', response.data.userName);
       $window.sessionStorage.setItem('userID', response.data.userID);

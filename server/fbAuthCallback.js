@@ -16,11 +16,6 @@ passport.use(new FacebookStrategy({
       var mongo = require('./mongoDBConnect');
       var db = mongo.getDB();
 
-      /** */
-      console.log('receive FB profile: ');
-      console.log(profile);
-      /** */
-
       /** need to check if (profile) here */
       db.collection('user').findOne({fbID: profile.id}, function(err, doc) {
         if (err) throw err;
@@ -44,11 +39,8 @@ passport.use(new FacebookStrategy({
             db.collection('user').findOne({fbID: profile.id}, function(err, doc2) {
             if (err) throw err;
             if (doc2) {
-            console.log('insert success: ');
-            console.log(doc2);
+              cb(err, doc2);
             }
-
-            cb(err, doc2);
           })
         }
         // need to understand more on fb log in callback
@@ -57,8 +49,7 @@ passport.use(new FacebookStrategy({
     }));
 
 module.exports = function fbAuthCallback(req, res) {
-  // Successful authentication, redirect home.
-  //res.redirect('/');
-  console.log(req.user);
+
   res.redirect('/#!/fbLogIn/'+req.user.fbID);
+
 }

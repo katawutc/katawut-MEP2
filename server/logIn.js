@@ -63,22 +63,26 @@ module.exports = function logIn(req, res) {
                         userRole: doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
 
-        res.json({userName: doc.userName,
-                  userID: doc.userID,
-                  userRole: doc.userRole,
-                  token: token,
-                  activate: doc.activate,
-                  message: 'login success'});
-                } else {
-                  res.json({message: 'login fail'});
-                }
-              });
-          }
-    else if (doc && doc.userEmail && doc.fbID) {
-      res.json({message: 'login fail:FB'})
-    }
-    else {
-      res.json(doc);
+        db.collection('loginHistory').insert({userID: doc.userID,
+                                                loginMethod: 'Email',
+                                                loginTime: Date().toString()}, cb);
+
+        function cb(err, result) {
+          res.json({userName: doc.userName,
+                    userID: doc.userID,
+                    userRole: doc.userRole,
+                    token: token,
+                    activate: doc.activate,
+                    message: 'login success'});
+                  }
+        }
+        else if (doc && doc.userEmail && doc.fbID) {
+          res.json({message: 'login fail:FB'})
+        }
+        else {
+          res.json(doc);
+        }
+      });
     }
   });
 }

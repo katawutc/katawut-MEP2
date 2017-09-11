@@ -10,10 +10,6 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
 opts.secretOrKey = 'secret';
 
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
-   console.log('payload received', jwt_payload);
-
-   console.log(jwt_payload.userID);
-   console.log(jwt_payload.userRole);
 
    // Need to refactor to userID
    /** to refactor to have user role in here */
@@ -36,13 +32,10 @@ var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 
 passport.use(strategy);
 
-
 module.exports = function fbLogIn(req, res) {
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
-
-  console.log(req.body.fbID);
 
   var query = {fbID: req.body.fbID};
   var loginSuccess;
@@ -59,16 +52,21 @@ module.exports = function fbLogIn(req, res) {
                         userRole: doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey);
 
-        console.log('fb re-login: ');
-        console.log(doc.activate);
+        db.collection('loginHistory').insert({userID: doc.userID,
+                                                loginMethod: 'fb',
+                                                loginTime: Date().toString()}, cb);
 
-        res.json({userName: doc.userName,
-                  userID: doc.userID,
-                  userRole: doc.userRole,
-                  token: token,
-                  activate: doc.activate, // to check 1st time setting
-                  message: 'login success'});
-
+        function cb(err, result) {
+          if (err) throw err;
+          else {
+            res.json({userName: doc.userName,
+                      userID: doc.userID,
+                      userRole: doc.userRole,
+                      token: token,
+                      activate: doc.activate, // to check 1st time setting
+                      message: 'login success'});
+          }
+        }
       }
       else {
       // need to refactor more when understand async
