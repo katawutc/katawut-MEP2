@@ -9,6 +9,14 @@
     color: white;
 }
 
+#bs-example-navbar-collapse-1 a {
+    color: white;
+}
+
+#main-more-dropdown a {
+    color: black;
+}
+
 .second-navbar{
   top:50px;
 }
