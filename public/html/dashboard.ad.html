@@ -1,17 +1,27 @@
 <nav-bar-ad></nav-bar-ad>
 
+<div class="row">
+  <div class="col-sm-1"></div>
+
+  <div class="col-sm-10">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>user name</th>
+          <th>user ID</th>
+          <th>user Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in userList">
+          <td>{{ user.userName }}</td>
+          <td>{{ user.userID }}</td>
+          <td>{{ user.userRole }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 <div class="col-sm-1"></div>
-
-<div class="col-sm-10">
-
-<h3>
-  Hello {{userName}}
-</h3>
-  <br>
-  <h4>
-  User role: {{userRole}}
-</h4>
-
 </div>
-
-<div class="col-sm-1"></div>

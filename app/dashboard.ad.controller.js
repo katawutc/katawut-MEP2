@@ -1,10 +1,10 @@
 angular.module('app').controller('dashboardAdCtrl', dashboardAdCtrl);
 
-function dashboardAdCtrl($scope, $http, $location, $window, $routeParams, dashboardData) {
+function dashboardAdCtrl($scope, $http, $location, $window, $routeParams, userListData) {
 
-    if (dashboardData) {
-      $scope.userName = dashboardData.userName;
-      $scope.userRole = dashboardData.userRole;
+    /** get user list data*/
+    if (userListData) {
+      $scope.userList = userListData;
   }
   else {
     $window.sessionStorage.setItem('errorMessage', 'No Authorization');

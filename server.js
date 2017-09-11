@@ -66,6 +66,10 @@ app.post('/logInDirect', require('./server/logInDirect'));
 app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   require('./server/dashboard'));
 
+/** get user list to diaplay on admin dashboard */
+app.get('/dashboard/ad/:userID/userList', passport.authenticate('jwt', {session: false}),
+  require('./server/userList'));
+
 /** logIn */
 app.post('/logIn', require('./server/logIn'));
 

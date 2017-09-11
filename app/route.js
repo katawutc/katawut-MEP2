@@ -104,13 +104,13 @@ angular.module('app')
         }
       }
     })
-    /** admin dashboard */
+    /** admin dashboard user list data*/
     .when("/dashboard/ad/:userID", {
       templateUrl : 'dashboard.ad.html',
       controller :'dashboardAdCtrl',
       resolve : {
-        dashboardData : function (dashboardAdService){
-          return dashboardAdService.getDashboardData();
+        userListData : function (userListDataService){
+          return userListDataService.getUserListData();
         }
       }
     })

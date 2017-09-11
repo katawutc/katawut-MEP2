@@ -1,15 +1,17 @@
-angular.module('app').factory('dashboardAdService', dashboardAdService);
+angular.module('app').factory('userListDataService', userListDataService);
 
-function dashboardAdService($http, $route, $window, $q) {
+function userListDataService($http, $route, $window, $q) {
   return {
-      getDashboardData : function() {
+      getUserListData : function() {
 
-      var dashboardDataUrl = '/dashboard/ad/'+$route.current.params.userID;
+      var userListDataUrl = '/dashboard/ad/'+$route.current.params.userID
+                                +'/userList';
 
       var deferred = $q.defer();
 
+      /** get all the user list for the starter */
       $http({
-        url: dashboardDataUrl,
+        url: userListDataUrl,
         method: 'GET',
         headers: {
           'Authorization': 'JWT ' + $window.sessionStorage.token
