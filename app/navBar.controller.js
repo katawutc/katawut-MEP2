@@ -49,7 +49,7 @@ function navBarController ($q, $scope, $http, $location, $window) {
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       console.log('route to the correct user dashboard');
-      $location.path('auth/facebook');
+      $window.location.href = '/auth/facebook';
     }
     if (response.status === 'unknown'){
       $location.path('/logIn');
