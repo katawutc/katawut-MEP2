@@ -23,10 +23,7 @@ passport.use(new FacebookStrategy({
           cb(err, doc);
         }
         else {
-
-          /*** use async to insert userSetting data here ***/
-
-
+          // no fbID in the DB before; now insert it
           db.collection('user').insert({fbID: profile.id,
                                           userName: profile.displayName,
                                           userEmail: profile.emails[0].value,

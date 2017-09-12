@@ -8,11 +8,6 @@
 
 <h1>Log in page</h1>
 
-<!-- To add other login function here
-  1. google
-  2. facebook
-  3. line
--->
 <div>
 
   <a class="btn btn-block btn-social btn-facebook" href='/auth/facebook'>
@@ -29,11 +24,11 @@
   <div class="form-group">
     <p style="color:red">{{logInErrorMessage}}</p>
     <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="credentials.email">
+    <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="credential.email">
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credentials.password">
+    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credential.password">
   </div>
   <button type="submit" class="btn btn-primary btn-block">Log in</button>
 </form>

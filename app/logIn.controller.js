@@ -3,13 +3,11 @@ angular.module('app').controller('logInCtrl', logInCtrl);
 
 function logInCtrl ($scope, $http, $location, $window) {
 
-  //var vm = this;
-
   $scope.logInSubmit = function() {
     $http({
       method: 'POST',
       url: '/logIn',
-      data: $scope.credentials
+      data: $scope.credential
     }).then(function successCallback(response) {
 
         // to work out on the asynchronous call function

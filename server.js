@@ -46,6 +46,7 @@ mongo.connectMongoDB( function() {
 /** fb log in callback */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email']}));
 
+/** fb /auth/facebook/callback */
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { session: false ,failureRedirect: '/#!/errorPage'}),
   require('./server/fbAuthCallback'));
