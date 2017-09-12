@@ -1,6 +1,6 @@
 angular.module('app').controller('navBarController', navBarController);
 
-function navBarController ($scope, $http, $location, $window) {
+function navBarController ($q, $scope, $http, $location, $window) {
 
     $scope.logIn = false;
 
@@ -12,13 +12,8 @@ function navBarController ($scope, $http, $location, $window) {
       $scope.logIn = true;
     } else { $scope.logIn = false; }
 
+    /** to check if FB log in status before route to the correct path  */
     $scope.checkFBLogIn = function() {
-      console.log('checkFBLogIn');
-
-      if($window.FB) console.log('$window.FB');
-
-      console.log($window.FB);
-
 
       $window.FB.init({
         appId      : '141198316480017',
@@ -29,14 +24,39 @@ function navBarController ($scope, $http, $location, $window) {
         version    : 'v2.8' // use graph api version 2.8
       })
 
+
+      var fbStatusDeferred = $q.defer();
+
+      var fbStatusPromise = fbStatusDeferred.promise;
+
       $window.FB.getLoginStatus(function(response) {
         console.log('getLoginStatus');
         console.log(response.status);
-        //statusChangeCallback(response);
-        if (response.status === 'unknown') {
-          $location.path('/logIn');
-        }
+        statusChangeCallback(response);
       });
+
+
+
+    function statusChangeCallback(response) {
+
+    console.log('statusChangeCallback');
+    console.log(response.status);
+
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      console.log('route to the correct user dashboard');
+      $location.path('auth/facebook');
+    }
+    if (response.status === 'unknown'){
+      $location.path('/logIn');
+    }
+  }
+
+
 
     }
 }
