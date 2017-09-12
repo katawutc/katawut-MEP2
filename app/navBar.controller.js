@@ -52,7 +52,8 @@ function navBarController ($q, $scope, $http, $location, $window) {
       $window.location.href = '/auth/facebook';
     }
     if (response.status === 'unknown'){
-      $location.path('/logIn');
+      $window.location.href = '#!/logIn';
+      //$location.path('/logIn');
     }
   }
 
