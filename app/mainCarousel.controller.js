@@ -29,4 +29,9 @@ function mainCarouselCtrl ($scope) {
       id: currIndex++
     });
 
+    slides.push({
+      image: 'image/mep05.jpg',
+      id: currIndex++
+    });
+
   }
