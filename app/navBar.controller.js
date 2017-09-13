@@ -24,40 +24,27 @@ function navBarController ($q, $scope, $http, $location, $window) {
         version    : 'v2.8' // use graph api version 2.8
       })
 
-
-      var fbStatusDeferred = $q.defer();
-
-      var fbStatusPromise = fbStatusDeferred.promise;
+      /** to implement asynchronous $q, defer, promise
+        var fbStatusDeferred = $q.defer();
+        var fbStatusPromise = fbStatusDeferred.promise;
+      */
 
       $window.FB.getLoginStatus(function(response) {
-        console.log('getLoginStatus');
-        console.log(response.status);
         statusChangeCallback(response);
       });
 
-
-
     function statusChangeCallback(response) {
 
-    console.log('statusChangeCallback');
-    console.log(response.status);
-
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      console.log('route to the correct user dashboard');
+      // route to the correct user dashboard
       $window.location.href = '/auth/facebook';
     }
-    if (response.status === 'unknown'){
+    else {
       $window.location.href = '#!/logIn';
       //$location.path('/logIn');
     }
   }
 
-
-
-    }
+  }
 }
