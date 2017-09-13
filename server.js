@@ -28,6 +28,7 @@ app.use(helmet());
 app.use(express.static('app'));
 app.use(express.static('public'));
 app.use(express.static('public/html'));
+app.use(express.static('public/image'));
 /** */
 
 // Body Parser Middleware

@@ -21,3 +21,16 @@
     </div>
     <div class="col-sm-4"></div>
   </div>
+
+<!-- add carousel here -->
+<div class="row" style="margin-top:50px">
+<div ng-controller="mainCarouselCtrl">
+  <div style="height: 1px">
+    <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+      <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
