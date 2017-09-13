@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.right.carousel-control, .left.carousel-control {
+    display: none;
+}
+
 .navbar-inverse .navbar-brand {
     color: white;
 }
