@@ -3,6 +3,8 @@ var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var angularOrder = require('gulp-angular-order');
+
 //var imagemin = require('gulp-imagemin');
 
 var path = {
@@ -27,7 +29,7 @@ gulp.task('lint', function() {
 
 // Concatenate & Minify JS
 gulp.task('script', function() {
-    return gulp.src('app/*.js')
+    return gulp.src(['app/app.module.js', 'app/*.js'])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))

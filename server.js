@@ -29,6 +29,8 @@ app.use(express.static('app'));
 app.use(express.static('public'));
 app.use(express.static('public/html'));
 app.use(express.static('public/image'));
+app.use(express.static('dist'));
+app.use(express.static('dist/js'));
 /** */
 
 // Body Parser Middleware
