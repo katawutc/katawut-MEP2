@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
+var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var angularOrder = require('gulp-angular-order');
@@ -31,9 +32,11 @@ gulp.task('lint', function() {
 gulp.task('script', function() {
     return gulp.src(['app/app.module.js', 'app/*.js'])
         .pipe(concat('all.js'))
+        .pipe(ngAnnotate())
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
-        .pipe(uglify({ mangle: false }))
+        .pipe(uglify())
+        //.pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('dist/js'));
 });
 
