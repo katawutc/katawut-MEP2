@@ -1,4 +1,5 @@
-angular.module('app').factory('examSummaryService', examSummaryService);
+angular.module('app').factory('examSummaryService',
+  ['$http', '$route', '$q', '$window', examSummaryService]);
 
 function examSummaryService($http, $route, $q, $window) {
 

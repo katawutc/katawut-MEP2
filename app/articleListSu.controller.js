@@ -1,5 +1,6 @@
 angular.module('app').controller('articleListSuCtrl',
-                                  articleListSuCtrl);
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+                                  articleListSuCtrl]);
 
 function articleListSuCtrl ($scope, $http, $routeParams, $window,
                                 $location) {

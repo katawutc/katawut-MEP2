@@ -1,5 +1,6 @@
 
-angular.module('app').controller('logOutCtrl', logOutCtrl);
+angular.module('app').controller('logOutCtrl',
+  ['$scope', '$http', '$routeParams', '$window', '$location', logOutCtrl]);
 
 function logOutCtrl($scope, $http, $routeParams, $window, $location) {
 

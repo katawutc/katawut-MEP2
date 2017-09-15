@@ -1,5 +1,6 @@
 // Log in controller
-angular.module('app').controller('logInCtrl', logInCtrl);
+angular.module('app').controller('logInCtrl',
+  ['$scope', '$http', '$location', '$window', logInCtrl]);
 
 function logInCtrl ($scope, $http, $location, $window) {
 

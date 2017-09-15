@@ -1,4 +1,6 @@
-angular.module('app').controller('unSubscribeExamModeCtrl', unSubscribeExamModeCtrl);
+angular.module('app').controller('unSubscribeExamModeCtrl',
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+    'testQuestion', unSubscribeExamModeCtrl]);
 
 function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
 

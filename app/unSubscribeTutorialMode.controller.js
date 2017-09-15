@@ -1,4 +1,6 @@
-angular.module('app').controller('unSubscribeTutorialModeCtrl', unSubscribeTutorialModeCtrl);
+angular.module('app').controller('unSubscribeTutorialModeCtrl',
+  ['$scope', '$http', '$routeParams', '$window',
+    '$location', 'testQuestion', unSubscribeTutorialModeCtrl]);
 
 function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
 

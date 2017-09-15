@@ -1,5 +1,6 @@
 angular.module('app').controller('firstSettingSuCtrl',
-                                  firstSettingSuCtrl);
+  ['$scope', '$http', '$routeParams', '$window',
+    '$location', firstSettingSuCtrl]);
 
 function firstSettingSuCtrl ($scope, $http, $routeParams, $window,
                             $location) {

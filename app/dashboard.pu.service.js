@@ -1,4 +1,5 @@
-angular.module('app').factory('dashboardPuService', dashboardPuService);
+angular.module('app').factory('dashboardPuService',
+  ['$http', '$route', '$window', '$q', dashboardPuService]);
 
 function dashboardPuService($http, $route, $window, $q) {
   return {

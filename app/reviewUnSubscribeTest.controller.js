@@ -1,4 +1,6 @@
-angular.module('app').controller('reviewUnSubscribeTestCtrl', reviewUnSubscribeTestCtrl)
+angular.module('app').controller('reviewUnSubscribeTestCtrl',
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+    'reviewUnSubscribeTest', reviewUnSubscribeTestCtrl])
 
 function reviewUnSubscribeTestCtrl($scope, $http, $routeParams, $window, $location,
                                     reviewUnSubscribeTest) {

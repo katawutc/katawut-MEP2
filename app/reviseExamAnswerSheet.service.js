@@ -1,5 +1,5 @@
 angular.module('app').factory('reviseExamAnswerSheetService',
-                                reviseExamAnswerSheetService);
+  ['$http', '$route', '$q', reviseExamAnswerSheetService]);
 
 function reviseExamAnswerSheetService($http, $route, $q) {
 

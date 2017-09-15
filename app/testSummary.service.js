@@ -1,4 +1,5 @@
-angular.module('app').factory('testSummaryService', testSummaryService);
+angular.module('app').factory('testSummaryService',
+  ['$http', '$route', '$q', '$window', testSummaryService]);
 
 function testSummaryService($http, $route, $q, $window) {
 

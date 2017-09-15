@@ -1,4 +1,5 @@
-angular.module('app').factory('dashboardTwService', dashboardTwService);
+angular.module('app').factory('dashboardTwService',
+  ['$http', '$route', '$window', '$q', dashboardTwService]);
 
 function dashboardTwService($http, $route, $window, $q) {
   return {

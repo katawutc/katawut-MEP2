@@ -1,5 +1,6 @@
 angular.module('app').controller('fbLogInCtrl',
-                                  fbLogInCtrl);
+  ['$scope', '$http', '$routeParams', '$window',
+    '$location', fbLogInCtrl]);
 
 function fbLogInCtrl ($scope, $http, $routeParams, $window,
                                 $location) {

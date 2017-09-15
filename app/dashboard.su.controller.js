@@ -1,4 +1,6 @@
-angular.module('app').controller('dashboardSuCtrl', dashboardSuCtrl);
+angular.module('app').controller('dashboardSuCtrl',
+  ['$scope', '$http', '$location', '$window', '$routeParams',
+    'dashboardData', dashboardSuCtrl]);
 
 function dashboardSuCtrl($scope, $http, $location, $window, $routeParams, dashboardData) {
 

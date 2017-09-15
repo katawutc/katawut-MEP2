@@ -1,4 +1,5 @@
-angular.module('app').factory('preferenceSettingSuService', preferenceSettingSuService);
+angular.module('app').factory('preferenceSettingSuService',
+  ['$http', '$route', '$window', '$q', preferenceSettingSuService]);
 
 function preferenceSettingSuService($http, $route, $window, $q) {
   return {

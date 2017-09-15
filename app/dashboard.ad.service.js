@@ -1,4 +1,5 @@
-angular.module('app').factory('userListDataService', userListDataService);
+angular.module('app').factory('userListDataService',
+  ['$http', '$route', '$window', '$q', userListDataService]);
 
 function userListDataService($http, $route, $window, $q) {
   return {

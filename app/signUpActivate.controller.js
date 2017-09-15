@@ -1,5 +1,5 @@
 angular.module('app').controller('signUpActivateCtrl',
-                                  signUpActivateCtrl);
+  ['$scope', '$http', '$routeParams', '$window', '$location', signUpActivateCtrl]);
 
 function signUpActivateCtrl ($scope, $http, $routeParams, $window, $location) {
 

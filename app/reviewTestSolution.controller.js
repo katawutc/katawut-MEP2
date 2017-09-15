@@ -1,4 +1,6 @@
-angular.module('app').controller('reviewTestSolutionCtrl', reviewTestSolutionCtrl)
+angular.module('app').controller('reviewTestSolutionCtrl',
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+    'reviewTestSolution', reviewTestSolutionCtrl])
 
 function reviewTestSolutionCtrl($scope, $http, $routeParams, $window, $location,
                                     reviewTestSolution) {

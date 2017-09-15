@@ -1,4 +1,5 @@
-angular.module('app').controller('navBarSuController', navBarSuController);
+angular.module('app').controller('navBarSuController',
+['$scope', '$http', '$location', '$window', navBarSuController]);
 
 function navBarSuController ($scope, $http, $location, $window) {
 

@@ -1,4 +1,5 @@
-angular.module('app').factory('loadingInterceptorService', loadingInterceptorService);
+angular.module('app').factory('loadingInterceptorService',
+  ['$q', '$rootScope', '$log', loadingInterceptorService]);
 
 function loadingInterceptorService($q, $rootScope, $log) {
   var xhrCreations = 0;

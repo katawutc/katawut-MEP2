@@ -1,4 +1,6 @@
-angular.module('app').controller('dashboardCtrl', dashboardCtrl);
+angular.module('app').controller('dashboardCtrl',
+  ['$scope', '$http', '$location', '$window', '$routeParams',
+  'dashboardData', dashboardCtrl]);
 
 function dashboardCtrl($scope, $http, $location, $window, $routeParams, dashboardData) {
 

@@ -1,5 +1,6 @@
 angular.module('app').controller('testSummaryExamModeCtrl',
-                                  testSummaryExamModeCtrl);
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+    'examScore', 'examSummary', testSummaryExamModeCtrl]);
 
 function testSummaryExamModeCtrl($scope, $http, $routeParams, $window, $location,
                                   examScore, examSummary) {

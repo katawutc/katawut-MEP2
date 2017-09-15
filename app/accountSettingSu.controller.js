@@ -1,5 +1,6 @@
 angular.module('app').controller('accountSettingSuCtrl',
-                                  accountSettingSuCtrl);
+                                  ['$scope', '$http', '$routeParams',
+                                    '$window', '$location', accountSettingSuCtrl]);
 
 function accountSettingSuCtrl ($scope, $http, $routeParams, $window,
                                 $location) {

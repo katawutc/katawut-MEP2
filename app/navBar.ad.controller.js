@@ -1,4 +1,5 @@
-angular.module('app').controller('navBarAdController', navBarAdController);
+angular.module('app').controller('navBarAdController',
+  ['$scope', '$http', '$location', '$window', navBarAdController]);
 
 function navBarAdController ($scope, $http, $location, $window) {
 

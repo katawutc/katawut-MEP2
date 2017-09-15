@@ -1,5 +1,5 @@
 angular.module('app').controller('mainCarouselCtrl',
-                                  mainCarouselCtrl);
+  ['$scope', mainCarouselCtrl]);
 
 function mainCarouselCtrl ($scope) {
 
@@ -31,6 +31,11 @@ function mainCarouselCtrl ($scope) {
 
     slides.push({
       image: 'image/mep05.jpg',
+      id: currIndex++
+    });
+
+    slides.push({
+      image: 'image/mep07.jpg',
       id: currIndex++
     });
 

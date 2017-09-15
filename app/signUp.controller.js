@@ -1,5 +1,6 @@
 // Sign up controller
-angular.module('app').controller('signUpCtrl', signUpCtrl);
+angular.module('app').controller('signUpCtrl',
+  ['$scope', '$http', '$location', '$window', signUpCtrl]);
 
 function signUpCtrl ($scope, $http, $location, $window) {
   $scope.signUpSubmit = function() {

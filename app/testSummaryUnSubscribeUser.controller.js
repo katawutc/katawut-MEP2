@@ -1,5 +1,6 @@
 angular.module('app').controller('testSummaryUnSubscribeUserCtrl',
-                                  testSummaryUnSubscribeUserCtrl);
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+    'testScore', 'testSummary', testSummaryUnSubscribeUserCtrl]);
 
 function testSummaryUnSubscribeUserCtrl ($scope, $http, $routeParams, $window, $location,
                                           testScore, testSummary) {

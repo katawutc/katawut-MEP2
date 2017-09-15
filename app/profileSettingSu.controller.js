@@ -1,5 +1,6 @@
 angular.module('app').controller('profileSettingSuCtrl',
-                                  profileSettingSuCtrl);
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+    'profileSettingSuData', profileSettingSuCtrl]);
 
 function profileSettingSuCtrl ($scope, $http, $routeParams, $window, $location,
                                 profileSettingSuData) {

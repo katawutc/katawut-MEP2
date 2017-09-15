@@ -1,5 +1,7 @@
 angular.module('app').controller('preferenceSettingSuCtrl',
-                                  preferenceSettingSuCtrl);
+  ['$scope', '$http', '$routeParams', '$window', '$location',
+    '$uibModal', '$document', '$log',
+      'preferenceSettingSuData', preferenceSettingSuCtrl]);
 
 function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $location,
                                   $uibModal, $document, $log, preferenceSettingSuData) {

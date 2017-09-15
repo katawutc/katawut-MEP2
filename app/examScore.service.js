@@ -1,4 +1,5 @@
-angular.module('app').factory('examScoreService', examScoreService);
+angular.module('app').factory('examScoreService',
+  ['$http', '$route', '$q', '$window', examScoreService]);
 
 function examScoreService($http, $route, $q, $window) {
 

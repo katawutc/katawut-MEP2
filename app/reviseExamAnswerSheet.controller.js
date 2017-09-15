@@ -1,5 +1,7 @@
 angular.module('app').controller('reviseExamAnswerSheetCtrl',
-                                  reviseExamAnswerSheetCtrl);
+  ['$scope', '$http', '$routeParams', '$window',
+    '$location', 'currentUserAnswerExam',
+    'reviseExamQuestion', reviseExamAnswerSheetCtrl]);
 
 function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
                                     $location, currentUserAnswerExam,

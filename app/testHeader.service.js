@@ -1,4 +1,5 @@
-angular.module('app').factory('testHeaderService', testHeaderService);
+angular.module('app').factory('testHeaderService',
+  ['$http', '$route', '$q', testHeaderService]);
 
 function testHeaderService($http, $route, $q) {
 

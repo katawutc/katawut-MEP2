@@ -1,5 +1,8 @@
 angular.module('app').controller('answerSummaryCtrl',
-                                  answerSummaryCtrl);
+                                  ['$scope', '$http',
+                                  '$routeParams', '$window',
+                                  '$location', 'answerSummary',
+                                  answerSummaryCtrl]);
 
 function answerSummaryCtrl ($scope, $http, $routeParams, $window,
                             $location, answerSummary) {

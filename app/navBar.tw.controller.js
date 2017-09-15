@@ -1,4 +1,5 @@
-angular.module('app').controller('navBarTwController', navBarTwController);
+angular.module('app').controller('navBarTwController',
+  ['$scope', '$http', '$location', '$window', navBarTwController]);
 
 function navBarTwController ($scope, $http, $location, $window) {
 

@@ -33,7 +33,7 @@ gulp.task('script', function() {
         .pipe(concat('all.js'))
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
-        .pipe(uglify())
+        .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('dist/js'));
 });
 

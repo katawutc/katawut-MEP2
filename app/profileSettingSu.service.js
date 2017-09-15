@@ -1,4 +1,5 @@
-angular.module('app').factory('profileSettingSuService', profileSettingSuService);
+angular.module('app').factory('profileSettingSuService',
+  ['$http', '$route', '$window', '$q', profileSettingSuService]);
 
 function profileSettingSuService($http, $route, $window, $q) {
   return {

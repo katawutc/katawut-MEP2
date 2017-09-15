@@ -1,4 +1,6 @@
-angular.module('app').controller('unSubscribeTestMainCtrl', unSubscribeTestMainCtrl);
+angular.module('app').controller('unSubscribeTestMainCtrl',
+  ['$scope', '$http', '$routeParams',
+    '$window', '$location', 'testHeader', unSubscribeTestMainCtrl]);
 
 // put resolve with testHeader
 function unSubscribeTestMainCtrl($scope, $http, $routeParams,
