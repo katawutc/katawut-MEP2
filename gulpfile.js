@@ -35,7 +35,7 @@ gulp.task('script', function() {
         .pipe(ngAnnotate())
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
-        .pipe(uglify())
+        .pipe(uglify({ mangle: true }))
         //.pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('dist/js'));
 });
