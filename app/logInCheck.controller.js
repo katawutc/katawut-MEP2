@@ -6,11 +6,7 @@ angular.module('app').controller('logInCheckCtrl',
 function logInCheckCtrl ($scope, $http, $routeParams,
                           $window, $location, fbLogInStatus) {
 
-    console.log(fbLogInStatus);
-
       if (fbLogInStatus === 'connected') {
-        // Logged into your app and Facebook.
-        // route to the correct user dashboard
         $window.location.href = '/auth/facebook';
       }
       else {
