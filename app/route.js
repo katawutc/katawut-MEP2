@@ -8,6 +8,7 @@ angular.module('app')
     .when("/logIn", {
       templateUrl : 'logIn.html',
       controller : 'logInCtrl'
+      // put resolve and re-arrange the route for loader and log in page
     })
     .when("/logOut", {
     templateUrl : 'logOut.html',
@@ -209,5 +210,6 @@ angular.module('app')
     .when('/fbLogIn/:fbID', {
       templateUrl : 'fbLogIn.html',
       controller : 'fbLogInCtrl',
+      // put resolve and loader waiting for FB loginStatus
     })
 });
