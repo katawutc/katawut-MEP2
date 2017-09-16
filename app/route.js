@@ -5,10 +5,19 @@ angular.module('app')
       templateUrl : 'main.html',
       controller : 'mainCtrl'
     })
+    // for checking the FB login status before routing
+    .when("/logInCheck", {
+      templateUrl : 'logInCheck.html',
+      controller : 'logInCheckCtrl',
+      resolve: {
+        fbLogInStatus : function(fbLogInStatusService) {
+          return fbLogInStatusService.getFBLogInStatus();
+        }
+      }
+    })
     .when("/logIn", {
       templateUrl : 'logIn.html',
       controller : 'logInCtrl'
-      // put resolve and re-arrange the route for loader and log in page
     })
     .when("/logOut", {
     templateUrl : 'logOut.html',

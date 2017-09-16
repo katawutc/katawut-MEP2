@@ -13,8 +13,14 @@ function navBarController ($q, $scope, $http, $location, $window) {
       $scope.logIn = true;
     } else { $scope.logIn = false; }
 
+  }
+
+
     /** to check if FB log in status before route to the correct path  */
+
+    /**
     $scope.checkFBLogIn = function() {
+
 
       $window.FB.init({
         appId      : '141198316480017',
@@ -30,6 +36,7 @@ function navBarController ($q, $scope, $http, $location, $window) {
         var fbStatusPromise = fbStatusDeferred.promise;
       */
 
+/**
       $window.FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
       });
@@ -43,9 +50,10 @@ function navBarController ($q, $scope, $http, $location, $window) {
     }
     else {
       $window.location.href = '#!/logIn';
-      //$location.path('/logIn');
     }
   }
 
   }
 }
+
+**/
