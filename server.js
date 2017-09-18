@@ -92,7 +92,8 @@ app.post('/activateAccount/:userID/:hashActivate', require('./server/activateAcc
 app.post('/logInDirect', require('./server/logInDirect'));
 
 /** dashboard */
-app.get('/dashboard/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+// to refactor to a specific role e.g. su, pu, tw
+app.get('/dashboard/su/:userID', passport.authenticate('jwt', {session: false}),
   require('./server/dashboard'));
 
 /** get user list to diaplay on admin dashboard */

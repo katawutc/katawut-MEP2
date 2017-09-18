@@ -3,6 +3,12 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 var jwt = require('jsonwebtoken');
+var passportJWT = require("passport-jwt");
+var ExtractJwt = passportJWT.ExtractJwt;
+var JwtStrategy = passportJWT.Strategy;
+var opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+opts.secretOrKey = 'secret'; /* to create a new secretOrKey */
 
 module.exports = function logIn(req, res) {
 
