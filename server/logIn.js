@@ -3,35 +3,6 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 var jwt = require('jsonwebtoken');
-var passport = require('passport');
-var passportJWT = require("passport-jwt");
-var ExtractJwt = passportJWT.ExtractJwt;
-var JwtStrategy = passportJWT.Strategy;
-
-/**  JWT Strategy */
-var opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
-opts.secretOrKey = 'secret'; /* to create a new secretOrKey */
-
-var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
-
-  /** to have another random number for more security ? */
-   var query = {userID: jwt_payload.userID,
-                userRole: jwt_payload.userRole};
-
-    var mongo = require('./mongoDBConnect');
-    var db = mongo.getDB();
-
-   db.collection('user').findOne(query, function(err, result) {
-     if (result) {
-       next(null, result);
-     } else {
-       next(null, false);
-     }
-   });
-});
-
-passport.use(strategy);
 
 module.exports = function logIn(req, res) {
 

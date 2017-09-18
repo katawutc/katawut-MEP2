@@ -1,4 +1,3 @@
-//var objectID = require('mongodb').ObjectID;
 
 module.exports = function dashboard(req, res) {
 
@@ -14,7 +13,6 @@ module.exports = function dashboard(req, res) {
       res.json(err);
     }
     else {
-      console.log(doc);
       res.json(doc); /** if (null) it will check at angular js */
     }
   })

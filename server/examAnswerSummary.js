@@ -19,10 +19,7 @@ module.exports = function examAnswerSummary(req, res) {
     function cb (err, doc) {
       if (err) throw err;
       else {
-        //console.log(doc);
-
         // checking answer and update the score here
-
         var solutionID = req.body.testID;
         var questionNumber = req.body.questionNumber;
         var solution;

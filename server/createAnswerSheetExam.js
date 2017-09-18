@@ -4,10 +4,6 @@ module.exports = function createAnswerSheetExam(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-   console.log('arrive createAnswerSheetExam');
-
-   console.log(req.body.numberOfQuestion);
-
    // loop in js to insert answer sheet
    /**
     * still need to fix defect on asynchronous call \

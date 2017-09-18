@@ -16,6 +16,31 @@ var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
 
+/**  JWT Strategy */
+var opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+opts.secretOrKey = 'secret'; /* to create a new secretOrKey */
+
+var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
+
+  /** to have another random number for more security ? */
+   var query = {userID: jwt_payload.userID,
+                userRole: jwt_payload.userRole};
+
+    var mongo = require('./mongoDBConnect');
+    var db = mongo.getDB();
+
+   db.collection('user').findOne(query, function(err, result) {
+     if (result) {
+       next(null, result);
+     } else {
+       next(null, false);
+     }
+   });
+});
+
+passport.use(strategy);
+
 /** helmet part */
 var helmet = require('helmet');
 app.use(helmet());
@@ -136,4 +161,5 @@ app.get('/reviewTestSolution/:testID/:questionNumber',
   require('./server/reviewTestSolution'));
 
 /** save setting parameters */
-app.post('/saveSetting/:userRole/:userID', require('./server/saveSetting'));
+app.post('/saveSetting/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/saveSetting'));

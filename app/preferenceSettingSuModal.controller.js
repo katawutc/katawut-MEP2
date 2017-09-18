@@ -1,9 +1,9 @@
 angular.module('app').controller('preferenceSettingSuModalCtrl',
   ['$scope', '$uibModalInstance', '$window',
-    '$http', 'params', preferenceSettingSuModalCtrl]);
+    '$http', '$location', 'params', preferenceSettingSuModalCtrl]);
 
 function preferenceSettingSuModalCtrl ($scope, $uibModalInstance, $window,
-                                        $http, params) {
+                                        $http, $location, params) {
   var $ctrl = this;
 
   // use DB to fetch this in the future
@@ -30,7 +30,10 @@ function preferenceSettingSuModalCtrl ($scope, $uibModalInstance, $window,
   $http({
     method: 'POST',
     url: saveSettingUrl,
-    data: $scope.newSettingData
+    data: $scope.newSettingData,
+    headers: {
+      'Authorization': 'JWT ' + $window.sessionStorage.token
+      }
   }).then(function successCallback(response) {
     /**
      * use data service to pass new setting to the \
