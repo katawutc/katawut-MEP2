@@ -8,7 +8,8 @@ module.exports = function dashboard(req, res) {
 
   // check Authorization for su hack
   // to refactor to a middleware
-  if (req.params.userID !== req.user.userID) {
+  if (req.user.userRole !== 'su' ||
+        req.params.userID !== req.user.userID) {
     res.json({errorMessage: 'no authority'});
   }
   else {
