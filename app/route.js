@@ -224,6 +224,11 @@ angular.module('app')
     /** userDetail for admin page*/
     .when('/userDetail/:userRole/:userID', {
       templateUrl : 'userDetail.html',
-      controller : 'userDetailCtrl'
+      controller : 'userDetailCtrl',
+      resolve : {
+        userDetail : function(userDetailService) {
+          return userDetailService.getUserDetail();
+        }
+      }
     })
 });

@@ -164,3 +164,8 @@ app.get('/reviewTestSolution/:testID/:questionNumber',
 /** save setting parameters */
 app.post('/saveSetting/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   require('./server/saveSetting'));
+
+/** get user detail for admin page view */
+app.get('/getUserDetail/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/checkAdminAuthority'),
+  require('./server/getUserDetail'));

@@ -1,8 +1,11 @@
 angular.module('app').controller('userDetailCtrl',
                                   ['$scope', '$http', '$routeParams',
-                                    '$window', '$location', userDetailCtrl]);
+                                    '$window', '$location',
+                                    'userDetail',userDetailCtrl]);
 
 function userDetailCtrl($scope, $http, $routeParams,
-                          $window, $location) {
+                          $window, $location, userDetail) {
 
-}                                    
+  console.log(userDetail);
+
+}
