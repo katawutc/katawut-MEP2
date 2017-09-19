@@ -7,5 +7,6 @@ function userDetailCtrl($scope, $http, $routeParams,
                           $window, $location, userDetail) {
 
   console.log(userDetail);
+  $scope.userDetail = userDetail;
 
 }
