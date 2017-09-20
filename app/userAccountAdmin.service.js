@@ -1,7 +1,7 @@
-angular.module('app').factory('userDetailService',
-  ['$http', '$route', '$q', '$window', userDetailService]);
+angular.module('app').factory('userAccountAdminService',
+  ['$http', '$route', '$q', '$window', userAccountAdminService]);
 
-function userDetailService($http, $route, $q, $window) {
+function userAccountAdminService($http, $route, $q, $window) {
 
   /** to retrieve
    * 1. user identity
@@ -10,20 +10,17 @@ function userDetailService($http, $route, $q, $window) {
    * 4. current dashboard detail
    */
 
-   console.log($route.current.params.userRole);
-   console.log($route.current.params.userID);
-
    return {
-     getUserDetail : function() {
+     getUserAccountAdmin : function() {
 
-       var userDetailUrl = '/getUserDetail/'+$route.current.params.userRole+
+       var userAccountUrl = '/admin/userAccount/'+$route.current.params.userRole+
                          '/'+$route.current.params.userID;
 
        var deferred = $q.defer();
 
        $http({
          method: 'GET',
-         url: userDetailUrl,
+         url: userAccountUrl,
          headers: {
            'Authorization': 'JWT ' + $window.sessionStorage.token
            }

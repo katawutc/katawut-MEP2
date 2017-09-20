@@ -222,12 +222,12 @@ angular.module('app')
       // put resolve and loader waiting for FB loginStatus
     })
     /** userDetail for admin page*/
-    .when('/userDetail/:userRole/:userID', {
-      templateUrl : 'userDetail.html',
-      controller : 'userDetailCtrl',
+    .when('/userAccountAdmin/:userRole/:userID', {
+      templateUrl : 'userAccount.admin.html',
+      controller : 'userAccountAdminCtrl',
       resolve : {
-        userDetail : function(userDetailService) {
-          return userDetailService.getUserDetail();
+        userAccountAdmin : function(userAccountAdminService) {
+          return userAccountAdminService.getUserAccountAdmin();
         }
       }
     })

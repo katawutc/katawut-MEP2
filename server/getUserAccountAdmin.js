@@ -1,6 +1,6 @@
 var async = require('async');
 
-module.exports = function getUserDetail(req, res) {
+module.exports = function getUserAccountAdmin(req, res) {
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
@@ -19,6 +19,7 @@ module.exports = function getUserDetail(req, res) {
     if (err) throw err;
     if(doc) {
       detail.userName = doc.userName;
+      detail.userID = doc.userID;
     }
 
     db.collection('userSetting').findOne({userID: req.params.userID,
