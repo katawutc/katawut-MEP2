@@ -6,7 +6,5 @@ angular.module('app').controller('userDetailCtrl',
 function userDetailCtrl($scope, $http, $routeParams,
                           $window, $location, userDetail) {
 
-  console.log(userDetail);
   $scope.userDetail = userDetail;
-
 }
