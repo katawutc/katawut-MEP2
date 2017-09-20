@@ -15,7 +15,7 @@ function preferenceSettingSuModalCtrl ($scope, $uibModalInstance, $window,
 
   $scope.data = params;
 
-  $ctrl.ok = function () {
+  $ctrl.save = function () {
 
   $scope.newSettingData = {userLevel: $scope.selectedLevel,
                             userPreferTest: $scope.selectedTest,

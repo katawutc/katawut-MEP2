@@ -19,13 +19,17 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
      $scope.userPreferTest = preferenceSettingSuData.userPreferTest;
      $scope.userPreferSubject = preferenceSettingSuData.userPreferSubject;
 
-     $scope.currentSetting = { currentUserLevel: $scope.userLevel,
+     $scope.currentSetting = function() {
+                                return {
+                                currentUserLevel: $scope.userLevel,
                                 currentPrefertest: $scope.userPreferTest,
-                                currentPreferSubject: $scope.userPreferSubject }
+                                currentPreferSubject: $scope.userPreferSubject
+                                }
+                              }
 
      /** */
 
-      $scope.open = function (size, parentSelector) {
+      $scope.editPreference = function (size, parentSelector) {
 
         var modalInstance = $uibModal.open({
           ariaLabelledBy: 'modal-title',
@@ -36,7 +40,7 @@ function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $locatio
           size: size,
           resolve: {
             params: function () {
-                return $scope.currentSetting;
+                return $scope.currentSetting();
             }
         }
       });
