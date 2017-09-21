@@ -228,17 +228,23 @@ angular.module('app')
       resolve : {
         accountAdmin : function(accountAdminService) {
           return accountAdminService.getAccountAdmin();
+        },
+        settingAdmin : function(settingAdminService) {
+          return settingAdminService.getSettingAdmin();
+        },
+        lastLoginAdmin : function(lastLoginAdminService) {
+          return lastLoginAdminService.getLastLoginAdmin();
         }
       }
     })
     /** user login history for admin page*/
-    .when('/userLoginHistoryAdmin/:userRole/:userID', {
+    .when('/loginHistoryAdmin/:userRole/:userID', {
       templateUrl : 'loginHistory.admin.html',
-      controller : 'userLoginHistoryAdminCtrl',
-      /*resolve : {
-        userAccountAdmin : function(userAccountAdminService) {
-          return userAccountAdminService.getUserAccountAdmin();
+      controller : 'loginHistoryAdminCtrl',
+      resolve : {
+        loginHistoryAdmin : function(loginHistoryAdminService) {
+          return loginHistoryAdminService.getLoginHistoryAdmin();
         }
-      }*/
+      }
     })
 });

@@ -7,15 +7,15 @@
 
     <ul class="nav nav-pills">
       <li role="presentation" class="active">
-        <a href="#!/userAccountAdmin/{{userAccount.userRole}}/{{userAccount.userID}}">Account</a>
+        <a href="#!/accountAdmin/{{userAccount.userRole}}/{{userAccount.userID}}">Account</a>
       </li>
       <li role="presentation"><a href="">Test</a></li>
       <li role="presentation"><a href="">Article</a></li>
       <li role="presentation">
-        <a href="#!/userLoginHistoryAdmin/{{userAccount.userRole}}/{{userAccount.userID}}">Log in history</a>
+        <a href="#!/loginHistoryAdmin/{{userAccount.userRole}}/{{userAccount.userID}}">Log in history</a>
       </li>
     </ul>
-    
+
     <p>
       <h3 style='display:inline;'>Name:</h3>
       <h4 style='display:inline;color:blue;'> {{userAccount.userName}} </h4>
@@ -30,25 +30,24 @@
     </p>
     <p>
       <h3 style='display:inline;'>Level:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userLevel}} </h4>
+      <h4 style='display:inline;color:blue;'> {{userSetting.userLevel}} </h4>
     </p>
     <p>
       <h3 style='display:inline;'>Prefer test:</h3>
-      <h4 style='display:inline;color:blue;'>{{userAccount.userPreferTest}} </h4>
+      <h4 style='display:inline;color:blue;'>{{userSetting.userPreferTest}} </h4>
     </p>
     <p>
       <h3 style='display:inline;'>Prefer subject:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userPreferSubject}} </h4>
+      <h4 style='display:inline;color:blue;'> {{userSetting.userPreferSubject}} </h4>
     </p>
     <p>
       <h3 style='display:inline;'>Last login by:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userLastLoginMethod}} </h4>
+      <h4 style='display:inline;color:blue;'> {{userLastLogin.userLastLoginMethod}} </h4>
     </p>
     <p>
       <h3 style='display:inline;'>Last login time:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userLastLoginTime}} </h4>
+      <h4 style='display:inline;color:blue;'> {{userLastLogin.userLastLoginTime}} </h4>
     </p>
   </div>
-
   <div class="col-sm-1"></div>
 </div>

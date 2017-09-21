@@ -1,27 +1,30 @@
-var async = require('async');
 
-module.exports = function getAccountAdmin(req, res) {
+module.exports = function getSettingAdmin(req, res) {
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  var account = {};
+  var setting = {};
+
+  if (!req.mepAdminAccess) {
+    res.json({errorMessage: 'no authority'});
+  }
 
   if (req.mepAdminAccess){
 
     // get user name
-    db.collection('user').findOne({userID: req.params.userID,
-                                    userRole: req.params.userRole}, getAccount);
+    db.collection('userSetting').findOne({userID: req.params.userID,
+                                    userRole: req.params.userRole}, getSetting);
   }
 
-  function getAccount(err, doc) {
+  function getSetting(err, doc) {
     if (err) throw err;
     if(doc) {
-      account.userName = doc.userName;
-      account.userID = doc.userID;
-      account.userRole = doc.userRole;
+      setting.userLevel = doc.userLevel;
+      setting.userPreferTest = doc.userPreferTest;
+      setting.userPreferSubject = doc.userPreferSubject;
     }
-      res.json(account);
+      res.json(setting);
   }
 }
 

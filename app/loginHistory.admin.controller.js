@@ -1,10 +1,9 @@
-angular.module('app').controller('userLoginHistoryAdminCtrl',
+angular.module('app').controller('loginHistoryAdminCtrl',
                                   ['$scope', '$http', '$routeParams',
                                     '$window', '$location',
-                                    'userAccountAdmin', userLoginHistoryAdminCtrl]);
+                                    'loginHistoryAdmin', loginHistoryAdminCtrl]);
 
-function userLoginHistoryAdminCtrl($scope, $http, $routeParams,
-                          $window, $location, userAccountAdmin) {
-
-  $scope.userAccount = userAccountAdmin;
+function loginHistoryAdminCtrl($scope, $http, $routeParams,
+                          $window, $location, loginHistoryAdmin) {
+  $scope.loginHistory = loginHistoryAdmin;
 }
