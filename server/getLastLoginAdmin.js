@@ -13,11 +13,13 @@ module.exports = function getLastLoginAdmin(req, res) {
   if (req.mepAdminAccess){
 
     db.collection('loginHistory').find({userID: req.params.userID},
-                                    {sort:{loginTime: -1}, limit: 1}).toArray(getLastLogin);
+                                    {sort:{$natural:-1}, limit: 1}).toArray(getLastLogin);
 
 
   function getLastLogin(err, doc) {
     if (err) throw err;
+    console.log(doc);
+    console.log(doc[0]);
     if(doc) {
       lastLogin.userLastLoginMethod = doc[0].loginMethod;
       lastLogin.userLastLoginTime = doc[0].loginTime;
