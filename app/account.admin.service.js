@@ -3,13 +3,6 @@ angular.module('app').factory('accountAdminService',
 
 function accountAdminService($http, $route, $q, $window) {
 
-  /** to retrieve
-   * 1. user identity
-   * 2. current preference setting
-   * 3. last log in
-   * 4. current dashboard detail
-   */
-
    return {
      getAccountAdmin : function() {
 

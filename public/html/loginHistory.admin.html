@@ -14,36 +14,12 @@
       <li role="presentation" class="active"><a href="">Log in history</a></li>
     </ul>
 
-
-    <p>
-      <h3 style='display:inline;'>Name:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userName}} </h4>
-    </p>
-    <p>
-      <h3 style='display:inline;'>user ID:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userID}} </h4>
-    </p>
-    <p>
-      <h3 style='display:inline;'>Level:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userLevel}} </h4>
-    </p>
-    <p>
-      <h3 style='display:inline;'>Prefer test:</h3>
-      <h4 style='display:inline;color:blue;'>{{userAccount.userPreferTest}} </h4>
-    </p>
-    <p>
-      <h3 style='display:inline;'>Prefer subject:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userPreferSubject}} </h4>
-    </p>
-    <p>
-      <h3 style='display:inline;'>Last login by:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userLastLoginMethod}} </h4>
-    </p>
-    <p>
-      <h3 style='display:inline;'>Last login time:</h3>
-      <h4 style='display:inline;color:blue;'> {{userAccount.userLastLoginTime}} </h4>
-    </p>
-  </div>
+    <table>
+      <tr ng-repeat="login in loginHistory">
+        <td>{{ login.loginMethod }}</td>
+        <td>{{ login.loginTime }}</td>
+      </tr>
+    </table>
 
   <div class="col-sm-1"></div>
 </div>

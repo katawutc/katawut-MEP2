@@ -242,6 +242,9 @@ angular.module('app')
       templateUrl : 'loginHistory.admin.html',
       controller : 'loginHistoryAdminCtrl',
       resolve : {
+        accountAdmin : function(accountAdminService) {
+          return accountAdminService.getAccountAdmin();
+        },
         loginHistoryAdmin : function(loginHistoryAdminService) {
           return loginHistoryAdminService.getLoginHistoryAdmin();
         }
