@@ -166,6 +166,6 @@ app.post('/saveSetting/:userRole/:userID', passport.authenticate('jwt', {session
   require('./server/saveSetting'));
 
 /** get user detail for admin page view */
-app.get('/admin/userAccount/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+app.get('/admin/account/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
-  require('./server/getUserAccountAdmin'));
+  require('./server/getAccountAdmin'));

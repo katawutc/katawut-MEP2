@@ -1,7 +1,7 @@
-angular.module('app').factory('userAccountAdminService',
-  ['$http', '$route', '$q', '$window', userAccountAdminService]);
+angular.module('app').factory('accountAdminService',
+  ['$http', '$route', '$q', '$window', accountAdminService]);
 
-function userAccountAdminService($http, $route, $q, $window) {
+function accountAdminService($http, $route, $q, $window) {
 
   /** to retrieve
    * 1. user identity
@@ -11,9 +11,9 @@ function userAccountAdminService($http, $route, $q, $window) {
    */
 
    return {
-     getUserAccountAdmin : function() {
+     getAccountAdmin : function() {
 
-       var userAccountUrl = '/admin/userAccount/'+$route.current.params.userRole+
+       var userAccountUrl = '/admin/account/'+$route.current.params.userRole+
                          '/'+$route.current.params.userID;
 
        var deferred = $q.defer();

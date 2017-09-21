@@ -20,6 +20,7 @@ module.exports = function getUserAccountAdmin(req, res) {
     if(doc) {
       detail.userName = doc.userName;
       detail.userID = doc.userID;
+      detail.userRole = doc.userRole;
     }
 
     db.collection('userSetting').findOne({userID: req.params.userID,

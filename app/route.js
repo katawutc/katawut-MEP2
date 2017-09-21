@@ -221,14 +221,24 @@ angular.module('app')
       controller : 'fbLogInCtrl',
       // put resolve and loader waiting for FB loginStatus
     })
-    /** userDetail for admin page*/
-    .when('/userAccountAdmin/:userRole/:userID', {
-      templateUrl : 'userAccount.admin.html',
-      controller : 'userAccountAdminCtrl',
+    /** user account for admin page*/
+    .when('/accountAdmin/:userRole/:userID', {
+      templateUrl : 'account.admin.html',
+      controller : 'accountAdminCtrl',
       resolve : {
+        accountAdmin : function(accountAdminService) {
+          return accountAdminService.getAccountAdmin();
+        }
+      }
+    })
+    /** user login history for admin page*/
+    .when('/userLoginHistoryAdmin/:userRole/:userID', {
+      templateUrl : 'loginHistory.admin.html',
+      controller : 'userLoginHistoryAdminCtrl',
+      /*resolve : {
         userAccountAdmin : function(userAccountAdminService) {
           return userAccountAdminService.getUserAccountAdmin();
         }
-      }
+      }*/
     })
 });
