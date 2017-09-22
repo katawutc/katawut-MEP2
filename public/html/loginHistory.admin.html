@@ -14,11 +14,19 @@
       <li role="presentation" class="active"><a href="">Log in history</a></li>
     </ul>
 
-    <table>
-      <tr ng-repeat="login in loginHistory">
-        <td>{{ login.loginMethod }}</td>
-        <td>{{ login.loginTime }}</td>
-      </tr>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Log in method</th>
+          <th>Log in date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="login in loginHistory">
+          <td>{{ login.loginMethod }}</td>
+          <td>{{ login.loginTime }}</td>
+        </tr>
+      </tbody>
     </table>
 
   <div class="col-sm-1"></div>

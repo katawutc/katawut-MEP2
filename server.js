@@ -107,7 +107,9 @@ app.post('/logIn', require('./server/logIn'));
 app.get('/profileSetting/su/:userID', require('./server/profileSetting'));
 
 /** get user preference setting*/
-app.get('/preferenceSetting/su/:userID', require('./server/preferenceSetting'));
+app.get('/preferenceSetting/su/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/preferenceSetting'));
 
 /** test header */
 app.get('/testHeader/:testID', require('./server/testHeader'));

@@ -7,11 +7,21 @@ module.exports = function preferenceSetting(req, res) {
 
   console.log('at server preferenceSetting');
 
-  db.collection('userSetting').findOne({userID: req.params.userID,
+  console.log(req.mepSuAccess);
+
+  if (req.mepSuAccess) {
+
+    db.collection('userSetting').findOne({userID: req.params.userID,
                                           userRole: 'su'}, cb);
 
-  function cb(err, doc) {
-    if (err) throw err;
-    res.json(doc);
-  }
+    function cb(err, doc) {
+      if (err) throw err;
+        console.log('found user setting');
+        console.log(doc);
+        res.json(doc);
+      }
+    }
+    else {
+      res.json({errorMessage: 'no authority'});
+    }
 }

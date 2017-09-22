@@ -92,6 +92,9 @@ angular.module('app')
       resolve : {
         dashboardData : function (dashboardSuService){
           return dashboardSuService.getDashboardData();
+        },
+        suDashboardTest : function (suDashboardTestService){
+          return suDashboardTestService.getSuDashboardTest();
         }
       }
     })
