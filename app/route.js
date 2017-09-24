@@ -21,8 +21,13 @@ angular.module('app')
     })
     .when("/logOut", {
     templateUrl : 'logOut.html',
-    controller : 'logOutCtrl'
-    })
+    controller : 'logOutCtrl',
+    resolve: {
+      fbLogInStatus : function(fbLogInStatusService) {
+        return fbLogInStatusService.getFBLogInStatus();
+      }
+    }
+  })
     .when("/signUp", {
       templateUrl : 'signUp.html',
       controller : 'signUpCtrl'
