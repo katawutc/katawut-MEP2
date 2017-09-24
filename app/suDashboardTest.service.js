@@ -8,8 +8,6 @@ function suDashboardTestService($http, $route, $q, $window) {
 
        var preferenceSettingUrl = 'preferenceSetting/su/'+$window.sessionStorage.userID;
 
-       console.log(preferenceSettingUrl);
-
        var deferred = $q.defer();
 
        $http({
