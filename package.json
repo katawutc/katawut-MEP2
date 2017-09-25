@@ -32,7 +32,8 @@
     "nodemailer": "^4.0.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
-    "passport-jwt": "^2.2.1"
+    "passport-jwt": "^2.2.1",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

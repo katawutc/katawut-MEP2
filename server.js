@@ -1,10 +1,14 @@
 // MEP2
 // Katawut Chuasiripattana
-
+var http = require('http');
 var express = require('express');
+var app = express();
+
+var server = http.createServer(app);
+// Pass a http.Server instance to the listen method
+var io = require('socket.io').listen(server);
 
 var port;
-var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 var objectID = require('mongodb').ObjectID;
@@ -66,10 +70,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 /** MongoDB */
 var mongo = require('./server/mongoDBConnect');
 mongo.connectMongoDB( function() {
-  app.listen(app.get('port'), function() {
-    console.log('Node app is running on port', app.get('port'))});
+  server.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'))});
 });
-/** */
+
+/** handle io connection */
+io.on('connection', function (socket) {
+    console.log("Connected succesfully to the socket ...");
+    socket.on('disconnect', function(){
+      console.log('a user disconnected');
+    });
+});
 
 /** fb log in callback */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email']}));
