@@ -5,7 +5,6 @@ var express = require('express');
 var app = express();
 
 var server = http.createServer(app);
-// Pass a http.Server instance to the listen method
 var io = require('socket.io').listen(server);
 
 var port;

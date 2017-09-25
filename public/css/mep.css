@@ -5,6 +5,16 @@
   box-sizing: border-box;
 }
 
+
+.navbar-text {
+  font-size: 15px;
+}
+
+.navbar .nav.pull-right {
+    float: right;
+    margin-right: 20px; /*set margin this way in your custom styesheet*/
+  }
+
 .right.carousel-control, .left.carousel-control {
     display: none;
 }
