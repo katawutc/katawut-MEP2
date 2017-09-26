@@ -1,8 +1,8 @@
-angular.module('app').controller('testListSuCtrl',
+angular.module('app').controller('suTestListCtrl',
   ['$scope', '$http', '$routeParams', '$window',
-    '$location', testListSuCtrl]);
+    '$location', suTestListCtrl]);
 
-function testListSuCtrl ($scope, $http, $routeParams, $window,
+function suTestListCtrl ($scope, $http, $routeParams, $window,
                                 $location) {
 
     $scope.userName = $window.sessionStorage.userName;

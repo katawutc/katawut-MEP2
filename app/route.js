@@ -215,8 +215,8 @@ angular.module('app')
     })
     /** exam list for su */
     .when('/testList/su/:userID', {
-      templateUrl : 'testListSu.html',
-      controller : 'testListSuCtrl',
+      templateUrl : 'suTestList.html',
+      controller : 'suTestListCtrl',
     })
     /** article list for su */
     .when('/articleList/su/:userID', {
