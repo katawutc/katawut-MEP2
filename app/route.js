@@ -217,6 +217,11 @@ angular.module('app')
     .when('/testList/su/:userID', {
       templateUrl : 'suTestList.html',
       controller : 'suTestListCtrl',
+      resolve: {
+        suDashboardTest : function (suDashboardTestService){
+          return suDashboardTestService.getSuDashboardTest();
+        }
+      }
     })
     /** article list for su */
     .when('/articleList/su/:userID', {
