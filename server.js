@@ -202,3 +202,8 @@ app.get('/admin/loginHistory/:userRole/:userID', passport.authenticate('jwt', {s
 app.get('/getSuNewTestInfo/:userID/:testID', passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuNewTestInfo'));
+
+/** get su new test header */
+app.get('/getSuNewTestHeader/:userID/:testID', passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/getSuNewTestHeader'));

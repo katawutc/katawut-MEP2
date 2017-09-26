@@ -270,7 +270,10 @@ angular.module('app')
       resolve : {
         suNewTestInfo : function(suNewTestInfoService) {
           return suNewTestInfoService.getSuNewTestInfo();
-        }
+        } /*,
+        suNewTestHeader : function(suNewTestHeaderService) {
+          return suNewTestHeaderService.getSuNewTestHeader();
+        } */
       }
     })
 });
