@@ -264,8 +264,13 @@ angular.module('app')
       }
     })
     /** su new test access */
-    .when('/newTest/su/:newTestID', {
+    .when('/suNewTest/:userID/:testID', {
       templateUrl : 'suNewTest.html',
-      controller : 'suNewTestCtrl'
+      controller : 'suNewTestCtrl',
+      resolve : {
+        suNewTestInfo : function(suNewTestInfoService) {
+          return suNewTestInfoService.getSuNewTestInfo();
+        }
+      }
     })
 });

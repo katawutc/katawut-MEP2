@@ -175,6 +175,7 @@ app.get('/reviewTestSolution/:testID/:questionNumber',
 
 /** save setting parameters */
 app.post('/saveSetting/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
   require('./server/saveSetting'));
 
 /** get user account for admin page view */
@@ -196,3 +197,8 @@ app.get('/admin/lastLogin/:userRole/:userID', passport.authenticate('jwt', {sess
 app.get('/admin/loginHistory/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
   require('./server/getLoginHistoryAdmin'));
+
+/** get su new test info */
+app.get('/getSuNewTestInfo/:userID/:testID', passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/getSuNewTestInfo'));

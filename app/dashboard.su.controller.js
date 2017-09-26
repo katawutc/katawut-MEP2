@@ -18,6 +18,7 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
     else if (suAccountData && !suAccountData.errorMessage) {
 
       $scope.userName = suAccountData.userName;
+      $scope.userID = suAccountData.userID;
       $scope.userRole = suAccountData.userRole;
     }
     else {
