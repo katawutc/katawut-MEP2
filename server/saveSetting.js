@@ -36,17 +36,20 @@ module.exports = function saveSetting(req, res) {
 
         console.log(doc);
 
-        // update activate if already done the 1st time setting before
-        // need to refactor more
-        db.collection('user').update({userID: req.params.userID,
-                                        userRole: req.params.userRole},
-                                        {$set:{activate: 'true'}}, cb1);
-        function cb1(err, doc) {
-          if (err) throw err;
-          res.json('return from at save setting server');
-        }
-
+        // to put this doc into the su new test DB <insert>
+        db.collection('suNewTest').insert({userID:req.params.userID,
+                                            testID: newTestName01,
+                                            test: doc}, function(err, doc){
+          // update activate if already done the 1st time setting before
+          // need to refactor more
+          db.collection('user').update({userID: req.params.userID,
+                                          userRole: req.params.userRole},
+                                          {$set:{activate: 'true'}}, cb1);
+            function cb1(err, doc) {
+              if (err) throw err;
+              res.json('return from at save setting server');
+          }
+        })
       });
-
   }
 }
