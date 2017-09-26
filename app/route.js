@@ -263,4 +263,9 @@ angular.module('app')
         }
       }
     })
+    /** su new test access */
+    .when('/newTest/su/:newTestID', {
+      templateUrl : 'suNewTest.html',
+      controller : 'suNewTestCtrl'
+    })
 });
