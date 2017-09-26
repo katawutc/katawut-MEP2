@@ -1,5 +1,5 @@
 
-module.exports = function dashboard(req, res) {
+module.exports = function suAccountData(req, res) {
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();

@@ -1,16 +1,16 @@
-angular.module('app').factory('dashboardSuService',
-  ['$http', '$route', '$window', '$q', dashboardSuService]);
+angular.module('app').factory('suAccountDataService',
+  ['$http', '$route', '$window', '$q', suAccountDataService]);
 
-function dashboardSuService($http, $route, $window, $q) {
+function suAccountDataService($http, $route, $window, $q) {
   return {
-      getDashboardData : function() {
+      getSuAccountData : function() {
 
-      var dashboardDataUrl = '/dashboard/su/'+$route.current.params.userID;
+      var suAccountDataUrl = '/accountData/su/'+$route.current.params.userID;
 
       var deferred = $q.defer();
 
       $http({
-        url: dashboardDataUrl,
+        url: suAccountDataUrl,
         method: 'GET',
         headers: {
           'Authorization': 'JWT ' + $window.sessionStorage.token

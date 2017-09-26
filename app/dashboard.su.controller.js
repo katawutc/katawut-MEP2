@@ -1,24 +1,24 @@
 angular.module('app').controller('dashboardSuCtrl',
   ['$scope', '$http', '$location', '$window', '$routeParams',
-    'dashboardData', 'suDashboardTest', dashboardSuCtrl]);
+    'suAccountData', 'suDashboardTest', dashboardSuCtrl]);
 
 function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
-                          dashboardData, suDashboardTest) {
+                          suAccountData, suDashboardTest) {
 
     /** dashboardData service duplicate with account.admn.service
      *  refactor to a new service name to be generic e.g. suAccountData service
      */
 
-    if (dashboardData && dashboardData.errorMessage) {
+    if (suAccountData && suAccountData.errorMessage) {
 
-      $window.sessionStorage.setItem('errorMessage', dashboardData.errorMessage);
+      $window.sessionStorage.setItem('errorMessage', suAccountData.errorMessage);
       $window.sessionStorage.setItem('logInMessage', 'login fail');
       $location.path('/errorPage');
     }
-    else if (dashboardData && !dashboardData.errorMessage) {
+    else if (suAccountData && !suAccountData.errorMessage) {
 
-      $scope.userName = dashboardData.userName;
-      $scope.userRole = dashboardData.userRole;
+      $scope.userName = suAccountData.userName;
+      $scope.userRole = suAccountData.userRole;
     }
     else {
       $window.sessionStorage.setItem('errorMessage', 'No Authorization');

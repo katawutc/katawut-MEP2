@@ -95,8 +95,12 @@ angular.module('app')
       templateUrl : 'dashboard.su.html',
       controller :'dashboardSuCtrl',
       resolve : {
+        /*
         dashboardData : function (dashboardSuService){
           return dashboardSuService.getDashboardData();
+        }, */
+        suAccountData : function(suAccountDataService) {
+          return suAccountDataService.getSuAccountData();
         },
         suDashboardTest : function (suDashboardTestService){
           return suDashboardTestService.getSuDashboardTest();

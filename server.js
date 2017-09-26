@@ -103,8 +103,8 @@ app.post('/logInDirect', require('./server/logInDirect'));
 
 /** dashboard */
 // to refactor to a specific role e.g. su, pu, tw
-app.get('/dashboard/su/:userID', passport.authenticate('jwt', {session: false}),
-  require('./server/dashboard'));
+app.get('/accountData/su/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/suAccountData'));
 
 /** get user list to diaplay on admin dashboard */
 app.get('/dashboard/ad/:userID/userList', passport.authenticate('jwt', {session: false}),
