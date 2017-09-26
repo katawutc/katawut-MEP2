@@ -15,14 +15,38 @@ module.exports = function saveSetting(req, res) {
   function cb(err, doc) {
     if (err) throw err;
 
-    // update activate if already done the 1st time setting before
-    // need to refactor more
-    db.collection('user').update({userID: req.params.userID,
-                                    userRole: req.params.userRole},
-                                    {$set:{activate: 'true'}}, cb1);
-    function cb1(err, doc) {
-      if (err) throw err;
-      res.json('return from at save setting server');
-    }
+    /** get the customize su test content here
+      * 1. create a new test name
+      * 2. aggregate test content
+      * 3. put into the DB for the su
+      */
+
+    var newTestName01 = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
+                        req.body.userPreferSubject+'-01';
+
+    var newTestName02 = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
+                        req.body.userPreferSubject+'-02';
+
+    var suTestContentID = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
+                          req.body.userPreferSubject;
+
+    // aggregate->match testID->sample
+    db.collection('suTestContent').aggregate([{$match:{testID:suTestContentID}},
+      {$sample:{size:3}}]).toArray(function(err, doc){
+
+        console.log(doc);
+
+        // update activate if already done the 1st time setting before
+        // need to refactor more
+        db.collection('user').update({userID: req.params.userID,
+                                        userRole: req.params.userRole},
+                                        {$set:{activate: 'true'}}, cb1);
+        function cb1(err, doc) {
+          if (err) throw err;
+          res.json('return from at save setting server');
+        }
+
+      });
+
   }
 }

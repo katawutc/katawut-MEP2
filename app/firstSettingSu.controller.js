@@ -25,7 +25,10 @@ function firstSettingSuCtrl ($scope, $http, $routeParams, $window,
     $http({
       method: 'POST',
       url: saveSettingUrl,
-      data: $scope.settingData
+      data: $scope.settingData,
+      headers: {
+        'Authorization': 'JWT ' + $window.sessionStorage.token
+        }
     }).then(function successCallback(response) {
       // route to the dashboard
 
