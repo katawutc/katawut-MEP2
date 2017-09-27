@@ -277,10 +277,13 @@ angular.module('app')
       }
     })
     /** su test tutorial mode */
-    .when('/suTest/tutorialMode/:userID/:testID/:testNumber', {
+    .when('/suTest/tutorialMode/:userID/:testID/:questionNumber', {
       templateUrl : 'suTestTutorialMode.html',
       controller : 'suTestTutorialModeCtrl',
       resolve : {
+        suTestQuestion : function(suTestQuestionService) {
+          return suTestQuestionService.getSuTestQuestion();
+        }
       }
     })
 });

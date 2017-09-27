@@ -21,7 +21,7 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
     return $scope.testFinished;
   }
 
-  var testUrl = '/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+$routeParams.questionNumber;
+  //var testUrl = '/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+$routeParams.questionNumber;
 
   var currentQuestionNumber = testQuestion.questionNumber;
 
