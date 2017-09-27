@@ -40,6 +40,7 @@ module.exports = function saveSetting(req, res) {
         console.log(doc);
 
         // to put this doc into the su new test DB <insert>
+        // to separate testID and test number <test running number>
         db.collection('suNewTest').insert({userID:req.params.userID,
                                             testID: newTestName01,
                                             test: doc}, function(err, doc){

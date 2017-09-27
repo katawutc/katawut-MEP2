@@ -6,11 +6,22 @@ angular.module('app').controller('suNewTestCtrl', ['$scope', '$http', '$routePar
 function suNewTestCtrl($scope, $http, $routeParams,
                           $window, $location, suNewTestInfo, suNewTestHeader) {
 
-  $scope.testID = suNewTestInfo.testID;
-  $scope.testDescription = suNewTestHeader.testDescription;
+    // to separate testID and test running number
 
-  $scope.startTestTutorialMode = function(){
-    console.log('startTestTutorialMode');
+    $scope.testID = suNewTestInfo.testID;
+    $scope.testDescription = suNewTestHeader.testDescription;
+
+    $scope.startTestTutorialMode = function() {
+
+      $window.sessionStorage.testID = $scope.testID;
+
+      console.log('startTestTutorialMode');
+
+      var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
+                                $scope.testID+'/'+1;
+
+      console.log(suTestTutorialUrl);
+
+      $location.path(suTestTutorialUrl);
   }
-
 }
