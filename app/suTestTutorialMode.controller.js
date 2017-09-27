@@ -32,6 +32,8 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
     console.log('receive su test question');
     console.log(suTestQuestion);
 
+    $scope.testID = suTestQuestion.testID; // testID not suTestID
+    $scope.questionNumber = suTestQuestion.questionNumber; // testID questionNumber
     $scope.question = suTestQuestion.question;
     $scope.choice1 = suTestQuestion.answerChoice[0];
     $scope.choice2 = suTestQuestion.answerChoice[1];
@@ -40,4 +42,54 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
 
   }
 
+  // handle submit answer
+  $scope.submitAnswer = function() {
+
+      console.log('submitAnswer');
+
+      var answerJSON = {userID: $window.sessionStorage.userID,
+                        testID: $scope.testID,
+                        questionNumber: $scope.questionNumber,
+                        answer: $scope.formData.answer};
+
+      console.log(answerJSON);
+
+      var suTestCheckAnswerUrl = '/suTest/checkAnswer/'+$window.sessionStorage.userID;
+
+      $http({
+      url: suTestCheckAnswerUrl,
+      method: 'POST',
+      data: answerJSON,
+      headers: {
+        'Authorization': 'JWT ' + $window.sessionStorage.token
+        }
+      }).then(function successCallback(response) {
+
+        console.log(response.data);
+        /*
+        $scope.result = response.data.result;
+        $scope.explanation = response.data.explanation
+
+
+        if ($routeParams.questionNumber === $window.sessionStorage.getItem('numberOfQuestion')) {
+          $scope.submitted = false;
+          $scope.next = false;
+          $scope.testFinished = true;
+        }
+        else {
+        $scope.submitted = false;
+        $scope.next = true;
+        $scope.testFinished = false;
+      }
+      */
+
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log(response.status);
+        $location.path('/errorPage');
+      });
+
+
+    }
 }

@@ -277,7 +277,7 @@ angular.module('app')
       }
     })
     /** su test tutorial mode */
-    .when('/suTest/tutorialMode/:userID/:testID/:questionNumber', {
+    .when('/suTest/tutorialMode/:userID/:testID/:suTestQuestionNumber', {
       templateUrl : 'suTestTutorialMode.html',
       controller : 'suTestTutorialModeCtrl',
       resolve : {

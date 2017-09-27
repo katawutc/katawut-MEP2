@@ -7,9 +7,9 @@ module.exports = function getSuTestQuestion(req, res) {
 
   console.log(req.params.userID);
   console.log(req.params.testID);
-  console.log(req.params.questionNumber);
+  console.log(req.params.suTestQuestionNumber);
 
-  var questionArrayIndex = req.params.questionNumber - 1;
+  var questionArrayIndex = req.params.suTestQuestionNumber - 1;
 
   console.log(questionArrayIndex);
 
