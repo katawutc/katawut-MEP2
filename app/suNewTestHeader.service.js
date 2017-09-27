@@ -16,8 +16,6 @@ function suNewTestHeaderService($http, $route, $q, $window) {
                                 '/'+$route.current.params.testID+
                                 '/'+$route.current.params.testRunningNumber;
 
-        console.log(newTestHeaderUrl);
-
         var deferred = $q.defer();
 
         $http({

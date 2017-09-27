@@ -276,4 +276,11 @@ angular.module('app')
         }
       }
     })
+    /** su test tutorial mode */
+    .when('/suTest/tutorialMode/:userID/:testID/:testRunningNumber/:testNumber', {
+      templateUrl : 'suTestTutorialMode.html',
+      controller : 'suTestTutorialModeCtrl',
+      resolve : {
+      }
+    })
 });

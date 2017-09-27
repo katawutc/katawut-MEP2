@@ -9,4 +9,8 @@ function suNewTestCtrl($scope, $http, $routeParams,
   $scope.testID = suNewTestInfo.testID;
   $scope.testDescription = suNewTestHeader.testDescription;
 
+  $scope.startTestTutorialMode = function(){
+    console.log('startTestTutorialMode');
+  }
+
 }
