@@ -13,7 +13,8 @@ function suNewTestInfoService($http, $route, $q, $window) {
         */
 
         var newTestInfoUrl = '/getSuNewTestInfo/'+$route.current.params.userID+
-                              '/'+$route.current.params.testID;
+                              '/'+$route.current.params.testID+
+                              '/'+$route.current.params.testRunningNumber;
 
         var deferred = $q.defer();
 

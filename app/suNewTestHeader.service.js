@@ -13,7 +13,10 @@ function suNewTestHeaderService($http, $route, $q, $window) {
         */
 
         var newTestHeaderUrl = '/getSuNewTestHeader/'+$route.current.params.userID+
-                              '/'+$route.current.params.testID;
+                                '/'+$route.current.params.testID+
+                                '/'+$route.current.params.testRunningNumber;
+
+        console.log(newTestHeaderUrl);
 
         var deferred = $q.defer();
 

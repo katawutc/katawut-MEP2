@@ -21,14 +21,17 @@ module.exports = function saveSetting(req, res) {
       * 3. put into the DB for the su
       */
 
-    var newTestName01 = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
-                        req.body.userPreferSubject+'-01';
+      var newTestRunningNumber1 = 01;
+      var newTestRunningNumber2 = 02;
 
-    var newTestName02 = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
-                        req.body.userPreferSubject+'-02';
+      var suTestContentID = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
+                            req.body.userPreferSubject;
 
-    var suTestContentID = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
-                          req.body.userPreferSubject;
+      var newTestName01 = suTestContentID+'-'+newTestRunningNumber1;
+
+      var newTestName02 = suTestContentID+'-'+newTestRunningNumber2;
+
+
 
     // aggregate->match testID->sample
     db.collection('suTestContent').aggregate([{$match:{testID:suTestContentID}},

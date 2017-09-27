@@ -199,11 +199,11 @@ app.get('/admin/loginHistory/:userRole/:userID', passport.authenticate('jwt', {s
   require('./server/getLoginHistoryAdmin'));
 
 /** get su new test info */
-app.get('/getSuNewTestInfo/:userID/:testID', passport.authenticate('jwt', {session: false}),
+app.get('/getSuNewTestInfo/:userID/:testID/:testRunningNumber', passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuNewTestInfo'));
 
 /** get su new test header */
-app.get('/getSuNewTestHeader/:userID/:testID', passport.authenticate('jwt', {session: false}),
+app.get('/getSuNewTestHeader/:userID/:testID/:testRunningNumber', passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuNewTestHeader'));

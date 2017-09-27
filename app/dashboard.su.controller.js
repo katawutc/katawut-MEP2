@@ -28,15 +28,19 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
     }
 
     if (suDashboardTest /*&& !suDashboardTest.errorMessage*/) {
-      $scope.dashboardTest1 = suDashboardTest.userLevel+'-'+
-                              suDashboardTest.userPreferTest+'-'+
-                              suDashboardTest.userPreferSubject+'-01';
 
+      // test running number
+      // to refactor for auto run
+      $scope.testRunningNumber01 = 01;
+      $scope.testRunningNumber02 = 02;
 
+      $scope.newTestID = suDashboardTest.userLevel+'-'+
+                          suDashboardTest.userPreferTest+'-'+
+                            suDashboardTest.userPreferSubject;
 
-      $scope.dashboardTest2 = suDashboardTest.userLevel+'-'+
-                              suDashboardTest.userPreferTest+'-'+
-                              suDashboardTest.userPreferSubject+'-02';
+      $scope.dashboardTest1 = $scope.newTestID+'-'+$scope.testRunningNumber01;
+
+      $scope.dashboardTest2 = $scope.newTestID+'-'+$scope.testRunningNumber02;
     }
     /*
     else if (suDashboardTest.errorMessage) {

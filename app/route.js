@@ -264,16 +264,16 @@ angular.module('app')
       }
     })
     /** su new test access */
-    .when('/suNewTest/:userID/:testID', {
+    .when('/suNewTest/:userID/:testID/:testRunningNumber', {
       templateUrl : 'suNewTest.html',
       controller : 'suNewTestCtrl',
       resolve : {
         suNewTestInfo : function(suNewTestInfoService) {
           return suNewTestInfoService.getSuNewTestInfo();
-        } /*,
+        },
         suNewTestHeader : function(suNewTestHeaderService) {
           return suNewTestHeaderService.getSuNewTestHeader();
-        } */
+        }
       }
     })
 });

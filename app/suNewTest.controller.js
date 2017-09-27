@@ -1,10 +1,12 @@
 angular.module('app').controller('suNewTestCtrl', ['$scope', '$http', '$routeParams',
                                     '$window', '$location',
-                                    'suNewTestInfo', suNewTestCtrl]);
+                                    'suNewTestInfo', 'suNewTestHeader',
+                                      suNewTestCtrl]);
 
 function suNewTestCtrl($scope, $http, $routeParams,
-                          $window, $location, suNewTestInfo) {
+                          $window, $location, suNewTestInfo, suNewTestHeader) {
 
   $scope.testID = suNewTestInfo.testID;
+  $scope.testDescription = suNewTestHeader.testDescription;
 
 }
