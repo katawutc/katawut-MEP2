@@ -65,31 +65,18 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
         }
       }).then(function successCallback(response) {
 
-        console.log(response.data);
-        /*
         $scope.result = response.data.result;
-        $scope.explanation = response.data.explanation
+        $scope.explanation = response.data.explanation;
 
-
-        if ($routeParams.questionNumber === $window.sessionStorage.getItem('numberOfQuestion')) {
-          $scope.submitted = false;
-          $scope.next = false;
-          $scope.testFinished = true;
-        }
-        else {
         $scope.submitted = false;
         $scope.next = true;
         $scope.testFinished = false;
-      }
-      */
-
-      }, function errorCallback(response) {
+      })
+      ,function errorCallback(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
         console.log(response.status);
         $location.path('/errorPage');
-      });
-
-
+      };
     }
 }
