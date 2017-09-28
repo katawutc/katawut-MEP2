@@ -17,7 +17,6 @@ module.exports = function getSuTestReview(req, res) {
           function(err, testReview) {
             if (err) throw err;
             if (testReview) {
-              console.log(testReview);
               res.json(testReview);
             }
           })
