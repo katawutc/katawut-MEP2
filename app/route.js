@@ -293,6 +293,9 @@ angular.module('app')
       resolve : {
         suTestSummary : function(suTestSummaryService) {
           return suTestSummaryService.getSuTestSummary();
+        },
+        suTestScore : function(suTestScoreService) {
+          return suTestScoreService.getSuTestScore();
         }
       }
     })

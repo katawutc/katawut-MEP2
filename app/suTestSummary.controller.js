@@ -1,10 +1,11 @@
 angular.module('app').controller('suTestSummaryCtrl',
                                   ['$scope', '$http', '$routeParams',
-                                    '$window', '$location', 'suTestSummary',
-                                      suTestSummaryCtrl]);
+                                    '$window', '$location',
+                                    'suTestSummary', 'suTestScore',
+                                     suTestSummaryCtrl]);
 
 function suTestSummaryCtrl($scope, $http, $routeParams,
-                          $window, $location, suTestSummary) {
+                          $window, $location, suTestSummary, suTestScore) {
 
   $scope.suTestID = suTestSummary[0].suTestID;
   $scope.suTestMode = suTestSummary[0].suTestMode;
@@ -12,7 +13,12 @@ function suTestSummaryCtrl($scope, $http, $routeParams,
 
   if(suTestSummary) {
 
-    console.log(suTestSummary);
     $scope.result = suTestSummary;
   }
+
+  if(suTestScore) {
+
+    $scope.suTestScore = suTestScore;
+  }
+
 }
