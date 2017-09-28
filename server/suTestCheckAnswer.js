@@ -9,12 +9,32 @@ module.exports = function suTestCheckAnswer(req, res) {
       if (err) throw err;
       if (doc) {
         if (req.body.answer === doc.solution) {
-          res.json({result: 'correct',
-                    explanation: doc.explanation});
+
+          db.collection('suTestHistory').insert({userID: req.body.userID,
+                                                 suTestID: req.body.suTestID,
+                                                 suTestMode: req.body.suTestMode,
+                                                 suTestStartAt: req.body.suTestStartAt,
+                                                 suTestQuestionNumber: req.body.suTestQuestionNumber,
+                                                 suTestAnswer: req.body.answer,
+                                                 suTestResult: 'correct'}, function(err, docHistory) {
+
+             res.json({result: 'correct',
+                       explanation: doc.explanation});
+          })
         }
         else if (req.body.answer !== doc.solution) {
-          res.json({result: 'wrong',
-                    explanation: doc.explanation});
+
+          db.collection('suTestHistory').insert({userID: req.body.userID,
+                                                 suTestID: req.body.suTestID,
+                                                 suTestMode: req.body.suTestMode,
+                                                 suTestStartAt: req.body.suTestStartAt,
+                                                 suTestQuestionNumber: req.body.suTestQuestionNumber,
+                                                 suTestAnswer: req.body.answer,
+                                                 suTestResult: 'wrong'}, function(err, docHistory) {
+
+             res.json({result: 'wrong',
+                       explanation: doc.explanation});
+          })
         }
       }
       else {

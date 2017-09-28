@@ -29,8 +29,6 @@ function suTestTutorialModeCtrl($scope, $http, $route,
 
   /** handle suTestQuestion*/
   if (suTestQuestion) {
-    console.log('receive su test question');
-    console.log(suTestQuestion);
 
     $scope.testID = suTestQuestion.testID; // testID not suTestID
     $scope.suTestQuestionNumber = $route.current.params.suTestQuestionNumber;
@@ -50,14 +48,14 @@ function suTestTutorialModeCtrl($scope, $http, $route,
   // handle submit answer
   $scope.submitAnswer = function() {
 
-      console.log('submitAnswer');
-
       var answerJSON = {userID: $window.sessionStorage.userID,
                         testID: $scope.testID, // main testID
+                        suTestID: $window.sessionStorage.suTestID,
+                        suTestMode: $window.sessionStorage.suTestMode,
+                        suTestStartAt : $window.sessionStorage.suTestStartAt,
+                        suTestQuestionNumber: $route.current.params.suTestQuestionNumber,
                         questionNumber: $scope.questionNumber,
                         answer: $scope.formData.answer};
-
-      console.log(answerJSON);
 
       var suTestCheckAnswerUrl = '/suTest/checkAnswer/'+$window.sessionStorage.userID;
 
@@ -100,10 +98,6 @@ function suTestTutorialModeCtrl($scope, $http, $route,
 
       ++suTestCurrentQuestionNumber;
 
-      console.log(suTestCurrentQuestionNumber);
-
-      console.log('next question to display');
-
       if (suTestCurrentQuestionNumber <= $window.sessionStorage.suTestSize) {
         // change button type to display
         $scope.submitted = true;
@@ -113,10 +107,19 @@ function suTestTutorialModeCtrl($scope, $http, $route,
         var suTestNextQuestionUrl =
           '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
             $window.sessionStorage.suTestID+'/'+suTestCurrentQuestionNumber;
-        console.log(suTestNextQuestionUrl);
+
         $location.path(suTestNextQuestionUrl);
+
       } else {
           console.log('To show the summary page');
       }
     }
+
+    $scope.suTestSummary = function() {
+
+      console.log('show su test summary');
+      //$location.path('/testSummaryUnSubscribeUser');
+    }
+
+
 }
