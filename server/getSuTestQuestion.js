@@ -6,7 +6,7 @@ module.exports = function getSuTestQuestion(req, res) {
   console.log('at server getSuTestQuestion');
 
   console.log(req.params.userID);
-  console.log(req.params.testID);
+  console.log(req.params.suTestID);
   console.log(req.params.suTestQuestionNumber);
 
   var questionArrayIndex = req.params.suTestQuestionNumber - 1;
@@ -14,11 +14,11 @@ module.exports = function getSuTestQuestion(req, res) {
   console.log(questionArrayIndex);
 
   db.collection('suNewTest').findOne({userID: req.params.userID,
-                                      testID: req.params.testID}, function(err, doc) {
+                                      suTestID: req.params.testID}, function(err, doc) {
     if (err) throw err;
-    if (doc && doc.test) {
-      console.log(doc.test[questionArrayIndex]);
-      res.json(doc.test[questionArrayIndex]);
+    if (doc && doc.suTest) {
+      console.log(doc.suTest[questionArrayIndex]);
+      res.json(doc.suTest[questionArrayIndex]);
     }
   })
 }

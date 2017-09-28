@@ -21,29 +21,33 @@ module.exports = function saveSetting(req, res) {
       * 3. put into the DB for the su
       */
 
-      var newTestRunningNumber1 = 01;
-      var newTestRunningNumber2 = 02;
+      /**
+       * How to implement suTestNumber
+       * 1. check test history
+       * 2. check
+       */
 
-      var suTestContentID = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
-                            req.body.userPreferSubject;
+      var suTestNumber = 01;
 
-      var newTestName01 = suTestContentID+'-'+newTestRunningNumber1;
+      var testID = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
+                    req.body.userPreferSubject;
 
-      var newTestName02 = suTestContentID+'-'+newTestRunningNumber2;
-
+      var suNewTest01 = testID+'-'+suTestNumber;
 
 
     // aggregate->match testID->sample
-    db.collection('suTestContent').aggregate([{$match:{testID:suTestContentID}},
+    db.collection('suTestContent').aggregate([{$match:{testID:testID}},
       {$sample:{size:3}}]).toArray(function(err, doc){
 
         console.log(doc);
 
         // to put this doc into the su new test DB <insert>
         // to separate testID and test number <test running number>
+        // to insert number of question e.g. 3
         db.collection('suNewTest').insert({userID:req.params.userID,
-                                            testID: newTestName01,
-                                            test: doc}, function(err, doc){
+                                            suTestID: suNewTest01,
+                                            suTestSize: 3,
+                                            suTest: doc}, function(err, doc){
           // update activate if already done the 1st time setting before
           // need to refactor more
           db.collection('user').update({userID: req.params.userID,

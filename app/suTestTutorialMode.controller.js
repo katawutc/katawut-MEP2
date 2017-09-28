@@ -8,7 +8,7 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
                           $window, $location, suTestQuestion) {
 
   // for displaying on 2nd nav bar
-  $scope.testID = $window.sessionStorage.testID;
+  $scope.suTestID = $window.sessionStorage.suTestID;
 
   // use for showing submit answer or next question button
   $scope.submitted = true;
@@ -48,7 +48,7 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
       console.log('submitAnswer');
 
       var answerJSON = {userID: $window.sessionStorage.userID,
-                        testID: $scope.testID,
+                        testID: $scope.testID, // main testID
                         questionNumber: $scope.questionNumber,
                         answer: $scope.formData.answer};
 
@@ -68,6 +68,8 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
         $scope.result = response.data.result;
         $scope.explanation = response.data.explanation;
 
+        // to implement condition to stop and end of the test and next question
+
         $scope.submitted = false;
         $scope.next = true;
         $scope.testFinished = false;
@@ -78,5 +80,11 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
         console.log(response.status);
         $location.path('/errorPage');
       };
+    }
+
+
+    $scope.nextQuestion = function() {
+
+      console.log('next question to display');
     }
 }

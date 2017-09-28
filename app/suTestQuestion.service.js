@@ -8,7 +8,7 @@ function suTestQuestionService($http, $route, $q, $window) {
 
        var suTestQuestionUrl = '/getSuTestQuestion/'+
                                 $window.sessionStorage.userID+'/'+
-                                $route.current.params.testID+'/'+
+                                $route.current.params.suTestID+'/'+
                                 $route.current.params.suTestQuestionNumber;
 
        console.log(suTestQuestionUrl);
