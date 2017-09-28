@@ -74,10 +74,19 @@ function suTestTutorialModeCtrl($scope, $http, $route,
         $scope.explanation = response.data.explanation;
 
         // to implement condition to stop and end of the test and next question
+        if ($route.current.params.suTestQuestionNumber ===
+            $window.sessionStorage.suTestSize) {
 
-        $scope.submitted = false;
-        $scope.next = true;
-        $scope.testFinished = false;
+          $scope.submitted = false;
+          $scope.next = false;
+          $scope.testFinished = true;
+        }
+        else {
+          $scope.submitted = false;
+          $scope.next = true;
+          $scope.testFinished = false;
+      }
+
       })
       ,function errorCallback(response) {
         // called asynchronously if an error occurs
@@ -86,7 +95,6 @@ function suTestTutorialModeCtrl($scope, $http, $route,
         $location.path('/errorPage');
       };
     }
-
 
     $scope.nextQuestion = function() {
 
