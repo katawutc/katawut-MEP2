@@ -302,16 +302,11 @@ angular.module('app')
     /** su test review */
     .when('/suTestReview/:userID/:suTestID/:suTestQuestionNumber', {
       templateUrl : 'suTestReview.html',
-      controller : 'suTestReviewCtrl'
-      /*
+      controller : 'suTestReviewCtrl',
       resolve : {
-        suTestSummary : function(suTestSummaryService) {
-          return suTestSummaryService.getSuTestSummary();
-        },
-        suTestScore : function(suTestScoreService) {
-          return suTestScoreService.getSuTestScore();
+        suTestReview : function(suTestReviewService) {
+          return suTestReviewService.getSuTestReview();
         }
       }
-      */
     })
 });

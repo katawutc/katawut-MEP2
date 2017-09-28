@@ -1,7 +1,7 @@
 <nav-bar-su></nav-bar-su>
 
 <div class="navbar navbar-default navbar-fixed-top second-navbar">
-    <p class="navbar-text">Test review {{suTestID}}</p>
+    <p class="navbar-text"> {{suTestID}} Test review </p>
 
     <ul class="nav navbar-nav pull-right">
       <li><a href=""><img src="image/chat-icon.png" style="width:25px;height:25px;border:0;"></a></li>
@@ -10,8 +10,24 @@
 
 <div class="row" style="margin-top:120px">
 
+    <div class="col-sm-1"></div>
+
+    <div class="col-sm-10">
+
+  <h1> Review Soluton </h1>
+
+  <h2> {{suTestReview.question}} </h2>
+
+  <h2> {{suTestReview.solution}} </h2>
+
+  <h2> {{suTestReview.explanation}} </h2>
+
+  <button type="button" class="btn btn-primary" ng-click='suTestSummary()'>Test summary</button>
 
 
+</div>
+
+    <div class="col-sm-1"></div>
 
 
 </div>
