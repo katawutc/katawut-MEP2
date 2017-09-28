@@ -44,6 +44,9 @@ function suTestTutorialModeCtrl($scope, $http, $route,
 
   }
 
+  // for navigation to the next question
+  var suTestCurrentQuestionNumber = $route.current.params.suTestQuestionNumber;
+
   // handle submit answer
   $scope.submitAnswer = function() {
 
@@ -87,6 +90,25 @@ function suTestTutorialModeCtrl($scope, $http, $route,
 
     $scope.nextQuestion = function() {
 
+      ++suTestCurrentQuestionNumber;
+
+      console.log(suTestCurrentQuestionNumber);
+
       console.log('next question to display');
+
+      if (suTestCurrentQuestionNumber <= $window.sessionStorage.suTestSize) {
+        // change button type to display
+        $scope.submitted = true;
+        $scope.next = false;
+        $scope.testFinished = false;
+        // Fetching a new question from the DB by routing
+        var suTestNextQuestionUrl =
+          '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
+            $window.sessionStorage.suTestID+'/'+suTestCurrentQuestionNumber;
+        console.log(suTestNextQuestionUrl);
+        $location.path(suTestNextQuestionUrl);
+      } else {
+          console.log('To show the summary page');
+      }
     }
 }

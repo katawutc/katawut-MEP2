@@ -13,13 +13,13 @@ function suNewTestCtrl($scope, $http, $routeParams,
 
     $scope.startTestTutorialMode = function() {
 
-    // use suTestID
-    $window.sessionStorage.suTestID = $scope.suTestID;
-    $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
+      // use suTestID
+      $window.sessionStorage.suTestID = $scope.suTestID;
+      $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
 
-    var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
-                                $scope.suTestID+'/'+1;
+      var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
+                                  $scope.suTestID+'/'+1;
 
-    $location.path(suTestTutorialUrl);
+      $location.path(suTestTutorialUrl);
   }
 }
