@@ -7,9 +7,12 @@ angular.module('app').controller('suTestSummaryCtrl',
 function suTestSummaryCtrl($scope, $http, $routeParams,
                           $window, $location, suTestSummary, suTestScore) {
 
+  console.log(suTestSummary[0].suTestStartAt);
+
   $scope.suTestID = suTestSummary[0].suTestID;
   $scope.suTestMode = suTestSummary[0].suTestMode;
-  $scope.suTestStartAt = Date(suTestSummary[0].suTestStartAt).toString();
+  var suTestStartAt = parseInt(suTestSummary[0].suTestStartAt);
+  $scope.suTestStartAt = (new Date(suTestStartAt)).toString();
 
   if(suTestSummary) {
 
