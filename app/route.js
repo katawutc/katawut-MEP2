@@ -286,4 +286,16 @@ angular.module('app')
         }
       }
     })
+    /** su test summary */
+    .when('/suTestSummary/:userID/:suTestID/:suTestMode/:suTestStartAt', {
+      templateUrl : 'suTestSummary.html',
+      controller : 'suTestSummaryCtrl'
+      /*
+      resolve : {
+        suTestQuestion : function(suTestQuestionService) {
+          return suTestQuestionService.getSuTestQuestion();
+        }
+      }
+      */
+    })
 });

@@ -118,8 +118,12 @@ function suTestTutorialModeCtrl($scope, $http, $route,
     $scope.suTestSummary = function() {
 
       console.log('show su test summary');
-      //$location.path('/testSummaryUnSubscribeUser');
+
+      var suTestSummaryUrl = '/suTestSummary/'+$window.sessionStorage.userID+'/'+
+                              $window.sessionStorage.suTestID+'/'+
+                              $window.sessionStorage.suTestMode+'/'+
+                              $window.sessionStorage.suTestStartAt;
+
+      $location.path(suTestSummaryUrl);
     }
-
-
 }
