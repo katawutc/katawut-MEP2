@@ -289,13 +289,11 @@ angular.module('app')
     /** su test summary */
     .when('/suTestSummary/:userID/:suTestID/:suTestMode/:suTestStartAt', {
       templateUrl : 'suTestSummary.html',
-      controller : 'suTestSummaryCtrl'
-      /*
+      controller : 'suTestSummaryCtrl',
       resolve : {
-        suTestQuestion : function(suTestQuestionService) {
-          return suTestQuestionService.getSuTestQuestion();
+        suTestSummary : function(suTestSummaryService) {
+          return suTestSummaryService.getSuTestSummary();
         }
       }
-      */
     })
 });

@@ -217,3 +217,9 @@ app.get('/getSuTestQuestion/:userID/:testID/:suTestQuestionNumber', passport.aut
 app.post('/suTest/checkAnswer/:userID', passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/suTestCheckAnswer'));
+
+/** get su test summary */
+app.get('/getSuTestSummary/:userID/:suTestID/:suTestMode/:suTestStartAt',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/getSuTestSummary'));
