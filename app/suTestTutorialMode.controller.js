@@ -1,10 +1,10 @@
 angular.module('app').controller('suTestTutorialModeCtrl',
-                                  ['$scope', '$http', '$routeParams',
+                                  ['$scope', '$http', '$route',
                                     '$window', '$location',
                                       'suTestQuestion',
                                       suTestTutorialModeCtrl]);
 
-function suTestTutorialModeCtrl($scope, $http, $routeParams,
+function suTestTutorialModeCtrl($scope, $http, $route,
                           $window, $location, suTestQuestion) {
 
   // for displaying on 2nd nav bar
@@ -33,6 +33,8 @@ function suTestTutorialModeCtrl($scope, $http, $routeParams,
     console.log(suTestQuestion);
 
     $scope.testID = suTestQuestion.testID; // testID not suTestID
+    $scope.suTestQuestionNumber = $route.current.params.suTestQuestionNumber;
+    $scope.suTestSize = $window.sessionStorage.suTestSize;
     $scope.questionNumber = suTestQuestion.questionNumber; // testID questionNumber
     $scope.question = suTestQuestion.question;
     $scope.choice1 = suTestQuestion.answerChoice[0];
