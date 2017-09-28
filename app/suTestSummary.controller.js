@@ -7,8 +7,6 @@ angular.module('app').controller('suTestSummaryCtrl',
 function suTestSummaryCtrl($scope, $http, $routeParams,
                           $window, $location, suTestSummary, suTestScore) {
 
-  console.log(suTestSummary[0].suTestStartAt);
-
   $scope.suTestID = suTestSummary[0].suTestID;
   $scope.suTestMode = suTestSummary[0].suTestMode;
   var suTestStartAt = parseInt(suTestSummary[0].suTestStartAt);
@@ -23,5 +21,4 @@ function suTestSummaryCtrl($scope, $http, $routeParams,
 
     $scope.suTestScore = suTestScore;
   }
-
 }
