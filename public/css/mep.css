@@ -48,6 +48,22 @@
   color: black;
 }
 
+#notePanel {
+  position: fixed;
+  width: 24%; /* 100% width */
+  left: 75%;
+  text-align: center; /* Centered text/links */
+  z-index: 20;
+}
+
+#chatPanel {
+  position: fixed;
+  width: 24%;
+  left: 75%;
+  top: 50%;
+  z-index: 20;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2,1fr);
