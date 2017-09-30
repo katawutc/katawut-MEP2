@@ -8,12 +8,7 @@ angular.module('app')
     // for checking the FB login status before routing
     .when("/logInCheck", {
       templateUrl : 'logInCheck.html',
-      controller : 'logInCheckCtrl',
-      resolve: {
-        fbLogInStatus : function(fbLogInStatusService) {
-          return fbLogInStatusService.getFBLogInStatus();
-        }
-      }
+      controller : 'logInCheckCtrl'
     })
     .when("/logIn", {
       templateUrl : 'logIn.html',

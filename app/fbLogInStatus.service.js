@@ -1,7 +1,7 @@
 angular.module('app').factory('fbLogInStatusService',
-  ['$http', '$route', '$window', '$q', fbLogInStatusService]);
+  ['$http', '$window', '$q', fbLogInStatusService]);
 
-function fbLogInStatusService($http, $route, $window, $q) {
+function fbLogInStatusService($http, $window, $q) {
   return {
       getFBLogInStatus : function() {
 
