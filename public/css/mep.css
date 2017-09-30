@@ -44,6 +44,10 @@
   color: white;
 }
 
+#su-2ndNavBarMore-dropdown a {
+  color: black;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2,1fr);
