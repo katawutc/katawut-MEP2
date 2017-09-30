@@ -9,7 +9,7 @@
   font-size: 15px;
 }
 
-.navbar .nav.pull-right {
+.pull-right {
     float: right;
     margin-right: 20px; /*set margin this way in your custom styesheet*/
   }
@@ -35,18 +35,16 @@
 }
 
 #su_nav_bar {
-  overflow-x: hidden;
+  z-index: 2000;
   background-color: #20B2AA;
   border-color: #20B2AA;
 }
 
 #su_nav_bar a {
-  overflow-x: hidden;
   color: white;
 }
 
 .wrapper {
-
   display: grid;
   grid-template-columns: repeat(2,1fr);
   grid-auto-rows: minmax(500px, auto);
