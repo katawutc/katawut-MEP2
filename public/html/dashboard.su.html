@@ -1,13 +1,15 @@
 <nav-bar-su></nav-bar-su>
 
-<div class="navbar navbar-default navbar-fixed-top second-navbar" id="su-2nd-nav-bar">
-    <p class="navbar-text">สวัสดี {{userName}} เรามาดู Dashboard กัน</p>
+<div ng-controller='secondNavBarSuCtrl'>
+  <div class="navbar navbar-default navbar-fixed-top second-navbar" id="su-2nd-nav-bar">
+      <p class="navbar-text">สวัสดี {{userName}} เรามาดู Dashboard กัน</p>
 
-    <ul class="nav navbar-nav pull-right">
-      <li><a href=""><img src="image/note-icon.jpg" style="width:25px;height:25px;border:0;"></a></li>
-      <li><a href=""><img src="image/chat-icon.png" style="width:25px;height:25px;border:0;"></a></li>
-    </ul>
+      <ul class="nav navbar-nav pull-right">
+        <li><a href="" ng-click="openNotePanel()"><img src="image/note-icon.jpg" style="width:25px;height:25px;border:0;"></a></li>
+        <li><a href="" ng-click="openChatPanel()"><img src="image/chat-icon.png" style="width:25px;height:25px;border:0;"></a></li>
+      </ul>
 
+  </div>
 </div>
 
 <div class="container fluid" style="margin-top:120px">

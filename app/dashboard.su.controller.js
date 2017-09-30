@@ -50,4 +50,11 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
     else {
       // other error case
     }
+
+    /*
+    $scope.openChatPanel = function() {
+      console.log('open chat panel');
+    }
+    */
+
   }
