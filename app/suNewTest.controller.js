@@ -26,4 +26,26 @@ function suNewTestCtrl($scope, $http, $routeParams,
 
       $location.path(suTestTutorialUrl);
   }
+
+    $scope.startTestExamMode = function() {
+
+      console.log('start su test Exam mode');
+
+      // use suTestID
+      $window.sessionStorage.suTestID = $scope.suTestID;
+      $window.sessionStorage.suTestMode = 'exam';
+      $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
+      $window.sessionStorage.suTestStartAt =  Date.now();
+
+      /** post to the server to registory the suTestHistory */
+
+      var suTestExamUrl = '/suTest/examMode/'+$window.sessionStorage.userID+'/'+
+                                  $scope.suTestID+'/'+1;
+
+      $location.path(suTestExamUrl);
+
+
+
+    }
+
 }
