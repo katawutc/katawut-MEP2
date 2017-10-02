@@ -235,3 +235,9 @@ app.get('/getSuTestReview/:userID/:suTestID/:suTestQuestionNumber',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuTestReview'));
+
+/** create su exam sheet */
+app.post('/createSuExamSheet/:userID/:suTestID',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/createSuExamSheet'));

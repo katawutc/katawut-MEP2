@@ -29,4 +29,20 @@ function suTestExamModeCtrl($scope, $http, $route,
   // for navigation to the next question
   var suTestCurrentQuestionNumber = $route.current.params.suTestQuestionNumber;
 
+
+  $scope.submitAnswerExamMode = function() {
+  }
+
+  //markQuestion()
+  $scope.markQuestion = function() {
+  }
+
+  $scope.answerSheetSummary = function() {
+    //console.log('go to answerSheetSummary');
+    //$location.path('/answerSummary');
+  }
+
+  $scope.stopTheTest = function() {
+
+  }
 }

@@ -127,7 +127,6 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
        * Modal dialog to show user the test will be stopped
        * and reset
        */
-      console.log('Stop the test');
       $location.path('/answerSummary');
     }
 
