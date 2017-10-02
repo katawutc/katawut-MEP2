@@ -44,8 +44,6 @@ function suNewTestCtrl($scope, $http, $routeParams,
 
       $location.path(suTestExamUrl);
 
-
-
     }
 
 }
