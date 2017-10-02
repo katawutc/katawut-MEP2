@@ -24,7 +24,6 @@ module.exports = function createSuExamSheet(req, res) {
        }
   }
 
-
   res.json('return from createSuExamSheet');
 
 }

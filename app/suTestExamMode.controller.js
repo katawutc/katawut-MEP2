@@ -12,8 +12,6 @@ function suTestExamModeCtrl($scope, $http, $route,
   /** handle suTestQuestion*/
   if (suTestQuestion) {
 
-    console.log(suTestQuestion);
-
     $scope.testID = suTestQuestion.testID; // testID not suTestID
     $scope.suTestQuestionNumber = $route.current.params.suTestQuestionNumber;
     $scope.suTestSize = $window.sessionStorage.suTestSize;
@@ -27,10 +25,61 @@ function suTestExamModeCtrl($scope, $http, $route,
   }
 
   // for navigation to the next question
-  var suTestCurrentQuestionNumber = $route.current.params.suTestQuestionNumber;
-
+  var suTestCurrentQuestionNumber = $scope.suTestQuestionNumber;
 
   $scope.submitAnswerExamMode = function() {
+
+    console.log('submitAnswerExamMode');
+
+    var answerJSON = {userID: $window.sessionStorage.userID,
+                      suTestID: $window.sessionStorage.suTestID,
+                      suTestMode: $window.sessionStorage.suTestMode,
+                      suTestStartAt: $window.sessionStorage.suTestStartAt,
+                      suTestQuestionNumber: suTestCurrentQuestionNumber,
+                      suTestQuestionStatus: 'answered',
+                      suTestAnswer: $scope.formData.answer};
+
+    var suTestExamModeSubmitAnswer = '/suTestExamModeSubmitAnswer/'+$window.sessionStorage.userID+'/'+
+                                        $window.sessionStorage.suTestID+'/'+
+                                        suTestCurrentQuestionNumber;
+
+    console.log(suTestExamModeSubmitAnswer);
+
+    $http({
+    url: suTestExamModeSubmitAnswer,
+    method: 'POST',
+    data: answerJSON,
+    headers: {
+      'Authorization': 'JWT ' + $window.sessionStorage.token
+      }
+    }).then(function successCallback(response) {
+
+      console.log(response.data);
+
+      // to check the response.data if good to continue
+
+      if (suTestCurrentQuestionNumber < $window.sessionStorage.suTestSize) {
+
+        ++suTestCurrentQuestionNumber;
+
+        var nextSutestQuestionUrl = '/suTest/examMode/'+$window.sessionStorage.userID+'/'+
+                                      $window.sessionStorage.suTestID+'/'+
+                                      suTestCurrentQuestionNumber;
+
+        $location.path(nextSutestQuestionUrl );
+      }
+      else {
+        console.log(currentQuestionNumber);
+        $location.path('/answerSummary');
+
+      }
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(response.status);
+      $location.path('/errorPage');
+    });
+
   }
 
   //markQuestion()

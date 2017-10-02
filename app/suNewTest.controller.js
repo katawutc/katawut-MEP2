@@ -71,10 +71,10 @@ function suNewTestCtrl($scope, $http, $route,
             console.log('return from create the answer sheet');
 
             // go to the 1st question after empty answer sheet is created
-            //var suTestExamUrl = '/suTest/examMode/'+$window.sessionStorage.userID+'/'+
-            //                           $scope.suTestID+'/'+1;
+            var suTestExamUrl = '/suTest/examMode/'+$window.sessionStorage.userID+'/'+
+                                       $scope.suTestID+'/'+1;
 
-            //$location.path(suTestExamUrl);
+            $location.path(suTestExamUrl);
 
           }, function errorCallback(response) {
             console.log(response.status);
