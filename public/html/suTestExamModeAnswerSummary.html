@@ -1,0 +1,49 @@
+<nav-bar-su></nav-bar-su>
+
+<div class="navbar navbar-default navbar-fixed-top second-navbar">
+    <p class="navbar-text">{{testID}} exam mode answer summary</p>
+
+    <ul class="nav navbar-nav pull-right">
+      <li><a href=""><img src="image/chat-icon.png" style="width:25px;height:25px;border:0;"></a></li>
+    </ul>
+</div>
+
+<div class="row" style="margin-top:120px">
+
+<div class='container'>
+
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+  <div class='row'>
+    <div class="col-sm-8">
+      <h1> Answer sheet summary</h1>
+    </div>
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-primary btn-block" ng-click='endExam()'>Finish exam</button>
+    </div>
+  </div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+  <th>Question number</th>
+  <th>Status</th>
+  <th>Answer</th>
+  <th>Review</th>
+    </tr>
+  </thead>
+      <tbody>
+        <tr ng-repeat="res in result">
+          <td>{{ res.questionNumber }}</td>
+          <td>{{ res.status }}</td>
+          <td>{{ res.userAnswer }}</td>
+          <td><a ng-href="#!/reviseExamAnswerSheet/{{res.userID}}/{{res.testMode}}/{{res.testStartAt}}/{{res.testID}}/{{res.questionNumber}}">Revise answer</a></td>
+          <!-- :userID/:testID/:testMode/:testStartAt -->
+          <!-- /reviseExamAnswer/xxx/xxx/xxx -->
+          <!-- use the same exam question route but have user answer in -->
+        </tr>
+      </tbody>
+</table>
+</div>
+<div class="col-sm-1"></div>
+</div>
+</div>

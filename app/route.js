@@ -314,4 +314,16 @@ angular.module('app')
         }
       }
     })
+    /** su test exam mode answer summary */
+    .when('/suTestExamModeAnswerSummary/:userID/:suTestID/:suTestStartAt', {
+      templateUrl : 'suTestExamModeAnswerSummary.html',
+      controller : 'suTestExamModeAnswerSummaryCtrl'
+      /*
+      resolve : {
+        suTestQuestion : function(suTestQuestionService) {
+          return suTestQuestionService.getSuTestQuestion();
+        }
+      }
+      */
+    })
 });

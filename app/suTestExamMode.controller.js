@@ -37,7 +37,9 @@ function suTestExamModeCtrl($scope, $http, $route,
                       suTestStartAt: $window.sessionStorage.suTestStartAt,
                       suTestQuestionNumber: suTestCurrentQuestionNumber,
                       suTestQuestionStatus: 'answered',
-                      suTestAnswer: $scope.formData.answer};
+                      suTestAnswer: $scope.formData.answer,
+                      testID: $scope.testID,
+                      questionNumber: $scope.questionNumber};
 
     var submitAnswerSuTestExamMode = '/submitAnswerSuTestExamMode/'+$window.sessionStorage.userID+'/'+
                                         $window.sessionStorage.suTestID+'/'+
@@ -66,11 +68,17 @@ function suTestExamModeCtrl($scope, $http, $route,
                                       $window.sessionStorage.suTestID+'/'+
                                       suTestCurrentQuestionNumber;
 
-        $location.path(nextSutestQuestionUrl );
+        $location.path(nextSutestQuestionUrl);
       }
       else {
-        console.log(currentQuestionNumber);
-        $location.path('/answerSummary');
+
+        console.log(suTestCurrentQuestionNumber);
+
+        var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
+                                                $window.sessionStorage.suTestID+'/'+
+                                                $window.sessionStorage.suTestStartAt;
+                                                
+        $location.path(suTestExamModeAnswerSummaryUrl);
 
       }
     }, function errorCallback(response) {
