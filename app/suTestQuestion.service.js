@@ -11,10 +11,6 @@ function suTestQuestionService($http, $route, $q, $window) {
                                 $route.current.params.suTestID+'/'+
                                 $route.current.params.suTestQuestionNumber;
 
-       console.log(suTestQuestionUrl);
-
-       console.log('at suTestQuestionService');
-
        var deferred = $q.defer();
 
        $http({

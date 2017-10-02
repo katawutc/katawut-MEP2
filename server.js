@@ -247,3 +247,9 @@ app.post('/submitAnswerSuTestExamMode/:userID/:suTestID/:suTestQuestionNumber',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/submitAnswerSuTestExamMode'));
+
+/** get su test exam mode answer summary */
+app.get('/suTestExamModeAnswerSummary/:userID/:suTestID/:suTestStartAt',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/suTestExamModeAnswerSummary'));
