@@ -209,7 +209,7 @@ app.get('/getSuNewTestHeader/:userID/:testID/:testRunningNumber', passport.authe
   require('./server/getSuNewTestHeader'));
 
 /** get su test question */
-app.get('/getSuTestQuestion/:userID/:testID/:suTestQuestionNumber', passport.authenticate('jwt', {session: false}),
+app.get('/getSuTestQuestion/:userID/:suTestID/:suTestQuestionNumber', passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuTestQuestion'));
 

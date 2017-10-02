@@ -14,7 +14,7 @@ module.exports = function getSuTestQuestion(req, res) {
   console.log(questionArrayIndex);
 
   db.collection('suNewTest').findOne({userID: req.params.userID,
-                                      suTestID: req.params.testID}, function(err, doc) {
+                                      suTestID: req.params.suTestID}, function(err, doc) {
     if (err) throw err;
     if (doc && doc.suTest) {
       console.log(doc.suTest[questionArrayIndex]);
