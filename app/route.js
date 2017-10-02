@@ -307,13 +307,11 @@ angular.module('app')
     /** su test exam mode */
     .when('/suTest/examMode/:userID/:suTestID/:suTestQuestionNumber', {
       templateUrl : 'suTestExamMode.html',
-      controller : 'suTestExamModeCtrl'
-      /*
+      controller : 'suTestExamModeCtrl',
       resolve : {
         suTestQuestion : function(suTestQuestionService) {
           return suTestQuestionService.getSuTestQuestion();
         }
       }
-      */
     })
 });
