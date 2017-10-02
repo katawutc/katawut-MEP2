@@ -39,14 +39,14 @@ function suTestExamModeCtrl($scope, $http, $route,
                       suTestQuestionStatus: 'answered',
                       suTestAnswer: $scope.formData.answer};
 
-    var suTestExamModeSubmitAnswer = '/suTestExamModeSubmitAnswer/'+$window.sessionStorage.userID+'/'+
+    var submitAnswerSuTestExamMode = '/submitAnswerSuTestExamMode/'+$window.sessionStorage.userID+'/'+
                                         $window.sessionStorage.suTestID+'/'+
                                         suTestCurrentQuestionNumber;
 
-    console.log(suTestExamModeSubmitAnswer);
+    console.log(submitAnswerSuTestExamMode);
 
     $http({
-    url: suTestExamModeSubmitAnswer,
+    url: submitAnswerSuTestExamMode,
     method: 'POST',
     data: answerJSON,
     headers: {

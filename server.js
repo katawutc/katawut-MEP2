@@ -243,7 +243,7 @@ app.post('/createSuExamSheet/:userID/:suTestID',
   require('./server/createSuExamSheet'));
 
 /** submit answer su test exam mode */
-app.post('/suTestExamModeSubmitAnswer/:userID/:suTestID/:suTestQuestionNumber',
+app.post('/submitAnswerSuTestExamMode/:userID/:suTestID/:suTestQuestionNumber',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
-  require('./server/suTestExamModeSubmitAnswer'));
+  require('./server/submitAnswerSuTestExamMode'));
