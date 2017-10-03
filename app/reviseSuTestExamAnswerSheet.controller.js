@@ -15,6 +15,8 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
   /** handle currentExamQuestion */
   if (currentExamQuestion) {
 
+    $scope.testID = currentExamQuestion.testID;
+    $scope.questionNumber = currentExamQuestion.questionNumber;
     $scope.suTestQuestionNumber = $route.current.params.suTestQuestionNumber;
     $scope.suTestSize = $window.sessionStorage.suTestSize;
     $scope.question = currentExamQuestion.question;
@@ -28,9 +30,6 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
   var suTestCurrentQuestionNumber = $route.current.params.suTestQuestionNumber;
 
   $scope.submitAnswerExamMode = function() {
-
-    console.log('submitAnswerExamMode');
-
 
     var answerJSON = {userID: $window.sessionStorage.userID,
                       suTestID: $window.sessionStorage.suTestID,
@@ -46,10 +45,6 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
                                         $window.sessionStorage.suTestID+'/'+
                                         suTestCurrentQuestionNumber;
 
-    console.log(submitAnswerSuTestExamMode);
-
-    console.log(answerJSON);
-
     $http({
     url: submitAnswerSuTestExamMode,
     method: 'POST',
@@ -58,8 +53,6 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
       'Authorization': 'JWT ' + $window.sessionStorage.token
       }
     }).then(function successCallback(response) {
-
-      console.log(response.data);
 
       // to check the response.data if good to continue
 
@@ -75,8 +68,6 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
         $location.path(nextReviseSutestQuestionUrl);
       }
       else {
-
-        console.log(suTestCurrentQuestionNumber);
 
         var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
                                                 $window.sessionStorage.suTestID+'/'+

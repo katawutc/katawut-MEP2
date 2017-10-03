@@ -19,6 +19,9 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
                         questionNumber: $scope.questionNumber};
                         */
 
+  console.log(req.body.userID);
+  console.log(req.body.testID);                  
+
   db.collection('suTestHistory').update({userID: req.body.userID,
                                           suTestID: req.body.suTestID,
                                           suTestMode: req.body.suTestMode,
