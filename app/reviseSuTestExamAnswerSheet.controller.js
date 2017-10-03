@@ -10,11 +10,7 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
 
   $scope.suTestID = $window.sessionStorage.suTestID;
 
-  console.log('at reviseSuTestExamAnswerSheetCtrl');
-
-  console.log(currentUserAnswer);
-
-  console.log(currentExamQuestion);
+  $scope.currentUserAnswer = currentUserAnswer;
 
   /** handle currentExamQuestion */
   if (currentExamQuestion) {
@@ -27,6 +23,11 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
     $scope.choice3 = currentExamQuestion.answerChoice[2];
     $scope.choice4 = currentExamQuestion.answerChoice[3];
 
+  }
+
+  $scope.submitAnswerExamMode = function() {
+
+    console.log('submitAnswerExamMode');
   }
 
 
