@@ -13,7 +13,6 @@ function suTestSummaryCtrl($scope, $http, $routeParams,
   $scope.suTestStartAt = (new Date(suTestStartAt)).toString();
 
   if(suTestSummary) {
-
     $scope.result = suTestSummary;
   }
 
