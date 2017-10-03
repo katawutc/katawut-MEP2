@@ -30,12 +30,11 @@ module.exports = function examAnswerSummary(req, res) {
                                                   solQuestionNumber: questionNumber},
                                                   cb); /*function (err, doc) { */
         function cb(err, solDoc) {
-          console.log(solDoc);
+
           if (err) throw err;
           else {
             solution = solDoc.solution;
 
-            console.log(userAnswer);
             if (solution === userAnswer) {
               db.collection('examAnswerSummary').update({userName: req.body.userName,
                                                           userID: req.body.userID,

@@ -26,7 +26,7 @@ var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 
    db.collection('user').findOne(query, function(err, result) {
      if (result) {
-       console.log(result);
+
        next(null, result);
      } else {
        console.log('Fail Fail Fail');

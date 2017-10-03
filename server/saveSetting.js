@@ -39,8 +39,6 @@ module.exports = function saveSetting(req, res) {
     db.collection('suTestContent').aggregate([{$match:{testID:testID}},
       {$sample:{size:3}}]).toArray(function(err, doc){
 
-        console.log(doc);
-
         // to put this doc into the su new test DB <insert>
         // to separate testID and test number <test running number>
         // to insert number of question e.g. 3

@@ -24,7 +24,7 @@ module.exports = function createAnswerSheetExam(req, res) {
      function cb(err, doc) {
        if (err) throw err;
        else {
-         console.log('empty answer sheet is created for '+questionNumber);
+         //console.log('empty answer sheet is created for '+questionNumber);
        }
      }
    }

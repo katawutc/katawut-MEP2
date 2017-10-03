@@ -18,7 +18,7 @@ module.exports = function userList(req, res) {
             if (err) throw err;
             // to send a list of userID, userName, userRole
             else {
-              console.log(doc);
+
               res.json(doc);
             }
           })

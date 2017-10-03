@@ -24,35 +24,3 @@ module.exports = function getAccountAdmin(req, res) {
       res.json(account);
   }
 }
-
-
-/*
-
-
-    db.collection('userSetting').findOne({userID: req.params.userID,
-                                          userRole: req.params.userRole}, getUserSetting);
-  }
-
-  function getUserSetting(err, doc) {
-    if (err) throw err;
-    if(doc) {
-      detail.userLevel = doc.userLevel;
-      detail.userPreferTest = doc.userPreferTest;
-      detail.userPreferSubject = doc.userPreferSubject;
-    }
-
-    db.collection('loginHistory').find({userID: req.params.userID},
-                                    {sort:{loginTime: -1}, limit: 1}).toArray(getLastLogin);
-}
-
-  function getLastLogin(err, doc) {
-    if (err) throw err;
-    if(doc) {
-      detail.userLastLoginMethod = doc[0].loginMethod;
-      detail.userLastLoginTime = doc[0].loginTime;
-    }
-      res.json(detail);
-  }
-}
-
-*/

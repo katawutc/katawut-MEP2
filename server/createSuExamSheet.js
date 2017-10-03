@@ -3,10 +3,6 @@ module.exports = function createSuExamSheet(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log('at server createSuExamSheet')
-  console.log(req.params);
-
-
   for(var i = 1; i <= req.body.suTestSize; i++) {
 
     var suTestQuestionNumber = i.toString();
@@ -19,7 +15,7 @@ module.exports = function createSuExamSheet(req, res) {
        function cb(err, doc) {
          if (err) throw err;
          else {
-           console.log('empty answer sheet is created for '+suTestQuestionNumber);
+           //console.log('empty answer sheet is created for '+suTestQuestionNumber);
          }
        }
   }

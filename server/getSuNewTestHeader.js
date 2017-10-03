@@ -9,7 +9,7 @@ module.exports = function getSuNewTestHeader(req, res) {
   db.collection('suTestHeader').findOne({testID: req.params.testID}, function(err, doc){
     if (err) throw err;
     if (doc) {
-      console.log(doc);
+
       res.json(doc);
     }
   })

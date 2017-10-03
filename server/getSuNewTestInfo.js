@@ -9,7 +9,7 @@ module.exports = function getSuNewTestInfo(req, res) {
                                       suTestID: suTestQuery}, function(err, doc) {
 
     if (err) throw err;
-    console.log(doc);
+
     res.json(doc);
   })
 }

@@ -37,6 +37,9 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
         var solution;
         var userAnswer = req.body.suTestAnswer;
 
+        console.log(solutionID);
+        console.log(questionNumber);
+
         // Retrieve Solution from the DB
         db.collection('suSolutionContent').findOne({solutionID: solutionID,
                                                     solQuestionNumber: questionNumber},

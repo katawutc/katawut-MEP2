@@ -18,8 +18,7 @@ module.exports = function getLastLoginAdmin(req, res) {
 
   function getLastLogin(err, doc) {
     if (err) throw err;
-    console.log(doc);
-    console.log(doc[0]);
+
     if(doc) {
       lastLogin.userLastLoginMethod = doc[0].loginMethod;
       lastLogin.userLastLoginTime = doc[0].loginTime;

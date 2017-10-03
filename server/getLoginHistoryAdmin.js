@@ -5,8 +5,6 @@ module.exports = function getLoginHistoryAdmin(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log('at server getLoginHistoryAdmin');
-
   if (!req.mepAdminAccess) {
     res.json({errorMessage : 'no authority'});
   }
@@ -20,7 +18,7 @@ module.exports = function getLoginHistoryAdmin(req, res) {
   function getLastHistory(err, doc) {
     if (err) throw err;
     if(doc) {
-      console.log(doc);
+
       loginHistory = doc;
     }
       res.json(loginHistory);

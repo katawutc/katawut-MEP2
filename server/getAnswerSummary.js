@@ -14,7 +14,6 @@ module.exports = function getAnswerSummary(req, res) {
 function cb(err, doc) {
   if (err) throw err;
   else {
-    console.log(doc);
     res.json(doc);
     }
   }

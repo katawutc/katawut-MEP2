@@ -29,8 +29,6 @@ function suTestExamModeCtrl($scope, $http, $route,
 
   $scope.submitAnswerExamMode = function() {
 
-    console.log('submitAnswerExamMode');
-
     var answerJSON = {userID: $window.sessionStorage.userID,
                       suTestID: $window.sessionStorage.suTestID,
                       suTestMode: $window.sessionStorage.suTestMode,
@@ -77,7 +75,7 @@ function suTestExamModeCtrl($scope, $http, $route,
         var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
                                                 $window.sessionStorage.suTestID+'/'+
                                                 $window.sessionStorage.suTestStartAt;
-                                                
+
         $location.path(suTestExamModeAnswerSummaryUrl);
 
       }
