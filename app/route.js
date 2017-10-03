@@ -234,6 +234,7 @@ angular.module('app')
       templateUrl : 'account.admin.html',
       controller : 'accountAdminCtrl',
       resolve : {
+        /** all of these can be in one service but different function */
         accountAdmin : function(accountAdminService) {
           return accountAdminService.getAccountAdmin();
         },
@@ -321,6 +322,19 @@ angular.module('app')
       resolve : {
         suTestExamModeAnswerSummary : function(suTestExamModeAnswerSummaryService) {
           return suTestExamModeAnswerSummaryService.getAnswerSummary();
+        }
+      }
+    })
+    /** revise answer sheet su test exam mode */
+    .when('/reviseSuTestExamAnswerSheet/:userID/:suTestID/:suTestStartAt/:suTestQuestionNumber', {
+      templateUrl : 'reviseSuTestExamAnswerSheet.html',
+      controller : 'reviseSuTestExamAnswerSheetCtrl',
+      resolve : {
+        currentUserAnswer : function(reviseSuTestExamAnswerSheetService) {
+          return reviseSuTestExamAnswerSheetService.getCurrentUserAnswer();
+        },
+        currentExamQuestion : function(reviseSuTestExamAnswerSheetService) {
+          return reviseSuTestExamAnswerSheetService.getCurrentExamQuestion();
         }
       }
     })

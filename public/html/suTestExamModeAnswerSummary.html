@@ -28,6 +28,7 @@
   <th>Question number</th>
   <th>Status</th>
   <th>Your answer</th>
+  <th>Review answer</th>
     </tr>
   </thead>
       <tbody>
@@ -35,6 +36,7 @@
           <td>{{ res.suTestQuestionNumber }}</td>
           <td>{{ res.suTestQuestionStatus }}</td>
           <td>{{ res.suTestAnswer }}</td>
+          <td><a ng-href="#!/reviseSuTestExamAnswerSheet/{{userID}}/{{suTestID}}/{{suTestStartAt}}/{{res.suTestQuestionNumber}}">Revise answer</a></td>
         </tr>
       </tbody>
 </table>

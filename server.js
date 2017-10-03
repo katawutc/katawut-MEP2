@@ -253,3 +253,15 @@ app.get('/suTestExamModeAnswerSummary/:userID/:suTestID/:suTestStartAt',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/suTestExamModeAnswerSummary'));
+
+/** get su test exam answer for revising in the answer sheet */
+app.get('/getSuTestExamAnswer/:userID/:suTestID/:suTestStartAt/:suTestQuestionNumber',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/getSuTestExamAnswer'));
+
+/** get su test exam question for revising in the answer sheet */
+app.get('/getSuTestExamQuestion/:userID/:suTestID/:suTestStartAt/:suTestQuestionNumber',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/getSuTestExamQuestion'));
