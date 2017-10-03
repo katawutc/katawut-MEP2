@@ -16,5 +16,12 @@ function suTestExamModeAnswerSummaryCtrl($scope, $http, $routeParams,
   $scope.endExam = function() {
     console.log('at suTestExamModeAnswerSummaryCtrl end the exam');
 
+    var suTestSummaryUrl = '/suTestSummary/'+$window.sessionStorage.userID+'/'+
+                            $window.sessionStorage.suTestID+'/'+
+                            $window.sessionStorage.suTestMode+'/'+
+                            $window.sessionStorage.suTestStartAt;
+
+    $location.path(suTestSummaryUrl);
+
   }
 }
