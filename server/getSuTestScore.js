@@ -12,7 +12,8 @@ module.exports = function getSuTestScore(req, res) {
   function cb(err, score) {
     if (err) throw error;
     else {
-      res.json(score);
+      console.log(score);
+      res.json(score.toString());
     }
   }
 }

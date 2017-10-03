@@ -18,7 +18,6 @@ function suTestSummaryCtrl($scope, $http, $routeParams,
   }
 
   if(suTestScore) {
-
     $scope.suTestScore = suTestScore;
   }
 }

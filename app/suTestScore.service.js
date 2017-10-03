@@ -6,8 +6,6 @@ function suTestScoreService($http, $route, $q, $window) {
    return {
      getSuTestScore : function() {
 
-       console.log('at suTestScoreService');
-
        var suTestScoreUrl = '/getSuTestScore/'+$window.sessionStorage.userID+'/'+
                                  $window.sessionStorage.suTestID+'/'+
                                  $window.sessionStorage.suTestMode+'/'+
@@ -21,6 +19,7 @@ function suTestScoreService($http, $route, $q, $window) {
            'Authorization': 'JWT ' + $window.sessionStorage.token
            }
        }).then(function successCallback(response) {
+
          deferred.resolve(response.data);
        },function errorCallback(response){
 

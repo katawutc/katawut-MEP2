@@ -13,6 +13,7 @@ module.exports = function getSuTestSummary(req, res) {
      if (err) throw err;
      if(doc) {
        // to refactot res.json only relevant field information
+       console.log(doc);
        res.json(doc);
      }
      else {

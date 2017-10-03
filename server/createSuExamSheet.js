@@ -11,6 +11,9 @@ module.exports = function createSuExamSheet(req, res) {
                                             suTestID: req.body.suTestID,
                                             suTestMode: req.body.suTestMode,
                                             suTestStartAt: req.body.suTestStartAt,
+                                            suTestAnswer: null,
+                                            suTestResult: 'wrong',
+                                            suTestQuestionStatus: 'unanswered',
                                             suTestQuestionNumber: suTestQuestionNumber}, cb);
        function cb(err, doc) {
          if (err) throw err;

@@ -43,8 +43,6 @@ function suTestExamModeCtrl($scope, $http, $route,
                                         $window.sessionStorage.suTestID+'/'+
                                         suTestCurrentQuestionNumber;
 
-    console.log(submitAnswerSuTestExamMode);
-
     $http({
     url: submitAnswerSuTestExamMode,
     method: 'POST',
@@ -53,8 +51,6 @@ function suTestExamModeCtrl($scope, $http, $route,
       'Authorization': 'JWT ' + $window.sessionStorage.token
       }
     }).then(function successCallback(response) {
-
-      console.log(response.data);
 
       // to check the response.data if good to continue
 
@@ -69,8 +65,6 @@ function suTestExamModeCtrl($scope, $http, $route,
         $location.path(nextSutestQuestionUrl);
       }
       else {
-
-        console.log(suTestCurrentQuestionNumber);
 
         var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
                                                 $window.sessionStorage.suTestID+'/'+
@@ -90,11 +84,16 @@ function suTestExamModeCtrl($scope, $http, $route,
 
   //markQuestion()
   $scope.markQuestion = function() {
+    // to update suTestQuestionStatus as mark
   }
 
   $scope.answerSheetSummary = function() {
-    //console.log('go to answerSheetSummary');
-    //$location.path('/answerSummary');
+    console.log('go to answerSheetSummary');
+    var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
+                                            $window.sessionStorage.suTestID+'/'+
+                                            $window.sessionStorage.suTestStartAt;
+
+    $location.path(suTestExamModeAnswerSummaryUrl);
   }
 
   $scope.stopTheTest = function() {

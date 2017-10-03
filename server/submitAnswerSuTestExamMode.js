@@ -6,22 +6,6 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
 
   console.log(' at server submitAnswerSuTestExamMode');
 
-/*
-
-      var answerJSON = {userID: $window.sessionStorage.userID,
-                        suTestID: $window.sessionStorage.suTestID,
-                        suTestMode: $window.sessionStorage.suTestMode,
-                        suTestStartAt: $window.sessionStorage.suTestStartAt,
-                        suTestQuestionNumber: suTestCurrentQuestionNumber,
-                        suTestQuestionStatus: 'answered',
-                        suTestAnswer: $scope.formData.answer,
-                        testID: $scope.testID,
-                        questionNumber: $scope.questionNumber};
-                        */
-
-  console.log(req.body.userID);
-  console.log(req.body.testID);                  
-
   db.collection('suTestHistory').update({userID: req.body.userID,
                                           suTestID: req.body.suTestID,
                                           suTestMode: req.body.suTestMode,
@@ -29,7 +13,8 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
                                           suTestQuestionNumber: req.body.suTestQuestionNumber},
                                               { $set:
                                                 { suTestQuestionStatus: req.body.suTestQuestionStatus,
-                                                  suTestAnswer: req.body.suTestAnswer}
+                                                  suTestAnswer: req.body.suTestAnswer,
+                                                  suTestQuestionStatus: 'answered'}
                                               }, cb);
     function cb (err, doc) {
       if (err) throw err;
@@ -40,20 +25,18 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
         var solution;
         var userAnswer = req.body.suTestAnswer;
 
-        console.log(solutionID);
-        console.log(questionNumber);
+        console.log(userAnswer);
 
         // Retrieve Solution from the DB
         db.collection('suSolutionContent').findOne({solutionID: solutionID,
                                                     solQuestionNumber: questionNumber},
                                                     cb); /*function (err, doc) { */
         function cb(err, solDoc) {
-          console.log(solDoc);
+
           if (err) throw err;
           else {
             solution = solDoc.solution;
 
-            console.log(userAnswer);
             if (solution === userAnswer) {
               db.collection('suTestHistory').update({userID: req.body.userID,
                                                       suTestID: req.body.suTestID,
