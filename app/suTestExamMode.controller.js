@@ -76,7 +76,7 @@ function suTestExamModeCtrl($scope, $http, $route,
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
-      console.log(response.status);
+
       $location.path('/errorPage');
     });
 
@@ -88,7 +88,7 @@ function suTestExamModeCtrl($scope, $http, $route,
   }
 
   $scope.answerSheetSummary = function() {
-    console.log('go to answerSheetSummary');
+
     var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
                                             $window.sessionStorage.suTestID+'/'+
                                             $window.sessionStorage.suTestStartAt;

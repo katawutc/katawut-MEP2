@@ -40,8 +40,6 @@ function reviseSuTestExamAnswerSheetService($http, $route, $q, $window) {
                                       $route.current.params.suTestStartAt+'/'+
                                       $route.current.params.suTestQuestionNumber;
 
-       console.log(currentExamQuestionUrl);
-
        var deferred = $q.defer();
 
        $http({

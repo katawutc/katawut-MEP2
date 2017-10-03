@@ -19,7 +19,6 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
 
     // where to clock question starts ?
     $window.sessionStorage.setItem('currentQuestionStartAt', Date.now());
-    console.log('currentQuestionStartAt: '+$window.sessionStorage.currentQuestionStartAt);
 
   $scope.submitAnswerExamMode = function() {
 
@@ -45,17 +44,13 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
       data: answerJSON
       }).then(function successCallback(response) {
 
-        console.log(response.data);
-
         if (currentQuestionNumber < $window.sessionStorage.getItem('numberOfQuestion')) {
           ++currentQuestionNumber;
-
-          console.log('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
 
           $location.path('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
         }
         else {
-          console.log(currentQuestionNumber);
+
           $location.path('/answerSummary');
 
         }
@@ -98,17 +93,13 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
         data: answerJSON
         }).then(function successCallback(response) {
 
-        console.log(response.data);
-
         if (currentQuestionNumber < $window.sessionStorage.getItem('numberOfQuestion')) {
           ++currentQuestionNumber;
-
-          console.log('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
 
           $location.path('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
           }
         else {
-          console.log(currentQuestionNumber);
+
           $location.path('/answerSummary');
         }
       }, function errorCallback(response) {
@@ -118,7 +109,7 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
   }
 
   $scope.answerSheetSummary = function() {
-    console.log('go to answerSheetSummary');
+
     $location.path('/answerSummary');
   }
 

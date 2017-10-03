@@ -46,12 +46,8 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
        data: answerJSON
        }).then(function successCallback(response) {
 
-         console.log(response.data);
-
          if (currentQuestionNumber < $window.sessionStorage.getItem('numberOfQuestion')) {
            ++currentQuestionNumber;
-
-           //console.log('/unSubscribeTest/exam/'+$routeParams.testID+'/'+currentQuestionNumber);
 
            var reviseAnswerUrl = '/reviseExamAnswerSheet/'+
                                   $window.sessionStorage.userID+'/'+
@@ -63,7 +59,7 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
            $location.path(reviseAnswerUrl);
          }
          else {
-           console.log(currentQuestionNumber);
+
            $location.path('/answerSummary');
 
          }
@@ -82,13 +78,8 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
    * To implement the answer sheet function
    */
    $scope.answerSheetSummary = function() {
-     console.log('go to answerSheetSummary');
+
      $location.path('/answerSummary');
    }
-
-
-   /**
-    * what to do with marked function ?
-    */
 
 }

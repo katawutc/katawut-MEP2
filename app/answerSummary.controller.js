@@ -13,7 +13,7 @@ function answerSummaryCtrl ($scope, $http, $routeParams, $window,
    */
 
   $scope.endExam = function() {
-    console.log('end the exam, and check the answer');
+
     $location.path('/testSummaryExamMode');
   }
 }

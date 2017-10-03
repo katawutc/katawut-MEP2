@@ -117,8 +117,6 @@ function suTestTutorialModeCtrl($scope, $http, $route,
 
     $scope.suTestSummary = function() {
 
-      console.log('show su test summary');
-
       var suTestSummaryUrl = '/suTestSummary/'+$window.sessionStorage.userID+'/'+
                               $window.sessionStorage.suTestID+'/'+
                               $window.sessionStorage.suTestMode+'/'+

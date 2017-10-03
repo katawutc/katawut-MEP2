@@ -5,18 +5,18 @@ module.exports = function unSubscribeTestCheckAnswer(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
- var userName = req.body.userName;
- var solutionID = req.body.testID;
- var testStartAt = req.body.testStartAt;
- var questionNumber = req.body.questionNumber;
- var userAnswer = req.body.answer;
+  var userName = req.body.userName;
+  var solutionID = req.body.testID;
+  var testStartAt = req.body.testStartAt;
+  var questionNumber = req.body.questionNumber;
+  var userAnswer = req.body.answer;
 
- var solution;
- var explanation;
+  var solution;
+  var explanation;
 
- if (req.body.testMode === 'tutorial') {
+  if (req.body.testMode === 'tutorial') {
    // Retrieve Solution from the DB
-   db.collection('unSubscribeSolutionContent').findOne({solutionID: solutionID,
+    db.collection('unSubscribeSolutionContent').findOne({solutionID: solutionID,
                                              solQuestionNumber: questionNumber},
                                              cb); /*function (err, doc) {*/
      function cb(err, doc) {

@@ -4,8 +4,6 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log(' at server submitAnswerSuTestExamMode');
-
   db.collection('suTestHistory').update({userID: req.body.userID,
                                           suTestID: req.body.suTestID,
                                           suTestMode: req.body.suTestMode,
@@ -24,8 +22,6 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
         var questionNumber = req.body.questionNumber;
         var solution;
         var userAnswer = req.body.suTestAnswer;
-
-        console.log(userAnswer);
 
         // Retrieve Solution from the DB
         db.collection('suSolutionContent').findOne({solutionID: solutionID,
