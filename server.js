@@ -277,3 +277,9 @@ app.get('/getSuTestHistory/:userID',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuTestHistory'));
+
+/** generate su new test */
+app.get('/generateSuNewTest/:userID',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/generateSuNewTest'));

@@ -19,6 +19,22 @@ function suNewTestService($http, $route, $q, $window) {
         * 6. there will be 0 to 2 suTestID in recent test at one time
         */
 
+        var getSuNewTestUrl = '/generateSuNewTest/'+$window.sessionStorage.userID;
+
+        var deferred = $q.defer();
+
+        $http({
+          url: getSuNewTestUrl,
+          method: 'GET',
+          headers: {
+            'Authorization': 'JWT ' + $window.sessionStorage.token
+            }
+        }).then(function successCallback(response) {
+          deferred.resolve(response.data);
+        },function errorCallback(response){
+
+        });
+        return  deferred.promise;
 
      }
    }
