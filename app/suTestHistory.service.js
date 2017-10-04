@@ -6,6 +6,8 @@ function suTestHistoryService($http, $route, $q, $window) {
    return {
      registerSuTestHistory : function() {
 
+       if ($route.current.params.suTestQuestionNumber==='1') {
+
        var registerSuTestHistoryUrl = '/registerSuTestHistory/'+$window.sessionStorage.userID+'/'+
                                         $window.sessionStorage.suTestID+'/'+
                                         $window.sessionStorage.suTestMode+'/'+
@@ -27,6 +29,10 @@ function suTestHistoryService($http, $route, $q, $window) {
 
        });
        return  deferred.promise;
+     }
+     else {
+        return 'registered';
+    }
      },
 
      getSuTestHistory : function() {
