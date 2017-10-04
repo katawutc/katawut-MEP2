@@ -9,7 +9,6 @@ function suTestReviewCtrl($scope, $http, $routeParams,
 
   $scope.suTestID = $window.sessionStorage.suTestID;
 
-  console.log(suTestReview);
   $scope.suTestReview = suTestReview;
 
   $scope.suTestSummary = function() {

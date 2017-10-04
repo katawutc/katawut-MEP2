@@ -6,13 +6,9 @@ function suTestReviewService($http, $route, $q, $window) {
    return {
      getSuTestReview : function() {
 
-       console.log('at suTestReviewService');
-
        var suTestReviewUrl = '/getSuTestReview/'+$window.sessionStorage.userID+'/'+
                                 $route.current.params.suTestID+'/'+
                                 $route.current.params.suTestQuestionNumber;
-
-       console.log(suTestReviewUrl);
 
        var deferred = $q.defer();
 
