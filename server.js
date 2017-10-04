@@ -265,3 +265,9 @@ app.get('/getSuTestExamQuestion/:userID/:suTestID/:suTestStartAt/:suTestQuestion
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuTestExamQuestion'));
+
+/** register su test history */
+app.post('/registerSuTestHistory/:userID/:suTestID/:suTestMode/:suTestStartAt',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/registerSuTestHistory'));

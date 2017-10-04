@@ -19,8 +19,6 @@ function suNewTestCtrl($scope, $http, $route,
       $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
       $window.sessionStorage.suTestStartAt =  Date.now();
 
-      /** post to the server to registory the suTestHistory */
-
       var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
                                   $scope.suTestID+'/'+1;
 

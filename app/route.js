@@ -279,6 +279,9 @@ angular.module('app')
       resolve : {
         suTestQuestion : function(suTestQuestionService) {
           return suTestQuestionService.getSuTestQuestion();
+        },
+        registerSuTestHistory: function(suTestHistoryService) {
+          return suTestHistoryService.registerSuTestHistory();
         }
       }
     })
