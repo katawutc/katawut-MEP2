@@ -1,10 +1,23 @@
 angular.module('app').controller('suTestExamModeCtrl',
                                   ['$scope', '$http', '$route',
-                                    '$window', '$location', 'suTestQuestion',
+                                    '$window', '$location',
+                                    'suTestQuestion', 'registerSuTestHistory',
                                       suTestExamModeCtrl]);
 
 function suTestExamModeCtrl($scope, $http, $route,
-                          $window, $location, suTestQuestion) {
+                          $window, $location,
+                          suTestQuestion, registerSuTestHistory) {
+
+  console.log('registerSuTestHistory');
+
+  if (registerSuTestHistory !== 'registered') {
+    console.log('cannot registerSuTestHistory');
+
+    /**
+     * 1. if error put in $window.sessionStorage
+     * 2. direct to error page
+     */
+  }
 
   // for displaying on 2nd nav bar
   $scope.suTestID = $window.sessionStorage.suTestID;
