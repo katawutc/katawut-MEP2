@@ -344,4 +344,19 @@ angular.module('app')
         }
       }
     })
+    /** su test history */
+    .when('/suTestHistory/:userID', {
+      templateUrl : 'suTestHistory.html',
+      controller : 'suTestHistoryCtrl'
+      /*
+      resolve : {
+        currentUserAnswer : function(reviseSuTestExamAnswerSheetService) {
+          return reviseSuTestExamAnswerSheetService.getCurrentUserAnswer();
+        },
+        currentExamQuestion : function(reviseSuTestExamAnswerSheetService) {
+          return reviseSuTestExamAnswerSheetService.getCurrentExamQuestion();
+        }
+      }
+      */
+    })
 });
