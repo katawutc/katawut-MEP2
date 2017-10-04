@@ -10,7 +10,8 @@ module.exports = function suTestCheckAnswer(req, res) {
       if (doc) {
         if (req.body.answer === doc.solution) {
 
-          db.collection('suTestHistory').insert({userID: req.body.userID,
+          //suTestHistory
+          db.collection('suTestAnswerSheet').insert({userID: req.body.userID,
                                                  suTestID: req.body.suTestID,
                                                  suTestMode: req.body.suTestMode,
                                                  suTestStartAt: req.body.suTestStartAt,
@@ -24,7 +25,8 @@ module.exports = function suTestCheckAnswer(req, res) {
         }
         else if (req.body.answer !== doc.solution) {
 
-          db.collection('suTestHistory').insert({userID: req.body.userID,
+          //suTestHistory
+          db.collection('suTestAnswerSheet').insert({userID: req.body.userID,
                                                  suTestID: req.body.suTestID,
                                                  suTestMode: req.body.suTestMode,
                                                  suTestStartAt: req.body.suTestStartAt,

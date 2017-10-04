@@ -4,7 +4,8 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  db.collection('suTestHistory').update({userID: req.body.userID,
+  //suTestHistory
+  db.collection('suTestAnswerSheet').update({userID: req.body.userID,
                                           suTestID: req.body.suTestID,
                                           suTestMode: req.body.suTestMode,
                                           suTestStartAt: req.body.suTestStartAt,
@@ -34,7 +35,8 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
             solution = solDoc.solution;
 
             if (solution === userAnswer) {
-              db.collection('suTestHistory').update({userID: req.body.userID,
+
+              db.collection('suTestAnswerSheet').update({userID: req.body.userID,
                                                       suTestID: req.body.suTestID,
                                                       suTestMode: req.body.suTestMode,
                                                       suTestStartAt: req.body.suTestStartAt,
@@ -42,7 +44,8 @@ module.exports = function submitAnswerSuTestExamMode(req, res) {
                                                           { $set: {suTestResult: 'correct'}});
             }
             else {
-              db.collection('suTestHistory').update({userID: req.body.userID,
+              //suTestHistory
+              db.collection('suTestAnswerSheet').update({userID: req.body.userID,
                                                       suTestID: req.body.suTestID,
                                                       suTestMode: req.body.suTestMode,
                                                       suTestStartAt: req.body.suTestStartAt,

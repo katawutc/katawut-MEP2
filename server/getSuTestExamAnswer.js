@@ -3,7 +3,8 @@ module.exports = function getSuTestExamAnswer(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  db.collection('suTestHistory').findOne({userID: req.params.userID,
+  //suTestHistory
+  db.collection('suTestAnswerSheet').findOne({userID: req.params.userID,
                                             suTestID: req.params.suTestID,
                                             suTestMode:'exam',
                                             suTestStartAt: req.params.suTestStartAt,

@@ -7,7 +7,8 @@ module.exports = function createSuExamSheet(req, res) {
 
     var suTestQuestionNumber = i.toString();
 
-    db.collection('suTestHistory').insert({userID: req.body.userID,
+    //suTestHistory
+    db.collection('suTestAnswerSheet').insert({userID: req.body.userID,
                                             suTestID: req.body.suTestID,
                                             suTestMode: req.body.suTestMode,
                                             suTestStartAt: req.body.suTestStartAt,
