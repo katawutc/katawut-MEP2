@@ -93,8 +93,8 @@ angular.module('app')
         suAccountData : function(suAccountDataService) {
           return suAccountDataService.getSuAccountData();
         },
-        suDashboardTest : function (suDashboardTestService){
-          return suDashboardTestService.getSuDashboardTest();
+        suNewTest : function (suGenerateNewTestService){
+          return suGenerateNewTestService.generateSuNewTest();
         }
       }
     })
@@ -286,7 +286,7 @@ angular.module('app')
       }
     })
     /** su test summary */
-    .when('/suTestSummary/:userID/:suTestID/:suTestMode/:suTestStartAt', {
+    .when(' /suTestSummary/:userID/:suTestID/:suTestMode/:suTestStartAt', {
       templateUrl : 'suTestSummary.html',
       controller : 'suTestSummaryCtrl',
       resolve : {

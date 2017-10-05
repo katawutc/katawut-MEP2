@@ -1,9 +1,11 @@
 angular.module('app').controller('dashboardSuCtrl',
   ['$scope', '$http', '$location', '$window', '$routeParams',
-    'suAccountData', 'suDashboardTest', dashboardSuCtrl]);
+    'suAccountData', /*'suDashboardTest',*/ 'suNewTest', dashboardSuCtrl]);
 
 function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
-                          suAccountData, suDashboardTest) {
+                          suAccountData,
+                          /* suDashboardTest, */
+                          suNewTest /* use suGenerateNewTest service*/) {
 
     /** dashboardData service duplicate with account.admn.service
      *  refactor to a new service name to be generic e.g. suAccountData service
@@ -27,10 +29,16 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
       $location.path('/errorPage');
     }
 
-    if (suDashboardTest /*&& !suDashboardTest.errorMessage*/) {
 
-      // test running number
-      // to refactor for auto run
+    console.log(suNewTest);
+
+
+
+
+
+/**
+    if (suDashboardTest) {
+
       $scope.testRunningNumber01 = 01;
       $scope.testRunningNumber02 = 02;
 
@@ -42,19 +50,12 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
 
       $scope.dashboardTest2 = $scope.newTestID+'-'+$scope.testRunningNumber02;
     }
-    /*
-    else if (suDashboardTest.errorMessage) {
-      $window.sessionStorage.setItem('errorMessage', suDashboardTest.errorMessage);
-      $location.path('/errorPage');
-    }*/
+
     else {
       // other error case
     }
 
-    /*
-    $scope.openChatPanel = function() {
-      console.log('open chat panel');
-    }
     */
+
 
   }

@@ -27,6 +27,16 @@ module.exports = function generateSuNewTest(req, res) {
             console.log(setting);
             // create testID here
             // check testID in suNewTestService DB
+            // - check userID for current testID,
+            // - {userID: suerID,
+            //    testID: xxxxxx,
+            //     newTest1: {suTestNumber: xx,
+            //                status: xx},
+            //     newTest2: {suTestNumber: xx'
+            //                status: xx}
+            //   }
+            // - if match, do nothing
+            // - if do not replace
             // check suTestID number
             // generate suTestID
           }

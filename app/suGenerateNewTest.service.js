@@ -1,11 +1,11 @@
-angular.module('app').factory('suNewTestService',
-  ['$http', '$route', '$q', '$window', suNewTestService]);
+angular.module('app').factory('suGenerateNewTestService',
+  ['$http', '$route', '$q', '$window', suGenerateNewTestService]);
 
-function suNewTestService($http, $route, $q, $window) {
+function suGenerateNewTestService($http, $route, $q, $window) {
 
    return {
-     getSuNewTest : function() {
-       console.log('at suNewTestService: getSuNewTest');
+     generateSuNewTest : function() {
+       console.log('at suNewTestService: generateSuNewTest');
 
        /**
         * 1. generate new suTestID based on setting
@@ -19,17 +19,18 @@ function suNewTestService($http, $route, $q, $window) {
         * 6. there will be 0 to 2 suTestID in recent test at one time
         */
 
-        var getSuNewTestUrl = '/generateSuNewTest/'+$window.sessionStorage.userID;
+        var generateSuNewTestUrl = '/generateSuNewTest/'+$window.sessionStorage.userID;
 
         var deferred = $q.defer();
 
         $http({
-          url: getSuNewTestUrl,
+          url: generateSuNewTestUrl,
           method: 'GET',
           headers: {
             'Authorization': 'JWT ' + $window.sessionStorage.token
             }
         }).then(function successCallback(response) {
+          
           deferred.resolve(response.data);
         },function errorCallback(response){
 
