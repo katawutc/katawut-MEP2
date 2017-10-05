@@ -29,8 +29,20 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
       $location.path('/errorPage');
     }
 
+    if (suNewTest) {
 
-    console.log(suNewTest);
+      console.log(suNewTest);
+
+      $scope.dashboardTest1 = suNewTest.newTest1.suTestID;
+      $scope.testID1 = suNewTest.newTest1.testID;
+      $scope.testRunningNumber1 = suNewTest.newTest1.suTestNumber;
+
+      $scope.dashboardTest2 = suNewTest.newTest2.suTestID;
+      $scope.testID2 = suNewTest.newTest2.testID;
+      $scope.testRunningNumber2 = suNewTest.newTest2.suTestNumber;
+    }
+
+
 
 
 

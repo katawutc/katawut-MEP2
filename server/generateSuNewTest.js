@@ -37,11 +37,11 @@ module.exports = function generateSuNewTest(req, res) {
 
         function cb(err, doc) {
           if (err) throw err;
-          if (!doc) {
-            var newTest = insertNewTest(db, userID, testID, runningNumber);
-            res.json(newTest);
+          if (doc === null) {
+            insertNewTest(res, db, userID, testID, runningNumber);
+            console.log('at server: generateSuNewTest: insertNewTest');
           }
-          else if (doc) {
+          if (doc !== null ) {
             var newTest = updateNewTest();
             res.json(newTest);
           }
@@ -51,15 +51,17 @@ module.exports = function generateSuNewTest(req, res) {
   }
 }
 
-function insertNewTest(varDB, varUserID, varTestID, varRunningNumber) {
+function insertNewTest(res, varDB, varUserID, varTestID, varRunningNumber) {
 
   var newTest = {userID: varUserID,
                   testID: varTestID,
                   runningNumber: varRunningNumber+2,
-                  newTest1: {suTestID: varTestID+'-'+(varRunningNumber+1),
+                  newTest1: { testID: varTestID,
+                              suTestID: varTestID+'-'+(varRunningNumber+1),
                               suTestNumber: varRunningNumber+1,
                               status: 'new'},
-                  newTest2: {suTestID: varTestID+'-'+(varRunningNumber+2),
+                  newTest2: { testID: varTestID,
+                              suTestID: varTestID+'-'+(varRunningNumber+2),
                               suTestNumber: varRunningNumber+2,
                               status: 'new'}
                 }
@@ -68,8 +70,9 @@ function insertNewTest(varDB, varUserID, varTestID, varRunningNumber) {
   .insert(newTest, function(err, doc){
       if (err) throw err;
       if (doc) {
-        return ({newTest1: newTest.newTest1,
-                newTest2: newTest.newTest2});
+        var suNewTest = {newTest1: newTest.newTest1,
+                          newTest2: newTest.newTest2};
+        res.json(suNewTest);
       }
   });
 }
