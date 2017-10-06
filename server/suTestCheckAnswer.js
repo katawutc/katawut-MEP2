@@ -11,36 +11,52 @@ module.exports = function suTestCheckAnswer(req, res) {
         if (req.body.answer === doc.solution) {
 
           //suTestHistory
-          db.collection('suTestAnswerSheet').insert({userID: req.body.userID,
+          db.collection('suTestAnswerSheet').update({userID: req.body.userID,
                                                  suTestID: req.body.suTestID,
                                                  suTestMode: req.body.suTestMode,
                                                  suTestStartAt: req.body.suTestStartAt,
-                                                 suTestQuestionNumber: req.body.suTestQuestionNumber,
-                                                 suTestAnswer: req.body.answer,
-                                                 suTestResult: 'correct'}, function(err, docHistory) {
+                                                 suTestQuestionNumber: req.body.suTestQuestionNumber},
+                                                    {$set:
+                                                      {
+                                                        suTestAnswer: req.body.answer,
+                                                        suTestResult: 'correct'
+                                                      }
+                                                    }, cb);
 
-             res.json({result: 'correct',
-                       explanation: doc.explanation});
-          })
+          function cb(err, doc) {
+            if (err) throw err;
+            if (doc) {
+              res.json({result: 'correct',
+                        explanation: doc.explanation});
+            }
+          }
         }
         else if (req.body.answer !== doc.solution) {
 
           //suTestHistory
-          db.collection('suTestAnswerSheet').insert({userID: req.body.userID,
+          db.collection('suTestAnswerSheet').update({userID: req.body.userID,
                                                  suTestID: req.body.suTestID,
                                                  suTestMode: req.body.suTestMode,
                                                  suTestStartAt: req.body.suTestStartAt,
-                                                 suTestQuestionNumber: req.body.suTestQuestionNumber,
-                                                 suTestAnswer: req.body.answer,
-                                                 suTestResult: 'wrong'}, function(err, docHistory) {
+                                                 suTestQuestionNumber: req.body.suTestQuestionNumber},
+                                                    {$set:
+                                                      {
+                                                        suTestAnswer: req.body.answer,
+                                                        suTestResult: 'wrong'
+                                                      }
+                                                    }, cb);
 
-             res.json({result: 'wrong',
-                       explanation: doc.explanation});
-          })
+          function cb(err, doc) {
+            if (err) throw err;
+            if (doc) {
+              res.json({result: 'wrong',
+                        explanation: doc.explanation});
+            }
+          }
         }
-      }
       else {
           res.json({errorMessage: 'error'});
       }
-    })
+    }
+  })
 }
