@@ -42,8 +42,9 @@ module.exports = function generateSuNewTest(req, res) {
             console.log('at server: generateSuNewTest: insertNewTest');
           }
           if (doc !== null ) {
-            var newTest = updateNewTest();
-            res.json(newTest);
+
+            updateNewTest(res, doc, db, userID, testID, runningNumber);
+
           }
         }
       }
@@ -77,9 +78,13 @@ function insertNewTest(res, varDB, varUserID, varTestID, varRunningNumber) {
   });
 }
 
-function updateNewTest() {
+function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumber) {
   console.log('at server: generateSuNewTest: updateNewTest');
-    return ('su new test is generated from server');
+
+  if (varDoc.testID === varTestID) {
+      res.json({newTest1: varDoc.newTest1,
+                newTest2: varDoc.newTest2});
+  }
 }
 
 
