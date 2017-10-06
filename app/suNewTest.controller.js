@@ -19,11 +19,46 @@ function suNewTestCtrl($scope, $http, $route,
       $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
       $window.sessionStorage.suTestStartAt =  Date.now();
 
-      var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
-                                  $scope.suTestID+'/'+1;
+      createAnswerSheetTutorial();
 
-      $location.path(suTestTutorialUrl);
-  }
+      function createAnswerSheetTutorial() {
+        console.log('creating createAnswerSheetTutorial');
+
+        var suAnswerSheetTutorialData = {userID: $window.sessionStorage.userID,
+                                          testID: $window.sessionStorage.testID,
+                                          suTestID: $window.sessionStorage.suTestID,
+                                          suTestSize: $window.sessionStorage.suTestSize,
+                                          suTestMode: $window.sessionStorage.suTestMode,
+                                          suTestStartAt: $window.sessionStorage.suTestStartAt};
+
+        console.log(suAnswerSheetTutorialData);
+
+        // create su exam sheet in the suTestHistory collection DB
+        var suExamSheetUrl = '/createSuExamSheet/'+$window.sessionStorage.userID+'/'+
+                               $window.sessionStorage.suTestID;
+
+        $http({
+          url: suExamSheetUrl,
+          method: 'POST',
+          data: suAnswerSheetTutorialData,
+          headers: {
+            'Authorization': 'JWT ' + $window.sessionStorage.token
+            }
+         }).then(function successCallback(response) {
+           console.log('return from create the answer sheet');
+
+           // go to the 1st question after empty answer sheet is created
+           var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
+                                       $scope.suTestID+'/'+1;
+
+           $location.path(suTestTutorialUrl);
+
+         }, function errorCallback(response) {
+           console.log(response.status);
+           $location.path('/errorPage');
+         });
+       }
+     }
 
     $scope.startTestExamMode = function() {
 
