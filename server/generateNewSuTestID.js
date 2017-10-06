@@ -1,9 +1,9 @@
-module.exports = function generateSuNewTest(req, res) {
+module.exports = function generateNewSuTestID(req, res) {
 
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log('at server: generateSuNewTest');
+  console.log('at server: generateNewSuTestID');
 
   /**
    * 1. check setting
@@ -32,14 +32,14 @@ module.exports = function generateSuNewTest(req, res) {
 
             var runningNumber = 0;
 
-            db.collection('suNewTestService')
+            db.collection('newSuTestIDService')
             .findOne({userID: req.params.userID}, cb);
 
         function cb(err, doc) {
           if (err) throw err;
           if (doc === null) {
             insertNewTest(res, db, userID, testID, runningNumber);
-            console.log('at server: generateSuNewTest: insertNewTest');
+            console.log('at server: generateSuNewTest: insertNewSuTestID');
           }
           if (doc !== null ) {
 
@@ -67,7 +67,7 @@ function insertNewTest(res, varDB, varUserID, varTestID, varRunningNumber) {
                               status: 'new'}
                 }
 
-  varDB.collection('suNewTestService')
+  varDB.collection('newSuTestIDService')
   .insert(newTest, function(err, doc){
       if (err) throw err;
       if (doc) {
@@ -79,13 +79,58 @@ function insertNewTest(res, varDB, varUserID, varTestID, varRunningNumber) {
 }
 
 function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumber) {
-  console.log('at server: generateSuNewTest: updateNewTest');
+  console.log('at server: generateNewSuTestID: updateNewSuTestID');
 
   if (varDoc.testID === varTestID) {
       res.json({newTest1: varDoc.newTest1,
                 newTest2: varDoc.newTest2});
   }
 }
+
+
+/*
+
+
+      var suTestNumber = 01;
+
+      var testID = req.body.userLevel+'-'+req.body.userPreferTest+'-'+
+                    req.body.userPreferSubject;
+
+      var suNewTest01 = testID+'-'+suTestNumber;
+
+
+    // aggregate->match testID->sample
+    db.collection('suTestContent').aggregate([{$match:{testID:testID}},
+      {$sample:{size:3}}]).toArray(function(err, doc){
+
+        // to put this doc into the su new test DB <insert>
+        // to separate testID and test number <test running number>
+        // to insert number of question e.g. 3
+        db.collection('suNewTest').insert({userID:req.params.userID,
+                                            suTestID: suNewTest01,
+                                            suTestSize: 3,
+                                            suTest: doc}, function(err, doc){
+          // update activate if already done the 1st time setting before
+          // need to refactor more
+          db.collection('user').update({userID: req.params.userID,
+                                          userRole: req.params.userRole},
+                                          {$set:{activate: 'true'}}, cb1);
+            function cb1(err, doc) {
+              if (err) throw err;
+              res.json('return from at save setting server');
+          }
+        })
+      });
+  }
+}
+
+
+
+*/
+
+
+
+
 
 
 

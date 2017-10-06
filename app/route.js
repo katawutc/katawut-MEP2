@@ -93,8 +93,8 @@ angular.module('app')
         suAccountData : function(suAccountDataService) {
           return suAccountDataService.getSuAccountData();
         },
-        suNewTest : function (suGenerateNewTestService){
-          return suGenerateNewTestService.generateSuNewTest();
+        newSuTestID : function (newSuTestIDService){
+          return newSuTestIDService.generateNewSuTestID();
         }
       }
     })
