@@ -7,6 +7,7 @@ angular.module('app').controller('suTestSummaryCtrl',
 function suTestSummaryCtrl($scope, $http, $routeParams,
                           $window, $location, suTestSummary, suTestScore) {
 
+  console.log('at suTestSummaryCtrl');
   console.log(suTestSummary);
 
   if(suTestSummary && suTestSummary[0]) {

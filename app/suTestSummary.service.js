@@ -6,10 +6,17 @@ function suTestSummaryService($http, $route, $q, $window) {
    return {
      getSuTestSummary : function() {
 
+
+       ///suTestSummary/:userID/:suTestID/:suTestMode/:suTestStartAt
+
+       $window.sessionStorage.suTestID = $route.current.params.suTestID;
+       $window.sessionStorage.suTestMode = $route.current.params.suTestMode;
+       $window.sessionStorage.suTestStartAt = $route.current.params.suTestStartAt;
+
        var suTestSummaryUrl = '/getSuTestSummary/'+$window.sessionStorage.userID+'/'+
-                                 $window.sessionStorage.suTestID+'/'+
-                                 $window.sessionStorage.suTestMode+'/'+
-                                 $window.sessionStorage.suTestStartAt;
+                                 $route.current.params.suTestID+'/'+
+                                 $route.current.params.suTestMode+'/'+
+                                 $route.current.params.suTestStartAt;
 
        var deferred = $q.defer();
 

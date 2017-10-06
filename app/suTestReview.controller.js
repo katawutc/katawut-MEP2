@@ -1,13 +1,13 @@
 angular.module('app').controller('suTestReviewCtrl',
-                                  ['$scope', '$http', '$routeParams',
+                                  ['$scope', '$http', '$route',
                                     '$window', '$location',
                                       'suTestReview',
                                       suTestReviewCtrl]);
 
-function suTestReviewCtrl($scope, $http, $routeParams,
+function suTestReviewCtrl($scope, $http, $route,
                           $window, $location, suTestReview) {
 
-  $scope.suTestID = $window.sessionStorage.suTestID;
+  $scope.suTestID = $route.current.params.suTestID;
 
   $scope.suTestReview = suTestReview;
 
