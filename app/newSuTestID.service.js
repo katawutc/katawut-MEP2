@@ -5,7 +5,7 @@ function newSuTestIDService($http, $route, $q, $window) {
 
    return {
      generateNewSuTestID : function() {
-       console.log('at newSuTestIDService: generateSuNewTestID');
+       console.log('at newSuTestIDService: generateNewSuTestID');
 
        /**
         * 1. generate new suTestID based on setting
