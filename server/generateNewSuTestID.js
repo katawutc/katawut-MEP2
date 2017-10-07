@@ -85,6 +85,10 @@ function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumbe
       res.json({newTest1: varDoc.newTest1,
                 newTest2: varDoc.newTest2});
   }
+
+  // implement the new setting testID here
+
+
 }
 
 
