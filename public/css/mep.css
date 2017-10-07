@@ -52,6 +52,7 @@
   position: fixed;
   width: 24%; /* 100% width */
   left: 75%;
+  height: 325px;
   text-align: center; /* Centered text/links */
   z-index: 20;
 }
@@ -60,7 +61,8 @@
   position: fixed;
   width: 24%;
   left: 75%;
-  top: 50%;
+  bottom: 0px;
+  height: 325px;
   z-index: 20;
 }
 
