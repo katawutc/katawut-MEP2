@@ -13,29 +13,51 @@ module.exports = function generateNewSuTest(req, res) {
 
   console.log(suTestID);
 
-  // aggregate->match testID->sample
-  db.collection('suTestContent')
-  .aggregate([{$match:{testID:req.params.testID}},
-    {$sample:{size:3}}]).toArray(function(err, doc){
+  /**
+   * 1. to check if suTestID is already generated ?
+   * 2.
+   */
 
-      // to put this doc into the su new test DB <insert>
-      // to separate testID and test number <test running number>
-      // to insert number of question e.g. 3
-      db.collection('newSuTest')
-      .insert({userID:req.params.userID,
-                suTestID: suTestID,
-                suTestSize: 3,
-                suTest: doc}, function(err, doc){
+   /** 1. to check if suTestID is already generated ? */
+   db.collection('newSuTest')
+   .findOne({userID: req.params.userID,
+              suTestID: suTestID}, cb);
 
-      if (err) throw err;
-      else {
-        res.json({suTestID: req.params.testID+'-'+req.params.testRunningNumber,
-                  suTestSize: 3});
-      }
-    })
-  })
-}
+   function cb(err, doc) {
+     if (err) throw err;
+     if (doc !== null) {
+       res.json({suTestID: req.params.testID+'-'+req.params.testRunningNumber,
+                 suTestSize: 3});
+     }
+     else if (doc === null) {
+       generateNewSuTest();
+     }
 
+     function generateNewSuTest() {
+       // aggregate->match testID->sample
+       db.collection('suTestContent')
+       .aggregate([{$match:{testID:req.params.testID}},
+         {$sample:{size:3}}]).toArray(function(err, doc){
+
+           // to put this doc into the su new test DB <insert>
+           // to separate testID and test number <test running number>
+           // to insert number of question e.g. 3
+           db.collection('newSuTest')
+           .insert({userID:req.params.userID,
+                     suTestID: suTestID,
+                     suTestSize: 3,
+                     suTest: doc}, function(err, doc){
+
+           if (err) throw err;
+           else {
+             res.json({suTestID: req.params.testID+'-'+req.params.testRunningNumber,
+                       suTestSize: 3});
+           }
+         });
+       })
+     }
+   }
+ }
   /** get the customize su test content here
     * 1. create a new test name
     * 2. aggregate test content
