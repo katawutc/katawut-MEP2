@@ -51,6 +51,8 @@ module.exports = function generateNewSuTest(req, res) {
          if (doc1 !== null) {
            console.log('retrieve testID exclusive question list');
            console.log('generate the new test with question exclusiveness here');
+           console.log(doc1.questionExclude);
+           generateNewSuTest(doc1.questionExclude);
          }
          else if (doc1 === null) {
            db.collection('suTestExcludeQuestion')
@@ -62,18 +64,19 @@ module.exports = function generateNewSuTest(req, res) {
 
               if (err) throw err;
 
-              generateNewSuTest();
+              generateNewSuTest([]);
            }
          }
        }
 
      }
 
-     function generateNewSuTest() {
+     function generateNewSuTest(questionExclude) {
        // aggregate->match testID->sample
        db.collection('suTestContent')
-       .aggregate([{$match:{testID:req.params.testID}},
-         {$sample:{size:3}}]).toArray(function(err, doc){
+       .aggregate([{$match:{testID:req.params.testID,
+                            questionNumber: {$nin: questionExclude}}},
+                            {$sample:{size:3}}]).toArray(function(err, suTest){
 
            // to put this doc into the su new test DB <insert>
            // to separate testID and test number <test running number>
@@ -81,9 +84,9 @@ module.exports = function generateNewSuTest(req, res) {
 
            // log question number already taken
            var questionTaken = [];
-           for (var i=0; i<doc.length; i++){
-              console.log(doc[i].questionNumber);
-              questionTaken.push(doc[i].questionNumber);
+           for (var i=0; i<suTest.length; i++){
+              console.log(suTest[i].questionNumber);
+              questionTaken.push(suTest[i].questionNumber);
            }
 
            console.log(questionTaken);
@@ -100,7 +103,7 @@ module.exports = function generateNewSuTest(req, res) {
              .insert({userID:req.params.userID,
                        suTestID: suTestID,
                        suTestSize: 3,
-                       suTest: doc}, function(err, doc){
+                       suTest: suTest}, function(err, doc){
 
              if (err) throw err;
              else {
