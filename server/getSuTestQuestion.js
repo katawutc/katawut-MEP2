@@ -5,7 +5,7 @@ module.exports = function getSuTestQuestion(req, res) {
 
   var questionArrayIndex = req.params.suTestQuestionNumber - 1;
 
-  db.collection('suNewTest').findOne({userID: req.params.userID,
+  db.collection('newSuTest').findOne({userID: req.params.userID,
                                       suTestID: req.params.suTestID}, function(err, doc) {
     if (err) throw err;
     if (doc && doc.suTest) {
