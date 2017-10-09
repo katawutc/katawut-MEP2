@@ -55,36 +55,41 @@ module.exports = function generateNewSuTestID(req, res) {
 
 function insertNewTest(res, varDB, varUserID, varTestID, varRunningNumber) {
 
-  var newTest = {userID: varUserID,
+  var newSuTest = {userID: varUserID,
                   testID: varTestID,
                   runningNumber: varRunningNumber+2,
-                  newTest1: { testID: varTestID,
+                  newTest: [{ testID: varTestID,
                               suTestID: varTestID+'-'+(varRunningNumber+1),
                               suTestNumber: varRunningNumber+1,
                               status: 'new'},
-                  newTest2: { testID: varTestID,
+                            { testID: varTestID,
                               suTestID: varTestID+'-'+(varRunningNumber+2),
                               suTestNumber: varRunningNumber+2,
-                              status: 'new'}
+                              status: 'new'}]
                 }
 
+  console.log(newSuTest);
+
   varDB.collection('newSuTestIDService')
-  .insert(newTest, function(err, doc){
+  .insert(newSuTest, function(err, doc){
       if (err) throw err;
       if (doc) {
-        var suNewTest = {newTest1: newTest.newTest1,
-                          newTest2: newTest.newTest2};
+        console.log(doc);
+        var suNewTest = {newTest1: newSuTest.newTest[0],
+                          newTest2: newSuTest.newTest[1]};
         res.json(suNewTest);
       }
   });
 }
 
-function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumber) {
+function updateNewTest(res, varDoc, // current testID
+                        varDB, varUserID, // new testID
+                        varTestID, varRunningNumber) {
   console.log('at server: generateNewSuTestID: updateNewSuTestID');
 
   if (varDoc.testID === varTestID) {
-      res.json({newTest1: varDoc.newTest1,
-                newTest2: varDoc.newTest2});
+      res.json({newTest1: varDoc.newTest[0],
+                newTest2: varDoc.newTest[1]});
   }
 
   // implement the new setting testID here
@@ -99,6 +104,7 @@ function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumbe
      console.log(varDoc.testID);
      console.log(varTestID);
 
+/*
      var newSuTestID = {testID: varTestID,
                         runningNumber: varRunningNumber+2,
                         newTest1: { testID: varTestID,
@@ -109,6 +115,7 @@ function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumbe
                           suTestID: varTestID+'-'+(varRunningNumber+2),
                           suTestNumber: varRunningNumber+2,
                           status: 'new'}}
+                          */
 
 
      varDB.collection('newSuTestIDService')
@@ -117,14 +124,14 @@ function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumbe
        $set:{
          testID: varTestID,
          runningNumber: varRunningNumber+2,
-         newTest1: { testID: varTestID,
+         newTest: [{ testID: varTestID,
                      suTestID: varTestID+'-'+(varRunningNumber+1),
                      suTestNumber: varRunningNumber+1,
                      status: 'new'},
-         newTest2: { testID: varTestID,
+                   { testID: varTestID,
                      suTestID: varTestID+'-'+(varRunningNumber+2),
                      suTestNumber: varRunningNumber+2,
-                     status: 'new'}
+                     status: 'new'}]
        }
      },
      { upsert: true }, cb);
@@ -134,8 +141,8 @@ function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumbe
 
        varDB.collection('newSuTestIDService')
        .findOne({userID: varUserID}, function(err, doc) {
-         res.json({newTest1: doc.newTest1,
-                   newTest2: doc.newTest2});
+         res.json({newTest1: doc.newTest[0],
+                   newTest2: doc.newTest[1]});
        })
      }
    } // if (varDoc.testID !== varTestID)
