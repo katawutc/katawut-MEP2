@@ -1,15 +1,23 @@
 angular.module('app').controller('suNewTestCtrl', ['$scope', '$http', '$route',
                                     '$window', '$location',
                                     'suNewTestInfo', 'suNewTestHeader',
+                                    'suNewTest',
                                       suNewTestCtrl]);
 
 function suNewTestCtrl($scope, $http, $route,
-                          $window, $location, suNewTestInfo, suNewTestHeader) {
+                          $window, $location,
+                          suNewTestInfo, suNewTestHeader, suNewTest) {
 
     // to separate testID and test running number
     $scope.testID = $route.current.params.testID;
     $scope.suTestID = suNewTestInfo.suTestID;
     $scope.testDescription = suNewTestHeader.testDescription;
+
+    console.log(suNewTest);
+    if (suNewTest !== 'return from server generateSuNewTest') {
+
+      $location.path('/errorPage');
+    }
 
     $scope.startTestTutorialMode = function() {
 
