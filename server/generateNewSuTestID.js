@@ -132,8 +132,11 @@ function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumbe
      function cb(err, count, doc) {
        if (err) throw err;
 
-         res.json({newTest1: newSuTestID.newTest1,
-                   newTest2: newSuTestID.newTest2});
+       varDB.collection('newSuTestIDService')
+       .findOne({userID: varUserID}, function(err, doc) {
+         res.json({newTest1: doc.newTest1,
+                   newTest2: doc.newTest2});
+       })
      }
    } // if (varDoc.testID !== varTestID)
 }
