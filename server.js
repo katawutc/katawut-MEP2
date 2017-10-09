@@ -285,7 +285,7 @@ app.get('/generateNewSuTestID/:userID',
   require('./server/generateNewSuTestID'));
 
 /** generate su new test */
-app.get('/generateSuNewTest/:userID/:testID/:testRunningNumber',
+app.get('/generateNewSuTest/:userID/:testID/:testRunningNumber',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
-  require('./server/generateSuNewTest'));
+  require('./server/generateNewSuTest'));

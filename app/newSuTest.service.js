@@ -1,23 +1,23 @@
-angular.module('app').factory('suNewTestService',
-  ['$http', '$route', '$q', '$window', suNewTestService]);
+angular.module('app').factory('newSuTestService',
+  ['$http', '$route', '$q', '$window', newSuTestService]);
 
-function suNewTestService($http, $route, $q, $window) {
+function newSuTestService($http, $route, $q, $window) {
 
    return {
-     generateSuNewTest : function() {
+     generateNewSuTest : function() {
 
-       console.log('at generateSuNewTest');
+       console.log('at generateNewSuTest');
 
-       var generateSuNewTestUrl = '/generateSuNewTest/'+$window.sessionStorage.userID+'/'+
+       var generateNewSuTestUrl = '/generateNewSuTest/'+$window.sessionStorage.userID+'/'+
                                     $route.current.params.testID+'/'+
                                     $route.current.params.testRunningNumber;
 
-       console.log(generateSuNewTestUrl);
+       console.log(generateNewSuTestUrl );
 
        var deferred = $q.defer();
 
        $http({
-         url: generateSuNewTestUrl,
+         url: generateNewSuTestUrl,
          method: 'GET',
          headers: {
            'Authorization': 'JWT ' + $window.sessionStorage.token

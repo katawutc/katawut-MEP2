@@ -271,8 +271,8 @@ angular.module('app')
           return suNewTestHeaderService.getSuNewTestHeader();
         },
         // to generate new test content
-        suNewTest : function(suNewTestService) {
-          return suNewTestService.generateSuNewTest();
+        newSuTest : function(newSuTestService) {
+          return newSuTestService.generateNewSuTest();
         }
       }
     })
