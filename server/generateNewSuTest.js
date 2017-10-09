@@ -3,7 +3,6 @@ module.exports = function generateNewSuTest(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-
   console.log('at server generateNewSuTest');
 
   console.log(req.params.testID);
@@ -15,7 +14,9 @@ module.exports = function generateNewSuTest(req, res) {
 
   /**
    * 1. to check if suTestID is already generated ?
-   * 2.
+   * 2. to check which questionNumber in the question pool \
+   *    is already taken ?
+   * 3. how to determine which one is already taken ?
    */
 
    /** 1. to check if suTestID is already generated ? */
@@ -30,7 +31,41 @@ module.exports = function generateNewSuTest(req, res) {
                  suTestSize: 3});
      }
      else if (doc === null) {
-       generateNewSuTest();
+
+       /** need to check questionNumber exclusiveness here before \
+        *  generate a new test
+        */
+
+       generateSuTestQuestionExclude();
+
+       //generateNewSuTest();
+     }
+
+     function generateSuTestQuestionExclude() {
+       db.collection('suTestExcludeQuestion')
+       .findOne({userID: req.params.userID,
+                  testID: req.params.testID}, cb1);
+
+       function cb1(err, doc1) {
+         if (err) throw err;
+         if (doc1 !== null) {
+           console.log('retrieve testID exclusive question list');
+         }
+         else if (doc1 === null) {
+           db.collection('suTestExcludeQuestion')
+           .insert({userID: req.params.userID,
+                      testID: req.params.testID,
+                      questionExclude: []}, cb2);
+
+           function cb2(err, doc) {
+
+              if (err) throw err;
+
+              generateNewSuTest();
+           }
+         }
+       }
+
      }
 
      function generateNewSuTest() {
