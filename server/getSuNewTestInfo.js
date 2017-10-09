@@ -10,6 +10,11 @@ module.exports = function getSuNewTestInfo(req, res) {
 
     if (err) throw err;
 
-    res.json(doc);
+    if (doc) {
+      res.json(doc);
+    }
+    else {
+      res.json({error: 'no document found'});
+    }
   })
 }

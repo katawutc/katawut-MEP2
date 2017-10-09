@@ -10,13 +10,13 @@ function suNewTestCtrl($scope, $http, $route,
 
     // to separate testID and test running number
     $scope.testID = $route.current.params.testID;
-    $scope.suTestID = suNewTestInfo.suTestID;
+    //$scope.suTestID = suNewTestInfo.suTestID;
     $scope.testDescription = suNewTestHeader.testDescription;
 
     console.log(newSuTest);
-    if (newSuTest !== 'return from server generateNewSuTest') {
+    if (newSuTest) {
 
-      $location.path('/errorPage');
+      $scope.suTestID = newSuTest.suTestID;
     }
 
     $scope.startTestTutorialMode = function() {
@@ -24,7 +24,7 @@ function suNewTestCtrl($scope, $http, $route,
       $window.sessionStorage.testID = $scope.testID;
       $window.sessionStorage.suTestID = $scope.suTestID; // suTestID
       $window.sessionStorage.suTestMode = 'tutorial';
-      $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
+      $window.sessionStorage.suTestSize = newSuTest.suTestSize;
       $window.sessionStorage.suTestStartAt =  Date.now();
 
       createAnswerSheetTutorial();
