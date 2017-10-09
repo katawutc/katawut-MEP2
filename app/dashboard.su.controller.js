@@ -31,6 +31,7 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
 
     if (newSuTestID) {
 
+      console.log('received new suTestID to display on view');
       console.log(newSuTestID);
 
       $scope.dashboardTest1 = newSuTestID.newTest1.suTestID;

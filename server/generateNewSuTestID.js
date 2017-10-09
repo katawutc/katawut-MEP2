@@ -32,6 +32,7 @@ module.exports = function generateNewSuTestID(req, res) {
 
             var runningNumber = 0;
 
+            // find the userID in the newSuTestIDService DB
             db.collection('newSuTestIDService')
             .findOne({userID: req.params.userID}, cb);
 
@@ -87,8 +88,54 @@ function updateNewTest(res, varDoc, varDB, varUserID, varTestID, varRunningNumbe
   }
 
   // implement the new setting testID here
+  if (varDoc.testID !== varTestID) {
+
+    /**
+     * 1. check if testID is existed in the suTest DB and it's current running number
+     * 2. if testID not existed in the suTest DB, generate a new one
+     */
+
+     console.log('at varDoc.testID !== varTestID');
+     console.log(varDoc.testID);
+     console.log(varTestID);
+
+     var newSuTestID = {testID: varTestID,
+                        runningNumber: varRunningNumber+2,
+                        newTest1: { testID: varTestID,
+                          suTestID: varTestID+'-'+(varRunningNumber+1),
+                          suTestNumber: varRunningNumber+1,
+                          status: 'new'},
+                        newTest2: { testID: varTestID,
+                          suTestID: varTestID+'-'+(varRunningNumber+2),
+                          suTestNumber: varRunningNumber+2,
+                          status: 'new'}}
 
 
+     varDB.collection('newSuTestIDService')
+     .update({userID: varUserID},
+     {
+       $set:{
+         testID: varTestID,
+         runningNumber: varRunningNumber+2,
+         newTest1: { testID: varTestID,
+                     suTestID: varTestID+'-'+(varRunningNumber+1),
+                     suTestNumber: varRunningNumber+1,
+                     status: 'new'},
+         newTest2: { testID: varTestID,
+                     suTestID: varTestID+'-'+(varRunningNumber+2),
+                     suTestNumber: varRunningNumber+2,
+                     status: 'new'}
+       }
+     },
+     { upsert: true }, cb);
+
+     function cb(err, count, doc) {
+       if (err) throw err;
+
+         res.json({newTest1: newSuTestID.newTest1,
+                   newTest2: newSuTestID.newTest2});
+     }
+   } // if (varDoc.testID !== varTestID)
 }
 
 
