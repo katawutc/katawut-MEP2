@@ -104,20 +104,6 @@ function updateNewTest(res, varDoc, // current testID
      console.log(varDoc.testID);
      console.log(varTestID);
 
-/*
-     var newSuTestID = {testID: varTestID,
-                        runningNumber: varRunningNumber+2,
-                        newTest1: { testID: varTestID,
-                          suTestID: varTestID+'-'+(varRunningNumber+1),
-                          suTestNumber: varRunningNumber+1,
-                          status: 'new'},
-                        newTest2: { testID: varTestID,
-                          suTestID: varTestID+'-'+(varRunningNumber+2),
-                          suTestNumber: varRunningNumber+2,
-                          status: 'new'}}
-                          */
-
-
      varDB.collection('newSuTestIDService')
      .update({userID: varUserID},
      {
