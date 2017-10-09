@@ -50,6 +50,7 @@ module.exports = function generateNewSuTest(req, res) {
          if (err) throw err;
          if (doc1 !== null) {
            console.log('retrieve testID exclusive question list');
+           console.log('generate the new test with question exclusiveness here');
          }
          else if (doc1 === null) {
            db.collection('suTestExcludeQuestion')
@@ -77,18 +78,37 @@ module.exports = function generateNewSuTest(req, res) {
            // to put this doc into the su new test DB <insert>
            // to separate testID and test number <test running number>
            // to insert number of question e.g. 3
-           db.collection('newSuTest')
-           .insert({userID:req.params.userID,
-                     suTestID: suTestID,
-                     suTestSize: 3,
-                     suTest: doc}, function(err, doc){
 
-           if (err) throw err;
-           else {
-             res.json({suTestID: req.params.testID+'-'+req.params.testRunningNumber,
-                       suTestSize: 3});
+           // log question number already taken
+           var questionTaken = [];
+           for (var i=0; i<doc.length; i++){
+              console.log(doc[i].questionNumber);
+              questionTaken.push(doc[i].questionNumber);
            }
-         });
+
+           console.log(questionTaken);
+
+           db.collection('suTestExcludeQuestion')
+           .update({userID: req.params.userID,
+                    testID: req.params.testID},
+                    {
+                      $push: { questionExclude: { $each: questionTaken}}
+                    }, cb3);
+
+           function cb3(err, count, doc) {
+             db.collection('newSuTest')
+             .insert({userID:req.params.userID,
+                       suTestID: suTestID,
+                       suTestSize: 3,
+                       suTest: doc}, function(err, doc){
+
+             if (err) throw err;
+             else {
+               res.json({suTestID: req.params.testID+'-'+req.params.testRunningNumber,
+                         suTestSize: 3});
+             }
+           });
+          }
        })
      }
    }
