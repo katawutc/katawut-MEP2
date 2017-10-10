@@ -3,15 +3,6 @@ module.exports = function generateNewSuTestID(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log('at server: generateNewSuTestID');
-
-  /**
-   * 1. check setting
-   * 2. check suNewTestService; testStatus is in here
-   * 3. check su new test status e.g. registered?
-   * 4. provide suTestID
-   */
-
    var userID;
    var testID;
    var runningNumber;
@@ -29,16 +20,12 @@ module.exports = function generateNewSuTestID(req, res) {
                                { testID: varTestID,
                                  suTestID: varTestID+'-'+(varRunningNumber+2),
                                  suTestNumber: varRunningNumber+2,
-                                 status: 'new'}]
-                   }
-
-     console.log(newSuTest);
+                                 status: 'new'}]};
 
      db.collection('newSuTestIDService')
      .insert(newSuTest, function(err, doc){
          if (err) throw err;
          if (doc) {
-           console.log(doc);
            var suNewTest = {newTest1: newSuTest.newTest[0],
                              newTest2: newSuTest.newTest[1]};
            res.json(suNewTest);
@@ -49,10 +36,6 @@ module.exports = function generateNewSuTestID(req, res) {
    function updateNewTest(varDoc, // current testID
                            varUserID, // new testID
                            varTestID, varRunningNumber) {
-     console.log('at server: generateNewSuTestID: updateNewSuTestID');
-
-     console.log(varDoc.newTest.length);
-
 
      /** there will be 2 new tests presented at one time */
      if (varDoc.testID === varTestID && varDoc.newTest.length === 2) {
@@ -65,10 +48,8 @@ module.exports = function generateNewSuTestID(req, res) {
          // push new test into the array
 
          var currentRunningNumber = varDoc.runningNumber;
-         console.log(currentRunningNumber);
-         var newRunningNumber = currentRunningNumber + 1;
 
-         console.log('at varDoc.testID === varTestID && varDoc.newTest.length === 1');
+         var newRunningNumber = currentRunningNumber + 1;
 
          db.collection('newSuTestIDService')
          .update({userID: varUserID,
@@ -102,10 +83,6 @@ module.exports = function generateNewSuTestID(req, res) {
         * 1. check if testID is existed in the suTest DB and it's current running number
         * 2. if testID not existed in the suTest DB, generate a new one
         */
-
-        console.log('at varDoc.testID !== varTestID');
-        console.log(varDoc.testID);
-        console.log(varTestID);
 
         db.collection('newSuTestIDService')
         .update({userID: varUserID},
@@ -143,24 +120,12 @@ module.exports = function generateNewSuTestID(req, res) {
      if (err) throw err;
      if (doc === null) {
 
-       console.log('at server: generateSuNewTest: doc === null: insertNewSuTestID');
-       console.log(userID);
-       console.log(testID);
-       console.log(runningNumber);
-
        insertNewTest(userID, testID, runningNumber);
 
      }
      if (doc !== null) {
 
-       console.log('at server: generateSuNewTest: doc !== null: insertNewSuTestID');
-       console.log(doc);
-       console.log(userID);
-       console.log(testID);
-       console.log(runningNumber);
-
        // 1st find the current situation of the newSuTestIDService
-
        updateNewTest(doc, userID, testID, runningNumber);
      }
    }
@@ -168,7 +133,6 @@ module.exports = function generateNewSuTestID(req, res) {
    function generateTestID(err, setting) {
      if (err) throw err;
      if (setting) {
-          console.log(setting);
           userID = req.params.userID;
           testID = setting.userLevel+'-'+
                     setting.userPreferTest+'-'+
