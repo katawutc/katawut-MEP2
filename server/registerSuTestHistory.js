@@ -5,16 +5,43 @@ module.exports = function registerSuTestHistory(req, res) {
 
   console.log('at server: registerSuTestHistory');
 
-  db.collection('suTestHistory').insert({userID: req.params.userID,
-                                          suTestID: req.params.suTestID,
-                                          suTestMode: req.params.suTestMode,
-                                          suTestStartAt: req.params.suTestStartAt}, cb);
 
-  function cb(err, doc) {
+  function removeSuTestIDFromNewSuTest() {
+
+    console.log('remove suTestID from newSuTestIDService');
+
+    db.collection('newSuTestIDService')
+    .update({userID: req.params.userID},
+            {$pull: {'newTest': {'suTestID': req.params.suTestID}}},
+    function(err, doc){
+      if (err) throw err;
+      if (doc) {
+        console.log(doc);
+        res.json('registered');
+      }
+    })
+  }
+
+  function registerSuTest(err, doc) { // callback function
     if (err) throw err;
     //need to add more logic checking if fails
 
-    res.json('registered');
+    /**
+     * 1. Once the test is registered, remove the test name from \
+     *    the
+     */
+
+    if (doc) {
+      removeSuTestIDFromNewSuTest();
+    }
   }
+
+  db.collection('suTestHistory')
+  .insert({userID: req.params.userID,
+            suTestID: req.params.suTestID,
+            suTestMode: req.params.suTestMode,
+            suTestStartAt: req.params.suTestStartAt},
+            registerSuTest);
+
 
 }
