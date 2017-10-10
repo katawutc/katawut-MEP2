@@ -51,10 +51,49 @@ module.exports = function generateNewSuTestID(req, res) {
                            varTestID, varRunningNumber) {
      console.log('at server: generateNewSuTestID: updateNewSuTestID');
 
-     if (varDoc.testID === varTestID) {
+     console.log(varDoc.newTest.length);
+
+
+     /** there will be 2 new tests presented at one time */
+     if (varDoc.testID === varTestID && varDoc.newTest.length === 2) {
          res.json({newTest1: varDoc.newTest[0],
                    newTest2: varDoc.newTest[1]});
      }
+
+     if (varDoc.testID === varTestID && varDoc.newTest.length === 1) {
+         // set new runningNumber + 1
+         // push new test into the array
+
+         var currentRunningNumber = varDoc.runningNumber;
+         console.log(currentRunningNumber);
+         var newRunningNumber = currentRunningNumber + 1;
+
+         console.log('at varDoc.testID === varTestID && varDoc.newTest.length === 1');
+
+         db.collection('newSuTestIDService')
+         .update({userID: varUserID,
+                  testID: varTestID},
+                 {$set: {runningNumber: newRunningNumber},
+                  $push: {newTest: {testID: varTestID,
+                                    suTestID: varTestID+'-'+newRunningNumber,
+                                    suTestNumber: newRunningNumber,
+                                    status: 'new'}}},
+          function(err, count, doc) {
+            if (err) throw err;
+
+            db.collection('newSuTestIDService')
+            .findOne({userID: varUserID,
+                     testID: varTestID},
+            function(err, doc) {
+              if (err) throw err;
+              if (doc) {
+                res.json({newTest1: doc.newTest[0],
+                          newTest2: doc.newTest[1]});
+              }
+            })
+          })
+     }
+
 
      // implement the new setting testID here
      if (varDoc.testID !== varTestID) {
@@ -89,7 +128,7 @@ module.exports = function generateNewSuTestID(req, res) {
         function cb(err, count, doc) {
           if (err) throw err;
 
-          varDB.collection('newSuTestIDService')
+          db.collection('newSuTestIDService')
           .findOne({userID: varUserID}, function(err, doc) {
             res.json({newTest1: doc.newTest[0],
                       newTest2: doc.newTest[1]});
@@ -104,7 +143,7 @@ module.exports = function generateNewSuTestID(req, res) {
      if (err) throw err;
      if (doc === null) {
 
-       console.log('at server: generateSuNewTest: insertNewSuTestID');
+       console.log('at server: generateSuNewTest: doc === null: insertNewSuTestID');
        console.log(userID);
        console.log(testID);
        console.log(runningNumber);
@@ -112,12 +151,15 @@ module.exports = function generateNewSuTestID(req, res) {
        insertNewTest(userID, testID, runningNumber);
 
      }
-     if (doc !== null ) {
+     if (doc !== null) {
 
-       console.log('at server: generateSuNewTest: insertNewSuTestID');
+       console.log('at server: generateSuNewTest: doc !== null: insertNewSuTestID');
+       console.log(doc);
        console.log(userID);
        console.log(testID);
        console.log(runningNumber);
+
+       // 1st find the current situation of the newSuTestIDService
 
        updateNewTest(doc, userID, testID, runningNumber);
      }
