@@ -6,6 +6,48 @@ module.exports = function getSuTestExamQuestion(req, res) {
   // the implementation duplicate with getSuTestQuestion
   var questionArrayIndex = req.params.suTestQuestionNumber - 1;
 
+  function getTestQuestion_cb(err, question) {
+    if (err) throw err;
+
+    // need to refactor for null and error case
+
+    if (question) {
+      console.log(question);
+      res.json(question);
+    }
+  }
+
+  function getTestQuestion(testID, suQuestion) {
+    db.collection('suTestContent')
+    .findOne({'testID': testID,
+              'questionNumber': suQuestion.questionNumber}, getTestQuestion_cb);
+  }
+
+
+  function getTestQuestionNumber_cb(err, test) {
+    if (test && test.suTest) {
+
+      console.log('at server: getTestQuestionNumber_cb');
+
+      console.log(test);
+
+      console.log(test.suTest[questionArrayIndex].testID);
+
+      console.log(test.suTest[questionArrayIndex]);
+
+      getTestQuestion(test.suTest[questionArrayIndex].testID, test.suTest[questionArrayIndex]);
+    }
+  }
+
+
+  db.collection('newSuTest')
+  .findOne({userID: req.params.userID,
+            suTestID: req.params.suTestID}, getTestQuestionNumber_cb);
+
+}
+
+
+/*
   db.collection('newSuTest').findOne({userID: req.params.userID,
                                       suTestID: req.params.suTestID}, function(err, doc) {
     if (err) throw err;
@@ -14,3 +56,4 @@ module.exports = function getSuTestExamQuestion(req, res) {
     }
   })
 }
+*/
