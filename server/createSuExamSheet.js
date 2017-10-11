@@ -19,7 +19,7 @@ module.exports = function createSuExamSheet(req, res) {
        function cb(err, doc) {
          if (err) throw err;
          else {
-           //console.log('empty answer sheet is created for '+suTestQuestionNumber);
+           console.log('empty answer sheet is created for '+suTestQuestionNumber);
          }
        }
   }

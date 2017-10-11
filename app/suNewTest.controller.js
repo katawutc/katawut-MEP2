@@ -75,7 +75,7 @@ function suNewTestCtrl($scope, $http, $route,
       $window.sessionStorage.testID = $scope.testID;  // testID
       $window.sessionStorage.suTestID = $scope.suTestID; // suTestID
       $window.sessionStorage.suTestMode = 'exam';
-      $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
+      $window.sessionStorage.suTestSize = newSuTest.suTestSize;
       $window.sessionStorage.suTestStartAt =  Date.now();
 
       createAnswerSheetExam();
