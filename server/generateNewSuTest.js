@@ -30,11 +30,8 @@ module.exports = function generateNewSuTest(req, res) {
       // log question number already taken
       var questionTaken = [];
       for (var i=0; i<suTest.length; i++){
-         console.log(suTest[i].questionNumber);
          questionTaken.push(suTest[i].questionNumber);
       }
-
-      console.log(questionTaken);
 
       db.collection('suTestQuestionExclude')
       .update({userID: req.params.userID,
@@ -72,9 +69,7 @@ module.exports = function generateNewSuTest(req, res) {
     function manageSuTestQuestionExclude_cb(err, excludeQuestionList) {
       if (err) throw err;
       if (excludeQuestionList !== null) {
-        console.log('retrieve testID exclusive question list');
-        console.log('generate the new test with question exclusiveness here');
-        console.log(excludeQuestionList.questionExclude);
+
         generateNewSuTest(excludeQuestionList.questionExclude);
       }
       else if (excludeQuestionList === null) {
