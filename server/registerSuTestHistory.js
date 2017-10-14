@@ -5,6 +5,7 @@ module.exports = function registerSuTestHistory(req, res) {
 
   console.log('at server: registerSuTestHistory');
 
+  console.log(req.body.testID);
 
   function removeSuTestIDFromNewSuTest() {
 
@@ -13,14 +14,23 @@ module.exports = function registerSuTestHistory(req, res) {
     db.collection('newSuTestIDService')
     .update({userID: req.params.userID},
             {$pull: {'newTest': {'suTestID': req.params.suTestID}}},
-    function(err, doc){
+    function(err, count, result){
       if (err) throw err;
-      if (doc) {
-        console.log(doc);
-        res.json('registered');
+
+      /** to pull the suTestIDService and update the test runningNumber \
+        * in suTestIDHistory
+        */
+      db.collection('suTestIDHistory')
+      .update({'userID': req.params.userID,
+               'testID': req.body.testID},
+              {$pull: {'newTest': {'suTestID': req.params.suTestID}}},
+      function(err, count, result) {
+        if (err) throw err;
+
+          res.json('registered');
       }
-    })
-  }
+    )}
+  )}
 
   function registerSuTest(err, doc) { // callback function
     if (err) throw err;
