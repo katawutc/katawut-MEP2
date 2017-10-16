@@ -3,7 +3,7 @@ module.exports = function getSuTestReview(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  db.collection('suNewTest').findOne({userID: req.params.userID,
+  db.collection('newSuTest').findOne({userID: req.params.userID,
                                       suTestID: req.params.suTestID},
 
     function(err, doc) {

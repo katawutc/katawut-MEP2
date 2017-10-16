@@ -1,22 +1,33 @@
 angular.module('app').controller('suNewTestCtrl', ['$scope', '$http', '$route',
                                     '$window', '$location',
                                     'suNewTestInfo', 'suNewTestHeader',
+                                    'newSuTest',
                                       suNewTestCtrl]);
 
 function suNewTestCtrl($scope, $http, $route,
-                          $window, $location, suNewTestInfo, suNewTestHeader) {
+                          $window, $location,
+                          suNewTestInfo, suNewTestHeader, newSuTest) {
 
     // to separate testID and test running number
     $scope.testID = $route.current.params.testID;
-    $scope.suTestID = suNewTestInfo.suTestID;
+    //$scope.suTestID = suNewTestInfo.suTestID;
     $scope.testDescription = suNewTestHeader.testDescription;
+
+    $scope.suTestNumber = $route.current.params.testRunningNumber;
+
+    console.log(newSuTest);
+    if (newSuTest) {
+
+      $scope.suTestID = newSuTest.suTestID;
+    }
 
     $scope.startTestTutorialMode = function() {
 
       $window.sessionStorage.testID = $scope.testID;
+      $window.sessionStorage.suTestNumber = $scope.suTestNumber;
       $window.sessionStorage.suTestID = $scope.suTestID; // suTestID
       $window.sessionStorage.suTestMode = 'tutorial';
-      $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
+      $window.sessionStorage.suTestSize = newSuTest.suTestSize;
       $window.sessionStorage.suTestStartAt =  Date.now();
 
       createAnswerSheetTutorial();
@@ -26,6 +37,7 @@ function suNewTestCtrl($scope, $http, $route,
 
         var suAnswerSheetTutorialData = {userID: $window.sessionStorage.userID,
                                           testID: $window.sessionStorage.testID,
+                                          suTestNumber: $window.sessionStorage.suTestNumber,
                                           suTestID: $window.sessionStorage.suTestID,
                                           suTestSize: $window.sessionStorage.suTestSize,
                                           suTestMode: $window.sessionStorage.suTestMode,
@@ -67,7 +79,7 @@ function suNewTestCtrl($scope, $http, $route,
       $window.sessionStorage.testID = $scope.testID;  // testID
       $window.sessionStorage.suTestID = $scope.suTestID; // suTestID
       $window.sessionStorage.suTestMode = 'exam';
-      $window.sessionStorage.suTestSize = suNewTestInfo.suTestSize;
+      $window.sessionStorage.suTestSize = newSuTest.suTestSize;
       $window.sessionStorage.suTestStartAt =  Date.now();
 
       createAnswerSheetExam();
@@ -82,6 +94,7 @@ function suNewTestCtrl($scope, $http, $route,
 
          var suAnswerSheetExamData = {userID: $window.sessionStorage.userID,
                                       testID: $window.sessionStorage.testID,
+                                      suTestNumber: $window.sessionStorage.suTestNumber,
                                       suTestID: $window.sessionStorage.suTestID,
                                       suTestSize: $window.sessionStorage.suTestSize,
                                       suTestMode: $window.sessionStorage.suTestMode,

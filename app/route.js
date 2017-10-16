@@ -93,8 +93,8 @@ angular.module('app')
         suAccountData : function(suAccountDataService) {
           return suAccountDataService.getSuAccountData();
         },
-        suDashboardTest : function (suDashboardTestService){
-          return suDashboardTestService.getSuDashboardTest();
+        newSuTestID : function (newSuTestIDService){
+          return newSuTestIDService.generateNewSuTestID();
         }
       }
     })
@@ -269,6 +269,10 @@ angular.module('app')
         },
         suNewTestHeader : function(suNewTestHeaderService) {
           return suNewTestHeaderService.getSuNewTestHeader();
+        },
+        // to generate new test content
+        newSuTest : function(newSuTestService) {
+          return newSuTestService.generateNewSuTest();
         }
       }
     })

@@ -178,6 +178,11 @@ app.post('/saveSetting/:userRole/:userID', passport.authenticate('jwt', {session
   require('./server/checkSuAuthority'),
   require('./server/saveSetting'));
 
+/** first timr setting */
+app.post('/firstSetting/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/firstSetting'));
+
 /** get user account for admin page view */
 app.get('/admin/account/:userRole/:userID', passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
@@ -277,3 +282,15 @@ app.get('/getSuTestHistory/:userID',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuTestHistory'));
+
+/** generate su new test ID */
+app.get('/generateNewSuTestID/:userID',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/generateNewSuTestID'));
+
+/** generate su new test */
+app.get('/generateNewSuTest/:userID/:testID/:testRunningNumber',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/generateNewSuTest'));

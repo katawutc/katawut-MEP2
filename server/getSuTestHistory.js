@@ -5,8 +5,10 @@ module.exports = function getSuTestHistory(req, res) {
 
   console.log('at server: getSuTestHistory');
 
-  db.collection('suTestHistory').find({userID: req.params.userID})
-                                .toArray(function(err, doc) {
+  db.collection('suTestHistory')
+  .find({userID: req.params.userID})
+  .sort({$natural: -1})
+  .toArray(function(err, doc) {
 
     if (err) throw err;
     if (doc) {

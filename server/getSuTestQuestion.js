@@ -5,11 +5,42 @@ module.exports = function getSuTestQuestion(req, res) {
 
   var questionArrayIndex = req.params.suTestQuestionNumber - 1;
 
-  db.collection('suNewTest').findOne({userID: req.params.userID,
-                                      suTestID: req.params.suTestID}, function(err, doc) {
+  function getTestQuestion_cb(err, question) {
     if (err) throw err;
-    if (doc && doc.suTest) {
-      res.json(doc.suTest[questionArrayIndex]);
+
+    // need to refactor for null and error case
+
+    if (question) {
+      console.log(question);
+      res.json(question);
     }
-  })
-}
+  }
+
+  function getTestQuestion(testID, suQuestion) {
+    db.collection('suTestContent')
+    .findOne({'testID': testID,
+              'questionNumber': suQuestion.questionNumber}, getTestQuestion_cb);
+  }
+
+  function getTestQuestionNumber_cb(err, test) {
+    if (test && test.suTest) {
+
+      console.log('at server: getTestQuestionNumber_cb');
+
+      console.log(test);
+
+      console.log(test.suTest[questionArrayIndex].testID);
+
+      console.log(test.suTest[questionArrayIndex]);
+
+      getTestQuestion(test.suTest[questionArrayIndex].testID, test.suTest[questionArrayIndex]);
+    }
+  }
+
+  /** main entry of the module */
+  db.collection('newSuTest')
+  .findOne({userID: req.params.userID,
+            suTestID: req.params.suTestID}, getTestQuestionNumber_cb);
+
+    console.log('at server: getSuTestQuestion');
+  }

@@ -43,6 +43,8 @@ function suTestExamModeCtrl($scope, $http, $route,
   $scope.submitAnswerExamMode = function() {
 
     var answerJSON = {userID: $window.sessionStorage.userID,
+                      testID: $window.sessionStorage.testID,
+                      suTestNumber: $window.sessionStorage.suTestNumber,
                       suTestID: $window.sessionStorage.suTestID,
                       suTestMode: $window.sessionStorage.suTestMode,
                       suTestStartAt: $window.sessionStorage.suTestStartAt,

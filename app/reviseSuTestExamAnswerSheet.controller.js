@@ -82,19 +82,20 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
       console.log(response.status);
       $location.path('/errorPage');
     });
-
-
-
-
-
-
-
-
-
-
-
   }
 
+    //markQuestion()
+    $scope.markQuestion = function() {
+      // to update suTestQuestionStatus as mark
+    }
 
+    $scope.answerSheetSummary = function() {
 
-}
+      var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
+                                              $window.sessionStorage.suTestID+'/'+
+                                              $window.sessionStorage.suTestStartAt;
+
+      $location.path(suTestExamModeAnswerSummaryUrl);
+    }
+
+  }

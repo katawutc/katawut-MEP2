@@ -27,6 +27,7 @@
         <th><h3 style='text-align:center';>Test mode</h3></th>
         <th><h3 style='text-align:center';>Taken on</h3></th>
         <th><h3>Review</h3></th>
+        <th><h3>Retake</h3></th>
           </tr>
         </thead>
             <tbody>
@@ -35,6 +36,7 @@
                 <td style='text-align:center';>{{his.suTestMode}}</td>
                 <td style='text-align:center';>{{his.testDate}}</td>
                 <td><a ng-href="#!/suTestSummary/{{his.userID}}/{{his.suTestID}}/{{his.suTestMode}}/{{his.suTestStartAt}}">Review</a></td>
+                <td><a ng-href="#!/suNewTest/{{userID}}/{{his.testID}}/{{his.suTestNumber}}">Retake</a></td>
               </tr>
             </tbody>
       </table>

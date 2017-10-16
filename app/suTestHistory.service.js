@@ -8,58 +8,66 @@ function suTestHistoryService($http, $route, $q, $window) {
 
        if ($route.current.params.suTestQuestionNumber==='1') {
 
-       var registerSuTestHistoryUrl = '/registerSuTestHistory/'+$window.sessionStorage.userID+'/'+
-                                        $window.sessionStorage.suTestID+'/'+
-                                        $window.sessionStorage.suTestMode+'/'+
-                                        $window.sessionStorage.suTestStartAt;
+         console.log('at suTestHistoryService: registerSuTestHistory');
 
-       var deferred = $q.defer();
+         var suTestInfo = {'testID': $window.sessionStorage.testID,
+                           'suTestNumber': $window.sessionStorage.suTestNumber};
 
-       $http({
-         url: registerSuTestHistoryUrl,
-         method: 'POST',
-         headers: {
-           'Authorization': 'JWT ' + $window.sessionStorage.token
-           }
-       }).then(function successCallback(response) {
+         console.log(suTestInfo);
 
-         deferred.resolve(response.data);
+         var registerSuTestHistoryUrl = '/registerSuTestHistory/'+$window.sessionStorage.userID+'/'+
+                                          $window.sessionStorage.suTestID+'/'+
+                                          $window.sessionStorage.suTestMode+'/'+
+                                          $window.sessionStorage.suTestStartAt;
 
-       },function errorCallback(response){
+         var deferred = $q.defer();
 
-       });
-       return  deferred.promise;
-     }
-     else {
-        return 'registered';
-    }
-     },
+         $http({
+           url: registerSuTestHistoryUrl,
+           method: 'POST',
+           data: suTestInfo,
+           headers: {
+             'Authorization': 'JWT ' + $window.sessionStorage.token
+             }
+         }).then(function successCallback(response) {
 
-     getSuTestHistory : function() {
+           deferred.resolve(response.data);
 
-       console.log('at suTestHistoryService: getSuTestHistory');
+         },function errorCallback(response){
 
-       var getSuTestHistoryUrl = '/getSuTestHistory/'+$window.sessionStorage.userID;
+         });
+         return  deferred.promise;
+       }
+       else {
+          return 'registered';
+      }
+       },
 
-       console.log(getSuTestHistoryUrl);
+       getSuTestHistory : function() {
 
-       var deferred = $q.defer();
+         console.log('at suTestHistoryService: getSuTestHistory');
 
-       $http({
-         url: getSuTestHistoryUrl,
-         method: 'GET',
-         headers: {
-           'Authorization': 'JWT ' + $window.sessionStorage.token
-           }
-       }).then(function successCallback(response) {
+         var getSuTestHistoryUrl = '/getSuTestHistory/'+$window.sessionStorage.userID;
 
-         deferred.resolve(response.data);
+         console.log(getSuTestHistoryUrl);
 
-       },function errorCallback(response){
+         var deferred = $q.defer();
 
-       });
-       return  deferred.promise;
+         $http({
+           url: getSuTestHistoryUrl,
+           method: 'GET',
+           headers: {
+             'Authorization': 'JWT ' + $window.sessionStorage.token
+             }
+         }).then(function successCallback(response) {
 
+           deferred.resolve(response.data);
+
+         },function errorCallback(response){
+
+         });
+         return  deferred.promise;
+
+       }
      }
    }
- }
