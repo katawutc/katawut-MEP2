@@ -31,9 +31,6 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
 
     if (newSuTestID) {
 
-      console.log('received new suTestID to display on view');
-      console.log(newSuTestID);
-
       $scope.dashboardTest1 = newSuTestID.newTest1.suTestID;
       $scope.testID1 = newSuTestID.newTest1.testID;
       $scope.testRunningNumber1 = newSuTestID.newTest1.suTestNumber;
@@ -42,33 +39,5 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
       $scope.testID2 = newSuTestID.newTest2.testID;
       $scope.testRunningNumber2 = newSuTestID.newTest2.suTestNumber;
     }
-
-
-
-
-
-
-
-/**
-    if (suDashboardTest) {
-
-      $scope.testRunningNumber01 = 01;
-      $scope.testRunningNumber02 = 02;
-
-      $scope.newTestID = suDashboardTest.userLevel+'-'+
-                          suDashboardTest.userPreferTest+'-'+
-                            suDashboardTest.userPreferSubject;
-
-      $scope.dashboardTest1 = $scope.newTestID+'-'+$scope.testRunningNumber01;
-
-      $scope.dashboardTest2 = $scope.newTestID+'-'+$scope.testRunningNumber02;
-    }
-
-    else {
-      // other error case
-    }
-
-    */
-
 
   }

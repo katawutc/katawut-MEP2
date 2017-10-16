@@ -13,6 +13,8 @@ function suNewTestCtrl($scope, $http, $route,
     //$scope.suTestID = suNewTestInfo.suTestID;
     $scope.testDescription = suNewTestHeader.testDescription;
 
+    $scope.suTestNumber = $route.current.params.testRunningNumber;
+
     console.log(newSuTest);
     if (newSuTest) {
 
@@ -22,6 +24,7 @@ function suNewTestCtrl($scope, $http, $route,
     $scope.startTestTutorialMode = function() {
 
       $window.sessionStorage.testID = $scope.testID;
+      $window.sessionStorage.suTestNumber = $scope.suTestNumber;
       $window.sessionStorage.suTestID = $scope.suTestID; // suTestID
       $window.sessionStorage.suTestMode = 'tutorial';
       $window.sessionStorage.suTestSize = newSuTest.suTestSize;

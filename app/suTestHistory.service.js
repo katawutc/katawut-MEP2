@@ -10,8 +10,10 @@ function suTestHistoryService($http, $route, $q, $window) {
 
          console.log('at suTestHistoryService: registerSuTestHistory');
 
-         var testID = {'testID': $window.sessionStorage.testID};
-         console.log(testID);
+         var suTestInfo = {'testID': $window.sessionStorage.testID,
+                           'suTestNumber': $window.sessionStorage.suTestNumber};
+
+         console.log(suTestInfo);
 
          var registerSuTestHistoryUrl = '/registerSuTestHistory/'+$window.sessionStorage.userID+'/'+
                                           $window.sessionStorage.suTestID+'/'+
@@ -23,7 +25,7 @@ function suTestHistoryService($http, $route, $q, $window) {
          $http({
            url: registerSuTestHistoryUrl,
            method: 'POST',
-           data: testID,
+           data: suTestInfo,
            headers: {
              'Authorization': 'JWT ' + $window.sessionStorage.token
              }

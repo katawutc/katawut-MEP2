@@ -9,6 +9,8 @@ function suTestHistoryCtrl($scope, $http, $routeParams,
 
   $scope.userName = $window.sessionStorage.userName;
 
+  $scope.userID = $window.sessionStorage.userID;
+
   // need to think when the array is very big, too big for looping; to do pagination
   for (var i=0; i<suTestHistory.length; i++) {
     var testDate = parseInt(suTestHistory[i].suTestStartAt);
@@ -16,6 +18,7 @@ function suTestHistoryCtrl($scope, $http, $routeParams,
     console.log(suTestHistory[i].testDate);
   }
 
+  console.log(suTestHistory);
   $scope.testHistory = suTestHistory;
 
 }

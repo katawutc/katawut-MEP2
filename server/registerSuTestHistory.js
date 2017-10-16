@@ -6,6 +6,7 @@ module.exports = function registerSuTestHistory(req, res) {
   console.log('at server: registerSuTestHistory');
 
   console.log(req.body.testID);
+  console.log(req.body.suTestNumber);
 
   function removeSuTestIDFromNewSuTest() {
 
@@ -48,10 +49,11 @@ module.exports = function registerSuTestHistory(req, res) {
 
   db.collection('suTestHistory')
   .insert({userID: req.params.userID,
+            testID: req.body.testID,
+            suTestNumber: req.body.suTestNumber,
             suTestID: req.params.suTestID,
             suTestMode: req.params.suTestMode,
             suTestStartAt: req.params.suTestStartAt},
             registerSuTest);
-
 
 }
