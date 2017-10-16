@@ -11,17 +11,20 @@ module.exports = function suTestCheckAnswer(req, res) {
         if (req.body.answer === doc.solution) {
 
           //suTestHistory
-          db.collection('suTestAnswerSheet').update({userID: req.body.userID,
-                                                 suTestID: req.body.suTestID,
-                                                 suTestMode: req.body.suTestMode,
-                                                 suTestStartAt: req.body.suTestStartAt,
-                                                 suTestQuestionNumber: req.body.suTestQuestionNumber},
-                                                    {$set:
-                                                      {
-                                                        suTestAnswer: req.body.answer,
-                                                        suTestResult: 'correct'
-                                                      }
-                                                    }, cb);
+          db.collection('suTestAnswerSheet')
+          .update({userID: req.body.userID,
+                   testID: req.body.testID,
+                   suTestNumber: req.body.suTestNumber,
+                   suTestID: req.body.suTestID,
+                   suTestMode: req.body.suTestMode,
+                   suTestStartAt: req.body.suTestStartAt,
+                   suTestQuestionNumber: req.body.suTestQuestionNumber},
+                   { $set:
+                      {
+                        suTestAnswer: req.body.answer,
+                        suTestResult: 'correct'
+                      }
+                   }, cb);
 
           function cb(err, doc) {
             if (err) throw err;
@@ -34,17 +37,20 @@ module.exports = function suTestCheckAnswer(req, res) {
         else if (req.body.answer !== doc.solution) {
 
           //suTestHistory
-          db.collection('suTestAnswerSheet').update({userID: req.body.userID,
-                                                 suTestID: req.body.suTestID,
-                                                 suTestMode: req.body.suTestMode,
-                                                 suTestStartAt: req.body.suTestStartAt,
-                                                 suTestQuestionNumber: req.body.suTestQuestionNumber},
-                                                    {$set:
-                                                      {
-                                                        suTestAnswer: req.body.answer,
-                                                        suTestResult: 'wrong'
-                                                      }
-                                                    }, cb);
+          db.collection('suTestAnswerSheet')
+          .update({userID: req.body.userID,
+                   testID: req.body.testID,
+                   suTestNumber: req.body.suTestNumber,
+                   suTestID: req.body.suTestID,
+                   suTestMode: req.body.suTestMode,
+                   suTestStartAt: req.body.suTestStartAt,
+                   suTestQuestionNumber: req.body.suTestQuestionNumber},
+                      {$set:
+                        {
+                          suTestAnswer: req.body.answer,
+                          suTestResult: 'wrong'
+                        }
+                      }, cb);
 
           function cb(err, doc) {
             if (err) throw err;

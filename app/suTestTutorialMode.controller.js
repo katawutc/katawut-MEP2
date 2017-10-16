@@ -61,6 +61,7 @@ function suTestTutorialModeCtrl($scope, $http, $route,
 
       var answerJSON = {userID: $window.sessionStorage.userID,
                         testID: $scope.testID, // main testID
+                        suTestNumber: $window.sessionStorage.suTestNumber,
                         suTestID: $window.sessionStorage.suTestID,
                         suTestMode: $window.sessionStorage.suTestMode,
                         suTestStartAt : $window.sessionStorage.suTestStartAt,
