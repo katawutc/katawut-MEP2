@@ -109,6 +109,8 @@
 <script type='text/javascript' src='secondNavBar.su.directive.js'> </script>
 <script type='text/javascript' src='secondNavBar.su.controller.js'> </script>
 
+<script type='text/javascript' src='socket.service.js'> </script>
+
 
 <!-- bootstrap3 -->
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -127,9 +129,11 @@
 
 <body ng-app='app'>
 
+<!--
   <script>
     var socket = io();
   </script>
+-->
 
 <div id="loaderdiv" data-ng-if="loading">
     <img src="image/loading.gif" class="ajax-loader"/>
