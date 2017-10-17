@@ -74,12 +74,24 @@ mongo.connectMongoDB( function() {
 });
 
 /** handle io connection */
-io.on('connection', function (socket) {
-    console.log("Connected succesfully to the socket ...");
+io.on('connection', function(socket) {
+    console.log('Connected succesfully to the socket ...');
     socket.on('disconnect', function(){
       console.log('a user disconnected');
     });
+
+    socket.on('suConnect', function(data){
+      console.log(data + ' connected to the server.');
+    })
 });
+
+/*
+io.on('suConnect', function(data) {
+  console.log(data + ' connected to the server.');
+})
+*/
+
+/** end of handle io connection */
 
 /** fb log in callback */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email']}));

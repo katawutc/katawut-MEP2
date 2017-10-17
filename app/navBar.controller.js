@@ -1,9 +1,9 @@
 angular.module('app').controller('navBarController',
                                 ['$q', '$scope', '$http', '$location',
-                                 '$window', 'socketService',
+                                 '$window', /*'socketService',*/
                                   navBarController]);
 
-function navBarController ($q, $scope, $http, $location, $window, socketService) {
+function navBarController ($q, $scope, $http, $location, $window /*, socketService*/) {
 
     $scope.logIn = false;
 

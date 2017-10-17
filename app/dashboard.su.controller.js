@@ -1,16 +1,24 @@
-angular.module('app').controller('dashboardSuCtrl',
-  ['$scope', '$http', '$location', '$window', '$routeParams',
-    'suAccountData', /*'suDashboardTest',*/ 'newSuTestID', dashboardSuCtrl]);
+angular.module('app')
+.controller('dashboardSuCtrl',
+           ['$scope', '$http', '$location', '$window', '$routeParams',
+            'suAccountData', 'newSuTestID', 'socketService',
+             dashboardSuCtrl]);
 
 function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
                           suAccountData,
-                          /* suDashboardTest, */
-                          newSuTestID /* use suGenerateNewTest service*/) {
+                          newSuTestID, /* use suGenerateNewTest service*/
+                          socketService) {
+
+    /** su emit socket connection */
+    console.log($window.sessionStorage.userID);
+    socketService.emit('suConnect', $window.sessionStorage.userID);
+    //
+
+
 
     /** dashboardData service duplicate with account.admn.service
      *  refactor to a new service name to be generic e.g. suAccountData service
      */
-
     if (suAccountData && suAccountData.errorMessage) {
 
       $window.sessionStorage.setItem('errorMessage', suAccountData.errorMessage);
