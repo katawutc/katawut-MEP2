@@ -12,6 +12,12 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
     /** su emit socket connection */
     console.log($window.sessionStorage.userID);
     socketService.emit('suConnect', $window.sessionStorage.userID);
+
+    socketService.on('greetingSu', function(data){
+
+      console.log('receive greetingSu');
+      console.log(data);
+    })
     //
 
 

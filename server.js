@@ -82,6 +82,8 @@ io.on('connection', function(socket) {
 
     socket.on('suConnect', function(data){
       console.log(data + ' connected to the server.');
+
+      socket.emit('greetingSu', {'message': 'Hello su user!'});
     })
 });
 
