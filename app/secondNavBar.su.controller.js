@@ -27,4 +27,10 @@ function secondNavBarSuCtrl($scope) {
       console.log('close note panel');
     }
   }
+
+  // send chat message
+  $scope.sendMessage = function() {
+      console.log('send chat message');
+      console.log($scope.message);
+  }
 }

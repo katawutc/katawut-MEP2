@@ -1,6 +1,7 @@
   <div ng-controller='secondNavBarSuCtrl'>
     <div class="navbar navbar-default navbar-fixed-top second-navbar" id="su-2nd-nav-bar">
-        <p class="navbar-text">สวัสดี {{userName}} เรามาดู Dashboard กัน</p>
+        <!-- <p class="navbar-text">สวัสดี {{userName}} เรามาดู Dashboard กัน</p> -->
+        <p class="navbar-text">{{suSecondNavBarMessage}}</p>
 
         <ul class="nav navbar-nav pull-right">
           <li><a href="" ng-click="openNotePanel()"><img src="image/note-icon.jpg" style="width:25px;height:25px;border:0;"></a></li>
@@ -18,8 +19,9 @@
     <div class="panel panel-default" id='chatPanel' ng-show='showChatPanel'>
       <div class="panel-heading">Chat panel</div>
       <div class="panel-body">Test chat panel</div>
-      <form action="">
-        <input id="chatPanel-message" autocomplete="off" /><button>Send</button>
+      <form id="chatPanel-message" ng-submit='sendMessage()'>
+        <input type='text' ng-model='message' size='38' autofocus></input>
+        <button type='submit' class='btn btn-success'>Send</button>
       </form>
     </div>
   </div> <!--ng-controller='secondNavBarSuCtrl'-->
