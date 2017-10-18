@@ -1,7 +1,9 @@
 angular.module('app').controller('secondNavBarSuCtrl',
-                                  ['$scope', secondNavBarSuCtrl]);
+                                  ['$scope',
+                                   'suSecondNavBarMessageService',
+                                    secondNavBarSuCtrl]);
 
-function secondNavBarSuCtrl($scope) {
+function secondNavBarSuCtrl($scope, suSecondNavBarMessageService) {
 
   $scope.showNotePanel = false;
   $scope.showChatPanel = false;

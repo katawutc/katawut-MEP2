@@ -25,26 +25,3 @@ function fbLogInStatusService($http, $window, $q) {
     }
   }
 }
-
-
-/**
-
-        $window.FB.getLoginStatus(function(response) {
-          statusChangeCallback(response);
-        });
-
-      function statusChangeCallback(response) {
-
-      if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        // route to the correct user dashboard
-        $window.location.href = '/auth/facebook';
-      }
-      else {
-        $window.location.href = '#!/logIn';
-      }
-    }
-
-    }
-
-**/

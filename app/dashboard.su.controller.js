@@ -2,12 +2,14 @@ angular.module('app')
 .controller('dashboardSuCtrl',
            ['$scope', '$http', '$location', '$window', '$routeParams',
             'suAccountData', 'newSuTestID', 'socketService',
+            'suSecondNavBarMessageService',
              dashboardSuCtrl]);
 
 function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
                           suAccountData,
                           newSuTestID, /* use suGenerateNewTest service*/
-                          socketService) {
+                          socketService,
+                          suSecondNavBarMessageService) {
 
     /** su emit socket connection */
     console.log($window.sessionStorage.userID);
@@ -20,6 +22,11 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
     })
     //
 
+    /** set suSecondNavBarMessage */
+    var message = 'สวัสดี '+ $window.sessionStorage.userName +
+                  ' เรา มาดู Dashboard กัน';
+    suSecondNavBarMessageService.setMessage(message);
+    /** */
 
 
     /** dashboardData service duplicate with account.admn.service
