@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('secondNavBarSuCtrl',
-           ['$scope',
+           ['$scope', '$window',
             'suSecondNavBarMessageService',
             'socketService',
              secondNavBarSuCtrl]);
 
-function secondNavBarSuCtrl($scope,
+function secondNavBarSuCtrl($scope, $window,
                             suSecondNavBarMessageService,
                             socketService) {
 
@@ -29,7 +29,11 @@ function secondNavBarSuCtrl($scope,
       console.log($scope.message);
 
 
-      socketService.emit('chat', $scope.message);
+      var message = {'userID': $window.sessionStorage.userID,
+                     'sentTime': Date.now(),
+                     'message': $scope.message}
+
+      socketService.emit('chat', message);
 
       $scope.message = null;
   }
