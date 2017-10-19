@@ -19,9 +19,9 @@
     <div class="panel panel-default" id='chatPanel' ng-show='showChatPanel'>
       <div class="panel-heading">Chat panel</div>
       <div class="panel-body" id='chatPanelBody'>
-        <table>
+        <table class="table table-striped">
           <tr ng-repeat='m in sentMessage'>
-            <td>{{m}}</td>
+            <td class="break-word">{{m}}</td>
           </tr>
         </table>
       </div>
