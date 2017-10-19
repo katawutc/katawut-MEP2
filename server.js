@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+var socketIO = require('socket.io').listen(server);
 
 var port;
 app.set('port', (process.env.PORT || 5000));
@@ -73,27 +73,8 @@ mongo.connectMongoDB( function() {
   console.log('Node app is running on port', app.get('port'))});
 });
 
-/** handle io connection */
-io.on('connection', function(socket) {
-    console.log('Connected succesfully to the socket ...');
-    socket.on('disconnect', function(){
-      console.log('a user disconnected');
-    });
-
-    socket.on('suConnect', function(data){
-      console.log(data + ' connected to the server.');
-
-      socket.emit('greetingSu', {'message': 'Hello su user!'});
-    })
-});
-
-/*
-io.on('suConnect', function(data) {
-  console.log(data + ' connected to the server.');
-})
-*/
-
-/** end of handle io connection */
+/** handle socket io connection */
+socketIO.on('connection', require('./server/socketIO'));
 
 /** fb log in callback */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email']}));

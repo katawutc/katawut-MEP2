@@ -1,38 +1,34 @@
-angular.module('app').controller('secondNavBarSuCtrl',
-                                  ['$scope',
-                                   'suSecondNavBarMessageService',
-                                    secondNavBarSuCtrl]);
+angular.module('app')
+.controller('secondNavBarSuCtrl',
+           ['$scope',
+            'suSecondNavBarMessageService',
+            'socketService',
+             secondNavBarSuCtrl]);
 
-function secondNavBarSuCtrl($scope, suSecondNavBarMessageService) {
+function secondNavBarSuCtrl($scope,
+                            suSecondNavBarMessageService,
+                            socketService) {
 
+  // shoe chat and note panels should ne $rootScope ?
   $scope.showNotePanel = false;
   $scope.showChatPanel = false;
 
   $scope.openChatPanel = function() {
 
     $scope.showChatPanel = !$scope.showChatPanel;
-    if ($scope.showChatPanel) {
-      console.log('open chat panel');
-    }
-    else if (!$scope.showChatPanel) {
-      console.log('close chat panel');
-    }
   }
 
   $scope.openNotePanel = function() {
 
     $scope.showNotePanel = !$scope.showNotePanel;
-    if ($scope.showNotePanel) {
-      console.log('open note panel');
-    }
-    else if (!$scope.showNotePanel) {
-      console.log('close note panel');
-    }
   }
 
   // send chat message
   $scope.sendMessage = function() {
       console.log('send chat message');
       console.log($scope.message);
+
+
+      socketService.emit('chat', $scope.message);
   }
 }
