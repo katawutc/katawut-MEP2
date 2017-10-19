@@ -30,5 +30,7 @@ function secondNavBarSuCtrl($scope,
 
 
       socketService.emit('chat', $scope.message);
+
+      $scope.message = null;
   }
 }
