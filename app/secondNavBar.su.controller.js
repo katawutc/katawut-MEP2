@@ -24,6 +24,8 @@ function secondNavBarSuCtrl($scope, $window,
   }
 
   // send chat message
+  $scope.sentMessage = [];
+
   $scope.sendMessage = function() {
       console.log('send chat message');
       console.log($scope.message);
@@ -34,6 +36,8 @@ function secondNavBarSuCtrl($scope, $window,
                      'message': $scope.message}
 
       socketService.emit('chat', message);
+
+      $scope.sentMessage.push($scope.message);
 
       $scope.message = null;
   }

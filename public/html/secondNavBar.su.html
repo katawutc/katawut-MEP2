@@ -18,7 +18,13 @@
     <!-- chat panel -->
     <div class="panel panel-default" id='chatPanel' ng-show='showChatPanel'>
       <div class="panel-heading">Chat panel</div>
-      <div class="panel-body">Test chat panel</div>
+      <div class="panel-body" id='chatPanelBody'>
+        <table>
+          <tr ng-repeat='m in sentMessage'>
+            <td>{{m}}</td>
+          </tr>
+        </table>
+      </div>
       <form id="chatPanel-message" ng-submit='sendMessage()'>
         <input type='text' ng-model='message' size='38' autofocus></input>
         <!-- <button type='submit' class='btn btn-success'>Send</button> -->

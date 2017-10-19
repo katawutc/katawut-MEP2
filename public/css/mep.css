@@ -75,6 +75,11 @@
   position: absolute; bottom: 0px;
 }
 
+#chatPanelBody {
+  overflow-y: scroll;
+  height: 250px;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2,1fr);
