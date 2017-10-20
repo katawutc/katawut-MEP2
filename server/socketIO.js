@@ -18,8 +18,13 @@ module.exports = function socketIO(socket) {
 
     socket.on('chat', function(data) {
 
-      console.log(data.message);
+      console.log(data);
 
-      socket.broadcast.emit('chatRoom', data.message);
+      if (data.userRole === 'su') {
+        socket.broadcast.emit('chatRoom', 'you: '+ data.message);
+      }
+      else if (data.userRole === 'ad') {
+        socket.broadcast.emit('chatRoom', 'admin: '+ data.message);
+      }
     })
 }
