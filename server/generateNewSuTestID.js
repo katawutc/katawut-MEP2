@@ -52,14 +52,6 @@ module.exports = function generateNewSuTestID(req, res) {
 
       if (err) throw err;
 
-      console.log('at server: newSuTestIDHistory_cb');
-
-      console.log(count);
-
-      console.log(status);
-
-        // May be wrong here //
-
         var newSuTest = [{'testID': testID,
                           'suTestID': testID+'-'+(runningNumber+1),
                           'suTestNumber': runningNumber+1,
@@ -88,17 +80,6 @@ module.exports = function generateNewSuTestID(req, res) {
 
      if (suTestIDDoc===null) {
 
-       console.log('at checkSuTestIDHistory_cb: suTestIDDoc===null');
-
-       /**
-        * 1. to record the current suTestID setting into suTestIDHistory
-        * 2. change newSuTestIDService to the new suTestID setting
-        */
-
-       console.log(currentSuTestIDService);
-
-       console.log(testID);
-
        // insert new setting //
        // need to check to insert new or old setting
 
@@ -123,18 +104,7 @@ module.exports = function generateNewSuTestID(req, res) {
       }
       else if (suTestIDDoc) { // found doc in the suTestIDHistory
 
-       console.log('at checkSuTestIDHistory_cb: found suTestIDDoc');
-
-       console.log(suTestIDDoc);
-
-       /** to check the size of suTestIDDoc to update suTestIDHistory
-         * 1. runningNumber and new suTestID if needed
-         * 2. update the 'newSuTestIDService' with
-         */
-       console.log('### checksize and update the suTestIDHistory here ###');
-
        if (suTestIDDoc.newTest.length === 2) {
-         console.log('at checkSuTestIDHistory_cb: suTestIDDoc.newTest.length === 2');
 
          // to update newSuTestIDService with suTestIDDoc
          db.collection('newSuTestIDService')
@@ -147,14 +117,11 @@ module.exports = function generateNewSuTestID(req, res) {
 
         // may not need this block; it may already be updated
        if (suTestIDDoc.newTest.length === 1) {
-         console.log('at checkSuTestIDHistory_cb: suTestIDDoc.newTest.length === 1');
 
          var newTest = {'testID': suTestIDDoc.testID,
                         'suTestID': suTestIDDoc.testID+'-'+(suTestIDDoc.runningNumber+1),
                         'suTestNumber': suTestIDDoc.runningNumber+1,
                         'status': 'new'}
-
-         console.log(newTest);
 
          db.collection('suTestIDHistory')
          .update({'userID': userID,
@@ -173,8 +140,6 @@ module.exports = function generateNewSuTestID(req, res) {
               if (err) throw err;
 
               if (doc) {
-
-              console.log(doc);
 
               db.collection('newSuTestIDService')
               .update({'userID': suTestIDDoc.userID},
@@ -196,14 +161,8 @@ module.exports = function generateNewSuTestID(req, res) {
      updateTestID = newTestID;
      updateRunningNumber = varRunningNumber;
 
-     console.log('at server: updateNewTest');
-
      /** there will be 2 new tests presented at one time */
      if (existingTestIDDoc.testID === newTestID && existingTestIDDoc.newTest.length === 2) {
-
-
-        console.log('at existingTestIDDoc.testID === newTestID &&'+
-                      'existingTestIDDoc.newTest.length === 2');
 
          res.json({newTest1: existingTestIDDoc.newTest[0],
                    newTest2: existingTestIDDoc.newTest[1]});
@@ -212,9 +171,6 @@ module.exports = function generateNewSuTestID(req, res) {
      if (existingTestIDDoc.testID === newTestID && existingTestIDDoc.newTest.length === 1) {
          // set new runningNumber + 1
          // push new test into the array
-
-         console.log('at server: existingTestIDDoc.testID === newTestID && existingTestIDDoc.newTest.length === 1');
-
          var currentRunningNumber = existingTestIDDoc.runningNumber;
 
          var newRunningNumber = currentRunningNumber + 1;
@@ -244,26 +200,6 @@ module.exports = function generateNewSuTestID(req, res) {
 
      // implement the new setting testID here
      if (existingTestIDDoc.testID !== newTestID) {
-
-       /**
-        * 1. check if testID is existed in the suTest DB and it's current running number
-        * 2. if testID not existed in the suTest DB, generate a new one
-        */
-
-        /**
-         * To implement logic of changing testID and suTestID
-         * 1. to have another DB collection: suTestIDHistory
-         * 2. to record the latest test runningNumber
-         * 3. to record the latest suTestID on dashboard
-         ***
-         * 4. if the new testID is in the suTestIDHistory \
-         *    take the data and display
-         * 5. if not create the new one
-         */
-
-         /*******/
-
-         console.log('at existingTestIDDoc.testID !== newTestID');
 
          currentSuTestIDService = existingTestIDDoc;
 
@@ -313,17 +249,12 @@ module.exports = function generateNewSuTestID(req, res) {
      if (err) throw err;
      if (existingTestIDDoc === null) {
 
-       console.log('at server: generateNewSuTestID: existingTestIDDoc === null');
-
        insertNewTest(userID,
                       testID, /*new one*/
                       runningNumber);
 
      }
      if (existingTestIDDoc !== null) {
-
-       // 1st find the current situation of the newSuTestIDService
-       console.log('at server: generateNewSuTestID: existingTestIDDoc !== null');
 
        /** check suTestHistory here for the latest running number
          * 1. check 'suTestHistory' to get the latest running number
@@ -345,11 +276,6 @@ module.exports = function generateNewSuTestID(req, res) {
                     setting.userPreferSubject;
 
           runningNumber = 0;
-
-          console.log('************************************');
-          console.log('at server: generateTestIDWithSetting');
-          console.log(userID);
-          console.log(testID);
 
           // find the userID in the newSuTestIDService DB
           db.collection('newSuTestIDService')
