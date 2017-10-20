@@ -21,10 +21,10 @@ module.exports = function socketIO(socket) {
       console.log(data);
 
       if (data.userRole === 'su') {
-        socket.broadcast.emit('chatRoom', 'you: '+ data.message);
+        socket.broadcast.emit('chatRoom', 'su: '+ data.message);
       }
       else if (data.userRole === 'ad') {
-        socket.broadcast.emit('chatRoom', 'admin: '+ data.message);
+        socket.broadcast.emit('chatRoom', 'Admin: '+ data.message);
       }
     })
 }
