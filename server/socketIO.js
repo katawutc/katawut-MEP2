@@ -7,13 +7,19 @@ module.exports = function socketIO(socket) {
     });
 
     socket.on('suConnect', function(userID) {
-      console.log(userID + ' connected to the server.');
+      console.log('su: '+ userID + ' connected to the server.');
 
       socket.emit('greetingSu', {'message': 'Hello su user!'});
     })
 
-    socket.on('chat', function(message) {
+    socket.on('adConnect', function(userID) {
+      console.log('ad: '+ userID + ' connected to the server.');
+    })
 
-      console.log(message);
+    socket.on('chat', function(data) {
+
+      console.log(data.message);
+
+      socket.broadcast.emit('chatRoom', data.message);
     })
 }

@@ -33,12 +33,18 @@ function secondNavBarSuCtrl($scope, $window,
 
       var message = {'userID': $window.sessionStorage.userID,
                      'sentTime': Date.now(),
-                     'message': $scope.message}
+                     'message': $window.sessionStorage.userID+': '+ $scope.message}
 
       socketService.emit('chat', message);
 
-      $scope.sentMessage.push($scope.message);
+      //$scope.sentMessage.push($scope.message);
 
       $scope.message = null;
   }
+
+  socketService.on('chatRoom', function(message) {
+
+    console.log(message);
+    $scope.sentMessage.push(message);
+  })
 }
