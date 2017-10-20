@@ -16,6 +16,8 @@ function secondNavBarSuCtrl($scope, $window,
   $scope.openChatPanel = function() {
 
     $scope.showChatPanel = !$scope.showChatPanel;
+
+    $window.document.getElementById('chatPanel-message-input').focus();
   }
 
   $scope.openNotePanel = function() {
