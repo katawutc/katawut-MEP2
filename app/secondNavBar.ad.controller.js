@@ -1,12 +1,10 @@
 angular.module('app')
 .controller('secondNavBarAdCtrl',
            ['$scope', '$window',
-            /*'suSecondNavBarMessageService',*/
             'socketService',
              secondNavBarAdCtrl]);
 
 function secondNavBarAdCtrl($scope, $window,
-                          /*  suSecondNavBarMessageService, */
                             socketService) {
 
   // shoe chat and note panels should ne $rootScope ?

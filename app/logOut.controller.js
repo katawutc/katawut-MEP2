@@ -1,9 +1,12 @@
 
-angular.module('app').controller('logOutCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location', 'fbLogInStatus',
-  logOutCtrl]);
+angular.module('app')
+.controller('logOutCtrl',
+           ['$scope', '$http', '$routeParams', '$window', '$location', '$rootScope',
+            'fbLogInStatus',
+             logOutCtrl]);
 
-function logOutCtrl($scope, $http, $routeParams, $window, $location, fbLogInStatus) {
+function logOutCtrl($scope, $http, $routeParams, $window, $location, $rootScope,
+                    fbLogInStatus) {
 
     // To implement asynchronous function before pass message to view
     $window.sessionStorage.clear();
@@ -16,5 +19,9 @@ function logOutCtrl($scope, $http, $routeParams, $window, $location, fbLogInStat
     }
 
     $scope.message = 'You have successfully logged out.';
+
+    // clear the $rootScope
+    // need to find a better way to clear the $rootScope
+    $rootScope.suSecondNavBarMessage = null;
 
   }
