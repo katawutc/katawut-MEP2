@@ -9,14 +9,31 @@
     </div>
 
     <!-- note panel -->
-    <div class="panel panel-default" id='notePanel' ng-show='showNotePanel'>
-      <label for="note">Note</label>
-      <textarea class="form-control" rows='10' column='50' id='note'></textarea>
-    </div>
+      <div class="panel panel-primary" id='notePanel' ng-show='showNotePanel'>
+          <div class="panel-heading">
+            <div class="panel-title pull-left">
+            Quick note
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-body"><form>
+            <div class="form-group">
+              <input id='quickNoteTitle' type='text' ng-model='quickNoteTitle' size='40' autofocus></input>
+            </div>
+        <div class="form-group">
+            <textarea class="form-control" rows='10' column='50' id='note'></textarea>
+        </div>
+          </form>
+        </div>
+      </div>
+
 
     <!-- chat panel -->
-    <div class="panel panel-default" id='chatPanel' ng-show='showChatPanel'>
-      <div class="panel-heading">Chat panel</div>
+    <div class="panel panel-primary" id='chatPanel' ng-show='showChatPanel'>
+      <div class="panel-heading">
+        <div class="panel-title pull-left">Chat panel</div>
+        <div class="clearfix"></div>
+      </div>
       <div class="panel-body" id='chatPanelBody' scroll-glue>
         <table class="table table-striped">
           <tr ng-repeat='m in sentMessage track by $index'>

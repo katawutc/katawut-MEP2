@@ -59,8 +59,16 @@
   width: 24%; /* 100% width */
   left: 75%;
   height: 325px;
-  text-align: center; /* Centered text/links */
+  text-align: left; /* Centered text/links */
   z-index: 20;
+}
+
+#notePanel a {
+  font-weight: bold;
+}
+
+.panel-title {
+  text-align: center;
 }
 
 #chatPanel {
