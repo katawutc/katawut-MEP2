@@ -15,8 +15,8 @@
               Quick note
             </div>
             <div class="panel-title pull-right">
-              <span class="glyphicon glyphicon-plus"></span>
-              <span class="glyphicon glyphicon-remove"></span>
+              <a href='' ng-click=''><span class="glyphicon glyphicon-plus"></span></a>
+              <a href='' ng-click=''><span class="glyphicon glyphicon-remove"></span></a>
               <!--img src="image/close.png" style="width:20px;height:20px;border:0;"-->
             </div>
             <div class="clearfix"></div>
@@ -24,8 +24,7 @@
           <div class="panel-body"><form>
             <div class="form-group">
               <input id='quickNoteTitle' type='text'
-                ng-model='quickNoteTitle'
-                size='35' placeholder=' Note title' autofocus>
+                ng-model='quickNoteTitle' placeholder=' Note title' autofocus>
               </input>
             </div>
         <div class="form-group">
@@ -42,7 +41,7 @@
       <div class="panel-heading">
         <div class="panel-title pull-left">Chat panel</div>
         <div class="panel-title pull-right">
-          <span class="glyphicon glyphicon-remove"></span>
+          <a href='' ng-click=''><span class="glyphicon glyphicon-remove"></span></a>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -54,7 +53,7 @@
         </table>
       </div>
       <form id="chatPanel-message" ng-submit='sendMessage()'>
-        <input id="chatPanel-message-input" type='text' ng-model='message' size='38'
+        <input id="chatPanel-message-input" type='text' ng-model='message'
                 placeholder=' Type message here ...' autofocus>
         </input>
         <!-- <button type='submit' class='btn btn-success'>Send</button> -->
