@@ -2,7 +2,10 @@
 // Katawut Chuasiripattana
 var http = require('http');
 var express = require('express');
+var compression = require('compression');
 var app = express();
+
+app.use(compression());
 
 var server = http.createServer(app);
 var socketIO = require('socket.io').listen(server);
