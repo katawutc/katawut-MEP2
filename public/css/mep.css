@@ -59,7 +59,7 @@
   width: 24%; /* 100% width */
   left: 75%;
   height: 325px;
-  text-align: left; /* Centered text/links */
+  /*text-align: left; Centered text/links */
   z-index: 20;
 }
 
