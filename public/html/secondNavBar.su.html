@@ -8,34 +8,6 @@
         </ul>
     </div>
 
-    <!-- note panel -->
-      <div class="panel panel-primary" id='notePanel' ng-show='showNotePanel'>
-          <div class="panel-heading">
-            <div class="panel-title pull-left">
-              Quick note
-            </div>
-            <div class="panel-title pull-right">
-              <a href='' ng-click='newNote()'><span class="glyphicon glyphicon-plus"></span></a>
-              <a href='' ng-click='openNotePanel()'><span class="glyphicon glyphicon-remove"></span></a>
-              <!--img src="image/close.png" style="width:20px;height:20px;border:0;"-->
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <div class="panel-body"><form>
-            <div class="form-group">
-              <input id='quickNoteTitle' type='text'
-                ng-model='quickNoteTitle' placeholder=' Note title' autofocus>
-              </input>
-            </div>
-        <div class="form-group">
-            <textarea class="form-control" rows='9' column='50' id='note'>
-            </textarea>
-        </div>
-          </form>
-        </div>
-      </div>
-
-
     <!-- chat panel -->
     <div class="panel panel-primary" id='chatPanel' ng-show='showChatPanel'>
       <div class="panel-heading">
@@ -59,4 +31,37 @@
         <!-- <button type='submit' class='btn btn-success'>Send</button> -->
       </form>
     </div>
+
   </div> <!--ng-controller='secondNavBarSuCtrl'-->
+  
+  <note-panel></note-panel>
+
+
+    <!-- note panel -->
+    <!--
+      <div class="panel panel-primary" id='notePanel' ng-show='showNotePanel'>
+          <div class="panel-heading">
+            <div class="panel-title pull-left">
+              Quick note
+            </div>
+            <div class="panel-title pull-right">
+              <a href='' ng-click='newNote()'><span class="glyphicon glyphicon-plus"></span></a>
+              <a href='' ng-click='openNotePanel()'><span class="glyphicon glyphicon-remove"></span></a>
+              <!--img src="image/close.png" style="width:20px;height:20px;border:0;"
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-body"><form>
+            <div class="form-group">
+              <input id='quickNoteTitle' type='text'
+                ng-model='quickNoteTitle' placeholder=' Note title' autofocus>
+              </input>
+            </div>
+        <div class="form-group">
+            <textarea class="form-control" rows='9' column='50' id='note'>
+            </textarea>
+        </div>
+          </form>
+        </div>
+      </div>
+      -->

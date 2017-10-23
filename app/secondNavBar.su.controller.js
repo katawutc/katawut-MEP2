@@ -12,7 +12,7 @@ function secondNavBarSuCtrl($scope, $rootScope,
                             socketService) {
 
   // shoe chat and note panels should ne $rootScope ?
-  $rootScope.showNotePanel  = false;
+  $rootScope.showNotePanel  = true;
   $scope.showChatPanel = false;
 
   $scope.openChatPanel = function() {
@@ -28,7 +28,7 @@ function secondNavBarSuCtrl($scope, $rootScope,
   }
 
   $rootScope.newNote = function() {
-    
+
     console.log('create a new note');
   }
 
