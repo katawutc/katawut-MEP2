@@ -3,18 +3,13 @@ angular.module('app')
            ['$scope', '$http', '$location', '$window', '$routeParams',
             'suAccountData', 'newSuTestID', 'socketService',
             'suSecondNavBarMessageService',
-            'initializeNotePanel',
              dashboardSuCtrl]);
 
 function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
                           suAccountData,
                           newSuTestID, /* use suGenerateNewTest service*/
                           socketService,
-                          suSecondNavBarMessageService,
-                          initializeNotePanel) {
-
-    console.log('initializeNotePanel: '+initializeNotePanel);
-
+                          suSecondNavBarMessageService) {
 
     /** su emit socket connection */
     socketService.emit('suConnect', $window.sessionStorage.userID);

@@ -1,0 +1,25 @@
+<!-- chat panel -->
+<div ng-controller='chatPanelCtrl'>
+  <div class="panel panel-primary" id='chatPanel' ng-show='showChatPanel'>
+    <div class="panel-heading">
+      <div class="panel-title pull-left">Chat panel</div>
+      <div class="panel-title pull-right">
+        <a href='' ng-click='openChatPanel()'><span class="glyphicon glyphicon-remove"></span></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body" id='chatPanelBody' scroll-glue>
+      <table class="table table-striped">
+        <tr ng-repeat='m in sentMessage track by $index'>
+          <td class="break-word">{{m}}</td>
+        </tr>
+      </table>
+    </div>
+    <form id="chatPanel-message" ng-submit='sendMessage()'>
+      <input id="chatPanel-message-input" type='text' ng-model='message'
+              placeholder=' Type message here ...' autofocus>
+      </input>
+      <!-- <button type='submit' class='btn btn-success'>Send</button> -->
+    </form>
+  </div>
+</div>

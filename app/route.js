@@ -95,9 +95,6 @@ angular.module('app')
         },
         newSuTestID : function (newSuTestIDService){
           return newSuTestIDService.generateNewSuTestID();
-        },
-        initializeNotePanel : function (notePanelService){
-          return notePanelService.initializeNotePanel();
         }
       }
     })

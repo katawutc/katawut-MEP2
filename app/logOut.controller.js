@@ -23,5 +23,6 @@ function logOutCtrl($scope, $http, $routeParams, $window, $location, $rootScope,
     // clear the $rootScope
     // need to find a better way to clear the $rootScope
     $rootScope.suSecondNavBarMessage = null;
-
+    $rootScope.showChatPanel = false;
+    $rootScope.showNotePanel = false;
   }

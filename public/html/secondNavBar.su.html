@@ -7,61 +7,8 @@
           <li><a href="" ng-click="openChatPanel()"><img src="image/chat-icon.png" style="width:25px;height:25px;border:0;"></a></li>
         </ul>
     </div>
+</div> <!--ng-controller='secondNavBarSuCtrl'-->
 
-    <!-- chat panel -->
-    <div class="panel panel-primary" id='chatPanel' ng-show='showChatPanel'>
-      <div class="panel-heading">
-        <div class="panel-title pull-left">Chat panel</div>
-        <div class="panel-title pull-right">
-          <a href='' ng-click='openChatPanel()'><span class="glyphicon glyphicon-remove"></span></a>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="panel-body" id='chatPanelBody' scroll-glue>
-        <table class="table table-striped">
-          <tr ng-repeat='m in sentMessage track by $index'>
-            <td class="break-word">{{m}}</td>
-          </tr>
-        </table>
-      </div>
-      <form id="chatPanel-message" ng-submit='sendMessage()'>
-        <input id="chatPanel-message-input" type='text' ng-model='message'
-                placeholder=' Type message here ...' autofocus>
-        </input>
-        <!-- <button type='submit' class='btn btn-success'>Send</button> -->
-      </form>
-    </div>
+<chat-panel></chat-panel>
 
-  </div> <!--ng-controller='secondNavBarSuCtrl'-->
-  
-  <note-panel></note-panel>
-
-
-    <!-- note panel -->
-    <!--
-      <div class="panel panel-primary" id='notePanel' ng-show='showNotePanel'>
-          <div class="panel-heading">
-            <div class="panel-title pull-left">
-              Quick note
-            </div>
-            <div class="panel-title pull-right">
-              <a href='' ng-click='newNote()'><span class="glyphicon glyphicon-plus"></span></a>
-              <a href='' ng-click='openNotePanel()'><span class="glyphicon glyphicon-remove"></span></a>
-              <!--img src="image/close.png" style="width:20px;height:20px;border:0;"
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <div class="panel-body"><form>
-            <div class="form-group">
-              <input id='quickNoteTitle' type='text'
-                ng-model='quickNoteTitle' placeholder=' Note title' autofocus>
-              </input>
-            </div>
-        <div class="form-group">
-            <textarea class="form-control" rows='9' column='50' id='note'>
-            </textarea>
-        </div>
-          </form>
-        </div>
-      </div>
-      -->
+<note-panel></note-panel>

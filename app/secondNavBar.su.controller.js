@@ -11,13 +11,9 @@ function secondNavBarSuCtrl($scope, $rootScope,
                             suSecondNavBarMessageService,
                             socketService) {
 
-  // shoe chat and note panels should ne $rootScope ?
-  //$rootScope.showNotePanel  = true;
-  $scope.showChatPanel = false;
+  $rootScope.openChatPanel = function() {
 
-  $scope.openChatPanel = function() {
-
-    $scope.showChatPanel = !$scope.showChatPanel;
+    $rootScope.showChatPanel = !rootScope.showChatPanel;
 
     $window.document.getElementById('chatPanel-message-input').focus();
   }
