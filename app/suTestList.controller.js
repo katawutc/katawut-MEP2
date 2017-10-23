@@ -1,12 +1,22 @@
-angular.module('app').controller('suTestListCtrl',
-  ['$scope', '$http', '$routeParams', '$window',
-    '$location', 'suDashboardTest', suTestListCtrl]);
+angular.module('app')
+.controller('suTestListCtrl',
+           ['$scope', '$http', '$routeParams', '$window',
+            '$location', 'suDashboardTest',
+            'suSecondNavBarMessageService',
+             suTestListCtrl]);
 
 function suTestListCtrl ($scope, $http, $routeParams,
-                          $window, $location, suDashboardTest) {
+                         $window, $location, suDashboardTest,
+                         suSecondNavBarMessageService) {
 
     $scope.userName = $window.sessionStorage.userName;
     $scope.userID = $window.sessionStorage.userID;
+
+    /** set suSecondNavBarMessage */
+    var message = 'สวัสดี '+ $window.sessionStorage.userName +
+                  ' เรามาดู Test list กัน';
+    suSecondNavBarMessageService.setMessage(message);
+    /** */
 
     if (suDashboardTest /*&& !suDashboardTest.errorMessage*/) {
       $scope.dashboardTest1 = suDashboardTest.userLevel+'-'+
