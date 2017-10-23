@@ -25,4 +25,5 @@ function logOutCtrl($scope, $http, $routeParams, $window, $location, $rootScope,
     $rootScope.suSecondNavBarMessage = null;
     $rootScope.showChatPanel = false;
     $rootScope.showNotePanel = false;
+    $rootScope.message = null;
   }

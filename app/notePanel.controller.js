@@ -9,4 +9,8 @@ function notePanelCtrl($rootScope) {
     $rootScope.showNotePanel = !$rootScope.showNotePanel;
   }
 
+  $rootScope.newNote = function() {
+
+    console.log('create a new note');
+  }
 }
