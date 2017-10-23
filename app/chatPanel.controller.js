@@ -13,7 +13,7 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService) {
   }
 
     // send chat message
-    $scope.sentMessage = [];
+    //$rootScope.sentMessage = [];
 
     $scope.sendMessage = function() {
         console.log('send chat message');
@@ -27,7 +27,7 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService) {
 
         socketService.emit('chat', message);
 
-        $scope.sentMessage.push('You: '+$scope.message);
+        $rootScope.sentMessage.push('You: '+$scope.message);
 
         $scope.message = null;
     }

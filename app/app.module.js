@@ -10,4 +10,6 @@ function initializeNoteChatPanel($rootScope) {
 
   $rootScope.showChatPanel = false;
   $rootScope.showNotePanel = false;
+
+  $rootScope.sentMessage = [];
 }
