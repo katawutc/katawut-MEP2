@@ -15,11 +15,20 @@
         </tr>
       </table>
     </div>
-    <form id="chatPanel-message" ng-submit='sendMessage()'>
+    <div id="chatPanel-message">
       <input id="chatPanel-message-input" type='text' ng-show='showChatPanel' focus-on-show
-              ng-model='message'
+              press-Enter='sendMessage()' ng-model='message'
               placeholder=' Type message here ...'>
       </input>
-    </form>
+    </div>
   </div>
 </div>
+
+<!--
+<form id="chatPanel-message" ng-submit='sendMessage()'>
+  <input id="chatPanel-message-input" type='text' ng-show='showChatPanel' focus-on-show
+          ng-model='message'
+          placeholder=' Type message here ...'>
+  </input>
+</form>
+-->
