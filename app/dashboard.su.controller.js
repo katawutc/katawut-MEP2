@@ -12,7 +12,7 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
                           suSecondNavBarMessageService) {
 
     /** su emit socket connection */
-    //socketService.emit('suConnect', $window.sessionStorage.userID);
+    socketService.emit('suConnect', $window.sessionStorage.userID);
     //
 
     /** set suSecondNavBarMessage */
