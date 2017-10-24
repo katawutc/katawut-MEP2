@@ -46,7 +46,7 @@ module.exports = function fbLogIn(req, res) {
 
         var payload = { userID: doc.userID,
                         userRole: doc.userRole};
-        var token = jwt.sign(payload, opts.secretOrKey);
+        var token = jwt.sign(payload, opts.secretOrKey, {expiresIn: 60*60*3});
 
         db.collection('loginHistory').insert({userID: doc.userID,
                                                 loginMethod: 'fb',
