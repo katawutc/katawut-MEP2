@@ -16,8 +16,9 @@
       </table>
     </div>
     <form id="chatPanel-message" ng-submit='sendMessage()'>
-      <input id="chatPanel-message-input" type='text' ng-model='message'
-              placeholder=' Type message here ...' autofocus>
+      <input id="chatPanel-message-input" type='text' ng-show='showChatPanel' focus-on-show
+              ng-model='message'
+              placeholder=' Type message here ...'>
       </input>
     </form>
   </div>

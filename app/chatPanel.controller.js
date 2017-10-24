@@ -7,13 +7,11 @@ angular.module('app')
 
 function chatPanelCtrl($rootScope, $scope, $window, socketService) {
 
-  $rootScope.openChatPanel = function() {
+    $rootScope.openChatPanel = function() {
 
     $rootScope.showChatPanel = !$rootScope.showChatPanel;
-  }
 
-    // send chat message
-    //$rootScope.sentMessage = [];
+  }
 
     $scope.sendMessage = function() {
         console.log('send chat message');
