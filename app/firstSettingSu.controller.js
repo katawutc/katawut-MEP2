@@ -1,9 +1,13 @@
-angular.module('app').controller('firstSettingSuCtrl',
-  ['$scope', '$http', '$routeParams', '$window',
-    '$location', firstSettingSuCtrl]);
+angular.module('app')
+.controller('firstSettingSuCtrl',
+           ['$scope', '$http', '$routeParams', '$window',
+            '$location',
+            'socketService',
+             firstSettingSuCtrl]);
 
 function firstSettingSuCtrl ($scope, $http, $routeParams, $window,
-                            $location) {
+                             $location,
+                             socketService) {
 
   // use DB to fetch this in the future
   $scope.levelList = ['P6', 'M3', 'M6', 'others 1'];
@@ -34,6 +38,9 @@ function firstSettingSuCtrl ($scope, $http, $routeParams, $window,
       // route to the dashboard
 
       $window.sessionStorage.activate = 'true';
+
+      socketService.emit('suConnect', $window.sessionStorage.userID);
+
       $location.path('/dashboard/'+$window.sessionStorage.userRole+'/'+
                       $window.sessionStorage.userID);
     },function errorCallback(response){

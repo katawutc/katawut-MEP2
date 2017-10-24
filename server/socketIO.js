@@ -1,16 +1,17 @@
 
 module.exports = function socketIO(socket) {
 
-    console.log('Connected succesfully to the socket ...');
+    console.log('A user visits the MEP ...');
+
     socket.on('disconnect', function(){
-      console.log('a user disconnected');
+      console.log('A user disconnects the MEP ...');
     });
 
     socket.on('suConnect', function(userID) {
       console.log('su: '+ userID + ' connected to the server.');
-
-      socket.emit('greetingSu', {'message': 'Hello su user!'});
     })
+
+    //socket.on('suConnect', require('./socketIO/suConnect'));
 
     socket.on('adConnect', function(userID) {
       console.log('ad: '+ userID + ' connected to the server.');

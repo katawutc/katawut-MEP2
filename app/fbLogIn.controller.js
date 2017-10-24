@@ -1,9 +1,13 @@
-angular.module('app').controller('fbLogInCtrl',
-  ['$scope', '$http', '$routeParams', '$window',
-    '$location', fbLogInCtrl]);
+angular.module('app')
+.controller('fbLogInCtrl',
+           ['$scope', '$http', '$routeParams', '$window',
+            '$location',
+            'socketService',
+             fbLogInCtrl]);
 
 function fbLogInCtrl ($scope, $http, $routeParams, $window,
-                                $location) {
+                      $location,
+                      socketService) {
 
     var fbID = {fbID: $routeParams.fbID};
 
@@ -33,6 +37,8 @@ function fbLogInCtrl ($scope, $http, $routeParams, $window,
         }
       else if ($window.sessionStorage.logInMessage === 'login success' &&
             $window.sessionStorage.activate === 'true') {
+
+        socketService.emit('suConnect', $window.sessionStorage.userID);
 
         $location.path('/dashboard'+'/'+
                         $window.sessionStorage.getItem('userRole')+'/'+

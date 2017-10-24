@@ -2,9 +2,10 @@
 angular.module('app')
 .controller('logInCtrl',
            ['$scope', '$http', '$location', '$window',
+            'socketService',
              logInCtrl]);
 
-function logInCtrl ($scope, $http, $location, $window) {
+function logInCtrl ($scope, $http, $location, $window, socketService) {
 
   $scope.logInSubmit = function() {
     $http({
@@ -23,11 +24,14 @@ function logInCtrl ($scope, $http, $location, $window) {
         $window.sessionStorage.setItem('logInMessage', response.data.message);
         $window.sessionStorage.setItem('activate', response.data.activate);
 
-        // Get userID here to start dashboard controller
-
-        // need to check activate too if not done 1st time setting
+        // socket.io connect before routing to su dashboard
+        // need to think more on this
+        if (response.data.userRole) {
+          socketService.emit('suConnect', $window.sessionStorage.userID);
+        }
 
         if (response.data.message === 'login success') {
+
           $location.path('/dashboard'+'/'+
                           $window.sessionStorage.getItem('userRole')+'/'+
                           $window.sessionStorage.getItem('userID'));
