@@ -4,7 +4,7 @@ angular.module('app').factory('socketService',
 
 function socketService($rootScope) {
 
-  var socket = io.connect();
+  var socket = io('http://localhost:5000/');
   console.log('socket created');
 
     return {
