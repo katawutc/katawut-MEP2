@@ -11,13 +11,15 @@ module.exports = function socketIO(socket) {
       console.log('su: '+ userID + ' connected to the server.');
     })
 
-    //socket.on('suConnect', require('./socketIO/suConnect'));
-
     socket.on('adConnect', function(userID) {
       console.log('ad: '+ userID + ' connected to the server.');
     })
 
     socket.on('chat', function(data) {
+
+      /** the data received should have logic to differentiate \
+        * the admin and su to emit the su ID event
+        */
 
       console.log(data);
 

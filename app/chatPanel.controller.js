@@ -17,7 +17,10 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService) {
         console.log('send chat message');
         console.log($scope.message);
 
-
+        /**
+          * The sent message should differentiate between admin and su \
+          * to select the select the correct message format to send to the server
+          */
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
                        'sentTime': Date.now(),
