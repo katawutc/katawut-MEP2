@@ -36,4 +36,17 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService) {
       $rootScope.sentMessage.push(message);
     })
 
+    /** the event to join chatting between admin and su has to be \
+      * userID
+      * admin should be able to select su to chat to
+      */
+
+    /*
+    socketService.on($window.sessionStorage.userID, function(message) {
+
+      console.log(message);
+      $rootScope.sentMessage.push(message);
+    })
+    */
+
 }
