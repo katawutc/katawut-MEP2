@@ -1,9 +1,12 @@
 angular.module('app').controller('navBarController',
-                                ['$q', '$scope', '$http', '$location',
-                                 '$window', /*'socketService',*/
+                                ['$scope', '$window',
                                   navBarController]);
 
-function navBarController ($q, $scope, $http, $location, $window /*, socketService*/) {
+function navBarController ($scope, $window) {
+
+    /** to consider having logIn and isLogIn as $rootScope \
+      * for centralizing socket.io on user visits the page
+      */
 
     $scope.logIn = false;
 

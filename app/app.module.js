@@ -4,12 +4,12 @@ angular.module('app', ['ngRoute',
 
 angular.module('app').run(['$rootScope', initializeNoteChatPanel]);
 
+/** initialize note and chat panel on $rootScope */
 function initializeNoteChatPanel($rootScope) {
-
-  console.log('at run: initializeNoteChatPanel');
 
   $rootScope.showChatPanel = false;
   $rootScope.showNotePanel = false;
 
+  // clean up sent chat message
   $rootScope.sentMessage = [];
 }

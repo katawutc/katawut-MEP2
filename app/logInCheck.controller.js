@@ -1,10 +1,9 @@
-angular.module('app').controller('logInCheckCtrl',
-                                  ['$scope', '$http', '$routeParams',
-                                    '$window', '$location', '$q', 'fbLogInStatusService',
-                                    logInCheckCtrl]);
+angular.module('app')
+.controller('logInCheckCtrl',
+           ['$window', 'fbLogInStatusService',
+             logInCheckCtrl]);
 
-function logInCheckCtrl ($scope, $http, $routeParams,
-                          $window, $location, $q, fbLogInStatusService) {
+function logInCheckCtrl ($window, fbLogInStatusService) {
 
       var logInCheck = function() {
           fbLogInStatusService.getFBLogInStatus()
@@ -17,10 +16,9 @@ function logInCheckCtrl ($scope, $http, $routeParams,
               }
             },
             function(data) {
-              console.log('Fail');
-              console.log(data);
+
             });
           }
 
-      logInCheck();   
+      logInCheck();
 }

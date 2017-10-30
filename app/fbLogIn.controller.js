@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('fbLogInCtrl',
-           ['$scope', '$http', '$routeParams', '$window',
+           ['$http', '$routeParams', '$window',
             '$location',
             'socketService',
              fbLogInCtrl]);
 
-function fbLogInCtrl ($scope, $http, $routeParams, $window,
+function fbLogInCtrl ($http, $routeParams, $window,
                       $location,
                       socketService) {
 
@@ -49,6 +49,6 @@ function fbLogInCtrl ($scope, $http, $routeParams, $window,
       }
       }
     },function errorCallback(response){
-      console.log(response.data);
+
     });
   }

@@ -1,5 +1,6 @@
-angular.module('app').controller('mainCarouselCtrl',
-  ['$scope', mainCarouselCtrl]);
+angular.module('app')
+.controller('mainCarouselCtrl',
+           ['$scope', mainCarouselCtrl]);
 
 function mainCarouselCtrl ($scope) {
 

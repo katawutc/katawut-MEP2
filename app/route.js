@@ -117,7 +117,7 @@ angular.module('app')
         }
       }
     })
-    /** admin dashboard user list data*/
+    /** admin dashboard user list data */
     .when("/dashboard/ad/:userID", {
       templateUrl : 'dashboard.ad.html',
       controller :'dashboardAdCtrl',
