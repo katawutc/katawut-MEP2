@@ -46,7 +46,7 @@ module.exports = function signUp(req, res) {
                             userID+'/'+hashActivate;
                             */
 
-        var activateUrl = 'https://tranquil-chamber-47085.herokuapp.com/#!/signUpActivate/'+
+        var activateUrl = 'https://tranquil-chamber-47085.herokuapp.com/signUpActivate/'+
                             userID+'/'+hashActivate;
 
         var mailOptions = {
