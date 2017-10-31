@@ -1,10 +1,11 @@
-angular.module('app').controller('unSubscribeTestMainCtrl',
-  ['$scope', '$http', '$routeParams',
-    '$window', '$location', 'testHeader', unSubscribeTestMainCtrl]);
+angular.module('app')
+.controller('unSubscribeTestMainCtrl',
+           ['$scope', '$http',
+            '$window', '$location', 'testHeader',
+             unSubscribeTestMainCtrl]);
 
-// put resolve with testHeader
-function unSubscribeTestMainCtrl($scope, $http, $routeParams,
-                                  $window, $location, testHeader) {
+function unSubscribeTestMainCtrl($scope, $http,
+                                 $window, $location, testHeader) {
 
   // write the testHeader information after resolve
   // need to check null of testHeader
@@ -78,7 +79,7 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
       createAnswerSheetExam();
 
     }, function errorCallback(response) {
-      console.log(response.status);
+
       $location.path('/errorPage');
     });
 
@@ -88,7 +89,6 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
      * then use update later for the real user answer
      */
      function createAnswerSheetExam() {
-       console.log('creating createAnswerSheetExam');
 
        var answerSheetExamData = {userName: $window.sessionStorage.userName,
                                     userID: $window.sessionStorage.userID,
@@ -97,14 +97,11 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
                                     testMode: $window.sessionStorage.testMode,
                                     testStartAt: $window.sessionStorage.testStartAt};
 
-       console.log(answerSheetExamData);
-
        $http({
        url: 'createAnswerSheetExam',
        method: 'POST',
        data: answerSheetExamData
        }).then(function successCallback(response) {
-         console.log('return from create the answer sheet');
 
          // go to the 1st question after empty answer sheet is created
          var url = 'unSubscribeTest/exam/'+$window.sessionStorage.testID
@@ -112,7 +109,7 @@ function unSubscribeTestMainCtrl($scope, $http, $routeParams,
          $location.path(url);
 
        }, function errorCallback(response) {
-         console.log(response.status);
+
          $location.path('/errorPage');
        });
      }

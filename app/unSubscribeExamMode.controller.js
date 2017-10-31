@@ -1,6 +1,7 @@
-angular.module('app').controller('unSubscribeExamModeCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location',
-    'testQuestion', unSubscribeExamModeCtrl]);
+angular.module('app')
+.controller('unSubscribeExamModeCtrl',
+           ['$scope', '$http', '$routeParams', '$window', '$location',
+            'testQuestion', unSubscribeExamModeCtrl]);
 
 function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
 
@@ -57,7 +58,7 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
       }, function errorCallback(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
-        console.log(response.status);
+
         $location.path('/errorPage');
       });
     }
@@ -68,7 +69,6 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
       /**
        * modal dialog to show user that the question is skipped
        */
-      console.log('mark this question');
 
       /** mark the question as unAnswered
        * $scope.formData.answer = 'unAnswered';
@@ -103,7 +103,7 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
           $location.path('/answerSummary');
         }
       }, function errorCallback(response) {
-        console.log(response.status);
+
         $location.path('/errorPage');
     });
   }
