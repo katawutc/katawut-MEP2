@@ -1,7 +1,9 @@
-angular.module('app').factory('testSummaryService',
-  ['$http', '$route', '$q', '$window', testSummaryService]);
+angular.module('app')
+.factory('testSummaryService',
+        ['$http', '$q', '$window',
+          testSummaryService]);
 
-function testSummaryService($http, $route, $q, $window) {
+function testSummaryService($http, $q, $window) {
 
   return {
     getTestSummary : function() {

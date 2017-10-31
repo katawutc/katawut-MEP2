@@ -1,7 +1,9 @@
-angular.module('app').factory('testScoreService',
-  ['$http', '$route', '$q', '$window', testScoreService]);
+angular.module('app')
+.factory('testScoreService',
+        ['$http', '$q', '$window',
+          testScoreService]);
 
-function testScoreService($http, $route, $q, $window) {
+function testScoreService($http, $q, $window) {
 
   return {
     getTestScore : function() {

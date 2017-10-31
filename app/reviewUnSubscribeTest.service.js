@@ -1,5 +1,7 @@
-angular.module('app').factory('reviewUnSubscribeTestService',
-  ['$http', '$route', '$q', reviewUnSubscribeTestService]);
+angular.module('app')
+.factory('reviewUnSubscribeTestService',
+        ['$http', '$route', '$q',
+          reviewUnSubscribeTestService]);
 
 function reviewUnSubscribeTestService($http, $route, $q) {
 

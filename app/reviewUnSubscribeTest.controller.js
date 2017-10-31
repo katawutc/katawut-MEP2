@@ -1,9 +1,11 @@
-angular.module('app').controller('reviewUnSubscribeTestCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location',
-    'reviewUnSubscribeTest', reviewUnSubscribeTestCtrl])
+angular.module('app')
+.controller('reviewUnSubscribeTestCtrl',
+           ['$scope', '$location',
+            'reviewUnSubscribeTest',
+             reviewUnSubscribeTestCtrl])
 
-function reviewUnSubscribeTestCtrl($scope, $http, $routeParams, $window, $location,
-                                    reviewUnSubscribeTest) {
+function reviewUnSubscribeTestCtrl($scope, $location,
+                                   reviewUnSubscribeTest) {
 
   $scope.questionNumber = reviewUnSubscribeTest.solQuestionNumber;
   $scope.question = reviewUnSubscribeTest.question;
