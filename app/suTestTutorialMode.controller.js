@@ -80,6 +80,8 @@ function suTestTutorialModeCtrl($scope, $http, $route,
         }
       }).then(function successCallback(response) {
 
+        console.log(response);
+
         $scope.result = response.data.result;
         $scope.explanation = response.data.explanation;
 

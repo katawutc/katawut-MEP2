@@ -25,12 +25,11 @@ module.exports = function suTestCheckAnswer(req, res) {
                     }
                  }, cb);
 
-        function cb(err, doc) {
+        function cb(err, count, status) {
           if (err) throw err;
-          if (doc) {
+
             res.json({result: 'correct',
                       explanation: doc.explanation});
-          }
         }
       }
       else if (req.body.answer !== doc.solution) {
@@ -51,12 +50,11 @@ module.exports = function suTestCheckAnswer(req, res) {
                       }
                     }, cb);
 
-        function cb(err, doc) {
+        function cb(err, count, status) {
           if (err) throw err;
-          if (doc) {
+
             res.json({result: 'wrong',
                       explanation: doc.explanation});
-          }
         }
       }
     else {
