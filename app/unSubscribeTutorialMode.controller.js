@@ -1,6 +1,7 @@
-angular.module('app').controller('unSubscribeTutorialModeCtrl',
-  ['$scope', '$http', '$routeParams', '$window',
-    '$location', 'testQuestion', unSubscribeTutorialModeCtrl]);
+angular.module('app')
+.controller('unSubscribeTutorialModeCtrl',
+           ['$scope', '$http', '$routeParams', '$window',
+            '$location', 'testQuestion', unSubscribeTutorialModeCtrl]);
 
 function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
 
@@ -20,8 +21,6 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
   $scope.isTestFinished = function() {
     return $scope.testFinished;
   }
-
-  //var testUrl = '/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+$routeParams.questionNumber;
 
   var currentQuestionNumber = testQuestion.questionNumber;
 
@@ -82,7 +81,7 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
       }, function errorCallback(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
-        console.log(response.status);
+
         $location.path('/errorPage');
       });
     }
@@ -98,10 +97,10 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
         $scope.testFinished = false;
         // Fetching a new question from the DB by routing
         var url = '/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+currentQuestionNumber;
-        console.log(url);
+
         $location.path('/unSubscribeTest/tutorial/'+$routeParams.testID+'/'+currentQuestionNumber);
     } else {
-      console.log('To show the summary page');
+
     }
   }
 
