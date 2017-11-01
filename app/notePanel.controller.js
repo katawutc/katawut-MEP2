@@ -9,6 +9,8 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
     $scope.title = $rootScope.quickNote.title;
     $scope.note = $rootScope.quickNote.note;
 
+    // to implement notePanelService to help on new note etc
+
     $rootScope.openNotePanel = function() {
 
       $rootScope.showNotePanel = !$rootScope.showNotePanel;
@@ -16,6 +18,12 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
       $rootScope.noteTimeStart = Date.now();
 
       console.log($rootScope.noteTimeStart);
+
+      // what to do when closing the note panel
+
+      //console.log($rootScope.quickNote);
+
+      //socketService.emit('suNote', $rootScope.quickNote);
     }
 
     $rootScope.saveNote = function() {
