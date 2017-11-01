@@ -14,17 +14,18 @@
       </div>
       <div class="panel-body"><form>
         <div class="form-group">
-          <input id='quickNoteTitle' type='text' ng-show='showNotePanel' focus-on-show
+          <input id='quickNoteTitle' type='text' ng-show='showNotePanel'
+            focus-on-show rfocus='NoteTitle'
             ng-model="title" placeholder=' Note title'
             ng-change='saveNote()'
-            ng-model-options="{ updateOn: 'default blur', debounce: {'default': 2000, 'blur': 0} }">
+            ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">
           </input>
         </div>
     <div class="form-group">
         <textarea id='quickNoteNote' class="form-control" rows='9' column='50'
           ng-model="note"
           ng-change='saveNote()'
-          ng-model-options="{ updateOn: 'default blur', debounce: {'default': 2000, 'blur': 0} }">
+          ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">
         </textarea>
     </div>
       </form>

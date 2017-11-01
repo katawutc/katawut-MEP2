@@ -30,5 +30,8 @@ function notePanelCtrl($rootScope, $scope) {
 
     $scope.title = '';
     $scope.note = '';
+
+    $scope.setFocusNoteTitle();
+
   }
 }
