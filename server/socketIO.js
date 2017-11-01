@@ -41,7 +41,7 @@ module.exports = function socketIO(socket) {
      console.log(data);
 
      // to save note into the DB here
-     if (data.title && data.note) {
+     if (data.title || data.note) {
 
        db.collection('suNote').update({'userID': data.userID,
                                        'noteTimeStart': data.noteTimeStart},

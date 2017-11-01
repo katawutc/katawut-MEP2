@@ -15,15 +15,20 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
 
       $rootScope.showNotePanel = !$rootScope.showNotePanel;
 
-      $rootScope.noteTimeStart = Date.now();
+      /** what to do when closing the note panel
+        * 1. if no title and no content, set a new noteTimeStart
+        * 2. if title or content, keep the current noteTimeStart
+        */
+      if (!$scope.title && !$scope.note) {
 
-      console.log($rootScope.noteTimeStart);
+        $rootScope.noteTimeStart = Date.now();
 
-      // what to do when closing the note panel
+        console.log($rootScope.noteTimeStart);
+      }
 
-      //console.log($rootScope.quickNote);
-
-      //socketService.emit('suNote', $rootScope.quickNote);
+      // save and update note every time when open or close the note panel
+      console.log($rootScope.quickNote);
+      socketService.emit('suNote', $rootScope.quickNote);
     }
 
     $rootScope.saveNote = function() {
@@ -46,6 +51,9 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
 
     console.log('create a new note');
 
+    console.log($rootScope.quickNote);
+    socketService.emit('suNote', $rootScope.quickNote);
+
     $scope.title = '';
     $scope.note = '';
 
@@ -54,6 +62,10 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
     $rootScope.noteTimeStart = Date.now();
 
     console.log($rootScope.noteTimeStart);
+
+    $rootScope.quickNote.noteTime = '';
+    $rootScope.quickNote.title = '';
+    $rootScope.quickNote.note = '';
 
   }
 }
