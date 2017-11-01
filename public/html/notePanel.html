@@ -15,11 +15,16 @@
       <div class="panel-body"><form>
         <div class="form-group">
           <input id='quickNoteTitle' type='text' ng-show='showNotePanel' focus-on-show
-            ng-model='quickNoteTitle' placeholder=' Note title' autofocus>
+            ng-model="title" placeholder=' Note title'
+            ng-change='saveNote()'
+            ng-model-options="{ updateOn: 'default blur', debounce: {'default': 2000, 'blur': 0} }">
           </input>
         </div>
     <div class="form-group">
-        <textarea class="form-control" rows='9' column='50' id='note'>
+        <textarea id='quickNoteNote' class="form-control" rows='9' column='50'
+          ng-model="note"
+          ng-change='saveNote()'
+          ng-model-options="{ updateOn: 'default blur', debounce: {'default': 2000, 'blur': 0} }">
         </textarea>
     </div>
       </form>

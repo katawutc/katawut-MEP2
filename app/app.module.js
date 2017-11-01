@@ -10,6 +10,11 @@ function initializeNoteChatPanel($rootScope) {
   $rootScope.showChatPanel = false;
   $rootScope.showNotePanel = false;
 
+  $rootScope.quickNote = {};
+
+  $rootScope.quickNote.title = '';
+  $rootScope.quickNote.note = '';
+
   // clean up sent chat message
   $rootScope.sentMessage = [];
 }

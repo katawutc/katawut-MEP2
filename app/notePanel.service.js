@@ -11,6 +11,12 @@ function notePanelService($rootScope) {
 
       $rootScope.showNotePanel = false;
 
+      $rootScope.noteTitle = '';
+      $rootScope.noteNote = '';
+
+      $rootScope.quickNote = {title: $rootScope.noteTitle,
+                              note: $rootScope.noteNote}
+
       return 'initializeNotePanel success';
     }
   }
