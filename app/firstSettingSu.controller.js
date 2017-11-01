@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('firstSettingSuCtrl',
-           ['$scope', '$http', '$routeParams', '$window',
+           ['$scope', '$http', '$window',
             '$location',
             'socketService',
              firstSettingSuCtrl]);
 
-function firstSettingSuCtrl ($scope, $http, $routeParams, $window,
+function firstSettingSuCtrl ($scope, $http, $window,
                              $location,
                              socketService) {
 

@@ -1,5 +1,7 @@
-angular.module('app').controller('signUpActivateCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location', signUpActivateCtrl]);
+angular.module('app')
+.controller('signUpActivateCtrl',
+           ['$scope', '$http', '$routeParams', '$window', '$location',
+             signUpActivateCtrl]);
 
 function signUpActivateCtrl ($scope, $http, $routeParams, $window, $location) {
 
@@ -19,12 +21,11 @@ function signUpActivateCtrl ($scope, $http, $routeParams, $window, $location) {
         url: activateAccountUrl,
         data: $scope.formData
       }). then(function successCallback(response) {
-          console.log(response.data);
 
           directLogIn($window, $http, $location, $scope.userID, $scope.formData.password);
 
       }, function errorCallback(response) {
-          console.log(response.data);
+
       });
     }
   }
@@ -33,16 +34,14 @@ function signUpActivateCtrl ($scope, $http, $routeParams, $window, $location) {
 function directLogIn($window, $http, $location, uID, pass) {
 
   var credentials = {userID: uID,
-                      password: pass};
+                     password: pass};
 
-  console.log(credentials);
 
   $http({
     method: 'POST',
     url: 'logInDirect',
     data: credentials
   }). then(function successCallback(response) {
-      console.log(response.data);
 
       $window.sessionStorage.setItem('userName', response.data.userName);
       $window.sessionStorage.setItem('userID', response.data.userID);
@@ -63,6 +62,6 @@ function directLogIn($window, $http, $location, uID, pass) {
       }
 
   }, function errorCallback(response) {
-      console.log(response.data);
+
   });
 }
