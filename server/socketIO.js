@@ -1,6 +1,9 @@
 
 module.exports = function socketIO(socket) {
 
+    var mongo = require('./mongoDBConnect');
+    var db = mongo.getDB();
+
     console.log('A user visits the MEP ...');
 
     socket.on('disconnect', function(){
@@ -32,4 +35,27 @@ module.exports = function socketIO(socket) {
         //socket.broadcast.emit(data.userID, 'Admin: '+ data.message);
       }
     })
+
+   socket.on('suNote', function(data) {
+
+     console.log(data);
+
+     // to save note into the DB here
+     if (data.title && data.note) {
+
+       db.collection('suNote').update({'userID': data.userID,
+                                       'noteTimeStart': data.noteTimeStart},
+                                      {$set:{'userID': data.userID,
+                                             'noteTimeStart': data.noteTimeStart,
+                                             'noteTime': data.noteTime,
+                                             'title': data.title,
+                                             'note': data.note}},
+                                      { upsert: true}, function(err, record) {
+                                        if (err) throw err;
+                                        console.log(record);
+                                      })
+     }
+   })
+
+
 }

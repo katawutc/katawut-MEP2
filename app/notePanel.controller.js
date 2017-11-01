@@ -1,9 +1,10 @@
 angular.module('app')
 .controller('notePanelCtrl',
-            ['$rootScope', '$scope',
+            ['$rootScope', '$scope', '$window',
+             'socketService',
               notePanelCtrl]);
 
-function notePanelCtrl($rootScope, $scope) {
+function notePanelCtrl($rootScope, $scope, $window, socketService) {
 
     $scope.title = $rootScope.quickNote.title;
     $scope.note = $rootScope.quickNote.note;
@@ -11,16 +12,25 @@ function notePanelCtrl($rootScope, $scope) {
     $rootScope.openNotePanel = function() {
 
       $rootScope.showNotePanel = !$rootScope.showNotePanel;
+
+      $rootScope.noteTimeStart = Date.now();
+
+      console.log($rootScope.noteTimeStart);
     }
 
     $rootScope.saveNote = function() {
 
     console.log('save note');
 
-    $rootScope.quickNote = { title: $scope.title,
-                             note: $scope.note}
+    $rootScope.quickNote = { userID: $window.sessionStorage.userID,
+                             noteTimeStart: $rootScope.noteTimeStart,
+                             noteTime: Date.now(),
+                             title: $scope.title,
+                             note: $scope.note }
 
     console.log($rootScope.quickNote);
+
+    socketService.emit('suNote', $rootScope.quickNote);
 
   }
 
@@ -32,6 +42,10 @@ function notePanelCtrl($rootScope, $scope) {
     $scope.note = '';
 
     $scope.setFocusNoteTitle();
+
+    $rootScope.noteTimeStart = Date.now();
+
+    console.log($rootScope.noteTimeStart);
 
   }
 }
