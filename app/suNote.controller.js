@@ -1,11 +1,14 @@
-angular.module('app').controller('viewSuNoteCtrl',
-                                ['$scope', '$http', '$routeParams',
-                                 '$window', '$location',
-                                 'suSecondNavBarMessageService',
-                                 'viewSuNoteCtrl']);
+angular.module('app')
+.controller('suNoteCtrl',
+           ['$scope', '$http', '$routeParams',
+            '$window', '$location',
+            'suSecondNavBarMessageService',
+            'suNote',
+             suNoteCtrl]);
 
-function viewSuNoteCtrl($scope, $http, $routeParams,
-                        $window, $location, suSecondNavBarMessageService) {
+function suNoteCtrl($scope, $http, $routeParams,
+                    $window, $location, suSecondNavBarMessageService,
+                    suNote) {
 
 
     $scope.userName = $window.sessionStorage.userName;
@@ -15,5 +18,7 @@ function viewSuNoteCtrl($scope, $http, $routeParams,
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
                   ' เรา มาดู';
     suSecondNavBarMessageService.setMessage(message);
+
+    console.log(suNote);
 
 }

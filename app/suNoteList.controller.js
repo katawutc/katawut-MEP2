@@ -28,9 +28,9 @@ function suNoteListCtrl ($scope, $http, $routeParams,
       for (var i =0; i<suNoteList.length; i++) {
 
         var notedate = parseInt(suNoteList[i].noteTime);
-        suNoteList[i].noteTime = (new Date(notedate)).toString();
+        suNoteList[i].noteTimeText = (new Date(notedate)).toString();
 
-        console.log(suNoteList[i].noteTime);
+        console.log(suNoteList[i].noteTimeText);
       }
 
       console.log(suNoteList);
