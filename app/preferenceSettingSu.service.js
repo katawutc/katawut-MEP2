@@ -1,8 +1,11 @@
-angular.module('app').factory('preferenceSettingSuService',
-  ['$http', '$route', '$window', '$q', preferenceSettingSuService]);
+angular.module('app')
+.factory('preferenceSettingSuService',
+        ['$http', '$window', '$q',
+          preferenceSettingSuService]);
 
-function preferenceSettingSuService($http, $route, $window, $q) {
+function preferenceSettingSuService($http, $window, $q) {
   return {
+
       getPreferenceSettingSuData : function() {
 
         var preferenceSettingUrl = 'preferenceSetting/su/'+$window.sessionStorage.userID;

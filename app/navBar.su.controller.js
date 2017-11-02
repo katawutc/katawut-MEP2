@@ -1,7 +1,9 @@
-angular.module('app').controller('navBarSuController',
-['$scope', '$http', '$location', '$window', navBarSuController]);
+angular.module('app')
+.controller('navBarSuController',
+           ['$scope', '$window',
+             navBarSuController]);
 
-function navBarSuController ($scope, $http, $location, $window) {
+function navBarSuController ($scope, $window) {
 
     $scope.userID = $window.sessionStorage.userID;
 
@@ -12,6 +14,8 @@ function navBarSuController ($scope, $http, $location, $window) {
     }
 
     if ($window.sessionStorage.getItem('logInMessage') === 'login success') {
+
       $scope.logIn = true;
+      
     } else { $scope.logIn = false; }
 }

@@ -1,6 +1,8 @@
-angular.module('app').controller('preferenceSettingSuModalCtrl',
-  ['$scope', '$uibModalInstance', '$window',
-    '$http', '$location', 'params', preferenceSettingSuModalCtrl]);
+angular.module('app')
+.controller('preferenceSettingSuModalCtrl',
+           ['$scope', '$uibModalInstance', '$window',
+            '$http', '$location', 'params',
+             preferenceSettingSuModalCtrl]);
 
 function preferenceSettingSuModalCtrl ($scope, $uibModalInstance, $window,
                                         $http, $location, params) {

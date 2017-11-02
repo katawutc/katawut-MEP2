@@ -1,8 +1,10 @@
-angular.module('app').controller('profileSettingSuCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location',
-    'profileSettingSuData', profileSettingSuCtrl]);
+angular.module('app')
+.controller('profileSettingSuCtrl',
+           ['$scope', '$location',
+            'profileSettingSuData',
+             profileSettingSuCtrl]);
 
-function profileSettingSuCtrl ($scope, $http, $routeParams, $window, $location,
+function profileSettingSuCtrl ($scope, $location,
                                 profileSettingSuData) {
 
     $scope.userID = $window.sessionStorage.userID;

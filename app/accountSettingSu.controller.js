@@ -1,9 +1,9 @@
-angular.module('app').controller('accountSettingSuCtrl',
-                                  ['$scope', '$http', '$routeParams',
-                                    '$window', '$location', accountSettingSuCtrl]);
+angular.module('app')
+.controller('accountSettingSuCtrl',
+           ['$scope', '$window',
+             accountSettingSuCtrl]);
 
-function accountSettingSuCtrl ($scope, $http, $routeParams, $window,
-                                $location) {
+function accountSettingSuCtrl ($scope, $window) {
 
     $scope.userID = $window.sessionStorage.userID;
 

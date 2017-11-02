@@ -1,10 +1,11 @@
-angular.module('app').controller('preferenceSettingSuCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location',
-    '$uibModal', '$document', '$log',
-      'preferenceSettingSuData', preferenceSettingSuCtrl]);
+angular.module('app')
+.controller('preferenceSettingSuCtrl',
+           ['$scope',
+            '$uibModal', '$document',
+            'preferenceSettingSuData',
+             preferenceSettingSuCtrl]);
 
-function preferenceSettingSuCtrl ($scope, $http, $routeParams, $window, $location,
-                                  $uibModal, $document, $log, preferenceSettingSuData) {
+function preferenceSettingSuCtrl ($scope, $uibModal, $document, preferenceSettingSuData) {
 
     $scope.userID = preferenceSettingSuData.userID;
 

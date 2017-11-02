@@ -1,17 +1,11 @@
 angular.module('app')
 .controller('secondNavBarSuCtrl',
-           ['$scope', '$rootScope',
-            '$window',
-            '$document',
+           ['$rootScope',
             'suSecondNavBarMessageService',
-            'socketService',
              secondNavBarSuCtrl]);
 
-function secondNavBarSuCtrl($scope, $rootScope,
-                            $window,
-                            $document,
-                            suSecondNavBarMessageService,
-                            socketService) {
+function secondNavBarSuCtrl($rootScope,
+                            suSecondNavBarMessageService) {
 
   $rootScope.openChatPanel = function() {
 
