@@ -233,6 +233,16 @@ angular.module('app')
         }
       }
     })
+    /** view su note */
+    .when('/suNote/:userID/:title/:noteTime', {
+      templateUrl : 'suNote.html',
+      controller : 'suNoteCtrl',
+      resolve: {
+        suNote : function(suNoteService) {
+          return suNoteService.getSuNote();
+        }
+      }
+    })
     /** url callback from facebook */
     .when('/fbLogIn/:fbID', {
       templateUrl : 'fbLogIn.html',

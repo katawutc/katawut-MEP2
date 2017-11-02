@@ -299,3 +299,9 @@ app.get('/getSuNoteList/:userID/',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuNoteList'));
+
+/** get su note to view */
+app.get('/getSuNote/:userID/:title/:noteTime',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/getSuNote'));
