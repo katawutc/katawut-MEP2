@@ -2,6 +2,8 @@ angular.module('app', ['ngRoute',
                        'ui.bootstrap',
                        'ngScrollGlue']);
 
+// to put app.run to init FB sdk here
+
 angular.module('app').run(['$rootScope', initializeNoteChatPanel]);
 
 /** initialize note and chat panel on $rootScope */

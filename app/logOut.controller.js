@@ -11,6 +11,8 @@ function logOutCtrl($scope, $http, $routeParams, $window, $location, $rootScope,
     // To implement asynchronous function before pass message to view
     $window.sessionStorage.clear();
 
+    console.log(fbLogInStatus);
+
     if (fbLogInStatus === 'connected') {
       FB.logout(function(response) {
       // user is now logged out both MEP and FB
