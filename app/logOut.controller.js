@@ -12,7 +12,7 @@ function logOutCtrl($scope, $http, $routeParams, $window, $location, $rootScope,
     $window.sessionStorage.clear();
 
     if (fbLogInStatus === 'connected') {
-      $window.FB.logout(function(response) {
+      FB.logout(function(response) {
       // user is now logged out both MEP and FB
       console.log(response);
       });

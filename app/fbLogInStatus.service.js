@@ -7,7 +7,7 @@ function fbLogInStatusService($window, $q) {
   return {
       getFBLogInStatus : function() {
 
-        $window.FB.init({
+        FB.init({
           appId      : '141198316480017',
           status     : true,
           cookie     : true,  // enable cookies to allow the server to access
@@ -18,7 +18,7 @@ function fbLogInStatusService($window, $q) {
 
         var deferred = $q.defer();
 
-        $window.FB.getLoginStatus(function(response) {
+        FB.getLoginStatus(function(response) {
           if (response.status) {
             deferred.resolve(response.status);
           }
