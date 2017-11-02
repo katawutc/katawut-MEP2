@@ -223,6 +223,11 @@ angular.module('app')
       templateUrl : 'articleListSu.html',
       controller : 'articleListSuCtrl',
     })
+    /** note list for su */
+    .when('/noteList/su/:userID', {
+      templateUrl : 'suNoteList.html',
+      controller : 'suNoteListCtrl',
+    })
     /** url callback from facebook */
     .when('/fbLogIn/:fbID', {
       templateUrl : 'fbLogIn.html',
