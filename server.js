@@ -293,3 +293,9 @@ app.get('/generateNewSuTest/:userID/:testID/:testRunningNumber',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/generateNewSuTest'));
+
+/** get su note list */
+app.get('/getSuNoteList/:userID/',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/getSuNoteList'));

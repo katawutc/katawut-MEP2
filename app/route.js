@@ -213,7 +213,7 @@ angular.module('app')
       templateUrl : 'suTestList.html',
       controller : 'suTestListCtrl',
       resolve: {
-        suDashboardTest : function (suDashboardTestService){
+        suDashboardTest : function (suDashboardTestService) {
           return suDashboardTestService.getSuDashboardTest();
         }
       }
@@ -227,6 +227,11 @@ angular.module('app')
     .when('/noteList/su/:userID', {
       templateUrl : 'suNoteList.html',
       controller : 'suNoteListCtrl',
+      resolve: {
+        suNoteList : function(suNoteListService) {
+          return suNoteListService.getSuNoteList();
+        }
+      }
     })
     /** url callback from facebook */
     .when('/fbLogIn/:fbID', {
