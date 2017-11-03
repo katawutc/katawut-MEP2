@@ -21,7 +21,7 @@
           <td>{{ user.userName }}</td>
           <td>{{ user.userID }}</td>
           <td>{{ user.userRole }}</td>
-          <td><a href="">chat</a>
+          <td><button ng-click='adminChatTo(user.userID)'>chat</button>
         </tr>
       </tbody>
     </table>

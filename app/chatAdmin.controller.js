@@ -26,4 +26,14 @@ function chatAdminCtrl($scope, $http, $routeParams,
       $location.path('/errorPage');
     }
 
+    /** implement admin select user to chat to */
+
+    $scope.adminChatTo = function(userID) {
+
+      console.log('open the chat panel');
+
+      console.log('admin selects '+ userID);
+
+    }
+
 }
