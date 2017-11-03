@@ -2,10 +2,10 @@ angular.module('app')
 .controller('chatPanelCtrl',
             ['$rootScope', '$scope',
              '$window',
-             'socketService',
+             'socketService', 'chatIOService',
               chatPanelCtrl]);
 
-function chatPanelCtrl($rootScope, $scope, $window, socketService) {
+function chatPanelCtrl($rootScope, $scope, $window, socketService, chatIOService) {
 
     $rootScope.openChatPanel = function() {
 
@@ -28,12 +28,20 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService) {
 
         socketService.emit('chat', message);
 
+        chatIOService.emit('chat', message);
+
         $rootScope.sentMessage.push('You: '+$scope.message);
 
         $scope.message = null;
     }
 
-    socketService.on('chatRoom', function(message) {
+    chatIOService.on($window.sessionStorage.userID, function(message) {
+
+      console.log(message);
+      $rootScope.sentMessage.push(message);
+    })
+
+    socketService.on($window.sessionStorage.userID, function(message) {
 
       console.log(message);
       $rootScope.sentMessage.push(message);

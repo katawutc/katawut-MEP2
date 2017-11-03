@@ -1,29 +1,11 @@
 angular.module('app')
 .controller('secondNavBarAdCtrl',
            ['$scope', '$window', '$rootScope',
-            'socketService',
+            'socketService', 'chatIOService', 'chatAdminService',
              secondNavBarAdCtrl]);
 
 function secondNavBarAdCtrl($scope, $window, $rootScope,
-                            socketService) {
-
-  // shoe chat and note panels should ne $rootScope ?
-  /*
-  $scope.showNotePanel = false;
-  $scope.showChatPanel = false;
-
-  $scope.openChatPanel = function() {
-
-    $scope.showChatPanel = !$scope.showChatPanel;
-
-    $window.document.getElementById('chatPanel-message-input').focus();
-  }
-
-  $scope.openNotePanel = function() {
-
-    $scope.showNotePanel = !$scope.showNotePanel;
-  }
-  */
+                            socketService, chatIOService, chatAdminService) {
 
 
   $rootScope.openChatPanel = function() {
@@ -46,16 +28,28 @@ function secondNavBarAdCtrl($scope, $window, $rootScope,
 
 
       var message = {'userID': $window.sessionStorage.userID,
+                     'adminChatTo': chatAdminService.getUserToChat(),
                      'userRole': $window.sessionStorage.userRole,
                      'sentTime': Date.now(),
                      'message': $scope.message}
 
       socketService.emit('chat', message);
 
+      var event = chatAdminService.getUserToChat();
+      console.log(event);
+
+      chatIOService.emit('chat', message);
+
       $scope.sentMessage.push('Admin: '+$scope.message);
 
       $scope.message = null;
   }
+
+  chatIOService.on(chatAdminService.getUserToChat(), function(message) {
+
+    console.log(message);
+    $scope.sentMessage.push(message);
+  })
 
   socketService.on('chatRoom', function(message) {
 
