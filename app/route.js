@@ -378,4 +378,14 @@ angular.module('app')
         }
       }
     })
+    /** admin chat user list */
+    .when('/chatAdmin/:userID', {
+      templateUrl : 'chatAdmin.html',
+      controller : 'chatAdminCtrl',
+      resolve : {
+        chatUserList : function(chatAdminService) {
+          return chatAdminService.getChatUser();
+        }
+      }
+    })
 });

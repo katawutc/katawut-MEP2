@@ -305,3 +305,9 @@ app.get('/getSuNote/:userID/:title/:noteTime',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuNote'));
+
+/** get su list to chat with admin */
+app.get('/adminChat/:userID/userList',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkAdminAuthority'),
+  require('./server/getAdminChatUserList'));
