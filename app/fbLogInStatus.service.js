@@ -6,7 +6,8 @@ angular.module('app')
 function fbLogInStatusService($window, $q) {
   return {
       getFBLogInStatus : function() {
-        
+
+        /*
         FB.init({
           appId      : '141198316480017',
           status     : true,
@@ -15,6 +16,7 @@ function fbLogInStatusService($window, $q) {
           xfbml      : true,  // parse social plugins on this page
           version    : 'v2.8' // use graph api version 2.8
         })
+        */
 
         var deferred = $q.defer();
 
