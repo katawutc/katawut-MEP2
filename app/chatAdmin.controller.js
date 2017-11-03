@@ -2,14 +2,12 @@ angular.module('app')
 .controller('chatAdminCtrl',
            ['$scope', '$http', '$routeParams',
             '$window', '$location', '$rootScope',
-            'chatUserList',
-            'adminSelectChatService',
+            'chatUserList', 'chatAdminService',
              chatAdminCtrl]);
 
 function chatAdminCtrl($scope, $http, $routeParams,
                        $window, $location, $rootScope,
-                       chatUserList,
-                       adminSelectChatService) {
+                       chatUserList, chatAdminService) {
 
 
 
@@ -38,8 +36,8 @@ function chatAdminCtrl($scope, $http, $routeParams,
 
       console.log('admin selects '+ userID);
 
-      adminSelectChatService.selectUserToChat(userID);
-      console.log(adminSelectChatService.getUserToChat());
+      chatAdminService.selectUserToChat(userID);
+      console.log(chatAdminService.getUserToChat());
 
     }
 

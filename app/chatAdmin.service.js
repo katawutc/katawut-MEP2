@@ -5,7 +5,7 @@ angular.module('app')
 
 function chatAdminService($http, $route, $q, $window) {
 
-    var selectedUserID;
+      var selectedUserID;
 
      return {
        getChatUser : function() {
@@ -34,12 +34,17 @@ function chatAdminService($http, $route, $q, $window) {
 
        selectUserToChat : function(id) {
 
+         console.log('at adminSelectChatService: selectUserToChat');
+
          selectedUserID = id;
-       },
+     },
 
        getUserToChat : function() {
 
+         console.log('at adminSelectChatService: getUserToChat');
+
          return selectedUserID;
-       }
      }
+
+   }
  }
