@@ -1,12 +1,13 @@
 angular.module('app')
 .controller('chatAdminCtrl',
            ['$scope', '$http', '$routeParams',
-            '$window', '$location',
+            '$window', '$location', '$rootScope',
             'chatUserList',
              chatAdminCtrl]);
 
 function chatAdminCtrl($scope, $http, $routeParams,
-                       $window, $location, chatUserList) {
+                       $window, $location, $rootScope,
+                       chatUserList) {
 
 
 
@@ -31,6 +32,7 @@ function chatAdminCtrl($scope, $http, $routeParams,
     $scope.adminChatTo = function(userID) {
 
       console.log('open the chat panel');
+      $rootScope.showChatPanel = true;
 
       console.log('admin selects '+ userID);
 

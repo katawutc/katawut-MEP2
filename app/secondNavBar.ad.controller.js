@@ -1,13 +1,14 @@
 angular.module('app')
 .controller('secondNavBarAdCtrl',
-           ['$scope', '$window',
+           ['$scope', '$window', '$rootScope',
             'socketService',
              secondNavBarAdCtrl]);
 
-function secondNavBarAdCtrl($scope, $window,
+function secondNavBarAdCtrl($scope, $window, $rootScope,
                             socketService) {
 
   // shoe chat and note panels should ne $rootScope ?
+  /*
   $scope.showNotePanel = false;
   $scope.showChatPanel = false;
 
@@ -22,6 +23,19 @@ function secondNavBarAdCtrl($scope, $window,
 
     $scope.showNotePanel = !$scope.showNotePanel;
   }
+  */
+
+
+  $rootScope.openChatPanel = function() {
+
+    $rootScope.showChatPanel = !$rootScope.showChatPanel;
+  }
+
+  $rootScope.openNotePanel = function() {
+
+    $rootScope.showNotePanel = !$rootScope.showNotePanel;
+  }
+
 
   // send chat message
   $scope.sentMessage = [];
