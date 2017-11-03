@@ -8,7 +8,7 @@ var app = express();
 app.use(compression());
 
 var server = http.createServer(app);
-var socketIO = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 
 var port;
 app.set('port', (process.env.PORT || 5000));
@@ -78,7 +78,12 @@ mongo.connectMongoDB( function() {
 });
 
 /** handle socket io connection */
-socketIO.on('connection', require('./server/socketIO'));
+io.on('connection', require('./server/socketIO'));
+
+var chatIO = io.of('/chat');
+chatIO.on('connection', require('./server/chatIO'));
+
+/***************************************************/
 
 /** fb log in callback */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email']}));

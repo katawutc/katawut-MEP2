@@ -5,30 +5,41 @@ angular.module('app')
 
 function chatAdminService($http, $route, $q, $window) {
 
-   return {
-     getChatUser : function() {
+    var selectedUserID;
 
-       var chatUserListUrl = '/adminChat/'+
-                              $route.current.params.userID+
-                              '/userList';
+     return {
+       getChatUser : function() {
 
-       var deferred = $q.defer();
+         var chatUserListUrl = '/adminChat/'+
+                                $route.current.params.userID+
+                                '/userList';
 
-       /** get all the user list for the starter */
-       $http({
-         url: chatUserListUrl,
-         method: 'GET',
-         headers: {
-           'Authorization': 'JWT ' + $window.sessionStorage.token
-           }
-       }).then(function successCallback(response) {
-         deferred.resolve(response.data);
-       },function errorCallback(response){
+         var deferred = $q.defer();
 
-       });
-       return  deferred.promise;
+         /** get all the user list for the starter */
+         $http({
+           url: chatUserListUrl,
+           method: 'GET',
+           headers: {
+             'Authorization': 'JWT ' + $window.sessionStorage.token
+             }
+         }).then(function successCallback(response) {
+           deferred.resolve(response.data);
+         },function errorCallback(response){
 
+         });
+         return  deferred.promise;
 
+       },
+
+       selectUserToChat : function(id) {
+
+         selectedUserID = id;
+       },
+
+       getUserToChat : function() {
+
+         return selectedUserID;
+       }
      }
-   }
  }

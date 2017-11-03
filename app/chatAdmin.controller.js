@@ -3,11 +3,13 @@ angular.module('app')
            ['$scope', '$http', '$routeParams',
             '$window', '$location', '$rootScope',
             'chatUserList',
+            'adminSelectChatService',
              chatAdminCtrl]);
 
 function chatAdminCtrl($scope, $http, $routeParams,
                        $window, $location, $rootScope,
-                       chatUserList) {
+                       chatUserList,
+                       adminSelectChatService) {
 
 
 
@@ -35,6 +37,9 @@ function chatAdminCtrl($scope, $http, $routeParams,
       $rootScope.showChatPanel = true;
 
       console.log('admin selects '+ userID);
+
+      adminSelectChatService.selectUserToChat(userID);
+      console.log(adminSelectChatService.getUserToChat());
 
     }
 
