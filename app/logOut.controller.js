@@ -1,11 +1,11 @@
 
 angular.module('app')
 .controller('logOutCtrl',
-           ['$scope', '$http', '$routeParams', '$window', '$location', '$rootScope',
+           ['$scope', '$window', '$rootScope',
             'fbLogInStatus',
              logOutCtrl]);
 
-function logOutCtrl($scope, $http, $routeParams, $window, $location, $rootScope,
+function logOutCtrl($scope, $window, $rootScope,
                     fbLogInStatus) {
 
     // To implement asynchronous function before pass message to view
