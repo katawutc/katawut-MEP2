@@ -1,9 +1,10 @@
-angular.module('app').controller('reviewTestSolutionCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location',
-    'reviewTestSolution', reviewTestSolutionCtrl])
+angular.module('app')
+.controller('reviewTestSolutionCtrl',
+           ['$scope', '$location',
+            'reviewTestSolution',
+             reviewTestSolutionCtrl])
 
-function reviewTestSolutionCtrl($scope, $http, $routeParams, $window, $location,
-                                    reviewTestSolution) {
+function reviewTestSolutionCtrl($scope, $location, reviewTestSolution) {
 
   $scope.questionNumber = reviewTestSolution.solQuestionNumber;
   $scope.question = reviewTestSolution.question;

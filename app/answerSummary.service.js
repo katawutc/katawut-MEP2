@@ -1,15 +1,17 @@
-angular.module('app').factory('answerSummaryService',
-  ['$http', '$route', '$q', '$window', answerSummaryService]);
+angular.module('app')
+.factory('answerSummaryService',
+        ['$http', '$q', '$window',
+          answerSummaryService]);
 
-function answerSummaryService($http, $route, $q, $window) {
+function answerSummaryService($http, $q, $window) {
 
   return {
     getAnswerSummary : function() {
 
       var answerSummaryUrl = '/getAnswerSummary/'+$window.sessionStorage.userID+
-                            '/'+$window.sessionStorage.testID+
-                            '/'+$window.sessionStorage.testMode+
-                            '/'+$window.sessionStorage.testStartAt;
+                             '/'+$window.sessionStorage.testID+
+                             '/'+$window.sessionStorage.testMode+
+                             '/'+$window.sessionStorage.testStartAt;
 
       var deferred = $q.defer();
 

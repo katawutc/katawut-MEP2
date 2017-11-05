@@ -1,9 +1,11 @@
-angular.module('app').controller('testSummaryExamModeCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location',
-    'examScore', 'examSummary', testSummaryExamModeCtrl]);
+angular.module('app')
+.controller('testSummaryExamModeCtrl',
+           ['$scope',
+            'examScore', 'examSummary',
+             testSummaryExamModeCtrl]);
 
-function testSummaryExamModeCtrl($scope, $http, $routeParams, $window, $location,
-                                  examScore, examSummary) {
+function testSummaryExamModeCtrl($scope, examScore, examSummary) {
+  
   $scope.score = examScore;
   $scope.result = examSummary;
 }

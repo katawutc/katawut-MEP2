@@ -1,7 +1,9 @@
-angular.module('app').factory('suAccountDataService',
-  ['$http', '$route', '$window', '$q', suAccountDataService]);
+angular.module('app')
+.factory('suAccountDataService',
+        ['$http', '$route', '$q',
+          suAccountDataService]);
 
-function suAccountDataService($http, $route, $window, $q) {
+function suAccountDataService($http, $route, $q) {
   return {
       getSuAccountData : function() {
 

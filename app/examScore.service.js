@@ -1,15 +1,17 @@
-angular.module('app').factory('examScoreService',
-  ['$http', '$route', '$q', '$window', examScoreService]);
+angular.module('app')
+.factory('examScoreService',
+        ['$http', '$q', '$window',
+          examScoreService]);
 
-function examScoreService($http, $route, $q, $window) {
+function examScoreService($http, $q, $window) {
 
   return {
     getExamScore : function() {
 
       var examScoreUrl = '/getExamScore/'+$window.sessionStorage.userID+
-                        '/'+$window.sessionStorage.testID+
-                        '/'+$window.sessionStorage.testMode+
-                        '/'+$window.sessionStorage.testStartAt;
+                         '/'+$window.sessionStorage.testID+
+                         '/'+$window.sessionStorage.testMode+
+                         '/'+$window.sessionStorage.testStartAt;
 
       var deferred = $q.defer();
 

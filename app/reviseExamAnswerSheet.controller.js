@@ -1,7 +1,9 @@
-angular.module('app').controller('reviseExamAnswerSheetCtrl',
-  ['$scope', '$http', '$routeParams', '$window',
-    '$location', 'currentUserAnswerExam',
-    'reviseExamQuestion', reviseExamAnswerSheetCtrl]);
+angular.module('app')
+.controller('reviseExamAnswerSheetCtrl',
+           ['$scope', '$http', '$routeParams', '$window',
+            '$location', 'currentUserAnswerExam',
+            'reviseExamQuestion',
+             reviseExamAnswerSheetCtrl]);
 
 function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
                                     $location, currentUserAnswerExam,
@@ -66,7 +68,7 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
        }, function errorCallback(response) {
          // called asynchronously if an error occurs
          // or server returns response with an error status.
-         console.log(response.status);
+
          $location.path('/errorPage');
        });
      }

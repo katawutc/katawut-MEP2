@@ -1,11 +1,10 @@
-angular.module('app').controller('answerSummaryCtrl',
-                                  ['$scope', '$http',
-                                  '$routeParams', '$window',
-                                  '$location', 'answerSummary',
-                                  answerSummaryCtrl]);
+angular.module('app')
+.controller('answerSummaryCtrl',
+           ['$scope', '$location', 'answerSummary',
+             answerSummaryCtrl]);
 
-function answerSummaryCtrl ($scope, $http, $routeParams, $window,
-                            $location, answerSummary) {
+function answerSummaryCtrl ($scope, $location, answerSummary) {
+  
   $scope.result = answerSummary;
 
   /**

@@ -1,5 +1,7 @@
-angular.module('app').factory('reviseExamAnswerSheetService',
-  ['$http', '$route', '$q', reviseExamAnswerSheetService]);
+angular.module('app')
+.factory('reviseExamAnswerSheetService',
+        ['$http', '$route', '$q',
+          reviseExamAnswerSheetService]);
 
 function reviseExamAnswerSheetService($http, $route, $q) {
 
@@ -27,6 +29,7 @@ function reviseExamAnswerSheetService($http, $route, $q) {
     },
 
     getReviseExamQuestion : function() {
+      
       var getQuestionUrl = 'unSubscribeTest/'+$route.current.params.testMode+'/'
                             +$route.current.params.testID+'/'
                             +$route.current.params.questionNumber;
