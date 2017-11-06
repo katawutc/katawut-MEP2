@@ -15,17 +15,35 @@ function suTestReviewCtrl($scope, $route,
    suSecondNavBarMessageService.setMessage(message);
    /** */
 
-  $scope.suTestID = $route.current.params.suTestID;
 
-  $scope.suTestReview = suTestReview;
+   $scope.commentTextArea = false;
 
-  $scope.suTestSummary = function() {
-    var suTestSummary = '/suTestSummary/'+
-                          $window.sessionStorage.userID+'/'+
-                          $window.sessionStorage.suTestID+'/'+
-                          $window.sessionStorage.suTestMode+'/'+
-                          $window.sessionStorage.suTestStartAt;
+   $scope.suTestID = $route.current.params.suTestID;
 
-    $location.path(suTestSummary);
+   $scope.suTestReview = suTestReview;
+
+   $scope.suTestSummary = function() {
+
+     var suTestSummary = '/suTestSummary/'+
+                           $window.sessionStorage.userID+'/'+
+                           $window.sessionStorage.suTestID+'/'+
+                           $window.sessionStorage.suTestMode+'/'+
+                           $window.sessionStorage.suTestStartAt;
+
+     $location.path(suTestSummary);
   }
+
+  $scope.showCommentTextArea = function() {
+
+    $scope.commentTextArea = !$scope.commentTextArea;
+  }
+
+  $scope.sendComment = function() {
+
+    console.log('comment is sent');
+
+    $scope.commentTextArea = !$scope.commentTextArea;
+
+  }
+
 }
