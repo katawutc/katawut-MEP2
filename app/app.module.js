@@ -3,13 +3,16 @@ angular.module('app', ['ngRoute',
                        'ngScrollGlue']);
 
 /** Loading the Facebook SDK for JavaScript */
-angular.module('app').run(['$window', FBAsyncInit]);
+angular.module('app').run(['$window', '$rootScope',
+                            FBAsyncInit]);
 
 /** initialize note and chat panel on $rootScope */
 angular.module('app').run(['$rootScope', initializeNoteChatPanel]);
 
 /**  Loading the Facebook SDK for JavaScript */
-function FBAsyncInit($window) {
+function FBAsyncInit($window, $rootScope) {
+
+  $rootScope.fbSdkLoaded = false;
 
   $window.fbAsyncInit = function() {
     FB.init({
@@ -20,6 +23,11 @@ function FBAsyncInit($window) {
       xfbml      : true,  // parse social plugins on this page
       version    : 'v2.8' // use graph api version 2.8
     });
+
+    $rootScope.fbSdkLoaded = true;
+
+    console.log('fb sdk is loaded');
+
   };
 }
 

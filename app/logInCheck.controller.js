@@ -14,9 +14,13 @@ function logInCheckCtrl ($window, fbLogInStatusService) {
               if (fbLogInStatus === 'connected') {
                 $window.location.href = '/auth/facebook';
               }
-              else {
+              else if (fbLogInStatus === 'fb sdk not loaded') {
+
+                console.log('fb sdk not loaded; may be forbidden');
                 $window.location.href = '#!/logIn';
               }
+              else {
+                $window.location.href = '#!/logIn';              }
             },
             function(data) {
 

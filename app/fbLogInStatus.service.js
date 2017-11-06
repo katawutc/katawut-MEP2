@@ -1,9 +1,9 @@
 angular.module('app')
 .factory('fbLogInStatusService',
-        ['$window', '$q',
+        ['$window', '$q', '$rootScope',
           fbLogInStatusService]);
 
-function fbLogInStatusService($window, $q) {
+function fbLogInStatusService($window, $q, $rootScope) {
   return {
       getFBLogInStatus : function() {
 
@@ -18,14 +18,22 @@ function fbLogInStatusService($window, $q) {
         })
         */
 
-        var deferred = $q.defer();
 
-        FB.getLoginStatus(function(response) {
-          if (response.status) {
-            deferred.resolve(response.status);
-          }
-      })
-      return deferred.promise;
+        /** if fb sdk fails to load */
+        if (!$rootScope.fbSdkLoaded) {
+          return 'fb sdk not loaded';
+        }
+        else if ($rootScope.fbSdkLoaded) {
+
+          var deferred = $q.defer();
+
+          FB.getLoginStatus(function(response) {
+            if (response.status) {
+              deferred.resolve(response.status);
+            }
+          })
+          return deferred.promise;
+        }
+      }
     }
   }
-}
