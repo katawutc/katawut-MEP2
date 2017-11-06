@@ -316,3 +316,9 @@ app.get('/adminChat/:userID/userList',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
   require('./server/getAdminChatUserList'));
+
+/** post su test comment */
+app.post('/postSuTestComment/:userID',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkSuAuthority'),
+  require('./server/postSuTestComment'));
