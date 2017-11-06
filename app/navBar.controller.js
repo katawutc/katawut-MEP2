@@ -18,4 +18,22 @@ function navBarController ($scope, $window) {
       $scope.logIn = true;
     } else { $scope.logIn = false; }
 
+
+    $scope.shareUs = function() {
+
+      FB.ui(
+        {
+          method: 'share',
+          href: 'https://tranquil-chamber-47085.herokuapp.com',
+        },
+        // callback
+        function(response) {
+          if (response && !response.error_message) {
+            //alert('Posting completed.');
+          } else {
+            //alert('Error while posting.');
+          }
+        }
+      );
+    }
   }

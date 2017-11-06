@@ -20,9 +20,9 @@ angular.module('app')
     resolve: {
       fbLogInStatus : function(fbLogInStatusService) {
         return fbLogInStatusService.getFBLogInStatus();
+        }
       }
-    }
-  })
+    })
     .when("/signUp", {
       templateUrl : 'signUp.html',
       controller : 'signUpCtrl'
