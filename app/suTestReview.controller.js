@@ -1,11 +1,19 @@
-angular.module('app').controller('suTestReviewCtrl',
-                                  ['$scope', '$http', '$route',
-                                    '$window', '$location',
-                                      'suTestReview',
-                                      suTestReviewCtrl]);
+angular.module('app')
+.controller('suTestReviewCtrl',
+           ['$scope', '$route',
+            '$window', '$location',
+            'suTestReview', 'suSecondNavBarMessageService',
+             suTestReviewCtrl]);
 
-function suTestReviewCtrl($scope, $http, $route,
-                          $window, $location, suTestReview) {
+function suTestReviewCtrl($scope, $route,
+                          $window, $location, suTestReview,
+                           suSecondNavBarMessageService) {
+
+   /** set suSecondNavBarMessage */
+   var message = $window.sessionStorage.suTestID +
+                 ' Test review';
+   suSecondNavBarMessageService.setMessage(message);
+   /** */
 
   $scope.suTestID = $route.current.params.suTestID;
 

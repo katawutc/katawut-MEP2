@@ -11,6 +11,10 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
                           socketService,
                           suSecondNavBarMessageService) {
 
+    console.log('at dashboardSuCtrl');
+
+    console.log(suAccountData);
+
     /** su emit socket connection */
     socketService.emit('suConnect', $window.sessionStorage.userID);
     //

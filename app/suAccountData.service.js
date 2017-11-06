@@ -1,28 +1,30 @@
 angular.module('app')
 .factory('suAccountDataService',
-        ['$http', '$route', '$q',
+        ['$http', '$route', '$q', '$window',
           suAccountDataService]);
 
-function suAccountDataService($http, $route, $q) {
+function suAccountDataService($http, $route, $q, $window) {
   return {
       getSuAccountData : function() {
 
-      var suAccountDataUrl = '/accountData/su/'+$route.current.params.userID;
+        console.log('at suAccountDataService: getSuAccountData');
 
-      var deferred = $q.defer();
+        var suAccountDataUrl = '/accountData/su/'+$route.current.params.userID;
 
-      $http({
-        url: suAccountDataUrl,
-        method: 'GET',
-        headers: {
-          'Authorization': 'JWT ' + $window.sessionStorage.token
-          }
-      }).then(function successCallback(response) {
-        deferred.resolve(response.data);
-      },function errorCallback(response){
+        var deferred = $q.defer();
 
-      });
-      return  deferred.promise;
-    }
+        $http({
+          url: suAccountDataUrl,
+          method: 'GET',
+          headers: {
+            'Authorization': 'JWT ' + $window.sessionStorage.token
+            }
+        }).then(function successCallback(response) {
+          deferred.resolve(response.data);
+        },function errorCallback(response){
+
+        });
+        return  deferred.promise;
+      }
   };
 }

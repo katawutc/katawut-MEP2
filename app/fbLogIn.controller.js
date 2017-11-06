@@ -40,6 +40,8 @@ function fbLogInCtrl ($http, $routeParams, $window,
 
         socketService.emit('suConnect', $window.sessionStorage.userID);
 
+        console.log('at fbLogInCtrl: before route to dashboard');
+
         $location.path('/dashboard'+'/'+
                         $window.sessionStorage.getItem('userRole')+'/'+
                         $window.sessionStorage.getItem('userID'));

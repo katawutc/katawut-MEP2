@@ -1,5 +1,7 @@
-angular.module('app').factory('suTestReviewService',
-  ['$http', '$route', '$q', '$window', suTestReviewService]);
+angular.module('app')
+.factory('suTestReviewService',
+        ['$http', '$route', '$q', '$window',
+          suTestReviewService]);
 
 function suTestReviewService($http, $route, $q, $window) {
 
