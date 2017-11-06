@@ -1,11 +1,19 @@
 angular.module('app')
 .controller('logInCheckCtrl',
-           ['$window', 'fbLogInStatusService',
+           ['$window', '$rootScope',
+            'fbLogInStatusService',
              logInCheckCtrl]);
 
-function logInCheckCtrl ($window, fbLogInStatusService) {
+function logInCheckCtrl ($window, $rootScope, fbLogInStatusService) {
 
       var logInCheck = function() {
+
+        if (!$rootScope.fbSdkLoaded) {
+          console.log('fb sdk not loaded; may be forbidden');
+          $window.location.href = '#!/logIn';
+        }
+        else if ($rootScope.fbSdkLoaded) {
+
           fbLogInStatusService.getFBLogInStatus()
             .then(function(fbLogInStatus) {
 
@@ -14,18 +22,15 @@ function logInCheckCtrl ($window, fbLogInStatusService) {
               if (fbLogInStatus === 'connected') {
                 $window.location.href = '/auth/facebook';
               }
-              else if (fbLogInStatus === 'fb sdk not loaded') {
-
-                console.log('fb sdk not loaded; may be forbidden');
+              else {
                 $window.location.href = '#!/logIn';
               }
-              else {
-                $window.location.href = '#!/logIn';              }
             },
             function(data) {
 
             });
           }
+        }
 
       logInCheck();
 }

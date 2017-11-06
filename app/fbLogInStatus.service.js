@@ -18,13 +18,6 @@ function fbLogInStatusService($window, $q, $rootScope) {
         })
         */
 
-
-        /** if fb sdk fails to load */
-        if (!$rootScope.fbSdkLoaded) {
-          return 'fb sdk not loaded';
-        }
-        else if ($rootScope.fbSdkLoaded) {
-
           var deferred = $q.defer();
 
           FB.getLoginStatus(function(response) {
@@ -33,7 +26,7 @@ function fbLogInStatusService($window, $q, $rootScope) {
             }
           })
           return deferred.promise;
-        }
+
       }
     }
   }
