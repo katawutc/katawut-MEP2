@@ -13,7 +13,7 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-      <th><h3 style='text-align:center';>Title</h3></th>
+      <th><h3 style='text-align:left';>Title</h3></th>
       <th><h3 style='text-align:center';>Date</h3></th>
       <th><h3 style='text-align:center';>View</h3></th>
       <th><h3 style='text-align:center';>Delete</h3></th>
@@ -21,9 +21,10 @@
     </thead>
       <tbody>
         <tr ng-repeat="note in noteList">
-          <td style='text-align:center';>{{note.title}}</td>
-          <td style='text-align:center';>{{note.noteTimeText}}</td>
-          <td><a ng-href="#!/suNote/{{note.userID}}/{{note.title}}/{{note.noteTime}}">view</a></td>
+          <td style='text-align:left';>{{note.title}}</td>
+          <td style='text-align:left';>{{note.noteTimeText}}</td>
+          <td style='text-align:center';><b><a ng-href="#!/suNote/{{note.userID}}/{{note.title}}/{{note.noteTime}}">view</a></b></td>
+          <td style='text-align:center';><b><a ng-href="" style='color: hotpink'>delete</a></b></td>
         </tr>
       </tbody>
     </table>
