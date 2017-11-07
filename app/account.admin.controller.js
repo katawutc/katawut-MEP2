@@ -1,11 +1,10 @@
-angular.module('app').controller('accountAdminCtrl',
-                                  ['$scope', '$http', '$routeParams',
-                                    '$window', '$location',
-                                    'accountAdmin', 'settingAdmin', 'lastLoginAdmin',
-                                      accountAdminCtrl]);
+angular.module('app')
+.controller('accountAdminCtrl',
+           ['$scope',
+            'accountAdmin', 'settingAdmin', 'lastLoginAdmin',
+             accountAdminCtrl]);
 
-function accountAdminCtrl($scope, $http, $routeParams,
-                          $window, $location,
+function accountAdminCtrl($scope,
                           accountAdmin, settingAdmin, lastLoginAdmin) {
 
   $scope.userAccount = accountAdmin;

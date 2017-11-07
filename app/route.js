@@ -388,4 +388,14 @@ angular.module('app')
         }
       }
     })
+    /** edit su note */
+    .when('/editSuNote/:userID/:noteTitle/:noteTime', {
+      templateUrl : 'editSuNote.html',
+      controller : 'editSuNoteCtrl',
+      resolve: {
+        suNote : function(suNoteService) {
+          return suNoteService.getSuNote();
+        }
+      }
+    })
 });

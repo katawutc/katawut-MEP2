@@ -7,9 +7,9 @@ angular.module('app')
              suNoteCtrl]);
 
 function suNoteCtrl($scope, $http, $routeParams,
-                    $window, $location, suSecondNavBarMessageService,
+                    $window, $location,
+                    suSecondNavBarMessageService,
                     suNote) {
-
 
     $scope.userName = $window.sessionStorage.userName;
     $scope.userID = $window.sessionStorage.userID;
@@ -29,14 +29,27 @@ function suNoteCtrl($scope, $http, $routeParams,
                   ' เรา มาดู '+suNote.title;
     suSecondNavBarMessageService.setMessage(message);
 
+
     $scope.editNote = function() {
 
       console.log('edit note');
+
+      var editSuNotePath = '/editSuNote/'+$window.sessionStorage.userID+'/'+
+                            $scope.noteTitle+'/'+
+                            parseInt(suNote.noteTime);
+
+      console.log(editSuNotePath);
+
+      $location.path(editSuNotePath);
+
     }
 
     $scope.deleteNote = function() {
 
       console.log('delete note');
+      /**
+        * to open a modal dialog to confirm the deletion
+        */
     }
 
 
