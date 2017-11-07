@@ -21,10 +21,10 @@
     </thead>
       <tbody>
         <tr ng-repeat="note in noteList">
-          <td style='text-align:left';>{{note.title}}</td>
-          <td style='text-align:left';>{{note.noteTimeText}}</td>
-          <td style='text-align:center';><b><a ng-href="#!/suNote/{{note.userID}}/{{note.title}}/{{note.noteTime}}">view</a></b></td>
-          <td style='text-align:center';><b><a ng-href="" style='color: hotpink'>delete</a></b></td>
+          <td style='text-align:left';><h4 style='color: blue'>{{note.title}}</h4></td>
+          <td style='text-align:left';><h4>{{note.noteTimeText}}</h4></td>
+          <td style='text-align:center';><h4><b><a ng-href="#!/suNote/{{note.userID}}/{{note.title}}/{{note.noteTime}}">view</a></b><h4></td>
+          <td style='text-align:center';><h4><b><a ng-href="" style='color: hotpink'>delete</a></b></h4></td>
         </tr>
       </tbody>
     </table>

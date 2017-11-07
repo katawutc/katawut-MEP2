@@ -16,8 +16,6 @@ function suNoteCtrl($scope, $http, $routeParams,
 
     if (suNote) {
 
-      console.log(suNote);
-
       $scope.noteTitle = suNote.title;
       $scope.noteContent = suNote.note;
 
@@ -30,6 +28,16 @@ function suNoteCtrl($scope, $http, $routeParams,
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
                   ' เรา มาดู '+suNote.title;
     suSecondNavBarMessageService.setMessage(message);
+
+    $scope.editNote = function() {
+
+      console.log('edit note');
+    }
+
+    $scope.deleteNote = function() {
+
+      console.log('delete note');
+    }
 
 
 
