@@ -11,6 +11,8 @@ function editSuNoteCtrl ($scope, suNote) {
 
   console.log(suNote);
 
+  $scope.showEditSuNote = true;
+
   $scope.title = suNote.title;
 
   $scope.note = suNote.note;
