@@ -24,7 +24,8 @@
           <td style='text-align:left';><h4 style='color: blue'>{{note.title}}</h4></td>
           <td style='text-align:left';><h4>{{note.noteTimeText}}</h4></td>
           <td style='text-align:center';><h4><b><a ng-href="#!/suNote/{{note.userID}}/{{note.title}}/{{note.noteTime}}">view</a></b><h4></td>
-          <td style='text-align:center';><h4><b><a ng-href="" style='color: hotpink'>delete</a></b></h4></td>
+          <td style='text-align:center';><h4><b><a ng-href='' ng-click='deleteNote(note.userID, note.title, note.noteTime)'
+              style='color: hotpink'>delete</a></b></h4></td>
         </tr>
       </tbody>
     </table>

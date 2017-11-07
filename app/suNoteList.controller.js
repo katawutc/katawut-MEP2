@@ -4,12 +4,14 @@ angular.module('app')
             '$location',
             'suSecondNavBarMessageService',
             'suNoteList',
+            'suNoteListService',
              suNoteListCtrl]);
 
 function suNoteListCtrl ($scope, $http, $routeParams,
                          $window, $location,
                          suSecondNavBarMessageService,
-                         suNoteList) {
+                         suNoteList,
+                         suNoteListService) {
 
     $scope.userName = $window.sessionStorage.userName;
     $scope.userID = $window.sessionStorage.userID;
@@ -38,5 +40,16 @@ function suNoteListCtrl ($scope, $http, $routeParams,
 
     }
 
+    $scope.deleteNote = function(userID, title, noteTime) {
+
+      console.log('delete note');
+
+      console.log(userID);
+      console.log(title);
+      console.log(noteTime);
+
+      suNoteListService.deleteSuNote(userID, title, noteTime);
+
+    }
 
   }

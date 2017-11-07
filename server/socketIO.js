@@ -65,8 +65,7 @@ module.exports = function socketIO(socket) {
                                         'noteTime': data.previousNoteTime},
                                         {$set:{'noteTime': data.newNoteTime,
                                                'title': data.title,
-                                               'note': data.note,
-                                               'newNote': data.newNote}},
+                                               'note': data.note}},
                                               { upsert: true}, function(err, record) {
                                                 if (err) throw err;
                                                 //console.log(record);
