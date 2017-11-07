@@ -35,11 +35,12 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
 
     console.log('save note');
 
-    $rootScope.quickNote = { userID: $window.sessionStorage.userID,
-                             noteTimeStart: $rootScope.noteTimeStart,
-                             noteTime: Date.now(),
-                             title: $scope.title,
-                             note: $scope.note }
+    $rootScope.quickNote = { 'userID': $window.sessionStorage.userID,
+                             'noteTimeStart': $rootScope.noteTimeStart,
+                             'noteTime': Date.now(),
+                             'title': $scope.title,
+                             'note': $scope.note,
+                             'newNote': true}
 
     console.log($rootScope.quickNote);
 

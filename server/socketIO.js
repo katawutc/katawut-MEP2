@@ -40,7 +40,7 @@ module.exports = function socketIO(socket) {
 
      console.log(data);
 
-     // to save note into the DB here
+     // to save new note into the DB here
      if (data.title || data.note) {
 
        db.collection('suNote').update({'userID': data.userID,
@@ -52,10 +52,25 @@ module.exports = function socketIO(socket) {
                                              'note': data.note}},
                                       { upsert: true}, function(err, record) {
                                         if (err) throw err;
-                                        console.log(record);
+                                        //console.log(record);
                                       })
-     }
-   })
+                                    }
+                                  })
 
+   socket.on('editSuNote', function(data) {
 
+      if (data.title || data.note) {
+
+        db.collection('suNote').update({'userID': data.userID,
+                                        'noteTime': data.previousNoteTime},
+                                        {$set:{'noteTime': data.newNoteTime,
+                                               'title': data.title,
+                                               'note': data.note,
+                                               'newNote': data.newNote}},
+                                              { upsert: true}, function(err, record) {
+                                                if (err) throw err;
+                                                //console.log(record);
+                                              })
+                                            }
+                                          })
 }
