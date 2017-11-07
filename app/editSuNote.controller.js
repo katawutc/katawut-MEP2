@@ -1,9 +1,18 @@
 angular.module('app')
 .controller('editSuNoteCtrl',
            ['$scope',
+            'suNote',
              editSuNoteCtrl]);
 
-function editSuNoteCtrl ($scope) {
+function editSuNoteCtrl ($scope, suNote) {
 
+
+  console.log('at editSuNoteCtrl');
+
+  console.log(suNote);
+
+  $scope.title = suNote.title;
+
+  $scope.note = suNote.note;
 
 }

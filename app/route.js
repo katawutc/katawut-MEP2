@@ -389,7 +389,7 @@ angular.module('app')
       }
     })
     /** edit su note */
-    .when('/editSuNote/:userID/:noteTitle/:noteTime', {
+    .when('/editSuNote/:userID/:title/:noteTime', {
       templateUrl : 'editSuNote.html',
       controller : 'editSuNoteCtrl',
       resolve: {

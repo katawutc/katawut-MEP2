@@ -2,26 +2,29 @@
 
 <second-nav-bar-su></second-nav-bar-su>
 
-<div class="container fluid" style="margin-top:120px">
+<div class="container fluid" style="margin-top:140px">
+
+  <div class="col-sm-2"></div>
+
+  <div class="col-sm-8">
 
   <form>
     <div class="form-group">
-      <input id='noteTitle' type='text'
-        ng-model="title"
-        ng-change='saveNote()'
-        ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">
-        {{title}}
+      <input id='noteTitle' type='text' size='30' style='font-size:24px; color: blue;';
+             ng-value = title>
+
       </input>
     </div>
     <div class="form-group">
-      <textarea id='noteNote' class="form-control" rows='9' column='50'
-        ng-model="note"
-        ng-change='saveNote()'
-        ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">
+      <textarea id='noteNote' class="form-control" rows='20' column='50'
+        style='font-size:20px; text-align: left;'>
         {{note}}
       </textarea>
     </div>
   </form>
 
+  </div>
+
+  <div class="col-sm-2"></div>
 
 </div>
