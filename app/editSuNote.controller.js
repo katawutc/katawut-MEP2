@@ -1,10 +1,10 @@
 angular.module('app')
 .controller('editSuNoteCtrl',
-           ['$scope', '$window',
+           ['$scope', '$window', '$timeout',
             'suNote', 'suSecondNavBarMessageService', 'socketService',
              editSuNoteCtrl]);
 
-function editSuNoteCtrl ($scope, $window,
+function editSuNoteCtrl ($scope, $window, $timeout,
                          suNote, suSecondNavBarMessageService, socketService) {
 
   console.log('at editSuNoteCtrl');
@@ -47,6 +47,12 @@ function editSuNoteCtrl ($scope, $window,
     console.log(suNote);
 
     socketService.emit('editSuNote', suNote);
+
+    // to display save notification
+    $scope.createNoteSave = true;
+    $timeout(function(){
+                $scope.createNoteSave = false;
+              }, 1000);
   }
 
 }

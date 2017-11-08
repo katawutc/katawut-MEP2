@@ -40,8 +40,8 @@ function createSuNoteCtrl ($scope, $window, $timeout,
 
     socketService.emit('createSuNote', suNote);
 
+    // to display save notification
     $scope.createNoteSave = true;
-
     $timeout(function(){
                 $scope.createNoteSave = false;
               }, 1000);
