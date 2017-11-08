@@ -31,7 +31,7 @@ function suNoteListService($http, $route, $q, $window, $location) {
      deleteSuNote : function(userID, title, noteTime) {
 
        var deleteSuNoteUrl = '/deleteSuNote/'+userID+'/'+
-                              title+'/'+
+                              encodeURIComponent(title)+'/'+
                               noteTime;
 
        console.log(deleteSuNoteUrl);

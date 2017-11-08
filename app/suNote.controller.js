@@ -40,7 +40,7 @@ function suNoteCtrl($scope, $http, $routeParams,
       console.log('edit note');
 
       var editSuNotePath = '/editSuNote/'+$window.sessionStorage.userID+'/'+
-                            $scope.noteTitle+'/'+
+                            encodeURIComponent($scope.noteTitle)+'/'+
                             parseInt(suNote.noteTime);
 
       console.log(editSuNotePath);
@@ -58,7 +58,7 @@ function suNoteCtrl($scope, $http, $routeParams,
 
 
         var deleteSuNoteUrl = '/deleteSuNote/'+$window.sessionStorage.userID+'/'+
-                               $scope.noteTitle+'/'+
+                               encodeURIComponent($scope.noteTitle)+'/'+
                                parseInt(suNote.noteTime);
 
         console.log(deleteSuNoteUrl);
