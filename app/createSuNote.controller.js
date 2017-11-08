@@ -1,10 +1,10 @@
 angular.module('app')
 .controller('createSuNoteCtrl',
-           ['$scope', '$window',
+           ['$scope', '$window', '$timeout',
             'suSecondNavBarMessageService', 'socketService',
              createSuNoteCtrl]);
 
-function createSuNoteCtrl ($scope, $window,
+function createSuNoteCtrl ($scope, $window, $timeout,
                            suSecondNavBarMessageService, socketService) {
 
   console.log('at createSuNoteCtrl');
@@ -39,7 +39,12 @@ function createSuNoteCtrl ($scope, $window,
     console.log(suNote);
 
     socketService.emit('createSuNote', suNote);
-    //console.log('socketService.emit(createSuNote)');
+
+    $scope.createNoteSave = true;
+
+    $timeout(function(){
+                $scope.createNoteSave = false;
+              }, 1000);
   }
 
   // override the $rootScope.openNotePanel
