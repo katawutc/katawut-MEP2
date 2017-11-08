@@ -16,6 +16,13 @@ function suNoteListCtrl ($scope, $http, $routeParams,
     // force close quick note panel
     $rootScope.showNotePanel = false;
 
+    /** reset quickNote $rootScope */
+    $rootScope.noteTimeStart = '';
+    $rootScope.quickNote.noteTime = '';
+    $rootScope.quickNote.title = '';
+    $rootScope.quickNote.note = '';
+    /** */
+
     $scope.userName = $window.sessionStorage.userName;
     $scope.userID = $window.sessionStorage.userID;
 

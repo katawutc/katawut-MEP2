@@ -3,7 +3,7 @@
   <div class="panel panel-primary" id='notePanel' ng-show='showNotePanel'>
       <div class="panel-heading">
         <div class="panel-title pull-left">
-          Quick note
+          Quick note  <h5 style='color: black; display: inline;' ng-show='quickNoteSave'}> saved... </h5>
         </div>
         <div class="panel-title pull-right">
           <a href='' ng-click='newNote()'><span class="glyphicon glyphicon-plus"></span></a>
@@ -19,14 +19,14 @@
               focus-on-show rfocus='NoteTitle'
               ng-model="title" placeholder=' Note title'
               ng-change='saveNote()'
-              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 4500, 'blur': 0} }">
             </input>
           </div>
           <div class="form-group">
             <textarea id='quickNoteNote' class="form-control" rows='9' column='50'
               ng-model="note"
               ng-change='saveNote()'
-              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">
+              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 4500, 'blur': 0} }">
             </textarea>
           </div>
         </form>

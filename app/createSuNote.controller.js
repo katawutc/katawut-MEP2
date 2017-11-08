@@ -19,7 +19,6 @@ function createSuNoteCtrl ($scope, $window, $timeout,
 
   var noteTimeStart = Date.now();
 
-
   $scope.saveNote = function() {
 
     console.log('at createSuNoteCtrl: saveNote');
