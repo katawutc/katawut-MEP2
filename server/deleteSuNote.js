@@ -8,9 +8,11 @@ module.exports = function deleteSuNote(req, res) {
   console.log(req.params.userID);
   console.log(req.params.title);
 
+  var noteTimeStart = parseInt(req.params.noteTimeStart);
   var noteTime = parseInt(req.params.noteTime);
 
   console.log(noteTime);
+  console.log(noteTimeStart);
 
 
   function suNoteDelete_cb(err, number) {
@@ -26,5 +28,6 @@ module.exports = function deleteSuNote(req, res) {
   db.collection('suNote')
   .remove({'userID': req.params.userID,
            'title': req.params.title,
+           'noteTimeStart': noteTimeStart,
            'noteTime': noteTime}, suNoteDelete_cb);
 }

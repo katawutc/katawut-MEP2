@@ -234,7 +234,7 @@ angular.module('app')
       }
     })
     /** view su note */
-    .when('/suNote/:userID/:title/:noteTime', {
+    .when('/suNote/:userID/:title/:noteTimeStart/:noteTime', {
       templateUrl : 'suNote.html',
       controller : 'suNoteCtrl',
       resolve: {
@@ -389,7 +389,7 @@ angular.module('app')
       }
     })
     /** edit su note */
-    .when('/editSuNote/:userID/:title/:noteTime', {
+    .when('/editSuNote/:userID/:title/:noteTimeStart/:noteTime', {
       templateUrl : 'editSuNote.html',
       controller : 'editSuNoteCtrl',
       resolve: {

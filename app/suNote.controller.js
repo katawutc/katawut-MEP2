@@ -1,17 +1,20 @@
 angular.module('app')
 .controller('suNoteCtrl',
            ['$scope', '$http', '$routeParams',
-            '$window', '$location', '$q',
+            '$window', '$location', '$q', '$rootScope',
             'suSecondNavBarMessageService',
             'suNote',
             'suNoteListService',
              suNoteCtrl]);
 
 function suNoteCtrl($scope, $http, $routeParams,
-                    $window, $location, $q,
+                    $window, $location, $q, $rootScope,
                     suSecondNavBarMessageService,
                     suNote,
                     suNoteListService) {
+
+    // force close quick note panel
+    $rootScope.showNotePanel = false;
 
     $scope.userName = $window.sessionStorage.userName;
     $scope.userID = $window.sessionStorage.userID;
@@ -21,8 +24,8 @@ function suNoteCtrl($scope, $http, $routeParams,
       $scope.noteTitle = suNote.title;
       $scope.noteContent = suNote.note;
 
-      var noteDate = parseInt(suNote.noteTime);
-      $scope.noteDate = (new Date(noteDate)).toString();
+      var noteTime = parseInt(suNote.noteTime);
+      $scope.noteTime = (new Date(noteTime)).toString();
 
     }
 
@@ -37,7 +40,8 @@ function suNoteCtrl($scope, $http, $routeParams,
       console.log('edit note');
 
       var editSuNotePath = '/editSuNote/'+$window.sessionStorage.userID+'/'+
-                            $scope.noteTitle+'/'+
+                            encodeURIComponent($scope.noteTitle)+'/'+
+                            parseInt(suNote.noteTimeStart)+'/'+
                             parseInt(suNote.noteTime);
 
       console.log(editSuNotePath);
@@ -55,7 +59,8 @@ function suNoteCtrl($scope, $http, $routeParams,
 
 
         var deleteSuNoteUrl = '/deleteSuNote/'+$window.sessionStorage.userID+'/'+
-                               $scope.noteTitle+'/'+
+                               encodeURIComponent($scope.noteTitle)+'/'+
+                               parseInt(suNote.noteTimeStart)+'/'+
                                parseInt(suNote.noteTime);
 
         console.log(deleteSuNoteUrl);
@@ -82,5 +87,14 @@ function suNoteCtrl($scope, $http, $routeParams,
         });
         return  deferred.promise;
 
+    }
+
+    // to create a new note
+    // override $rootScope.openNotePanel
+    $scope.openNotePanel = function() {
+
+      console.log('route to create a new note path');
+      var createSuNoteUrl = 'createSuNote/'+$window.sessionStorage.userID;
+      $location.path(createSuNoteUrl);
     }
 }

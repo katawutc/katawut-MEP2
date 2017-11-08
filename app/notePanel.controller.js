@@ -1,10 +1,11 @@
 angular.module('app')
 .controller('notePanelCtrl',
-            ['$rootScope', '$scope', '$window',
+            ['$rootScope', '$scope', '$window', '$timeout',
              'socketService',
               notePanelCtrl]);
 
-function notePanelCtrl($rootScope, $scope, $window, socketService) {
+function notePanelCtrl($rootScope, $scope, $window, $timeout,
+                        socketService) {
 
     $scope.title = $rootScope.quickNote.title;
     $scope.note = $rootScope.quickNote.note;
@@ -46,6 +47,12 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
 
     socketService.emit('suNote', $rootScope.quickNote);
 
+    // to display save notification
+    $scope.quickNoteSave = true;
+    $timeout(function(){
+                $scope.quickNoteSave = false;
+              }, 1000);
+
   }
 
   $rootScope.newNote = function() {
@@ -58,11 +65,17 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
     $scope.title = '';
     $scope.note = '';
 
+    // to display save notification
+    $scope.quickNoteSave = true;
+    $timeout(function(){
+                $scope.quickNoteSave = false;
+              }, 1000);
+
     $scope.setFocusNoteTitle(); // using rfocus
 
-    $rootScope.noteTimeStart = Date.now();
+    $rootScope.quickNote.noteTimeStart = Date.now();
 
-    console.log($rootScope.noteTimeStart);
+    console.log($rootScope.quickNote.noteTimeStart);
 
     $rootScope.quickNote.noteTime = '';
     $rootScope.quickNote.title = '';

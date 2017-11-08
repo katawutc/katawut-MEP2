@@ -1,17 +1,27 @@
 angular.module('app')
 .controller('suNoteListCtrl',
            ['$scope', '$http', '$routeParams', '$window',
-            '$location',
+            '$location', '$rootScope',
             'suSecondNavBarMessageService',
             'suNoteList',
             'suNoteListService',
              suNoteListCtrl]);
 
 function suNoteListCtrl ($scope, $http, $routeParams,
-                         $window, $location,
+                         $window, $location, $rootScope,
                          suSecondNavBarMessageService,
                          suNoteList,
                          suNoteListService) {
+
+    // force close quick note panel
+    $rootScope.showNotePanel = false;
+
+    /** reset quickNote $rootScope */
+    $rootScope.noteTimeStart = '';
+    $rootScope.quickNote.noteTime = '';
+    $rootScope.quickNote.title = '';
+    $rootScope.quickNote.note = '';
+    /** */
 
     $scope.userName = $window.sessionStorage.userName;
     $scope.userID = $window.sessionStorage.userID;
@@ -40,7 +50,7 @@ function suNoteListCtrl ($scope, $http, $routeParams,
 
     }
 
-    $scope.deleteNote = function(userID, title, noteTime) {
+    $scope.deleteNote = function(userID, title, noteTimeStart, noteTime) {
 
       console.log('delete note');
 
@@ -48,8 +58,20 @@ function suNoteListCtrl ($scope, $http, $routeParams,
       console.log(title);
       console.log(noteTime);
 
-      suNoteListService.deleteSuNote(userID, title, noteTime);
+      suNoteListService.deleteSuNote(userID, title, noteTimeStart, noteTime);
 
+    }
+
+    $scope.viewNote = function(userID, title, noteTimeStart, noteTime) {
+
+      var viewNoteUrl = '/suNote/'+userID+'/'+
+                          encodeURIComponent(title)+'/'+
+                          noteTimeStart+'/'+
+                          noteTime;
+                          
+      console.log(viewNoteUrl);
+
+      $location.path(viewNoteUrl);
     }
 
     // to create a new note

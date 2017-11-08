@@ -8,8 +8,10 @@ module.exports = function getSuNote(req, res) {
 
   console.log(req.params.userID);
   console.log(req.params.title);
+  console.log(req.params.noteTimeStart);
   console.log(req.params.noteTime);
 
+  var noteTimeStart = parseInt(req.params.noteTimeStart);
   var noteTime = parseInt(req.params.noteTime);
 
   console.log(noteTime);
@@ -32,6 +34,7 @@ module.exports = function getSuNote(req, res) {
   db.collection('suNote')
   .findOne({'userID': req.params.userID,
             'title': req.params.title,
+            'noteTimeStart': noteTimeStart,
             'noteTime': noteTime}, note_cb);
 
 }

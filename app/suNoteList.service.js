@@ -28,10 +28,11 @@ function suNoteListService($http, $route, $q, $window, $location) {
        return  deferred.promise;
      },
 
-     deleteSuNote : function(userID, title, noteTime) {
+     deleteSuNote : function(userID, title, noteTimeStart, noteTime) {
 
        var deleteSuNoteUrl = '/deleteSuNote/'+userID+'/'+
-                              title+'/'+
+                              encodeURIComponent(title)+'/'+
+                              noteTimeStart+'/'+
                               noteTime;
 
        console.log(deleteSuNoteUrl);

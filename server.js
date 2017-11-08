@@ -306,7 +306,7 @@ app.get('/getSuNoteList/:userID/',
   require('./server/getSuNoteList'));
 
 /** get su note to view */
-app.get('/getSuNote/:userID/:title/:noteTime',
+app.get('/getSuNote/:userID/:title/:noteTimeStart/:noteTime',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/getSuNote'));
@@ -324,7 +324,7 @@ app.post('/postSuTestComment/:userID',
   require('./server/postSuTestComment'));
 
 /** delete su note */
-app.get('/deleteSuNote/:userID/:title/:noteTime',
+app.get('/deleteSuNote/:userID/:title/:noteTimeStart/:noteTime',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/deleteSuNote'));
