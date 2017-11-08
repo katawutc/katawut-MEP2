@@ -72,4 +72,27 @@ module.exports = function socketIO(socket) {
                                               })
                                             }
                                           })
+
+    socket.on('createSuNote', function(data) {
+
+      console.log(data);
+
+      // to save new note into the DB here
+      if (data.title || data.note) {
+
+        db.collection('suNote').update({'userID': data.userID,
+                                        'noteTimeStart': data.noteTimeStart},
+                                       {$set:{'userID': data.userID,
+                                              'noteTimeStart': data.noteTimeStart,
+                                              'noteTime': data.noteTime,
+                                              'title': data.title,
+                                              'note': data.note}},
+                                       { upsert: true}, function(err, record) {
+                                         if (err) throw err;
+                                         //console.log(record);
+                                       })
+                                     }
+                                   })      
+
+
 }

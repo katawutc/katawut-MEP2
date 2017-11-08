@@ -58,7 +58,7 @@ function notePanelCtrl($rootScope, $scope, $window, socketService) {
     $scope.title = '';
     $scope.note = '';
 
-    $scope.setFocusNoteTitle();
+    $scope.setFocusNoteTitle(); // using rfocus
 
     $rootScope.noteTimeStart = Date.now();
 

@@ -12,6 +12,7 @@
     <div class="form-group">
       <label for='noteTitle' style='font-size:24px;'>Title: </label>
       <input id='noteTitle' type='text' size='30' style='font-size:24px; color: blue;';
+             ng-show='showCreateSuNote' focus-on-show rfocus='NoteTitle'
              ng-model='title' value={{title}}
              ng-change='saveNote()'
              ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">
@@ -20,7 +21,6 @@
     <div class="form-group">
       <textarea id='noteNote' class="form-control" rows='20' column='50'
         style='font-size:20px; text-align: justify;'
-        ng-show='showEditSuNote' focus-on-show
         ng-model='note'
         ng-change='saveNote()'
         ng-model-options="{ updateOn: 'default blur', debounce: {'default': 5000, 'blur': 0} }">{{note}}</textarea>
@@ -31,4 +31,4 @@
 
   <div class="col-sm-2"></div>
 
-</div>
+<div>
