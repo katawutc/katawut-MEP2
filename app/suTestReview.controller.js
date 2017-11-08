@@ -41,19 +41,11 @@ function suTestReviewCtrl($scope, $route,
 
   $scope.sendComment = function() {
 
-    console.log('comment is sent');
+    /**
+      * to implement if comment is empty, not to send anything
+      */
 
     $scope.commentTextArea = !$scope.commentTextArea;
-
-    console.log($scope.suTestComment);
-
-/*
-    "solutionID": "P6-O-net-Math",
-    "solQuestionNumber": "1",
-    "solution": "b",
-    "explanation": "1 + 1 is 2.",
-    "question": "<P6-O-net-Math>::<1>::What is the result of 1 + 1 ?"*/
-
 
     var comment = {
                     'userID': window.sessionStorage.userID,
@@ -62,8 +54,6 @@ function suTestReviewCtrl($scope, $route,
                     'commentTime': Date.now(),
                     'comment': $scope.suTestComment
                   }
-
-    console.log(comment);
 
 
     var postSuTestCommentUrl = '/postSuTestComment/'+$window.sessionStorage.userID;

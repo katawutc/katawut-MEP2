@@ -1,16 +1,12 @@
-angular.module('app').factory('suNewTestInfoService',
-  ['$http', '$route', '$q', '$window', suNewTestInfoService]);
+angular.module('app')
+.factory('suNewTestInfoService',
+        ['$http', '$route', '$q', '$window',
+          suNewTestInfoService]);
 
 function suNewTestInfoService($http, $route, $q, $window) {
 
    return {
      getSuNewTestInfo : function() {
-
-       /**
-        * 1. get test ID
-        * 2. get test header
-        * 3. get test instruction
-        */
 
         var newTestInfoUrl = '/getSuNewTestInfo/'+$route.current.params.userID+
                               '/'+$route.current.params.testID+

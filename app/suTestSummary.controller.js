@@ -1,11 +1,12 @@
-angular.module('app').controller('suTestSummaryCtrl',
-                                  ['$scope', '$http', '$routeParams',
-                                    '$window', '$location',
-                                    'suTestSummary', 'suTestScore',
-                                     suTestSummaryCtrl]);
+angular.module('app')
+.controller('suTestSummaryCtrl',
+           ['$scope', '$http', '$routeParams',
+            '$window', '$location',
+            'suTestSummary', 'suTestScore',
+             suTestSummaryCtrl]);
 
 function suTestSummaryCtrl($scope, $http, $routeParams,
-                          $window, $location, suTestSummary, suTestScore) {
+                           $window, $location, suTestSummary, suTestScore) {
 
   var retakeTestUrl;
 
@@ -32,8 +33,6 @@ function suTestSummaryCtrl($scope, $http, $routeParams,
   // retake the test
   $scope.retakeTest = function()
   {
-    console.log('go to retake the test');
-    console.log(retakeTestUrl);
     $location.path(retakeTestUrl);
   }
 }

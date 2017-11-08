@@ -1,7 +1,9 @@
-angular.module('app').controller('errorPageCtrl',
-  ['$scope', '$http', '$routeParams', '$window',
-    '$location', errorPageCtrl]);
+angular.module('app')
+.controller('errorPageCtrl',
+           ['$scope',
+             errorPageCtrl]);
 
-function errorPageCtrl ($scope, $http, $routeParams, $window, $location) {
+function errorPageCtrl ($scope) {
+
   $scope.errorMessage = $window.sessionStorage.errorMessage;
 }

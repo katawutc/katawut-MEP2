@@ -1,11 +1,12 @@
-angular.module('app').controller('suTestTutorialModeCtrl',
-                                  ['$scope', '$http', '$route',
-                                    '$window', '$location',
-                                      'suTestQuestion', 'registerSuTestHistory',
-                                      suTestTutorialModeCtrl]);
+angular.module('app')
+.controller('suTestTutorialModeCtrl',
+           ['$scope', '$http', '$route',
+            '$window', '$location',
+            'suTestQuestion', 'registerSuTestHistory',
+             suTestTutorialModeCtrl]);
 
 function suTestTutorialModeCtrl($scope, $http, $route,
-                          $window, $location, suTestQuestion, registerSuTestHistory) {
+                                $window, $location, suTestQuestion, registerSuTestHistory) {
 
   console.log(registerSuTestHistory);
 
@@ -80,8 +81,6 @@ function suTestTutorialModeCtrl($scope, $http, $route,
         }
       }).then(function successCallback(response) {
 
-        console.log(response);
-
         $scope.result = response.data.result;
         $scope.explanation = response.data.explanation;
 
@@ -125,7 +124,7 @@ function suTestTutorialModeCtrl($scope, $http, $route,
         $location.path(suTestNextQuestionUrl);
 
       } else {
-          console.log('To show the summary page');
+
       }
     }
 

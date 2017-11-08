@@ -1,13 +1,13 @@
-angular.module('app').factory('suTestSummaryService',
-  ['$http', '$route', '$q', '$window', suTestSummaryService]);
+angular.module('app')
+.factory('suTestSummaryService',
+        ['$http', '$route', '$q', '$window',
+          suTestSummaryService]);
 
 function suTestSummaryService($http, $route, $q, $window) {
 
    return {
+     
      getSuTestSummary : function() {
-
-
-       ///suTestSummary/:userID/:suTestID/:suTestMode/:suTestStartAt
 
        $window.sessionStorage.suTestID = $route.current.params.suTestID;
        $window.sessionStorage.suTestMode = $route.current.params.suTestMode;

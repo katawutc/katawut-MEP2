@@ -1,12 +1,12 @@
 angular.module('app')
 .controller('suTestListCtrl',
-           ['$scope', '$http', '$routeParams', '$window',
-            '$location', 'suDashboardTest',
+           ['$scope', '$window',
+            'suDashboardTest',
             'suSecondNavBarMessageService',
              suTestListCtrl]);
 
-function suTestListCtrl ($scope, $http, $routeParams,
-                         $window, $location, suDashboardTest,
+function suTestListCtrl ($scope,
+                         $window, suDashboardTest,
                          suSecondNavBarMessageService) {
 
     $scope.userName = $window.sessionStorage.userName;

@@ -1,8 +1,10 @@
-angular.module('app').controller('suNewTestCtrl', ['$scope', '$http', '$route',
-                                    '$window', '$location',
-                                    'suNewTestInfo', 'suNewTestHeader',
-                                    'newSuTest',
-                                      suNewTestCtrl]);
+angular.module('app')
+.controller('suNewTestCtrl',
+           ['$scope', '$http', '$route',
+            '$window', '$location',
+            'suNewTestInfo', 'suNewTestHeader',
+            'newSuTest',
+             suNewTestCtrl]);
 
 function suNewTestCtrl($scope, $http, $route,
                           $window, $location,
@@ -15,7 +17,6 @@ function suNewTestCtrl($scope, $http, $route,
 
     $scope.suTestNumber = $route.current.params.testRunningNumber;
 
-    console.log(newSuTest);
     if (newSuTest) {
 
       $scope.suTestID = newSuTest.suTestID;
@@ -33,7 +34,6 @@ function suNewTestCtrl($scope, $http, $route,
       createAnswerSheetTutorial();
 
       function createAnswerSheetTutorial() {
-        console.log('creating createAnswerSheetTutorial');
 
         var suAnswerSheetTutorialData = {userID: $window.sessionStorage.userID,
                                           testID: $window.sessionStorage.testID,
@@ -42,8 +42,6 @@ function suNewTestCtrl($scope, $http, $route,
                                           suTestSize: $window.sessionStorage.suTestSize,
                                           suTestMode: $window.sessionStorage.suTestMode,
                                           suTestStartAt: $window.sessionStorage.suTestStartAt};
-
-        console.log(suAnswerSheetTutorialData);
 
         // create su exam sheet in the suTestHistory collection DB
         var suExamSheetUrl = '/createSuExamSheet/'+$window.sessionStorage.userID+'/'+
@@ -57,7 +55,6 @@ function suNewTestCtrl($scope, $http, $route,
             'Authorization': 'JWT ' + $window.sessionStorage.token
             }
          }).then(function successCallback(response) {
-           console.log('return from create the answer sheet');
 
            // go to the 1st question after empty answer sheet is created
            var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
@@ -66,15 +63,13 @@ function suNewTestCtrl($scope, $http, $route,
            $location.path(suTestTutorialUrl);
 
          }, function errorCallback(response) {
-           console.log(response.status);
+
            $location.path('/errorPage');
          });
        }
      }
 
     $scope.startTestExamMode = function() {
-
-      console.log('start su test Exam mode');
 
       $window.sessionStorage.testID = $scope.testID;  // testID
       $window.sessionStorage.suTestID = $scope.suTestID; // suTestID
@@ -90,7 +85,6 @@ function suNewTestCtrl($scope, $http, $route,
        * then use update later for the real user answer
        */
        function createAnswerSheetExam() {
-         console.log('creating createAnswerSheetExam');
 
          var suAnswerSheetExamData = {userID: $window.sessionStorage.userID,
                                       testID: $window.sessionStorage.testID,
@@ -99,8 +93,6 @@ function suNewTestCtrl($scope, $http, $route,
                                       suTestSize: $window.sessionStorage.suTestSize,
                                       suTestMode: $window.sessionStorage.suTestMode,
                                       suTestStartAt: $window.sessionStorage.suTestStartAt};
-
-         console.log(suAnswerSheetExamData);
 
          // create su exam sheet in the suTestHistory collection DB
          var suExamSheetUrl = '/createSuExamSheet/'+$window.sessionStorage.userID+'/'+
@@ -114,7 +106,6 @@ function suNewTestCtrl($scope, $http, $route,
              'Authorization': 'JWT ' + $window.sessionStorage.token
              }
           }).then(function successCallback(response) {
-            console.log('return from create the answer sheet');
 
             // go to the 1st question after empty answer sheet is created
             var suTestExamUrl = '/suTest/examMode/'+$window.sessionStorage.userID+'/'+
@@ -123,7 +114,7 @@ function suNewTestCtrl($scope, $http, $route,
             $location.path(suTestExamUrl);
 
           }, function errorCallback(response) {
-            console.log(response.status);
+
             $location.path('/errorPage');
           });
         }

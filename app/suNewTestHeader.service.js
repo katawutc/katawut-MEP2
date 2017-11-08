@@ -1,16 +1,12 @@
-angular.module('app').factory('suNewTestHeaderService',
-  ['$http', '$route', '$q', '$window', suNewTestHeaderService]);
+angular.module('app')
+.factory('suNewTestHeaderService',
+        ['$http', '$route', '$q', '$window',
+          suNewTestHeaderService]);
 
 function suNewTestHeaderService($http, $route, $q, $window) {
 
    return {
      getSuNewTestHeader : function() {
-
-       /**
-        * 1. get test ID
-        * 2. get test header
-        * 3. get test instruction
-        */
 
         var newTestHeaderUrl = '/getSuNewTestHeader/'+$route.current.params.userID+
                                 '/'+$route.current.params.testID+

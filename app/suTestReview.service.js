@@ -6,6 +6,7 @@ angular.module('app')
 function suTestReviewService($http, $route, $q, $window) {
 
    return {
+     
      getSuTestReview : function() {
 
        var suTestReviewUrl = '/getSuTestReview/'+$window.sessionStorage.userID+'/'+
@@ -21,7 +22,9 @@ function suTestReviewService($http, $route, $q, $window) {
            'Authorization': 'JWT ' + $window.sessionStorage.token
            }
        }).then(function successCallback(response) {
+
          deferred.resolve(response.data);
+
        },function errorCallback(response){
 
        });

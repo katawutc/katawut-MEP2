@@ -1,9 +1,12 @@
-angular.module('app').factory('suDashboardTestService',
-  ['$http', '$route', '$q', '$window', suDashboardTestService]);
+angular.module('app')
+.factory('suDashboardTestService',
+        ['$http', '$route', '$q', '$window',
+          suDashboardTestService]);
 
 function suDashboardTestService($http, $route, $q, $window) {
 
    return {
+     
      getSuDashboardTest : function() {
 
        var preferenceSettingUrl = 'preferenceSetting/su/'+$window.sessionStorage.userID;

@@ -1,9 +1,9 @@
-angular.module('app').controller('articleListSuCtrl',
-  ['$scope', '$http', '$routeParams', '$window', '$location',
-                                  articleListSuCtrl]);
+angular.module('app')
+.controller('articleListSuCtrl',
+           ['$scope', '$window',
+             articleListSuCtrl]);
 
-function articleListSuCtrl ($scope, $http, $routeParams, $window,
-                                $location) {
+function articleListSuCtrl ($scope, $window) {
 
     $scope.userID = $window.sessionStorage.userID;
 
