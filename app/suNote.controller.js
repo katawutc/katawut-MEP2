@@ -1,17 +1,20 @@
 angular.module('app')
 .controller('suNoteCtrl',
            ['$scope', '$http', '$routeParams',
-            '$window', '$location', '$q',
+            '$window', '$location', '$q', '$rootScope',
             'suSecondNavBarMessageService',
             'suNote',
             'suNoteListService',
              suNoteCtrl]);
 
 function suNoteCtrl($scope, $http, $routeParams,
-                    $window, $location, $q,
+                    $window, $location, $q, $rootScope,
                     suSecondNavBarMessageService,
                     suNote,
                     suNoteListService) {
+
+    // force close quick note panel
+    $rootScope.showNotePanel = false;
 
     $scope.userName = $window.sessionStorage.userName;
     $scope.userID = $window.sessionStorage.userID;
@@ -82,5 +85,14 @@ function suNoteCtrl($scope, $http, $routeParams,
         });
         return  deferred.promise;
 
+    }
+
+    // to create a new note
+    // override $rootScope.openNotePanel
+    $scope.openNotePanel = function() {
+
+      console.log('route to create a new note path');
+      var createSuNoteUrl = 'createSuNote/'+$window.sessionStorage.userID;
+      $location.path(createSuNoteUrl);
     }
 }

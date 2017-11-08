@@ -15,6 +15,10 @@ function suNoteService($http, $route, $q, $window) {
 
        console.log(getSuNoteUrl);
 
+       console.log($window.sessionStorage.userID);
+       console.log($route.current.params.title);
+       console.log($route.current.params.noteTime);
+
        var deferred = $q.defer();
 
        $http({
