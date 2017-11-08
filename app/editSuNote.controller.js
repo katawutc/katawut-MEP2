@@ -19,7 +19,9 @@ function editSuNoteCtrl ($scope, $window, $timeout,
 
     $scope.note = suNote.note;
 
-    $scope.noteTime = suNote.noteTime;
+    $scope.noteTimeStart = suNote.noteTimeStart;
+
+    //$scope.noteTime = suNote.noteTime;
   }
 
 
@@ -35,8 +37,9 @@ function editSuNoteCtrl ($scope, $window, $timeout,
     var suNote = {'userID': $window.sessionStorage.userID,
                   'title': $scope.title,
                   'note': $scope.note,
-                  'previousNoteTime': $scope.noteTime,
-                  'newNoteTime': Date.now()
+                  'noteTimeStart': $scope.noteTimeStart,
+                  //'previousNoteTime': $scope.noteTime,
+                  'noteTime': Date.now()
                   }
 
     message = 'Note editing: '+ $scope.title;

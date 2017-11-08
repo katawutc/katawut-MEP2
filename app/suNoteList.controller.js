@@ -50,7 +50,7 @@ function suNoteListCtrl ($scope, $http, $routeParams,
 
     }
 
-    $scope.deleteNote = function(userID, title, noteTime) {
+    $scope.deleteNote = function(userID, title, noteTimeStart, noteTime) {
 
       console.log('delete note');
 
@@ -58,13 +58,17 @@ function suNoteListCtrl ($scope, $http, $routeParams,
       console.log(title);
       console.log(noteTime);
 
-      suNoteListService.deleteSuNote(userID, title, noteTime);
+      suNoteListService.deleteSuNote(userID, title, noteTimeStart, noteTime);
 
     }
 
-    $scope.viewNote = function(userID, title, noteTime) {
+    $scope.viewNote = function(userID, title, noteTimeStart, noteTime) {
 
-      var viewNoteUrl = '/suNote/'+userID+'/'+encodeURIComponent(title)+'/'+noteTime;
+      var viewNoteUrl = '/suNote/'+userID+'/'+
+                          encodeURIComponent(title)+'/'+
+                          noteTimeStart+'/'+
+                          noteTime;
+                          
       console.log(viewNoteUrl);
 
       $location.path(viewNoteUrl);

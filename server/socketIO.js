@@ -61,9 +61,12 @@ module.exports = function socketIO(socket) {
 
       if (data.title || data.note) {
 
+        console.log(data);
+
         db.collection('suNote').update({'userID': data.userID,
-                                        'noteTime': data.previousNoteTime},
-                                        {$set:{'noteTime': data.newNoteTime,
+                                        'noteTimeStart': data.noteTimeStart},
+                                      //  'noteTime': data.previousNoteTime},
+                                        {$set:{'noteTime': data.noteTime,
                                                'title': data.title,
                                                'note': data.note}},
                                               { upsert: true}, function(err, record) {
@@ -92,7 +95,7 @@ module.exports = function socketIO(socket) {
                                          //console.log(record);
                                        })
                                      }
-                                   })      
+                                   })
 
 
 }

@@ -47,6 +47,7 @@ function createSuNoteCtrl ($scope, $window, $timeout,
   }
 
   // override the $rootScope.openNotePanel
+  // to open a new note to create
   $scope.openNotePanel = function() {
 
     console.log('create a new note at createSuNote');

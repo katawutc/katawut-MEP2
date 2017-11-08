@@ -24,8 +24,8 @@ function suNoteCtrl($scope, $http, $routeParams,
       $scope.noteTitle = suNote.title;
       $scope.noteContent = suNote.note;
 
-      var noteDate = parseInt(suNote.noteTime);
-      $scope.noteDate = (new Date(noteDate)).toString();
+      var noteTime = parseInt(suNote.noteTime);
+      $scope.noteTime = (new Date(noteTime)).toString();
 
     }
 
@@ -41,6 +41,7 @@ function suNoteCtrl($scope, $http, $routeParams,
 
       var editSuNotePath = '/editSuNote/'+$window.sessionStorage.userID+'/'+
                             encodeURIComponent($scope.noteTitle)+'/'+
+                            parseInt(suNote.noteTimeStart)+'/'+
                             parseInt(suNote.noteTime);
 
       console.log(editSuNotePath);
@@ -59,6 +60,7 @@ function suNoteCtrl($scope, $http, $routeParams,
 
         var deleteSuNoteUrl = '/deleteSuNote/'+$window.sessionStorage.userID+'/'+
                                encodeURIComponent($scope.noteTitle)+'/'+
+                               parseInt(suNote.noteTimeStart)+'/'+
                                parseInt(suNote.noteTime);
 
         console.log(deleteSuNoteUrl);
