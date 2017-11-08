@@ -52,4 +52,13 @@ function suNoteListCtrl ($scope, $http, $routeParams,
 
     }
 
+    // to create a new note
+    // override $rootScope.openNotePanel
+    $scope.openNotePanel = function() {
+
+      console.log('route to create a new note path');
+      var createSuNoteUrl = 'createSuNote/'+$window.sessionStorage.userID;
+      $location.path(createSuNoteUrl);
+    }
+
   }

@@ -398,4 +398,9 @@ angular.module('app')
         }
       }
     })
+    /** create su note when at su note lost route */
+    .when('/createSuNote/:userID', {
+      templateUrl : 'createSuNote.html',
+      controller : 'createSuNoteCtrl'
+    })
 });
