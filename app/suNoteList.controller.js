@@ -33,30 +33,18 @@ function suNoteListCtrl ($scope, $http, $routeParams,
 
     if (suNoteList) {
 
-      console.log(suNoteList);
-
-      console.log(suNoteList.length);
-
       for (var i =0; i<suNoteList.length; i++) {
 
         var notedate = parseInt(suNoteList[i].noteTime);
         suNoteList[i].noteTimeText = (new Date(notedate)).toString();
 
-        console.log(suNoteList[i].noteTimeText);
       }
 
-      console.log(suNoteList);
       $scope.noteList = suNoteList;
 
     }
 
     $scope.deleteNote = function(userID, title, noteTimeStart, noteTime) {
-
-      console.log('delete note');
-
-      console.log(userID);
-      console.log(title);
-      console.log(noteTime);
 
       suNoteListService.deleteSuNote(userID, title, noteTimeStart, noteTime);
 
@@ -68,8 +56,6 @@ function suNoteListCtrl ($scope, $http, $routeParams,
                           encodeURIComponent(title)+'/'+
                           noteTimeStart+'/'+
                           noteTime;
-                          
-      console.log(viewNoteUrl);
 
       $location.path(viewNoteUrl);
     }
@@ -78,7 +64,6 @@ function suNoteListCtrl ($scope, $http, $routeParams,
     // override $rootScope.openNotePanel
     $scope.openNotePanel = function() {
 
-      console.log('route to create a new note path');
       var createSuNoteUrl = 'createSuNote/'+$window.sessionStorage.userID;
       $location.path(createSuNoteUrl);
     }

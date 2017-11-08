@@ -1,5 +1,7 @@
-angular.module('app').factory('reviseSuTestExamAnswerSheetService',
-  ['$http', '$route', '$q', '$window', reviseSuTestExamAnswerSheetService]);
+angular.module('app')
+.factory('reviseSuTestExamAnswerSheetService',
+        ['$http', '$route', '$q', '$window',
+          reviseSuTestExamAnswerSheetService]);
 
 function reviseSuTestExamAnswerSheetService($http, $route, $q, $window) {
 
@@ -11,8 +13,6 @@ function reviseSuTestExamAnswerSheetService($http, $route, $q, $window) {
                                     $route.current.params.suTestID+'/'+
                                     $route.current.params.suTestStartAt+'/'+
                                     $route.current.params.suTestQuestionNumber;
-
-       console.log(currentUserAnswerUrl);
 
        var deferred = $q.defer();
 

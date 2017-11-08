@@ -1,11 +1,13 @@
-angular.module('app').factory('newSuTestIDService',
-  ['$http', '$route', '$q', '$window', newSuTestIDService]);
+angular.module('app')
+.factory('newSuTestIDService',
+        ['$http', '$q', '$window',
+          newSuTestIDService]);
 
-function newSuTestIDService($http, $route, $q, $window) {
+function newSuTestIDService($http, $q, $window) {
 
    return {
+
      generateNewSuTestID : function() {
-       console.log('at newSuTestIDService: generateNewSuTestID');
 
        /**
         * 1. generate new suTestID based on setting

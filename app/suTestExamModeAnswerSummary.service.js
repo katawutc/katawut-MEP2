@@ -1,9 +1,12 @@
-angular.module('app').factory('suTestExamModeAnswerSummaryService',
-  ['$http', '$route', '$q', '$window', suTestExamModeAnswerSummaryService]);
+angular.module('app')
+.factory('suTestExamModeAnswerSummaryService',
+        ['$http', '$q', '$window',
+          suTestExamModeAnswerSummaryService]);
 
-function suTestExamModeAnswerSummaryService($http, $route, $q, $window) {
+function suTestExamModeAnswerSummaryService($http, $q, $window) {
 
    return {
+
      getAnswerSummary : function() {
 
        var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+

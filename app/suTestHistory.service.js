@@ -1,19 +1,17 @@
-angular.module('app').factory('suTestHistoryService',
-  ['$http', '$route', '$q', '$window', suTestHistoryService]);
+angular.module('app')
+.factory('suTestHistoryService',
+        ['$http', '$q', '$window',
+          suTestHistoryService]);
 
-function suTestHistoryService($http, $route, $q, $window) {
+function suTestHistoryService($http, $q, $window) {
 
    return {
      registerSuTestHistory : function() {
 
        if ($route.current.params.suTestQuestionNumber==='1') {
 
-         console.log('at suTestHistoryService: registerSuTestHistory');
-
          var suTestInfo = {'testID': $window.sessionStorage.testID,
                            'suTestNumber': $window.sessionStorage.suTestNumber};
-
-         console.log(suTestInfo);
 
          var registerSuTestHistoryUrl = '/registerSuTestHistory/'+$window.sessionStorage.userID+'/'+
                                           $window.sessionStorage.suTestID+'/'+
@@ -45,11 +43,7 @@ function suTestHistoryService($http, $route, $q, $window) {
 
        getSuTestHistory : function() {
 
-         console.log('at suTestHistoryService: getSuTestHistory');
-
          var getSuTestHistoryUrl = '/getSuTestHistory/'+$window.sessionStorage.userID;
-
-         console.log(getSuTestHistoryUrl);
 
          var deferred = $q.defer();
 

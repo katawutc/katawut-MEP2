@@ -1,9 +1,9 @@
 angular.module('app')
 .factory('suNoteListService',
-        ['$http', '$route', '$q', '$window', '$location',
+        ['$http', '$route', '$q', '$window',
           suNoteListService]);
 
-function suNoteListService($http, $route, $q, $window, $location) {
+function suNoteListService($http, $route, $q, $window) {
 
    return {
 
@@ -20,6 +20,7 @@ function suNoteListService($http, $route, $q, $window, $location) {
            'Authorization': 'JWT ' + $window.sessionStorage.token
            }
        }).then(function successCallback(response) {
+
          deferred.resolve(response.data);
 
        },function errorCallback(response){
@@ -35,8 +36,6 @@ function suNoteListService($http, $route, $q, $window, $location) {
                               noteTimeStart+'/'+
                               noteTime;
 
-       console.log(deleteSuNoteUrl);
-
        var deferred = $q.defer();
 
        $http({
@@ -46,11 +45,11 @@ function suNoteListService($http, $route, $q, $window, $location) {
            'Authorization': 'JWT ' + $window.sessionStorage.token
            }
        }).then(function successCallback(response) {
+
          deferred.resolve(response.data);
 
-         console.log(response);
-
          if(response.data === 'delete success') {
+
            $route.reload('/noteList/su/'+$window.sessionStorage.userID);
          }
 

@@ -1,10 +1,11 @@
-angular.module('app').controller('suTestExamModeAnswerSummaryCtrl',
-                                  ['$scope', '$http', '$routeParams',
-                                    '$window', '$location', 'suTestExamModeAnswerSummary',
-                                      suTestExamModeAnswerSummaryCtrl]);
+angular.module('app')
+.controller('suTestExamModeAnswerSummaryCtrl',
+           ['$scope', '$window', '$location',
+            'suTestExamModeAnswerSummary',
+             suTestExamModeAnswerSummaryCtrl]);
 
-function suTestExamModeAnswerSummaryCtrl($scope, $http, $routeParams,
-                                          $window, $location, suTestExamModeAnswerSummary) {
+function suTestExamModeAnswerSummaryCtrl($scope, $window, $location,
+                                          suTestExamModeAnswerSummary) {
 
   $scope.userID = $window.sessionStorage.userID;
   $scope.suTestStartAt = $window.sessionStorage.suTestStartAt;

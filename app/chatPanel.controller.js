@@ -14,8 +14,6 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService, chatIOService
   }
 
     $scope.sendMessage = function() {
-        console.log('send chat message');
-        console.log($scope.message);
 
         /**
           * The sent message should differentiate between admin and su \
@@ -37,27 +35,12 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService, chatIOService
 
     chatIOService.on($window.sessionStorage.userID, function(message) {
 
-      console.log(message);
       $rootScope.sentMessage.push(message);
     })
 
     socketService.on($window.sessionStorage.userID, function(message) {
 
-      console.log(message);
       $rootScope.sentMessage.push(message);
     })
-
-    /** the event to join chatting between admin and su has to be \
-      * userID
-      * admin should be able to select su to chat to
-      */
-
-    /*
-    socketService.on($window.sessionStorage.userID, function(message) {
-
-      console.log(message);
-      $rootScope.sentMessage.push(message);
-    })
-    */
 
 }

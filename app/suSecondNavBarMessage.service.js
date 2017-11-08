@@ -6,6 +6,7 @@ angular.module('app')
 function suSecondNavBarMessageService($rootScope) {
 
    return {
+     
      setMessage : function(message) {
 
        $rootScope.suSecondNavBarMessage = message;

@@ -7,8 +7,6 @@ angular.module('app')
 function createSuNoteCtrl ($scope, $window, $timeout,
                            suSecondNavBarMessageService, socketService) {
 
-  console.log('at createSuNoteCtrl');
-
   /** set suSecondNavBarMessage */
   var message = 'Create a new note: ';
   suSecondNavBarMessageService.setMessage(message);
@@ -21,8 +19,6 @@ function createSuNoteCtrl ($scope, $window, $timeout,
 
   $scope.saveNote = function() {
 
-    console.log('at createSuNoteCtrl: saveNote');
-
     var suNote = {'userID': $window.sessionStorage.userID,
                   'title': $scope.title,
                   'note': $scope.note,
@@ -32,10 +28,6 @@ function createSuNoteCtrl ($scope, $window, $timeout,
 
     message = 'Create a new note: '+ $scope.title;
     suSecondNavBarMessageService.setMessage(message);
-
-    console.log(message);
-
-    console.log(suNote);
 
     socketService.emit('createSuNote', suNote);
 
@@ -49,8 +41,6 @@ function createSuNoteCtrl ($scope, $window, $timeout,
   // override the $rootScope.openNotePanel
   // to open a new note to create
   $scope.openNotePanel = function() {
-
-    console.log('create a new note at createSuNote');
 
     $scope.title = '';
     $scope.note = '';

@@ -7,10 +7,6 @@ angular.module('app')
 function editSuNoteCtrl ($scope, $window, $timeout,
                          suNote, suSecondNavBarMessageService, socketService) {
 
-  console.log('at editSuNoteCtrl');
-
-  console.log(suNote);
-
   $scope.showEditSuNote = true;
 
   if (suNote) {
@@ -21,7 +17,6 @@ function editSuNoteCtrl ($scope, $window, $timeout,
 
     $scope.noteTimeStart = suNote.noteTimeStart;
 
-    //$scope.noteTime = suNote.noteTime;
   }
 
 
@@ -32,22 +27,15 @@ function editSuNoteCtrl ($scope, $window, $timeout,
 
   $scope.saveNote = function() {
 
-    console.log('at editSuNoteCtrl: saveNote');
-
     var suNote = {'userID': $window.sessionStorage.userID,
                   'title': $scope.title,
                   'note': $scope.note,
                   'noteTimeStart': $scope.noteTimeStart,
-                  //'previousNoteTime': $scope.noteTime,
                   'noteTime': Date.now()
                   }
 
     message = 'Note editing: '+ $scope.title;
     suSecondNavBarMessageService.setMessage(message);
-
-    console.log(message);
-
-    console.log(suNote);
 
     socketService.emit('editSuNote', suNote);
 

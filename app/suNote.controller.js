@@ -1,13 +1,13 @@
 angular.module('app')
 .controller('suNoteCtrl',
-           ['$scope', '$http', '$routeParams',
+           ['$scope', '$http',
             '$window', '$location', '$q', '$rootScope',
             'suSecondNavBarMessageService',
             'suNote',
             'suNoteListService',
              suNoteCtrl]);
 
-function suNoteCtrl($scope, $http, $routeParams,
+function suNoteCtrl($scope, $http,
                     $window, $location, $q, $rootScope,
                     suSecondNavBarMessageService,
                     suNote,
@@ -37,14 +37,10 @@ function suNoteCtrl($scope, $http, $routeParams,
 
     $scope.editNote = function() {
 
-      console.log('edit note');
-
       var editSuNotePath = '/editSuNote/'+$window.sessionStorage.userID+'/'+
                             encodeURIComponent($scope.noteTitle)+'/'+
                             parseInt(suNote.noteTimeStart)+'/'+
                             parseInt(suNote.noteTime);
-
-      console.log(editSuNotePath);
 
       $location.path(editSuNotePath);
 
@@ -52,18 +48,10 @@ function suNoteCtrl($scope, $http, $routeParams,
 
     $scope.deleteNote = function() {
 
-      console.log('delete note');
-      /**
-        * to open a modal dialog to confirm the deletion
-        */
-
-
         var deleteSuNoteUrl = '/deleteSuNote/'+$window.sessionStorage.userID+'/'+
                                encodeURIComponent($scope.noteTitle)+'/'+
                                parseInt(suNote.noteTimeStart)+'/'+
                                parseInt(suNote.noteTime);
-
-        console.log(deleteSuNoteUrl);
 
         var deferred = $q.defer();
 
@@ -74,9 +62,8 @@ function suNoteCtrl($scope, $http, $routeParams,
             'Authorization': 'JWT ' + $window.sessionStorage.token
             }
         }).then(function successCallback(response) {
-          deferred.resolve(response.data);
 
-          console.log(response);
+          deferred.resolve(response.data);
 
           if(response.data === 'delete success') {
             $location.path('/noteList/su/'+$window.sessionStorage.userID);
@@ -93,7 +80,6 @@ function suNoteCtrl($scope, $http, $routeParams,
     // override $rootScope.openNotePanel
     $scope.openNotePanel = function() {
 
-      console.log('route to create a new note path');
       var createSuNoteUrl = 'createSuNote/'+$window.sessionStorage.userID;
       $location.path(createSuNoteUrl);
     }

@@ -1,14 +1,13 @@
-angular.module('app').controller('suTestExamModeCtrl',
-                                  ['$scope', '$http', '$route',
-                                    '$window', '$location',
-                                    'suTestQuestion', 'registerSuTestHistory',
-                                      suTestExamModeCtrl]);
+angular.module('app')
+.controller('suTestExamModeCtrl',
+           ['$scope', '$http', '$route',
+            '$window', '$location',
+            'suTestQuestion', 'registerSuTestHistory',
+             suTestExamModeCtrl]);
 
 function suTestExamModeCtrl($scope, $http, $route,
-                          $window, $location,
-                          suTestQuestion, registerSuTestHistory) {
-
-  console.log('registerSuTestHistory');
+                            $window, $location,
+                            suTestQuestion, registerSuTestHistory) {
 
   if (registerSuTestHistory !== 'registered') {
     console.log('cannot registerSuTestHistory');

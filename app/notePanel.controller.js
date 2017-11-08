@@ -24,17 +24,13 @@ function notePanelCtrl($rootScope, $scope, $window, $timeout,
 
         $rootScope.noteTimeStart = Date.now();
 
-        console.log($rootScope.noteTimeStart);
       }
 
       // save and update note every time when open or close the note panel
-      console.log($rootScope.quickNote);
       socketService.emit('suNote', $rootScope.quickNote);
     }
 
     $rootScope.saveNote = function() {
-
-    console.log('save note');
 
     $rootScope.quickNote = { 'userID': $window.sessionStorage.userID,
                              'noteTimeStart': $rootScope.noteTimeStart,
@@ -42,8 +38,6 @@ function notePanelCtrl($rootScope, $scope, $window, $timeout,
                              'title': $scope.title,
                              'note': $scope.note,
                              'newNote': true}
-
-    console.log($rootScope.quickNote);
 
     socketService.emit('suNote', $rootScope.quickNote);
 
@@ -57,9 +51,6 @@ function notePanelCtrl($rootScope, $scope, $window, $timeout,
 
   $rootScope.newNote = function() {
 
-    console.log('create a new note');
-
-    console.log($rootScope.quickNote);
     socketService.emit('suNote', $rootScope.quickNote);
 
     $scope.title = '';
@@ -74,8 +65,6 @@ function notePanelCtrl($rootScope, $scope, $window, $timeout,
     $scope.setFocusNoteTitle(); // using rfocus
 
     $rootScope.quickNote.noteTimeStart = Date.now();
-
-    console.log($rootScope.quickNote.noteTimeStart);
 
     $rootScope.quickNote.noteTime = '';
     $rootScope.quickNote.title = '';

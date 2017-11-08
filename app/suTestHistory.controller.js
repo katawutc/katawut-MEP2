@@ -1,15 +1,15 @@
 angular.module('app')
 .controller('suTestHistoryCtrl',
-           ['$scope', '$http', '$routeParams',
-            '$window', '$location',
+           ['$scope',
+            '$window',
             'suTestHistory',
             'suSecondNavBarMessageService',
              suTestHistoryCtrl]);
 
-function suTestHistoryCtrl($scope, $http, $routeParams,
-                          $window, $location,
-                          suTestHistory,
-                          suSecondNavBarMessageService) {
+function suTestHistoryCtrl($scope,
+                           $window,
+                           suTestHistory,
+                           suSecondNavBarMessageService) {
 
   $scope.userName = $window.sessionStorage.userName;
 
@@ -23,12 +23,12 @@ function suTestHistoryCtrl($scope, $http, $routeParams,
 
   // need to think when the array is very big, too big for looping; to do pagination
   for (var i=0; i<suTestHistory.length; i++) {
+
     var testDate = parseInt(suTestHistory[i].suTestStartAt);
     suTestHistory[i].testDate = (new Date(testDate)).toString();
-    console.log(suTestHistory[i].testDate);
+
   }
 
-  console.log(suTestHistory);
   $scope.testHistory = suTestHistory;
 
 }

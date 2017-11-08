@@ -1,5 +1,6 @@
 
-angular.module('app').directive('notePanel', notePanel);
+angular.module('app')
+.directive('notePanel', notePanel);
 
 function notePanel() {
   return {

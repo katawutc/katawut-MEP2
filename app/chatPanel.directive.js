@@ -1,4 +1,5 @@
-angular.module('app').directive('chatPanel', chatPanel);
+angular.module('app')
+.directive('chatPanel', chatPanel);
 
 function chatPanel() {
   return {
