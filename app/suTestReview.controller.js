@@ -44,9 +44,6 @@ function suTestReviewCtrl($scope, $route,
     /**
       * to implement if comment is empty, not to send anything
       */
-
-    $scope.commentTextArea = !$scope.commentTextArea;
-
     var comment = {
                     'userID': window.sessionStorage.userID,
                     'testID': suTestReview.solutionID,
@@ -60,22 +57,31 @@ function suTestReviewCtrl($scope, $route,
 
     var deferred = $q.defer();
 
-    $http({
-      method: 'POST',
-      url: postSuTestCommentUrl,
-      data: comment,
-      headers: {
-        'Authorization': 'JWT ' + $window.sessionStorage.token
-        }
-    }).then(function successCallback(response) {
-      deferred.resolve(response.data);
+    if (comment.comment) { // if comment is not empty
 
-      $scope.suTestComment = '';
+      $scope.commentTextArea = !$scope.commentTextArea;
 
-    },function errorCallback(response){
+      $http({
+        method: 'POST',
+        url: postSuTestCommentUrl,
+        data: comment,
+        headers: {
+          'Authorization': 'JWT ' + $window.sessionStorage.token
+          }
+      }).then(function successCallback(response) {
+        deferred.resolve(response.data);
 
-    });
-    return  deferred.promise;
+        $scope.suTestComment = '';
 
+      },function errorCallback(response){
+
+      });
+      return  deferred.promise;
+
+    }
+    else if (!comment.comment) // if comment is empty
+    {      
+      $scope.commentTextArea = !$scope.commentTextArea;
+    }
   }
 }
