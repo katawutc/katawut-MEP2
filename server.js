@@ -328,3 +328,7 @@ app.get('/deleteSuNote/:userID/:title/:noteTimeStart/:noteTime',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
   require('./server/deleteSuNote'));
+
+/** post test comment */
+app.post('/postTestComment',
+  require('./server/postTestComment'));
