@@ -9,9 +9,9 @@ function testScoreService($http, $q, $window) {
     getTestScore : function() {
 
       var testScoreUrl = '/getTestScoreUnSubscribeUser/'+$window.sessionStorage.userID+
-                        '/'+$window.sessionStorage.testID+
-                        '/'+$window.sessionStorage.testMode+
-                        '/'+$window.sessionStorage.testStartAt;
+                         '/'+$window.sessionStorage.testID+
+                         '/'+$window.sessionStorage.testMode+
+                         '/'+$window.sessionStorage.testStartAt;
 
       var deferred = $q.defer();
 
@@ -19,7 +19,9 @@ function testScoreService($http, $q, $window) {
         method: 'GET',
         url: testScoreUrl
       }).then(function successCallback(response) {
+
         deferred.resolve(response.data);
+
       },function errorCallback(response){
 
       });

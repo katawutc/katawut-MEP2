@@ -19,7 +19,9 @@ function testSummaryService($http, $q, $window) {
         method: 'GET',
         url: testSummaryUrl
       }).then(function successCallback(response) {
+
         deferred.resolve(response.data);
+
       },function errorCallback(response){
 
       });

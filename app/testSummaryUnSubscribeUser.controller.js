@@ -4,8 +4,8 @@ angular.module('app')
             'testScore', 'testSummary',
              testSummaryUnSubscribeUserCtrl]);
 
-function testSummaryUnSubscribeUserCtrl ($scope, $http, $routeParams, $window, $location,
-                                          testScore, testSummary) {
+function testSummaryUnSubscribeUserCtrl ($scope, testScore, testSummary) {
+
   $scope.score = testScore;
 
   $scope.result = testSummary;
