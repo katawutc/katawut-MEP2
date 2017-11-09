@@ -56,7 +56,7 @@ function reviewUnSubscribeTestCtrl($scope, $location, $http, $q,
 
         deferred.resolve(response.data);
 
-        $scope.suTestComment = '';
+        $scope.testComment = '';
 
       },function errorCallback(response){
 
