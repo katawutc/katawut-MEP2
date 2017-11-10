@@ -3,12 +3,19 @@ angular.module('app')
            ['$scope', '$http', '$routeParams',
             '$window', '$location', '$rootScope',
             'chatUserList', 'chatAdminService', 'chatIOService',
+            'adSecondNavBarMessageService',
              chatAdminCtrl]);
 
 function chatAdminCtrl($scope, $http, $routeParams,
                        $window, $location, $rootScope,
                        chatUserList, chatAdminService,
-                       chatIOService) {
+                       chatIOService,
+                       adSecondNavBarMessageService) {
+
+     /** set suSecondNavBarMessage */
+     var message = 'Chat to the user: ';
+     adSecondNavBarMessageService.setMessage(message);
+     /** */
 
     /** get user list data*/
     if (chatUserList && chatUserList.errorMessage) {
@@ -28,7 +35,12 @@ function chatAdminCtrl($scope, $http, $routeParams,
 
     /** implement admin select user to chat to */
 
-    $scope.adminChatTo = function(userID) {
+    $scope.adminChatTo = function(userName, userID) {
+
+      /** set suSecondNavBarMessage */
+      var message = 'Chat to the user: '+ userName + '; ID: '+ userID;
+      adSecondNavBarMessageService.setMessage(message);
+      /** */
 
       console.log('open the chat panel');
       $rootScope.showChatPanel = true;

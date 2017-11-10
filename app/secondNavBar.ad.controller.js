@@ -55,12 +55,5 @@ function secondNavBarAdCtrl($scope, $window, $rootScope,
     $scope.sentMessage.push(message);
   })
 
-/*
-  socketService.on('chatRoom', function(message) {
-
-    console.log(message);
-    $scope.sentMessage.push(message);
-  })
-  */
 
 }
