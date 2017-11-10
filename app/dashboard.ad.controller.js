@@ -15,6 +15,7 @@ function dashboardAdCtrl($scope, $location, $window,
     console.log(userList);
 
     /** get user list data*/
+    /*
     if (userList && userList.errorMessage) {
       $window.sessionStorage.setItem('errorMessage', userList.errorMessage);
       $window.sessionStorage.setItem('logInMessage', 'login fail');
@@ -28,4 +29,5 @@ function dashboardAdCtrl($scope, $location, $window,
       $window.sessionStorage.setItem('logInMessage', 'login fail');
       $location.path('/errorPage');
     }
+    */
 }
