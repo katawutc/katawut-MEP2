@@ -7,6 +7,10 @@ angular.module('app')
 
 function logInCtrl ($scope, $http, $location, $window, socketService) {
 
+  /** to focus on Email input */
+  $scope.inputEmailFocus = true;
+  /** */
+
   $scope.logInSubmit = function() {
     $http({
       method: 'POST',
