@@ -12,10 +12,10 @@ module.exports = function chatIO(socket) {
 
     console.log(data);
 
-    if (data.adminChatTo) {
+    if (data.adminChatTo) { //adminChatTo is userID admin chats to
 
         console.log(data.adminChatTo);
-
+        console.log('at adminChatTo block');
         socket.broadcast.emit(data.adminChatTo, 'Admin: '+ data.message);
     }
     else if (data.userRole === 'su') {
@@ -24,14 +24,12 @@ module.exports = function chatIO(socket) {
     }
 
     if (data.userRole === 'su') {
+      console.log('user: '+data.userID+' chats to admin');
       socket.broadcast.emit(data.userID, 'su: '+ data.message);
-      //socket.broadcast.emit(data.userID, 'su: '+ data.message);
     }
-    else if (data.userRole === 'ad') {
+    /*else if (data.userRole === 'ad') {
       socket.broadcast.emit(data.userID, 'Admin: '+ data.message);
-      //socket.broadcast.emit(data.userID, 'Admin: '+ data.message);
-    }
+    } */
   })
-
 
 }

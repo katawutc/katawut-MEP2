@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('secondNavBarAdCtrl',
            ['$scope', '$window', '$rootScope',
-            'socketService', 'chatIOService', 'chatAdminService',
+          /*  'socketService', */'chatIOService', 'chatAdminService',
              secondNavBarAdCtrl]);
 
 function secondNavBarAdCtrl($scope, $window, $rootScope,
-                            socketService, chatIOService, chatAdminService) {
+                            /*socketService,*/ chatIOService, chatAdminService) {
 
 
   $rootScope.openChatPanel = function() {
@@ -33,7 +33,9 @@ function secondNavBarAdCtrl($scope, $window, $rootScope,
                      'sentTime': Date.now(),
                      'message': $scope.message}
 
-      socketService.emit('chat', message);
+      console.log(message);
+
+      //socketService.emit('chat', message);
 
       var event = chatAdminService.getUserToChat();
       console.log(event);
@@ -45,16 +47,21 @@ function secondNavBarAdCtrl($scope, $window, $rootScope,
       $scope.message = null;
   }
 
+  console.log('before chatIOService.on');
+  console.log(chatAdminService.getUserToChat());
+
   chatIOService.on(chatAdminService.getUserToChat(), function(message) {
 
     console.log(message);
     $scope.sentMessage.push(message);
   })
 
+/*
   socketService.on('chatRoom', function(message) {
 
     console.log(message);
     $scope.sentMessage.push(message);
   })
+  */
 
 }

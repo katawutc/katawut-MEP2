@@ -1,18 +1,14 @@
 angular.module('app')
 .controller('dashboardAdCtrl',
            ['$scope', '$location', '$window',
-            'userList',
             'socketService',
              dashboardAdCtrl]);
 
 function dashboardAdCtrl($scope, $location, $window,
-                         userList,
                          socketService) {
 
     /** ad emit socket connection */
     socketService.emit('adConnect', $window.sessionStorage.userID);
-
-    console.log(userList);
 
     /** get user list data*/
     /*

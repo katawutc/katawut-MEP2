@@ -1,11 +1,10 @@
 angular.module('app')
-.controller('chatPanelCtrl',
-            ['$rootScope', '$scope',
-             '$window',
-             'socketService', 'chatIOService',
-              chatPanelCtrl]);
+.controller('suChatPanelCtrl',
+           ['$rootScope', '$scope', '$window',
+            'chatIOService',
+             suChatPanelCtrl]);
 
-function chatPanelCtrl($rootScope, $scope, $window, socketService, chatIOService) {
+function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     $rootScope.openChatPanel = function() {
 
@@ -15,30 +14,20 @@ function chatPanelCtrl($rootScope, $scope, $window, socketService, chatIOService
 
     $scope.sendMessage = function() {
 
-        /**
-          * The sent message should differentiate between admin and su \
-          * to select the select the correct message format to send to the server
-          */
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
                        'sentTime': Date.now(),
                        'message': $scope.message}
-
-        socketService.emit('chat', message);
 
         chatIOService.emit('chat', message);
 
         $rootScope.sentMessage.push('You: '+$scope.message);
 
         $scope.message = null;
+
     }
 
     chatIOService.on($window.sessionStorage.userID, function(message) {
-
-      $rootScope.sentMessage.push(message);
-    })
-
-    socketService.on($window.sessionStorage.userID, function(message) {
 
       $rootScope.sentMessage.push(message);
     })

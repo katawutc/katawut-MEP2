@@ -2,14 +2,13 @@ angular.module('app')
 .controller('chatAdminCtrl',
            ['$scope', '$http', '$routeParams',
             '$window', '$location', '$rootScope',
-            'chatUserList', 'chatAdminService',
+            'chatUserList', 'chatAdminService', 'chatIOService',
              chatAdminCtrl]);
 
 function chatAdminCtrl($scope, $http, $routeParams,
                        $window, $location, $rootScope,
-                       chatUserList, chatAdminService) {
-
-
+                       chatUserList, chatAdminService,
+                       chatIOService) {
 
     /** get user list data*/
     if (chatUserList && chatUserList.errorMessage) {
@@ -40,5 +39,14 @@ function chatAdminCtrl($scope, $http, $routeParams,
       console.log(chatAdminService.getUserToChat());
 
     }
+
+    console.log('before chatIOService.on');
+    console.log(chatAdminService.getUserToChat());
+
+    chatIOService.on(chatAdminService.getUserToChat(), function(message) {
+
+      console.log(message);
+      $scope.sentMessage.push(message);
+    })
 
 }

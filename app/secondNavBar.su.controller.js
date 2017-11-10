@@ -9,7 +9,9 @@ function secondNavBarSuCtrl($rootScope,
 
   $rootScope.openChatPanel = function() {
 
-    $rootScope.showChatPanel = !rootScope.showChatPanel;
+    console.log('open su chat panel');
+
+    $rootScope.showChatPanel = !$rootScope.showChatPanel;
   }
 
   $rootScope.openNotePanel = function() {

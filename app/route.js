@@ -120,12 +120,7 @@ angular.module('app')
     /** admin dashboard user list data */
     .when("/dashboard/ad/:userID", {
       templateUrl : 'dashboard.ad.html',
-      controller :'dashboardAdCtrl',
-      resolve : {
-        userList : function (userListService){
-          return userListService.getUserList();
-        }
-      }
+      controller :'dashboardAdCtrl'
     })
     .when('/answerSummary', {
       templateUrl : 'answerSummary.html',
