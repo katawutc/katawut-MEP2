@@ -1,12 +1,11 @@
 angular.module('app')
 .controller('secondNavBarAdCtrl',
            ['$scope', '$window', '$rootScope',
-          /*  'socketService', */'chatIOService', 'chatAdminService',
+            'chatIOService', 'chatAdminService',
              secondNavBarAdCtrl]);
 
 function secondNavBarAdCtrl($scope, $window, $rootScope,
-                            /*socketService,*/ chatIOService, chatAdminService) {
-
+                            chatIOService, chatAdminService) {
 
   $rootScope.openChatPanel = function() {
 
