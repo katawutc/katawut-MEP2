@@ -403,4 +403,14 @@ angular.module('app')
       templateUrl : 'createSuNote.html',
       controller : 'createSuNoteCtrl'
     })
+    /** admin user list */
+    .when('/admin/userList', {
+      templateUrl : 'adminUserList.html',
+      controller : 'adminUserListCtrl',
+      resolve : {
+        userList : function (userListService){
+          return userListService.getUserList();
+        }
+      }
+    })
 });
