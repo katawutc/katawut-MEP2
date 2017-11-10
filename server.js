@@ -112,6 +112,7 @@ app.get('/accountData/su/:userID', passport.authenticate('jwt', {session: false}
 
 /** get user list to diaplay on admin dashboard */
 app.get('/dashboard/ad/:userID/userList', passport.authenticate('jwt', {session: false}),
+  require('./server/checkAdminAuthority'),  
   require('./server/userList'));
 
 /** logIn */

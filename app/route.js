@@ -122,8 +122,8 @@ angular.module('app')
       templateUrl : 'dashboard.ad.html',
       controller :'dashboardAdCtrl',
       resolve : {
-        userListData : function (userListDataService){
-          return userListDataService.getUserListData();
+        userList : function (userListService){
+          return userListService.getUserList();
         }
       }
     })

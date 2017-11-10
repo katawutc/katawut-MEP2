@@ -6,6 +6,8 @@ module.exports = function userList(req, res) {
 
   // to put the authority checking here
 
+  console.log('at server: userList');
+
   if (req.user.userRole !== 'ad' ||
         req.user.userID !== req.params.userID) {
 
