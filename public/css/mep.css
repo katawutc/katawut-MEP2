@@ -85,6 +85,10 @@
   width: 100%; box-sizing:border-box;
 }
 
+#adChatPanel-message-input {
+  width: 100%; box-sizing:border-box;
+}
+
 .panel-title {
   text-align: center;
 }

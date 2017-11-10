@@ -42,8 +42,8 @@ function chatAdminCtrl($scope, $http, $routeParams,
       adSecondNavBarMessageService.setMessage(message);
       /** */
 
-      console.log('open the chat panel');
-      $rootScope.showChatPanel = true;
+      console.log('open the admin chat panel');
+      $rootScope.showAdChatPanel = true;
 
       console.log('admin selects '+ userID);
 
