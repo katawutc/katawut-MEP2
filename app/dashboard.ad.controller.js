@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('dashboardAdCtrl',
-           ['$scope', '$window',
+           ['$scope', '$window', '$rootScope',
             'socketService',
             'adSecondNavBarMessageService',
              dashboardAdCtrl]);
 
-function dashboardAdCtrl($scope, $window,
+function dashboardAdCtrl($scope, $window, $rootScope,
                          socketService,
                          adSecondNavBarMessageService) {
 
@@ -17,6 +17,9 @@ function dashboardAdCtrl($scope, $window,
                   ' เรา มาดู admin dashboard กัน';
     adSecondNavBarMessageService.setMessage(message);
     /** */
+
+    /** initialize admin chat panel */
+    $rootScope.showAdChatPanel = false;
 
 
 }
