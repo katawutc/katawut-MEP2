@@ -19,17 +19,9 @@ module.exports = function chatIO(socket) {
         socket.broadcast.emit(data.adminChatTo, 'Admin: '+ data.message);
     }
     else if (data.userRole === 'su') {
+      
         socket.broadcast.emit(data.userID, 'su: '+ data.message);
-
     }
-
-    if (data.userRole === 'su') {
-      console.log('user: '+data.userID+' chats to admin');
-      socket.broadcast.emit(data.userID, 'su: '+ data.message);
-    }
-    /*else if (data.userRole === 'ad') {
-      socket.broadcast.emit(data.userID, 'Admin: '+ data.message);
-    } */
   })
 
 }
