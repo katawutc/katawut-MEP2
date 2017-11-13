@@ -2,20 +2,20 @@ angular.module('app')
 .controller('adChatPanelCtrl',
            ['$rootScope', '$scope', '$window',
             'chatIOService',
+            'chatAdminService',
              adChatPanelCtrl]);
 
-function adChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
-
-    $rootScope.openChatPanel = function() {
-
-    $rootScope.showAdChatPanel = !$rootScope.showAdChatPanel;
-
-  }
+function adChatPanelCtrl($rootScope, $scope, $window,
+                         chatIOService,
+                         chatAdminService) {
 
     $scope.sendMessage = function() {
 
+        console.log('adminChatTo: '+chatAdminService.getUserToChat());
+
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
+                       'adminChatTo': chatAdminService.getUserToChat(),
                        'sentTime': Date.now(),
                        'message': $scope.message}
 
