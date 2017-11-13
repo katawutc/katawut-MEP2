@@ -12,6 +12,9 @@ function logInCtrl ($scope, $http, $location, $window, socketService) {
   /** */
 
   $scope.logInSubmit = function() {
+
+    if ($scope.credential.email && $scope.credential.password) {
+
     $http({
       method: 'POST',
       url: '/logIn',
@@ -55,4 +58,5 @@ function logInCtrl ($scope, $http, $location, $window, socketService) {
           $location.path('/logIn');
         });
     }
+  }
 };
