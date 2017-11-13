@@ -9,6 +9,8 @@ function adChatPanelCtrl($rootScope, $scope, $window,
                          chatIOService,
                          chatAdminService) {
 
+    $scope.adSentMessage = [];
+
     $scope.sendMessage = function() {
 
         console.log('adminChatTo: '+chatAdminService.getUserToChat());
@@ -21,7 +23,7 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
         chatIOService.emit('chat', message);
 
-        $rootScope.adSentMessage.push('You: '+$scope.message);
+        $scope.adSentMessage.push('You: '+$scope.message);
 
         $scope.message = null;
 
@@ -32,17 +34,8 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
       console.log(message);
 
-      $rootScope.adSentMessage.push(message);
+      $scope.adSentMessage.push(message);
 
     })
-
-    /*
-    chatIOService.on($rootScope.selectedUserID, function(message) {
-
-      console.log(message);
-
-      $rootScope.adSentMessage.push(message);
-    })
-    */
 
 }

@@ -10,9 +10,7 @@ function dashboardAdCtrl($scope, $window, $rootScope,
                          adSecondNavBarMessageService) {
 
     /** ad emit socket connection */
-    socketService.emit('adConnect', $window.sessionStorage.userID);
-
-    $rootScope.adSentMessage = [];
+    //socketService.emit('adConnect', $window.sessionStorage.userID);
 
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
