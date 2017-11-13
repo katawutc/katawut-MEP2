@@ -42,23 +42,11 @@ function chatAdminCtrl($scope, $http, $routeParams,
       adSecondNavBarMessageService.setMessage(message);
       /** */
 
-      console.log('open the admin chat panel');
+      /** ope the admin chat panel */
       $rootScope.showAdChatPanel = true;
 
-      console.log('admin selects '+ userID);
-
+      /** select the user to chat to */
       chatAdminService.selectUserToChat(userID);
-      console.log(chatAdminService.getUserToChat());
 
     }
-
-    console.log('before chatIOService.on');
-    console.log(chatAdminService.getUserToChat());
-
-    chatIOService.on(chatAdminService.getUserToChat(), function(message) {
-
-      console.log(message);
-      $scope.sentMessage.push(message);
-    })
-
 }
