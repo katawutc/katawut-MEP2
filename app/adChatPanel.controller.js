@@ -27,9 +27,22 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
     }
 
-    chatIOService.on(chatAdminService.getUserToChat(), function(message) {
+
+    chatIOService.on('toAdmin', function(message) {
+
+      console.log(message);
+
+      $rootScope.adSentMessage.push(message);
+
+    })
+
+    /*
+    chatIOService.on($rootScope.selectedUserID, function(message) {
+
+      console.log(message);
 
       $rootScope.adSentMessage.push(message);
     })
+    */
 
 }

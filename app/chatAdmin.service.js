@@ -1,11 +1,9 @@
 angular.module('app')
 .factory('chatAdminService',
-        ['$http', '$route', '$q', '$window',
+        ['$http', '$route', '$q', '$window', '$rootScope',
           chatAdminService]);
 
-function chatAdminService($http, $route, $q, $window) {
-
-      var selectedUserID;
+function chatAdminService($http, $route, $q, $window, $rootScope) {
 
      return {
        getChatUser : function() {
@@ -36,14 +34,20 @@ function chatAdminService($http, $route, $q, $window) {
 
          console.log('at adminSelectChatService: selectUserToChat');
 
-         selectedUserID = id;
+         $rootScope.selectedUserID = id;
+
+         console.log(typeof $rootScope.selectedUserID);
+
+         console.log($rootScope.selectedUserID);
      },
 
        getUserToChat : function() {
 
          console.log('at adminSelectChatService: getUserToChat');
 
-         return selectedUserID;
+         console.log($rootScope.selectedUserID);
+
+         return $rootScope.selectedUserID;
      }
 
    }
