@@ -117,6 +117,13 @@
   height: 250px;
 }
 
+
+#adChatPanelBody {
+  overflow-y: scroll;
+  height: 250px;
+}
+
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2,1fr);
