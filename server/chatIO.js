@@ -10,8 +10,6 @@ module.exports = function chatIO(socket) {
       * the admin and su to emit the su ID event
       */
 
-    //console.log(data);
-
     if (data.adminChatTo) { //adminChatTo is userID admin chats to
 
         console.log('at adminChatTo block');
