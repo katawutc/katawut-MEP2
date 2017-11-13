@@ -42,7 +42,7 @@ function chatAdminCtrl($scope, $http, $routeParams,
       adSecondNavBarMessageService.setMessage(message);
       /** */
 
-      /** ope the admin chat panel */
+      /** open the admin chat panel */
       $rootScope.showAdChatPanel = true;
 
       /** select the user to chat to */

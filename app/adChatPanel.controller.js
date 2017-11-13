@@ -11,6 +11,12 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
     $scope.adSentMessage = [];
 
+    /** close the admin chat panel */
+    $scope.closeChatPanel = function() {
+
+      $rootScope.showAdChatPanel = false;
+    }
+
     $scope.sendMessage = function() {
 
         console.log('adminChatTo: '+chatAdminService.getUserToChat());
