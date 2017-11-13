@@ -31,7 +31,10 @@
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="credential.password">
+    <input type="password" class="form-control" id="password"
+           placeholder="Password"
+           ng-model="credential.password"
+           press-Enter='logInSubmit()'>
   </div>
   <button type="submit" class="btn btn-primary btn-block">Log in</button>
 </form>
