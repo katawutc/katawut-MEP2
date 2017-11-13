@@ -12,6 +12,8 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     /** ad emit socket connection */
     socketService.emit('adConnect', $window.sessionStorage.userID);
 
+    $rootScope.adSentMessage = [];
+
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
                   ' เรา มาดู admin dashboard กัน';

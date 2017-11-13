@@ -21,7 +21,7 @@ function adChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
         chatIOService.emit('chat', message);
 
-        $rootScope.sentMessage.push('You: '+$scope.message);
+        $rootScope.adSentMessage.push('You: '+$scope.message);
 
         $scope.message = null;
 
@@ -29,7 +29,7 @@ function adChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     chatIOService.on($window.sessionStorage.userID, function(message) {
 
-      $rootScope.sentMessage.push(message);
+      $rootScope.adSentMessage.push(message);
     })
 
 }

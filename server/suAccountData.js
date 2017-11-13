@@ -6,8 +6,6 @@ module.exports = function suAccountData(req, res) {
 
   var query = {userID : req.params.userID};
 
-  console.log('at server: suAccountData');
-
   // check Authorization for su hack
   // to refactor to a middleware
   if (req.user.userRole !== 'su' ||
@@ -23,8 +21,6 @@ module.exports = function suAccountData(req, res) {
         res.json(err);
       }
       else {
-
-        console.log(doc);
 
         res.json(doc); /** if (null) it will check at angular js */
         }
