@@ -29,6 +29,8 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     chatIOService.on($window.sessionStorage.userID, function(message) {
 
+      console.log('chatIOService.on: '+$window.sessionStorage.userID+' '+message);
+
       $rootScope.sentMessage.push(message);
     })
 
