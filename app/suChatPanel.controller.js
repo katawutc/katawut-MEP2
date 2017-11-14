@@ -14,11 +14,26 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     $scope.sendMessage = function() {
 
-        console.log($rootScope.adminSocketID);
+        if ($rootScope.adminSocketID) {
+
+          console.log($rootScope.adminSocketID);
+
+          var message = {'userID': $window.sessionStorage.userID,
+                         'userRole': $window.sessionStorage.userRole,
+                         'adminSocketID': $rootScope.adminSocketID,
+                         'sentTime': Date.now(),
+                         'message': $scope.message}
+
+          chatIOService.emit('chat', message);
+
+          $rootScope.sentMessage.push('You: '+$scope.message);
+
+          $scope.message = null;
+      }
+      else {
 
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
-                       'adminSocketID': $rootScope.adminSocketID,
                        'sentTime': Date.now(),
                        'message': $scope.message}
 
@@ -27,6 +42,7 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
         $rootScope.sentMessage.push('You: '+$scope.message);
 
         $scope.message = null;
+      }
 
     }
 
@@ -41,4 +57,11 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
       $rootScope.sentMessage.push('Admin: '+data.message);
     })
 
+    chatIOService.on('fromAdmin', function(data) {
+
+      console.log(data);
+
+      $rootScope.sentMessage.push(data);
+
+    })
 }

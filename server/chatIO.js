@@ -10,7 +10,7 @@ module.exports = function chatIO(socket) {
       * the admin and su to emit the su ID event
       */
 
-    if (data.adminChatTo) { //adminChatTo is userID admin chats to
+    if (data.userRole === 'ad' && data.adminChatTo) { //adminChatTo is userID admin chats to
 
         console.log('at adminChatTo block');
         console.log(data.adminChatTo);
@@ -20,7 +20,7 @@ module.exports = function chatIO(socket) {
 
         socket.broadcast.emit(data.adminChatTo, data);
     }
-    else if (data.userRole === 'su') {
+    else if (data.userRole === 'su' && data.adminSocketID) {
 
         console.log(typeof data.userID);
         console.log(data.userID);
@@ -30,8 +30,28 @@ module.exports = function chatIO(socket) {
 
         socket.to(data.adminSocketID).emit('toAdmin', 'su: '+ data.message);
 
-        //socket.broadcast.emit(data.userID, 'su: '+ data.message);
     }
+
+    /** su chat to the admin first */
+    if (data.userRole === 'su' && !data.adminSocketID) {
+
+      console.log('su chat to the admin first');
+
+      data.suSocketID = socket.id;
+      console.log(data.suSocketID);
+
+      console.log(data);
+
+      socket.broadcast.emit('fromSu', data);
+    }
+    else if (data.userRole === 'ad' && data.suSocketID) {
+
+      console.log(data);
+      socket.to(data.suSocketID).emit('fromAdmin', 'admin: '+data.message);
+    }
+
+
+
   })
 
 }

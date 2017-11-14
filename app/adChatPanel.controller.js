@@ -19,6 +19,8 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
     $scope.sendMessage = function() {
 
+        if (!$rootScope.suSocketID) {
+
         console.log('adminChatTo: '+chatAdminService.getUserToChat());
 
         var message = {'userID': $window.sessionStorage.userID,
@@ -32,6 +34,21 @@ function adChatPanelCtrl($rootScope, $scope, $window,
         $scope.adSentMessage.push('You: '+$scope.message);
 
         $scope.message = null;
+      }
+      else if ($rootScope.suSocketID) {
+
+        var message = {'userID': $window.sessionStorage.userID,
+                       'userRole': $window.sessionStorage.userRole,
+                       'suSocketID': $rootScope.suSocketID,
+                       'sentTime': Date.now(),
+                       'message': $scope.message}
+
+        chatIOService.emit('chat', message);
+
+        $scope.adSentMessage.push('You: '+$scope.message);
+
+        $scope.message = null;
+      }
 
     }
 
@@ -42,6 +59,18 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
       $scope.adSentMessage.push(message);
 
+    })
+
+    chatIOService.on('fromSu', function(data) {
+
+      console.log(data);
+
+      $rootScope.showAdChatPanel = true;
+
+      $scope.adSentMessage.push('su: '+data.message);
+
+      $rootScope.suSocketID = data.suSocketID;
+      console.log($rootScope.suSocketID);
     })
 
 }
