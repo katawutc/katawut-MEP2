@@ -7,8 +7,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
     clientID: '141198316480017',
     clientSecret: 'dbb7f9659805b136d28f5b576a246c1c',
-    //callbackURL: "https://tranquil-chamber-47085.herokuapp.com/auth/facebook/callback",
-    callbackURL: "http://localhost:5000/auth/facebook/callback",
+    callbackURL: "https://tranquil-chamber-47085.herokuapp.com/auth/facebook/callback",
+    //callbackURL: "http://localhost:5000/auth/facebook/callback",
     //passReqToCallback : true, /* what is this? */
     profileFields: ['id', 'emails', 'name', 'displayName'] //This
   },
