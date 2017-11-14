@@ -19,6 +19,10 @@ function createSuNoteCtrl ($scope, $window, $timeout,
 
   $scope.saveNote = function() {
 
+    if ($scope.title === undefined) {
+      $scope.title = 'untitled';
+    }
+
     var suNote = {'userID': $window.sessionStorage.userID,
                   'title': $scope.title,
                   'note': $scope.note,

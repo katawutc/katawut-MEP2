@@ -27,6 +27,8 @@ function editSuNoteCtrl ($scope, $window, $timeout,
 
   $scope.saveNote = function() {
 
+    if ($scope.title === '') { $scope.title = 'untitled';}
+
     var suNote = {'userID': $window.sessionStorage.userID,
                   'title': $scope.title,
                   'note': $scope.note,
@@ -44,6 +46,20 @@ function editSuNoteCtrl ($scope, $window, $timeout,
     $timeout(function(){
                 $scope.createNoteSave = false;
               }, 1000);
+  }
+
+  $scope.openNotePanel = function() {
+
+    $scope.title = '';
+    $scope.note = '';
+
+    /** set suSecondNavBarMessage */
+    var message = 'Create a new note: ';
+    suSecondNavBarMessageService.setMessage(message);
+    /** */
+
+    // set focus on note title input
+    $scope.setFocusNoteTitle(); // using rfocus
   }
 
 }

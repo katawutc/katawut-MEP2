@@ -18,27 +18,11 @@ module.exports = function socketIO(socket) {
       console.log('ad: '+ userID + ' connected to the server.');
     })
 
-    /*socket.on('chat', function(data) {
-
-      /** the data received should have logic to differentiate \
-        * the admin and su to emit the su ID event
-        */
-      /*
-      console.log(data);
-
-      if (data.userRole === 'su') {
-        socket.broadcast.emit('chatRoom', 'su: '+ data.message);
-        //socket.broadcast.emit(data.userID, 'su: '+ data.message);
-      }
-      else if (data.userRole === 'ad') {
-        socket.broadcast.emit('chatRoom', 'Admin: '+ data.message);
-        //socket.broadcast.emit(data.userID, 'Admin: '+ data.message);
-      }
-    }) */
-
    socket.on('suNote', function(data) {
 
      console.log(data);
+
+     if (data.title === '') { data.title = 'untitled';}
 
      // to save new note into the DB here
      if (data.title || data.note) {
@@ -58,6 +42,8 @@ module.exports = function socketIO(socket) {
                                   })
 
    socket.on('editSuNote', function(data) {
+
+      if (data.title === '') { data.title = 'untitled';}
 
       if (data.title || data.note) {
 
@@ -79,6 +65,8 @@ module.exports = function socketIO(socket) {
     socket.on('createSuNote', function(data) {
 
       console.log(data);
+
+      if (data.title === '') { data.title = 'untitled';}
 
       // to save new note into the DB here
       if (data.title || data.note) {
