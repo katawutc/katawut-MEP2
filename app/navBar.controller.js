@@ -18,7 +18,6 @@ function navBarController ($scope, $window) {
       $scope.logIn = true;
     } else { $scope.logIn = false; }
 
-
     $scope.shareUs = function() {
 
       FB.ui(
