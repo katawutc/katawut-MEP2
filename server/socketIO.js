@@ -6,8 +6,37 @@ module.exports = function socketIO(socket) {
 
     console.log('A user visits the MEP ...');
 
+    function countDefaultUser_cb(err, userList) {
+
+      if (err) throw err;
+      if (userList) {
+
+        console.log(userList);
+        socket.broadcast.emit('defaultUserVisit', userList.length);
+      }
+    }
+
+    function defaultVisit_cb(err, doc) {
+      if (err) throw err;
+
+      if (doc) {
+
+        console.log(doc);
+
+        db.collection('realTimeUser')
+        .find({'status': 'live'}).toArray(countDefaultUser_cb);
+      }
+    }
+
+    /** use DB to keep realtime data */
+    db.collection('realTimeUser')
+    .insert({'socketID': socket.id,
+             'user': 'default',
+             'accessTime': Date.now(),
+             'status': 'live'}, defaultVisit_cb);
+
     /** for counting user visit MEP */
-    socket.broadcast.emit('userVisit', socket.id);
+    //socket.broadcast.emit('userVisit', socket.id);
 
     socket.on('disconnect', function(){
 

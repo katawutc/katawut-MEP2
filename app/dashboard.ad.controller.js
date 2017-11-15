@@ -25,12 +25,12 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     $rootScope.showAdChatPanel = false;
 
     /** for adding and counting user visit MEP */
-    socketService.on('userVisit', function(data) {
+    socketService.on('defaultUserVisit', function(data) {
 
         console.log(data);
-        $rootScope.userVisitSocketID.push(data);
+        //$rootScope.userVisitSocketID.push(data);
 
-        $scope.userVisitMEP = $rootScope.userVisitSocketID.length;
+        $scope.userVisitMEP = data;
     })
 
     /** for deleting and couunting user visit MEP */
