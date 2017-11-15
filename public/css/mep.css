@@ -62,8 +62,8 @@
   position: fixed;
   width: 24%; /* 100% width */
   left: 75%;
-  height: 325px;
-  top: 130px;
+  height: 330px;
+  top: 135px;
   /*text-align: left; Centered text/links */
   z-index: 20;
   box-sizing:border-box;
@@ -98,8 +98,8 @@
   position: fixed;
   width: 24%;
   left: 75%;
-  bottom: 15px;
-  height: 325px;
+  bottom: 10px;
+  height: 330px;
   z-index: 20;
 }
 
@@ -128,7 +128,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  grid-auto-rows: minmax(320px, auto);
+  grid-auto-rows: minmax(325px, auto);
   grid-gap: 10px;
   grid-template-areas:
     "d1 d2"
@@ -159,8 +159,8 @@
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     animation: spin 2s linear infinite;
 }
 
