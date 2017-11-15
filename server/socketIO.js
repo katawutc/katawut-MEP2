@@ -6,6 +6,9 @@ module.exports = function socketIO(socket) {
 
     console.log('A user visits the MEP ...');
 
+    /** for counting user visit MEP */
+    socket.broadcast.emit('userVisit', socket.id);
+
     socket.on('disconnect', function(){
       console.log('A user disconnects the MEP ...');
     });

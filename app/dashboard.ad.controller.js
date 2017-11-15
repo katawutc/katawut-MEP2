@@ -12,6 +12,9 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     /** ad emit socket connection */
     //socketService.emit('adConnect', $window.sessionStorage.userID);
 
+    /** userVisit MEP socket ID */
+    $rootScope.userVisitSocketID = [];
+
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
                   ' เรา มาดู admin dashboard กัน';
@@ -21,5 +24,13 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     /** initialize admin chat panel */
     $rootScope.showAdChatPanel = false;
 
+    /** for counting user visit MEP */
+    socketService.on('userVisit', function(data) {
+
+        console.log(data);
+        $rootScope.userVisitSocketID.push(data);
+
+        $scope.userVisitMEP = $rootScope.userVisitSocketID.length;
+    })
 
 }
