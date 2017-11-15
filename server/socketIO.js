@@ -4,15 +4,14 @@ module.exports = function socketIO(socket) {
     var mongo = require('./mongoDBConnect');
     var db = mongo.getDB();
 
-    console.log('A user visits the MEP ...');
-
-    function countDefaultUser_cb(err, userList) {
+    function countDefaultUser_cb(err, count) {
 
       if (err) throw err;
-      if (userList) {
+      if (count) {
 
-        console.log(userList);
-        socket.broadcast.emit('defaultUserVisit', userList.length);
+        console.log(count);
+
+        socket.broadcast.emit('defaultUserVisit', count);
       }
     }
 
@@ -21,36 +20,67 @@ module.exports = function socketIO(socket) {
 
       if (doc) {
 
-        console.log(doc);
-
         db.collection('realTimeUser')
-        .find({'status': 'live'}).toArray(countDefaultUser_cb);
+        .find({'user': 'default',
+               'status': 'live'}).count(countDefaultUser_cb);
       }
     }
 
     /** use DB to keep realtime data */
+    console.log(socket.id+' connect...');
     db.collection('realTimeUser')
     .insert({'socketID': socket.id,
              'user': 'default',
              'accessTime': Date.now(),
              'status': 'live'}, defaultVisit_cb);
 
-    /** for counting user visit MEP */
-    //socket.broadcast.emit('userVisit', socket.id);
+
+
+    function defaultUserLeave_cb(err, count, status) {
+
+      if (err) throw err;
+
+      db.collection('realTimeUser')
+      .find({'status': 'live'}).count(countDefaultUser_cb);
+
+    }
 
     socket.on('disconnect', function(){
 
+      /*
       console.log(socket.id);
-      socket.broadcast.emit('userLeave', socket.id);
-      console.log('A user disconnects the MEP ...');
+      socket.broadcast.emit('defaultUserLeave', socket.id);
+      console.log('A user disconnects the MEP ...');*/
+      console.log(socket.id+' disconnect...');
+      db.collection('realTimeUser')
+      .update({'socketID': socket.id},
+              {$set: {'offTime': Date.now(),
+                      'status': 'off'
+                    }}, defaultUserLeave_cb);
+
     });
 
     socket.on('suConnect', function(userID) {
       console.log('su: '+ userID + ' connected to the server.');
     })
 
+    function adminVisit_cb(err, doc) {
+
+      db.collection('realTimeUser')
+      .find({'user': 'default',
+             'status': 'live'}).count(countDefaultUser_cb);
+    }
+
     socket.on('adConnect', function(userID) {
+
       console.log('ad: '+ userID + ' connected to the server.');
+
+      db.collection('realTimeUser')
+      .insert({'socketID': socket.id,
+               'user': 'ad',
+               'userID': userID,
+               'accessTime': Date.now(),
+               'status': 'live'}, adminVisit_cb);
     })
 
    socket.on('suNote', function(data) {

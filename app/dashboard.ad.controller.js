@@ -10,7 +10,7 @@ function dashboardAdCtrl($scope, $window, $rootScope,
                          adSecondNavBarMessageService) {
 
     /** ad emit socket connection */
-    //socketService.emit('adConnect', $window.sessionStorage.userID);
+    socketService.emit('adConnect', $window.sessionStorage.userID);
 
     /** userVisit MEP socket ID */
     $rootScope.userVisitSocketID = [];
@@ -33,20 +33,4 @@ function dashboardAdCtrl($scope, $window, $rootScope,
         $scope.userVisitMEP = data;
     })
 
-    /** for deleting and couunting user visit MEP */
-    socketService.on('userLeave', function (data) {
-
-      console.log(data);
-
-      var index = $rootScope.userVisitSocketID.indexOf(data);
-
-      if (index > -1) {
-        $rootScope.userVisitSocketID.splice(index, 1);
-      }
-
-      console.log($rootScope.userVisitSocketID);
-
-      $scope.userVisitMEP = $rootScope.userVisitSocketID.length;
-
-    })
 }

@@ -41,12 +41,12 @@ module.exports = function signUp(req, res) {
       db.collection('user').update({_id:userID}, {$set:{userID: userIDString}});
 
         // activate url to have userID and hashActivate
-        /*
+
         var activateUrl = 'http://localhost:5000/#!/signUpActivate/'+
                             userID+'/'+hashActivate;
-                            */
 
-        var activateUrl = 'https://tranquil-chamber-47085.herokuapp.com/signUpActivate/'+
+
+        //var activateUrl = 'https://tranquil-chamber-47085.herokuapp.com/signUpActivate/'+
                             userID+'/'+hashActivate;
 
         var mailOptions = {

@@ -1,9 +1,9 @@
 angular.module('app')
 .controller('signUpInstructionCtrl',
-           ['$scope',
+           ['$scope', '$window',
              signUpInstructionCtrl]);
 
-function signUpInstructionCtrl ($scope) {
-  
+function signUpInstructionCtrl ($scope, $window) {
+
   $scope.signUpEmail = $window.sessionStorage.signUpEmail;
 }
