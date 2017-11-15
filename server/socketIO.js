@@ -10,6 +10,9 @@ module.exports = function socketIO(socket) {
     socket.broadcast.emit('userVisit', socket.id);
 
     socket.on('disconnect', function(){
+
+      console.log(socket.id);
+      socket.broadcast.emit('userLeave', socket.id);
       console.log('A user disconnects the MEP ...');
     });
 

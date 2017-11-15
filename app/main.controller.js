@@ -7,4 +7,5 @@ angular.module('app')
 function mainCtrl ($window, socketService) {
   // To implement asynchronous function before pass message to view
   $window.sessionStorage.clear();
+
 }

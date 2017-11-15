@@ -24,7 +24,7 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     /** initialize admin chat panel */
     $rootScope.showAdChatPanel = false;
 
-    /** for counting user visit MEP */
+    /** for adding and counting user visit MEP */
     socketService.on('userVisit', function(data) {
 
         console.log(data);
@@ -33,4 +33,20 @@ function dashboardAdCtrl($scope, $window, $rootScope,
         $scope.userVisitMEP = $rootScope.userVisitSocketID.length;
     })
 
+    /** for deleting and couunting user visit MEP */
+    socketService.on('userLeave', function (data) {
+
+      console.log(data);
+
+      var index = $rootScope.userVisitSocketID.indexOf(data);
+
+      if (index > -1) {
+        $rootScope.userVisitSocketID.splice(index, 1);
+      }
+
+      console.log($rootScope.userVisitSocketID);
+
+      $scope.userVisitMEP = $rootScope.userVisitSocketID.length;
+
+    })
 }

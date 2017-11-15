@@ -5,6 +5,17 @@
   box-sizing: border-box;
 }
 
+
+.adminDashboardTitleFont {
+  font-size: 60px;
+  color: black;
+}
+
+.adminDashboardDataFont {
+  font-size: 60px;
+  color: blue;
+}
+
 .modal-demo {
   z-index: 1000;
 }
