@@ -33,8 +33,24 @@ function logInCtrl ($scope, $http, $location, $window, socketService) {
 
         // socket.io connect before routing to su dashboard
         // need to think more on this
-        if (response.data.userRole) {
+        if (response.data.userRole === 'su') {
+
+          var data = {'method': 'email',
+                      'userRole': 'su',
+                      'userID': $window.sessionStorage.userID}
           socketService.emit('suConnect', $window.sessionStorage.userID);
+        }
+        else if (response.data.userRole === 'ad') {
+
+          socketService.on('connect', () => {
+            console.log(socketService.id); // 'G5p5...'
+          });
+
+          var data = {'method': 'email',
+                      'userRole': 'ad',
+                      'userID': $window.sessionStorage.userID,
+                      'socketID': socketService.id}
+          socketService.emit('adConnect', data);
         }
 
         if (response.data.message === 'login success') {

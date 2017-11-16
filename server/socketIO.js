@@ -1,8 +1,12 @@
 
+/** socketIO.js will be used for real time user log in */
+
 module.exports = function socketIO(socket) {
 
     var mongo = require('./mongoDBConnect');
     var db = mongo.getDB();
+
+    /** default user visit and leave MEP counting for admin dashboard */
 
     function countDefaultUser_cb(err, count) {
 
@@ -60,9 +64,7 @@ module.exports = function socketIO(socket) {
 
     });
 
-    socket.on('suConnect', function(userID) {
-      console.log('su: '+ userID + ' connected to the server.');
-    })
+    /** admin connection */
 
     function adminVisit_cb(err, doc) {
 
@@ -71,17 +73,33 @@ module.exports = function socketIO(socket) {
              'status': 'live'}).count(countDefaultUser_cb);
     }
 
-    socket.on('adConnect', function(userID) {
+    socket.on('adConnect', function(data) {
 
-      console.log('ad: '+ userID + ' connected to the server.');
+      console.log('ad: '+ data.userID + ' connected to the server.');
+      console.log(data.socketID);
+      console.log(data);
 
+      /*
       db.collection('realTimeUser')
       .insert({'socketID': socket.id,
                'user': 'ad',
                'userID': userID,
                'accessTime': Date.now(),
                'status': 'live'}, adminVisit_cb);
+               */
     })
+
+
+
+
+
+    /*
+
+    socket.on('suConnect', function(userID) {
+      console.log('su: '+ userID + ' connected to the server.');
+    })
+
+    */
 
    socket.on('suNote', function(data) {
 

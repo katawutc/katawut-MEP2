@@ -78,7 +78,7 @@ mongo.connectMongoDB( function() {
 });
 
 /** handle socket io connection */
-io.on('connection', require('./server/socketIO'));
+io.on('connect', require('./server/socketIO'));
 
 var chatIO = io.of('/chat');
 chatIO.on('connection', require('./server/chatIO'));
@@ -112,7 +112,7 @@ app.get('/accountData/su/:userID', passport.authenticate('jwt', {session: false}
 
 /** get user list to diaplay on admin dashboard */
 app.get('/dashboard/ad/:userID/userList', passport.authenticate('jwt', {session: false}),
-  require('./server/checkAdminAuthority'),  
+  require('./server/checkAdminAuthority'),
   require('./server/userList'));
 
 /** logIn */

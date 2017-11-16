@@ -9,6 +9,7 @@ angular.module('app').run(['$window', '$rootScope',
 /** initialize note and chat panel on $rootScope */
 angular.module('app').run(['$rootScope', initializeNoteChatPanel]);
 
+
 /**  Loading the Facebook SDK for JavaScript */
 function FBAsyncInit($window, $rootScope) {
 

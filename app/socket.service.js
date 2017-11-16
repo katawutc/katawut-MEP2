@@ -7,6 +7,11 @@ function socketService($rootScope) {
   //var socket = io('http://localhost:5000/');
   var socket = io();
 
+  socket.on('connect', function() {
+
+    $rootScope.defaultSocketID = socket.id;
+  })
+
     return {
       on: function (eventName, callback) {
         socket.on(eventName, function () {
