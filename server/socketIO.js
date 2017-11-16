@@ -55,22 +55,30 @@ module.exports = function socketIO(socket) {
       console.log(socket.id);
       socket.broadcast.emit('defaultUserLeave', socket.id);
       console.log('A user disconnects the MEP ...');*/
+      /*
       console.log(socket.id+' disconnect...');
       db.collection('realTimeUser')
       .update({'socketID': socket.id},
               {$set: {'offTime': Date.now(),
                       'status': 'off'
-                    }}, defaultUserLeave_cb);
+                    }}, defaultUserLeave_cb);*/
 
     });
 
     /** admin connection */
 
-    function adminVisit_cb(err, doc) {
+    function adConnect_cb(err, doc) {
 
-      db.collection('realTimeUser')
-      .find({'user': 'default',
-             'status': 'live'}).count(countDefaultUser_cb);
+      if (err) throw err;
+
+      if (doc) {
+
+        console.log(doc);
+
+        db.collection('realTimeUser')
+        .find({'user': 'default',
+               'status': 'live'}).count(countDefaultUser_cb);
+      }
     }
 
     socket.on('adConnect', function(data) {
@@ -79,14 +87,12 @@ module.exports = function socketIO(socket) {
       console.log(data.socketID);
       console.log(data);
 
-      /*
       db.collection('realTimeUser')
-      .insert({'socketID': socket.id,
-               'user': 'ad',
-               'userID': userID,
-               'accessTime': Date.now(),
-               'status': 'live'}, adminVisit_cb);
-               */
+      .findAndModify({'socketID': data.socketID},
+                     [],
+                     {$set:{'user': data.userRole}},
+                     {new: true}, adConnect_cb);
+
     })
 
 
