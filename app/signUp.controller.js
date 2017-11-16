@@ -6,6 +6,8 @@ angular.module('app')
 
 function signUpCtrl ($scope, $http, $location, $window) {
 
+  $scope.signUpEmailFocus = true;
+
   $scope.signUpSubmit = function() {
 
     $http({

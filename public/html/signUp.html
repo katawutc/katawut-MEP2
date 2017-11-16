@@ -17,7 +17,10 @@
 <form ng-submit="signUpSubmit()">
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="formData.email">
+    <input type="email" class="form-control" id="email"
+           placeholder="Enter email"
+           ng-model="formData.email"
+           focus-on-show ng-show='signUpEmailFocus'>
   </div>
   <button type="submit" class="btn btn-info btn-block">Sign up</button>
 </form>
