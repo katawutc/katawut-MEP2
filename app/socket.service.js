@@ -6,6 +6,7 @@ function socketService($rootScope) {
 
   //var socket = io('http://localhost:5000/');
   var socket = io();
+  //var socket = io({transports: ['websocket'], upgrade: false});
 
   socket.on('connect', function() {
 
