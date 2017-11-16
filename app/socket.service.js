@@ -1,8 +1,8 @@
 angular.module('app').factory('socketService',
-                             ['$rootScope',
+                             ['$rootScope', '$window',
                                socketService]);
 
-function socketService($rootScope) {
+function socketService($rootScope, $window) {
 
   //var socket = io('http://localhost:5000/');
   var socket = io();
@@ -11,6 +11,9 @@ function socketService($rootScope) {
   socket.on('connect', function() {
 
     $rootScope.defaultSocketID = socket.id;
+
+    console.log($rootScope.defaultSocketID);
+
   })
 
     return {

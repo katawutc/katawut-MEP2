@@ -9,9 +9,6 @@ function dashboardAdCtrl($scope, $window, $rootScope,
                          socketService,
                          adSecondNavBarMessageService) {
 
-    /** userVisit MEP socket ID */
-    $rootScope.userVisitSocketID = [];
-
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
                   ' เรา มาดู admin dashboard กัน';

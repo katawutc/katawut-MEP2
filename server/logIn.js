@@ -55,5 +55,8 @@ module.exports = function logIn(req, res) {
         }
       });
     }
+    else if (!doc) {
+      res.json({message: 'wrong user name or password'});
+    }
   });
 }

@@ -41,6 +41,8 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
                       'userID': $window.sessionStorage.userID,
                       'socketID': $rootScope.defaultSocketID}
 
+          $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
+
           socketService.emit('suConnect', data);
         }
         else if (response.data.userRole === 'ad') {
@@ -49,6 +51,8 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
                       'userRole': 'ad',
                       'userID': $window.sessionStorage.userID,
                       'socketID': $rootScope.defaultSocketID}
+
+          $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;                      
 
           socketService.emit('adConnect', data);
         }

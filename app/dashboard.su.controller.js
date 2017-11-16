@@ -1,19 +1,19 @@
 angular.module('app')
 .controller('dashboardSuCtrl',
-           ['$scope', '$http', '$location', '$window', '$routeParams',
+           ['$scope', '$http', '$location', '$window', '$routeParams', '$rootScope',
             'suAccountData', 'newSuTestID', 'socketService',
             'suSecondNavBarMessageService',
              dashboardSuCtrl]);
 
-function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
+function dashboardSuCtrl($scope, $http, $location, $window, $routeParams, $rootScope,
                           suAccountData,
                           newSuTestID, /* use suGenerateNewTest service*/
                           socketService,
                           suSecondNavBarMessageService) {
 
-    console.log('at dashboardSuCtrl');
-
-    console.log(suAccountData);
+    if ($rootScope.defaultSocketID !== $window.sessionStorage.defaultSocketID) {
+      console.log('refresh page ?');
+    }
 
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
