@@ -25,7 +25,9 @@
   <div class="form-group">
     <label for="password">Confirmed password</label>
     <input type="password" required class="form-control" id="password2"
-    placeholder="Confirmed password" ng-model="formData.password2">
+           placeholder="Confirmed password"
+           ng-model="formData.password2"
+           press-Enter='signUpActivate()'>
   </div>
   <button type="submit" class="btn btn-info btn-block">Activate</button>
 </form>
