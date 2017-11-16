@@ -38,8 +38,10 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
 
           var data = {'method': 'email',
                       'userRole': 'su',
-                      'userID': $window.sessionStorage.userID}
-          socketService.emit('suConnect', $window.sessionStorage.userID);
+                      'userID': $window.sessionStorage.userID,
+                      'socketID': $rootScope.defaultSocketID}
+
+          socketService.emit('suConnect', data);
         }
         else if (response.data.userRole === 'ad') {
 

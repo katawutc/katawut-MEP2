@@ -25,27 +25,124 @@ module.exports = function socketIO(socket) {
 
       if (doc) {
         db.collection('realTimeUser')
-        .find({'user': 'default',
+        .find({'userRole': 'default',
                'status': 'live'}).count(countUser_cb);
       }
     }
 
-    /** use DB to keep realtime data */
+    /** ------------------------------------------ */
+    /** Main entry -- use DB to keep realtime data */
+    /** ------------------------------------------ */
     console.log(socket.id+' connect...');
     db.collection('realTimeUser')
     .insert({'socketID': socket.id,
-             'user': 'default',
+             'userRole': 'default',
              'accessTime': Date.now(),
              'status': 'live'}, defaultVisit_cb);
+    /** ------------------------------------------ */
 
 
-
-    function disconnect_cb(err, count, status) {
+    /** admin connection */
+    function adConnect_cb(err, doc) {
 
       if (err) throw err;
 
+      if (doc) {
+
+        console.log(doc);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'default',
+               'status': 'live'}).count(countUser_cb);
+      }
+    }
+
+    socket.on('adConnect', function(data) {
+
+      console.log('ad: '+ data.socketID + ' connected to the server.');
+      console.log(data.socketID);
+      console.log(data);
+
       db.collection('realTimeUser')
-      .find({'status': 'live'}).count(countUser_cb);
+      .findAndModify({'socketID': data.socketID},
+                     [],
+                     {$set:{'userID': data.userID,
+                            'userRole': data.userRole,
+                            'method': data.method,
+                            'adAccessTime': Date.now()}},
+                     {new: true}, adConnect_cb);
+    })
+
+    /** su connection */
+
+    function countSu_cb(err, count) {
+
+      if (err) throw err;
+      if (count) {
+
+        console.log(count);
+
+        socket.broadcast.emit('suVisit', count);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'default',
+               'status': 'live'}).count(countUser_cb);
+      }
+    }
+
+    function suConnectEmail_cb(err, doc) {
+
+      if (err) throw err;
+
+      if (doc) {
+
+        console.log(doc);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'su',
+               'status': 'live'}).count(countSu_cb);
+      }
+    }
+
+    socket.on('suConnect', function(data) {
+
+      console.log('su: '+ data.socketID + ' connected to the server.');
+      console.log(data.socketID);
+      console.log(data);
+
+      if (data.method === 'email') {
+
+        db.collection('realTimeUser')
+        .findAndModify({'socketID': data.socketID},
+                       [],
+                       {$set:{'userID' : data.userID,
+                              'userRole': data.userRole,
+                              'method': data.method,
+                              'suAccessTime': Date.now()}},
+                       {new: true}, suConnectEmail_cb);
+      }
+      else if (data.method === 'fb') {
+
+      }
+    })
+
+   /** discinnect from MEP */
+    function disconnect_cb(err, doc) {
+
+      if (err) throw err;
+
+      if (doc) {
+
+        console.log(doc);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'default',
+               'status': 'live'}).count(countUser_cb);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'su',
+               'status': 'live'}).count(countSu_cb);
+      }
 
     }
 
@@ -56,53 +153,14 @@ module.exports = function socketIO(socket) {
       db.collection('realTimeUser')
       .findAndModify({'socketID': socket.id},
                      [],
-                     {$set:{'status': 'off'}},
+                     {$set:{'status': 'off',
+                            'LeaveTime': Date.now()}},
                      {new: true}, disconnect_cb);
 
     });
 
-    /** admin connection */
 
-    function adConnect_cb(err, doc) {
-
-      if (err) throw err;
-
-      if (doc) {
-
-        console.log(doc);
-
-        db.collection('realTimeUser')
-        .find({'user': 'default',
-               'status': 'live'}).count(countUser_cb);
-      }
-    }
-
-    socket.on('adConnect', function(data) {
-
-      console.log('ad: '+ data.userID + ' connected to the server.');
-      console.log(data.socketID);
-      console.log(data);
-
-      db.collection('realTimeUser')
-      .findAndModify({'socketID': data.socketID},
-                     [],
-                     {$set:{'user': data.userRole}},
-                     {new: true}, adConnect_cb);
-
-    })
-
-
-
-
-
-    /*
-
-    socket.on('suConnect', function(userID) {
-      console.log('su: '+ userID + ' connected to the server.');
-    })
-
-    */
-
+   /** su note */
    socket.on('suNote', function(data) {
 
      console.log(data);

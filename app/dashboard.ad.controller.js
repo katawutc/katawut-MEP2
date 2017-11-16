@@ -21,12 +21,20 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     /** initialize admin chat panel */
     $rootScope.showAdChatPanel = false;
 
-    /** for adding and counting user visit MEP */
+    /** for adding and counting default user visit MEP */
     socketService.on('defaultUserVisit', function(data) {
 
         console.log(data);
 
         $scope.userVisitMEP = data;
+    })
+
+    /** for adding and counting su visit MEP */
+    socketService.on('suVisit', function(data) {
+
+        console.log(data);
+
+        $scope.suVisitMEP = data;
     })
 
 }
