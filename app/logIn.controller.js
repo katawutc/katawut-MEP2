@@ -1,11 +1,12 @@
 // Log in controller
 angular.module('app')
 .controller('logInCtrl',
-           ['$scope', '$http', '$location', '$window',
+           ['$scope', '$http', '$location', '$window', '$rootScope',
             'socketService',
              logInCtrl]);
 
-function logInCtrl ($scope, $http, $location, $window, socketService) {
+function logInCtrl ($scope, $http, $location, $window, $rootScope,
+                    socketService) {
 
   /** to focus on Email input */
   $scope.inputEmailFocus = true;
@@ -42,14 +43,11 @@ function logInCtrl ($scope, $http, $location, $window, socketService) {
         }
         else if (response.data.userRole === 'ad') {
 
-          socketService.on('connect', () => {
-            console.log(socketService.id); // 'G5p5...'
-          });
-
           var data = {'method': 'email',
                       'userRole': 'ad',
                       'userID': $window.sessionStorage.userID,
-                      'socketID': socketService.id}
+                      'socketID': $rootScope.defaultSocketID}
+
           socketService.emit('adConnect', data);
         }
 

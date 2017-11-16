@@ -9,10 +9,6 @@ function dashboardAdCtrl($scope, $window, $rootScope,
                          socketService,
                          adSecondNavBarMessageService) {
 
-    /** ad emit socket connection */
-    //socketService.emit('adConnect', $window.sessionStorage.userID);
-    console.log(socketService.socket.sessionid);
-
     /** userVisit MEP socket ID */
     $rootScope.userVisitSocketID = [];
 
@@ -29,7 +25,6 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     socketService.on('defaultUserVisit', function(data) {
 
         console.log(data);
-        //$rootScope.userVisitSocketID.push(data);
 
         $scope.userVisitMEP = data;
     })

@@ -20,10 +20,10 @@ module.exports = function socketIO(socket) {
     }
 
     function defaultVisit_cb(err, doc) {
+
       if (err) throw err;
 
       if (doc) {
-
         db.collection('realTimeUser')
         .find({'user': 'default',
                'status': 'live'}).count(countDefaultUser_cb);
