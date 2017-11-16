@@ -11,12 +11,9 @@ module.exports = function socketIO(socket) {
     function countUser_cb(err, count) {
 
       if (err) throw err;
-      if (count) {
 
-        console.log(count);
-
-        socket.broadcast.emit('defaultUserVisit', count);
-      }
+      console.log('default: '+count);
+      socket.broadcast.emit('defaultUserVisit', count);
     }
 
     function defaultVisit_cb(err, doc) {
@@ -27,6 +24,11 @@ module.exports = function socketIO(socket) {
         db.collection('realTimeUser')
         .find({'userRole': 'default',
                'status': 'live'}).count(countUser_cb);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'su',
+               'status': 'live'}).count(countSu_cb);
+
       }
     }
 
@@ -54,6 +56,11 @@ module.exports = function socketIO(socket) {
         db.collection('realTimeUser')
         .find({'userRole': 'default',
                'status': 'live'}).count(countUser_cb);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'su',
+               'status': 'live'}).count(countSu_cb);
+
       }
     }
 
@@ -78,16 +85,9 @@ module.exports = function socketIO(socket) {
     function countSu_cb(err, count) {
 
       if (err) throw err;
-      if (count) {
 
-        console.log(count);
-
-        socket.broadcast.emit('suVisit', count);
-
-        db.collection('realTimeUser')
-        .find({'userRole': 'default',
-               'status': 'live'}).count(countUser_cb);
-      }
+      console.log('su: '+count);
+      socket.broadcast.emit('suVisit', count);      
     }
 
     function suConnectEmail_cb(err, doc) {
@@ -101,6 +101,11 @@ module.exports = function socketIO(socket) {
         db.collection('realTimeUser')
         .find({'userRole': 'su',
                'status': 'live'}).count(countSu_cb);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'default',
+               'status': 'live'}).count(countUser_cb);
+
       }
     }
 

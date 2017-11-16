@@ -15,10 +15,6 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams,
 
     console.log(suAccountData);
 
-    /** su emit socket connection */
-    socketService.emit('suConnect', $window.sessionStorage.userID);
-    //
-
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
                   ' เรา มาดู Dashboard กัน';

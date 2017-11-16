@@ -39,8 +39,6 @@ function firstSettingSuCtrl ($scope, $http, $window,
 
       $window.sessionStorage.activate = 'true';
 
-      socketService.emit('suConnect', $window.sessionStorage.userID);
-
       $location.path('/dashboard/'+$window.sessionStorage.userRole+'/'+
                       $window.sessionStorage.userID);
     },function errorCallback(response){

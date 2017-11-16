@@ -38,8 +38,6 @@ function fbLogInCtrl ($http, $routeParams, $window,
       else if ($window.sessionStorage.logInMessage === 'login success' &&
             $window.sessionStorage.activate === 'true') {
 
-        socketService.emit('suConnect', $window.sessionStorage.userID);
-
         console.log('at fbLogInCtrl: before route to dashboard');
 
         $location.path('/dashboard'+'/'+
