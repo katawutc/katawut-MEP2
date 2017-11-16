@@ -11,7 +11,10 @@
 <form ng-submit="signUpActivate()">
   <div class="form-group">
     <label for="userName">Full name</label>
-    <input type="text" required class="form-control" id="userName" placeholder="Enter your name" ng-model="formData.userName">
+    <input type="text" required class="form-control" id="userName"
+           placeholder="Enter your name"
+           ng-model="formData.userName"
+           focus-on-show ng-show='activateEmailFocus'>
   </div>
   <p style="color:red">{{passwordError}}</p>
   <div class="form-group">

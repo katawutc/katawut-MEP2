@@ -5,6 +5,8 @@ angular.module('app')
 
 function signUpActivateCtrl ($scope, $http, $routeParams, $window, $location) {
 
+    $scope.activateEmailFocus = true;
+
     $scope.userID = $routeParams.userID;
     $scope.hashActivate = $routeParams.hashActivate;
 
