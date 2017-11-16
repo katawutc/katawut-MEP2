@@ -8,7 +8,7 @@ module.exports = function socketIO(socket) {
 
     /** default user visit and leave MEP counting for admin dashboard */
 
-    function countDefaultUser_cb(err, count) {
+    function countUser_cb(err, count) {
 
       if (err) throw err;
       if (count) {
@@ -26,7 +26,7 @@ module.exports = function socketIO(socket) {
       if (doc) {
         db.collection('realTimeUser')
         .find({'user': 'default',
-               'status': 'live'}).count(countDefaultUser_cb);
+               'status': 'live'}).count(countUser_cb);
       }
     }
 
@@ -40,28 +40,24 @@ module.exports = function socketIO(socket) {
 
 
 
-    function defaultUserLeave_cb(err, count, status) {
+    function disconnect_cb(err, count, status) {
 
       if (err) throw err;
 
       db.collection('realTimeUser')
-      .find({'status': 'live'}).count(countDefaultUser_cb);
+      .find({'status': 'live'}).count(countUser_cb);
 
     }
 
     socket.on('disconnect', function(){
 
-      /*
-      console.log(socket.id);
-      socket.broadcast.emit('defaultUserLeave', socket.id);
-      console.log('A user disconnects the MEP ...');*/
-      /*
-      console.log(socket.id+' disconnect...');
+      console.log(socket.id + ' disconnect ...');
+
       db.collection('realTimeUser')
-      .update({'socketID': socket.id},
-              {$set: {'offTime': Date.now(),
-                      'status': 'off'
-                    }}, defaultUserLeave_cb);*/
+      .findAndModify({'socketID': socket.id},
+                     [],
+                     {$set:{'status': 'off'}},
+                     {new: true}, disconnect_cb);
 
     });
 
@@ -77,7 +73,7 @@ module.exports = function socketIO(socket) {
 
         db.collection('realTimeUser')
         .find({'user': 'default',
-               'status': 'live'}).count(countDefaultUser_cb);
+               'status': 'live'}).count(countUser_cb);
       }
     }
 
