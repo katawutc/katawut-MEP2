@@ -335,19 +335,7 @@ app.post('/postTestComment',
   require('./server/postTestComment'));
 
 /** get real time default user */
-app.get('/realTimeDefaultUser/:userID',
+app.get('/realTimeUser/:user/:userID',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
-  require('./server/realTimeDefaultUser'));
-
-/** get real time default user */
-app.get('/realTimeSuUser/:userID',
-  passport.authenticate('jwt', {session: false}),
-  require('./server/checkAdminAuthority'),
-  require('./server/realTimeSuUser'));
-
-/** get real time default user */
-app.get('/realTimeAdUser/:userID',
-  passport.authenticate('jwt', {session: false}),
-  require('./server/checkAdminAuthority'),
-  require('./server/realTimeAdUser'));  
+  require('./server/realTimeUser'));

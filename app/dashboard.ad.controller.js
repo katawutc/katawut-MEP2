@@ -3,11 +3,13 @@ angular.module('app')
            ['$scope', '$window', '$rootScope',
             'socketService',
             'adSecondNavBarMessageService',
+            'defaultUser', 'suUser', 'adUser',
              dashboardAdCtrl]);
 
 function dashboardAdCtrl($scope, $window, $rootScope,
                          socketService,
-                         adSecondNavBarMessageService) {
+                         adSecondNavBarMessageService,
+                         defaultUser, suUser, adUser) {
 
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +
@@ -18,8 +20,13 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     /** initialize admin chat panel */
     $rootScope.showAdChatPanel = false;
 
+    /** initialize dashboard real time user data */
+    $scope.userVisitMEP = defaultUser;
+    $scope.suVisitMEP = suUser;
+    $scope.adVisitMEP = adUser;
+
     /** for adding and counting default user visit MEP */
-    socketService.on('defaultUserVisit', function(data) {
+    socketService.on('defaultVisit', function(data) {
 
         console.log(data);
 
@@ -32,6 +39,14 @@ function dashboardAdCtrl($scope, $window, $rootScope,
         console.log(data);
 
         $scope.suVisitMEP = data;
+    })
+
+    /** for adding and counting admin visit MEP */
+    socketService.on('adVisit', function(data) {
+
+        console.log(data);
+
+        $scope.adVisitMEP = data;
     })
 
 }

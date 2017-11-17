@@ -8,7 +8,7 @@ function realTimeUserService($http, $route, $q, $window) {
    return {
      getDefaultUser : function() {
 
-       var realTimeDefaultUserUrl = 'realTimeDefaultUser/'+$window.sessionStorage.userID;
+       var realTimeDefaultUserUrl = 'realTimeUser/default/'+$window.sessionStorage.userID;
 
        var deferred = $q.defer();
 
@@ -30,7 +30,7 @@ function realTimeUserService($http, $route, $q, $window) {
      },
      getSuUser : function() {
 
-       var realTimeSuUserUrl = 'realTimeSuUser/'+$window.sessionStorage.userID;
+       var realTimeSuUserUrl = 'realTimeUser/su/'+$window.sessionStorage.userID;
 
        var deferred = $q.defer();
 
@@ -52,7 +52,7 @@ function realTimeUserService($http, $route, $q, $window) {
      },
      getAdUser : function() {
 
-       var realTimeAdUserUrl = 'realTimeAdUser/'+$window.sessionStorage.userID;
+       var realTimeAdUserUrl = 'realTimeUser/ad/'+$window.sessionStorage.userID;
 
        var deferred = $q.defer();
 
