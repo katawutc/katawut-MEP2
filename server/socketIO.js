@@ -243,15 +243,24 @@ module.exports = function socketIO(socket) {
       console.log('at server: refreshSocket');
       console.log(data);
 
+      /** set off status to previousSocket */
+      db.collection('realTimeUser')
+      .findAndModify({'socketID': data.previousSocket},
+                     [],
+                     {$set:{'status': 'off'}},
+                     {new: true}, refreshSocket_cb);
+
       db.collection('realTimeUser')
       .findAndModify({'socketID': data.newSocket},
                      [],
-                     {$set:{'userRole': data.userRole,
+                     {$set:{'userID': data.userID,
+                            'userRole': data.userRole,
                             'previousSocketID': data.previousSocket,
                             'refreshAt': data.refreshAt}},
                      {new: true}, refreshSocket_cb);
     })
 
+/*
     socket.on('refreshCheck', function(data) {
 
       console.log('at refreshCheck');
@@ -261,6 +270,7 @@ module.exports = function socketIO(socket) {
         refreshSocket_cb(null, 'adDashboard');
       }
     })
+    */
 
    /** su note */
    socket.on('suNote', function(data) {
