@@ -12,6 +12,8 @@ module.exports = function socketIO(socket) {
 
       if (err) throw err;
 
+      console.log('at countUser_cb');
+
       console.log('default: '+count);
       socket.broadcast.emit('defaultVisit', count);
     }
@@ -47,12 +49,15 @@ module.exports = function socketIO(socket) {
              'status': 'live'}, defaultVisit_cb);
     /** ------------------------------------------ */
 
-
     function countAd_cb(err, count) {
       if (err) throw err;
 
       console.log('admin: '+count);
-      socket.broadcast.emit('adVisit', count);
+
+      //setTimeout(function() {socket.broadcast.emit('adVisit', count);}, 3000);
+
+      //socket.broadcast.emit('adVisit', count);
+      socket.emit('adVisit', count);
     }
 
     /** admin connection */
@@ -210,6 +215,52 @@ module.exports = function socketIO(socket) {
 
     });
 
+    function refreshSocket_cb(err, doc) {
+
+      if (err) throw err;
+
+      if (doc) {
+
+        console.log('at refreshSocket_cb');
+        console.log(doc);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'default',
+               'status': 'live'}).count(countUser_cb);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'su',
+               'status': 'live'}).count(countSu_cb);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'ad',
+               'status': 'live'}).count(countAd_cb);
+      }
+    }
+
+    socket.on('refreshSocket', function(data) {
+
+      console.log('at server: refreshSocket');
+      console.log(data);
+
+      db.collection('realTimeUser')
+      .findAndModify({'socketID': data.newSocket},
+                     [],
+                     {$set:{'userRole': data.userRole,
+                            'previousSocketID': data.previousSocket,
+                            'refreshAt': data.refreshAt}},
+                     {new: true}, refreshSocket_cb);
+    })
+
+    socket.on('refreshCheck', function(data) {
+
+      console.log('at refreshCheck');
+
+      if (data === 'adDashboard') {
+        console.log(data);
+        refreshSocket_cb(null, 'adDashboard');
+      }
+    })
 
    /** su note */
    socket.on('suNote', function(data) {
