@@ -120,7 +120,18 @@ angular.module('app')
     /** admin dashboard user list data */
     .when("/dashboard/ad/:userID", {
       templateUrl : 'dashboard.ad.html',
-      controller :'dashboardAdCtrl'
+      controller :'dashboardAdCtrl',
+      resolve : {
+        defaultUser : function(realTimeUserService) {
+          return realTimeUserService.getDefaultUser();
+        },
+        suUser : function(realTimeUserService) {
+          return realTimeUserService.getSuUser();
+        },
+        adUser : function(realTimeUserService) {
+          return realTimeUserService.getAdUser();
+        }
+      }
     })
     .when('/answerSummary', {
       templateUrl : 'answerSummary.html',
