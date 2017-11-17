@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('fbLogInCtrl',
-           ['$http', '$routeParams', '$window',
+           ['$http', '$routeParams', '$window', '$rootScope',
             '$location',
             'socketService',
              fbLogInCtrl]);
 
-function fbLogInCtrl ($http, $routeParams, $window,
+function fbLogInCtrl ($http, $routeParams, $window, $rootScope,
                       $location,
                       socketService) {
 
@@ -38,7 +38,14 @@ function fbLogInCtrl ($http, $routeParams, $window,
       else if ($window.sessionStorage.logInMessage === 'login success' &&
             $window.sessionStorage.activate === 'true') {
 
-        console.log('at fbLogInCtrl: before route to dashboard');
+        var data = {'method': 'fb',
+                    'userRole': 'su',
+                    'userID': $window.sessionStorage.userID,
+                    'socketID': $rootScope.defaultSocketID}
+
+        $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
+
+        socketService.emit('suConnect', data);
 
         $location.path('/dashboard'+'/'+
                         $window.sessionStorage.getItem('userRole')+'/'+

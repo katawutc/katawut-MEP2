@@ -105,6 +105,25 @@ module.exports = function socketIO(socket) {
       socket.broadcast.emit('suVisit', count);
     }
 
+    function suConnectFB_cb(err, doc) {
+
+      if (err) throw err;
+
+      if (doc) {
+
+        console.log(doc);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'su',
+               'status': 'live'}).count(countSu_cb);
+
+        db.collection('realTimeUser')
+        .find({'userRole': 'default',
+               'status': 'live'}).count(countUser_cb);
+
+      }
+    }
+
     function suConnectEmail_cb(err, doc) {
 
       if (err) throw err;
@@ -143,6 +162,14 @@ module.exports = function socketIO(socket) {
       }
       else if (data.method === 'fb') {
 
+        db.collection('realTimeUser')
+        .findAndModify({'socketID': data.socketID},
+                       [],
+                       {$set:{'userID' : data.userID,
+                              'userRole': data.userRole,
+                              'method': data.method,
+                              'suAccessTime': Date.now()}},
+                       {new: true}, suConnectFB_cb);
       }
     })
 
