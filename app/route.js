@@ -419,4 +419,14 @@ angular.module('app')
         }
       }
     })
+    /** live su */
+    .when('/liveSu/:userID', {
+      templateUrl : 'liveSu.html',
+      controller : 'liveSuCtrl',
+      resolve : {
+        liveSu : function(liveSuService) {
+          return liveSuService.getLiveSu();
+        }
+      }
+    })
 });

@@ -339,3 +339,9 @@ app.get('/realTimeUser/:user/:userID',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
   require('./server/realTimeUser'));
+
+/** get LIVE Su */
+app.get('/liveSu/:userID',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkAdminAuthority'),
+  require('./server/liveSu'));
