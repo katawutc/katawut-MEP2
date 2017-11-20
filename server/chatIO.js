@@ -71,6 +71,8 @@ module.exports = function chatIO(socket) {
     if (doc) {
 
       console.log(doc);
+
+      socket.to('adminRoom').emit('offSu', doc);
     }
   }
 
@@ -84,6 +86,7 @@ module.exports = function chatIO(socket) {
                    {$set:{'status': 'off',
                           'LeaveTime': Date.now()}},
                    {new: true}, chatDisconnect_cb);
+
   });
 
 

@@ -39,4 +39,11 @@ function liveSuCtrl($scope, $http, $routeParams,
 
     })
 
+    chatIOService.on('offSu', function(data) {
+
+      console.log('off su');
+      console.log(data);
+      
+    })
+
 }
