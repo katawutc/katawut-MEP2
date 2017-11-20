@@ -30,4 +30,13 @@ function liveSuCtrl($scope, $http, $routeParams,
       $location.path('/errorPage');
     }
 
+    chatIOService.on('liveSu', function(data) {
+
+      console.log('new live su');
+      console.log(data);
+
+      $scope.liveSu.push(data);
+
+    })
+
 }

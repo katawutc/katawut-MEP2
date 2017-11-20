@@ -40,6 +40,12 @@ module.exports = function chatIO(socket) {
 
   socket.on('chatConnect', function(data) {
 
+    // make admin room for admin socket to join
+    if (data.userRole === 'ad') {
+
+      socket.join('adminRoom');
+    }
+
     // to record chat socket ID
      db.collection('suChatSocket')
      .findAndModify({'chatSocketID': data.chatSocketID},
@@ -50,6 +56,11 @@ module.exports = function chatIO(socket) {
                            'chatConnectAt': Date.now(),
                            'status': 'live'}},
                     {new: true}, chatConnect_cb);
+
+    if (data.userRole === 'su') {
+
+      socket.to('adminRoom').emit('liveSu', data);
+    }
   })
 
 

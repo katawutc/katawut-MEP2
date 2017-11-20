@@ -73,4 +73,10 @@ function adChatPanelCtrl($rootScope, $scope, $window,
       console.log($rootScope.suSocketID);
     })
 
+    chatIOService.on('liveSu', function(data) {
+
+      console.log('new live su');
+      console.log(data);
+    })
+
 }
