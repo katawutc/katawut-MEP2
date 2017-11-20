@@ -1,9 +1,9 @@
 angular.module('app')
 .factory('chatIOService',
-        ['$rootScope',
+        ['$rootScope', '$window',
           chatIOService]);
 
-function chatIOService($rootScope) {
+function chatIOService($rootScope, $window) {
 
   //var socket = io('http://localhost:5000/');
   var chatIO = io('/chat');
@@ -13,37 +13,31 @@ function chatIOService($rootScope) {
       $rootScope.chatSocketID = chatIO.id;
 
       console.log('$rootScope.chatSocketID: '+$rootScope.chatSocketID);
-    })
 
-      /*
-      if ($window.sessionStorage.defaultSocketID) {
+      if ($window.sessionStorage.chatSocketID) {
 
-        if ($rootScope.defaultSocketID !== $window.sessionStorage.defaultSocketID) {
+        if ($rootScope.chatSocketID !== $window.sessionStorage.chatSocketID) {
 
-          /*
           console.log('page refresh ?');
 
-          console.log($window.sessionStorage.defaultSocketID);
+          console.log($window.sessionStorage.chatSocketID);
 
-          console.log($rootScope.defaultSocketID);
-          */
-          /*
+          console.log($rootScope.chatSocketID);
 
-        var socketData = {'previousSocket': $window.sessionStorage.defaultSocketID,
-                          'newSocket': $rootScope.defaultSocketID,
-                          'refreshAt': Date.now(),
-                          'userID': $window.sessionStorage.userID,
-                          'userRole': $window.sessionStorage.userRole}
+        var chatSocketData = {'previousChatSocket': $window.sessionStorage.chatSocketID,
+                              'newChatSocket': $rootScope.chatSocketID,
+                              'refreshAt': Date.now(),
+                              'userID': $window.sessionStorage.userID,
+                              'userRole': $window.sessionStorage.userRole}
 
-        socket.emit('refreshSocket', socketData);
+        chatIO.emit('refreshChatSocket', chatSocketData);
 
-        $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
+        $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 
       }
     }
 
   })
-  */
 
     return {
       on: function (eventName, callback) {

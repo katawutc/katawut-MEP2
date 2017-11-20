@@ -36,29 +36,44 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
         // need to think more on this
         if (response.data.userRole === 'su') {
 
-          var data = {'method': 'email',
-                      'userRole': 'su',
-                      'userID': $window.sessionStorage.userID,
-                      'socketID': $rootScope.defaultSocketID}
+          var socketData = {'method': 'email',
+                            'userRole': 'su',
+                            'userID': $window.sessionStorage.userID,
+                            'socketID': $rootScope.defaultSocketID,
+                            }
+
+          socketService.emit('suConnect', socketData);
 
           $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
 
+          var suChatData = {'userName': $window.sessionStorage.userName,
+                            'userRole': 'su',
+                            'chatSocketID': $rootScope.chatSocketID}
+
+          chatIOService.emit('suChat', suChatData);
+
           $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 
-          socketService.emit('suConnect', data);
         }
         else if (response.data.userRole === 'ad') {
 
-          var data = {'method': 'email',
-                      'userRole': 'ad',
-                      'userID': $window.sessionStorage.userID,
-                      'socketID': $rootScope.defaultSocketID}
+          var socketData = {'method': 'email',
+                            'userRole': 'ad',
+                            'userID': $window.sessionStorage.userID,
+                            'socketID': $rootScope.defaultSocketID}
+
+          socketService.emit('adConnect', socketData);
 
           $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
 
+          var adChatData = {'userName': $window.sessionStorage.userName,
+                            'userRole': 'ad',
+                            'chatSocketID': $rootScope.chatSocketID}
+
+          chatIOService.emit('adChat', suChatData);
+
           $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 
-          socketService.emit('adConnect', data);
         }
 
         if (response.data.message === 'login success') {

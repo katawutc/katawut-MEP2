@@ -38,16 +38,22 @@ function fbLogInCtrl ($http, $routeParams, $window, $rootScope,
       else if ($window.sessionStorage.logInMessage === 'login success' &&
             $window.sessionStorage.activate === 'true') {
 
-        var data = {'method': 'fb',
-                    'userRole': 'su',
-                    'userID': $window.sessionStorage.userID,
-                    'socketID': $rootScope.defaultSocketID}
+        var socketData = {'method': 'fb',
+                          'userRole': 'su',
+                          'userID': $window.sessionStorage.userID,
+                          'socketID': $rootScope.defaultSocketID}
+
+        socketService.emit('suConnect', socketData);
 
         $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
 
-        $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
+        var suChatData = {'userName': $window.sessionStorage.userName,
+                          'userRole': 'su',
+                          'chatSocketID': $rootScope.chatSocketID}
 
-        socketService.emit('suConnect', data);
+        chatIOService.emit('suChat', suChatData);
+
+        $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 
         $location.path('/dashboard'+'/'+
                         $window.sessionStorage.getItem('userRole')+'/'+
