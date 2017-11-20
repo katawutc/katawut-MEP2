@@ -12,19 +12,11 @@ function socketService($rootScope, $window) {
 
       $rootScope.defaultSocketID = socket.id;
 
-      //console.log('$rootScope.defaultSocketID: '+$rootScope.defaultSocketID);
+      console.log('$rootScope.defaultSocketID: '+$rootScope.defaultSocketID);
 
       if ($window.sessionStorage.defaultSocketID) {
 
         if ($rootScope.defaultSocketID !== $window.sessionStorage.defaultSocketID) {
-
-          /*
-          console.log('page refresh ?');
-
-          console.log($window.sessionStorage.defaultSocketID);
-
-          console.log($rootScope.defaultSocketID);
-          */
 
         var socketData = {'previousSocket': $window.sessionStorage.defaultSocketID,
                           'newSocket': $rootScope.defaultSocketID,
