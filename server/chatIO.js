@@ -22,7 +22,8 @@ module.exports = function chatIO(socket) {
   /** ------------------------------------------ */
   console.log(socket.id+' chat socket connect...');
   db.collection('suChatSocket')
-  .insert({'chatSocketID': socket.id},
+  .insert({'chatSocketID': socket.id,
+           'status': 'live'},
             suChatSocket_cb);
   /** ------------------------------------------ */
 
@@ -31,10 +32,9 @@ module.exports = function chatIO(socket) {
 
     if (err) throw err;
 
-    if (doc) {
+    console.log(doc);
 
-      socket.to('adminRoom').emit('liveSu', doc);
-    }
+    socket.to('adminRoom').emit('liveSu', doc);
   }
 
   function chatConnect_cb(err, doc) {
@@ -103,40 +103,41 @@ module.exports = function chatIO(socket) {
 
 
 
-      function refreshChatSocket_cb(err, doc) {
+  function refreshChatSocket_cb(err, doc) {
 
-        if (err) throw err;
+    if (err) throw err;
 
-        if (doc) {
+    console.log('at refreshChatSocket_cb');
+    console.log(doc);
 
-          console.log('at refreshChatSocket_cb');
-          console.log(doc);
+    db.collection('suChatSocket')
+    .find({'userRole': 'su',
+           'status': 'live'}).toArray(liveSu_cb);
 
-        }
-      }
+  }
 
-      socket.on('refreshChatSocket', function(data) {
+  socket.on('refreshChatSocket', function(data) {
 
-        console.log('at server: refreshChatSocket');
-        console.log(data);
+    console.log('at server: refreshChatSocket');
+    console.log(data);
 
-        /** set off status to previousSocket */
-        db.collection('suChatSocket')
-        .findAndModify({'chatSocketID': data.previousChatSocket},
-                       [],
-                       {$set:{'status': 'off'}},
-                       {new: true}, refreshChatSocket_cb);
+    /** set off status to previousSocket */
+    db.collection('suChatSocket')
+    .findAndModify({'chatSocketID': data.previousChatSocket},
+                   [],
+                   {$set:{'status': 'off'}},
+                   {new: true});
 
-        db.collection('suChatSocket')
-        .findAndModify({'chatSocketID': data.newChatSocket},
-                       [],
-                       {$set:{'userID': data.userID,
-                              'userName': data.userName,
-                              'userRole': data.userRole,
-                              'previousChatSocketID': data.previousChatSocket,
-                              'refreshAt': data.refreshAt}},
-                       {new: true}, refreshChatSocket_cb);
-      })
+    db.collection('suChatSocket')
+    .findAndModify({'chatSocketID': data.newChatSocket},
+                   [],
+                   {$set:{'userID': data.userID,
+                          'userName': data.userName,
+                          'userRole': data.userRole,
+                          'previousChatSocketID': data.previousChatSocket,
+                          'refreshAt': data.refreshAt}},
+                   {new: true}, refreshChatSocket_cb);
+  })
 
   /** **/
 
