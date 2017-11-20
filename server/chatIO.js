@@ -26,16 +26,26 @@ module.exports = function chatIO(socket) {
             suChatSocket_cb);
   /** ------------------------------------------ */
 
-  function chatConnect_cb(err, doc) {
+
+  function liveSu_cb(err, doc) {
 
     if (err) throw err;
 
     if (doc) {
 
-      console.log(doc)
+      socket.to('adminRoom').emit('liveSu', doc);
     }
+  }
 
+  function chatConnect_cb(err, doc) {
 
+    if (err) throw err;
+
+      console.log(doc)
+
+      db.collection('suChatSocket')
+      .find({'userRole': 'su',
+             'status': 'live'}).toArray(liveSu_cb);
   }
 
   socket.on('chatConnect', function(data) {
@@ -56,24 +66,26 @@ module.exports = function chatIO(socket) {
                            'chatConnectAt': Date.now(),
                            'status': 'live'}},
                     {new: true}, chatConnect_cb);
-
-    if (data.userRole === 'su') {
-
-      socket.to('adminRoom').emit('liveSu', data);
-    }
   })
 
+
+  function offSu_cb(err, doc) {
+
+    if (err) throw err;
+
+    console.log(doc);
+    socket.to('adminRoom').emit('offSu', doc);
+  }
 
   function chatDisconnect_cb(err, doc) {
 
     if (err) throw err;
 
-    if (doc) {
+    console.log(doc);
 
-      console.log(doc);
-
-      socket.to('adminRoom').emit('offSu', doc);
-    }
+    db.collection('suChatSocket')
+    .find({'userRole': 'su',
+           'status': 'live'}).toArray(offSu_cb);
   }
 
   socket.on('disconnect', function(){

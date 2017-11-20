@@ -35,7 +35,7 @@ function liveSuCtrl($scope, $http, $routeParams,
       console.log('new live su');
       console.log(data);
 
-      $scope.liveSu.push(data);
+      $scope.liveSu = data;
 
     })
 
@@ -43,7 +43,9 @@ function liveSuCtrl($scope, $http, $routeParams,
 
       console.log('off su');
       console.log(data);
-      
+
+      $scope.liveSu = data;
+
     })
 
 }
