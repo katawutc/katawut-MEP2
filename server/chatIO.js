@@ -3,6 +3,116 @@ module.exports = function chatIO(socket) {
 
   console.log('chatIO socket starts on server ...');
 
+  var mongo = require('./mongoDBConnect');
+  var db = mongo.getDB();
+
+
+  function suChatSocket_cb(err, doc) {
+
+    if (err) throw err;
+
+    if (doc) {
+
+      console.log(doc);
+    }
+  }
+
+  /** ------------------------------------------ */
+  /** Main entry -- use DB to keep chat socket data */
+  /** ------------------------------------------ */
+  console.log(socket.id+' chat socket connect...');
+  db.collection('suChatSocket')
+  .insert({'chatSocketID': socket.id},
+            suChatSocket_cb);
+  /** ------------------------------------------ */
+
+  function chatConnect_cb(err, doc) {
+
+    if (err) throw err;
+
+    if (doc) {
+
+      console.log(doc)
+    }
+
+
+  }
+
+  socket.on('chatConnect', function(data) {
+
+    // to record chat socket ID
+     db.collection('suChatSocket')
+     .findAndModify({'chatSocketID': data.chatSocketID},
+                    [],
+                    {$set:{'userID': data.userID,
+                           'userName': data.userName,
+                           'userRole': data.userRole,
+                           'chatConnectAt': Date.now(),
+                           'status': 'live'}},
+                    {new: true}, chatConnect_cb);
+  })
+
+
+  function chatDisconnect_cb(err, doc) {
+
+    if (err) throw err;
+
+    if (doc) {
+
+      console.log(doc);
+    }
+  }
+
+  socket.on('disconnect', function(){
+
+    console.log(socket.id + ' disconnect ...');
+
+    db.collection('suChatSocket')
+    .findAndModify({'chatSocketID': socket.id},
+                   [],
+                   {$set:{'status': 'off',
+                          'LeaveTime': Date.now()}},
+                   {new: true}, chatDisconnect_cb);
+  });
+
+
+
+      function refreshChatSocket_cb(err, doc) {
+
+        if (err) throw err;
+
+        if (doc) {
+
+          console.log('at refreshChatSocket_cb');
+          console.log(doc);
+
+        }
+      }
+
+      socket.on('refreshChatSocket', function(data) {
+
+        console.log('at server: refreshChatSocket');
+        console.log(data);
+
+        /** set off status to previousSocket */
+        db.collection('suChatSocket')
+        .findAndModify({'chatSocketID': data.previousChatSocket},
+                       [],
+                       {$set:{'status': 'off'}},
+                       {new: true}, refreshChatSocket_cb);
+
+        db.collection('suChatSocket')
+        .findAndModify({'chatSocketID': data.newChatSocket},
+                       [],
+                       {$set:{'userID': data.userID,
+                              'userName': data.userName,
+                              'userRole': data.userRole,
+                              'previousChatSocketID': data.previousChatSocket,
+                              'refreshAt': data.refreshAt}},
+                       {new: true}, refreshChatSocket_cb);
+      })
+
+  /** **/
 
   socket.on('chat', function(data) {
 

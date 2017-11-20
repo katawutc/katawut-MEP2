@@ -47,11 +47,12 @@ function fbLogInCtrl ($http, $routeParams, $window, $rootScope,
 
         $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
 
-        var suChatData = {'userName': $window.sessionStorage.userName,
+        var suChatData = {'userID': $window.sessionStorage.userID,
+                          'userName': $window.sessionStorage.userName,
                           'userRole': 'su',
                           'chatSocketID': $rootScope.chatSocketID}
 
-        chatIOService.emit('suChat', suChatData);
+        chatIOService.emit('chatConnect', suChatData);
 
         $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 

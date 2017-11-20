@@ -46,11 +46,12 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
 
           $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
 
-          var suChatData = {'userName': $window.sessionStorage.userName,
+          var suChatData = {'userID': $window.sessionStorage.userID,
+                            'userName': $window.sessionStorage.userName,
                             'userRole': 'su',
                             'chatSocketID': $rootScope.chatSocketID}
 
-          chatIOService.emit('suChat', suChatData);
+          chatIOService.emit('chatConnect', suChatData);
 
           $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 
@@ -66,11 +67,12 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
 
           $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
 
-          var adChatData = {'userName': $window.sessionStorage.userName,
+          var adChatData = {'userID': $window.sessionStorage.userID,
+                            'userName': $window.sessionStorage.userName,
                             'userRole': 'ad',
                             'chatSocketID': $rootScope.chatSocketID}
 
-          chatIOService.emit('adChat', suChatData);
+          chatIOService.emit('chatConnect', adChatData);
 
           $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 

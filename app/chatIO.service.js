@@ -28,6 +28,7 @@ function chatIOService($rootScope, $window) {
                               'newChatSocket': $rootScope.chatSocketID,
                               'refreshAt': Date.now(),
                               'userID': $window.sessionStorage.userID,
+                              'userName': $window.sessionStorage.userName,
                               'userRole': $window.sessionStorage.userRole}
 
         chatIO.emit('refreshChatSocket', chatSocketData);

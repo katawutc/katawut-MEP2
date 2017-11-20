@@ -54,9 +54,6 @@ module.exports = function socketIO(socket) {
 
       console.log('admin: '+count);
 
-      //setTimeout(function() {socket.broadcast.emit('adVisit', count);}, 3000);
-
-      //socket.broadcast.emit('adVisit', count);
       socket.emit('adVisit', count);
     }
 
@@ -259,18 +256,6 @@ module.exports = function socketIO(socket) {
                             'refreshAt': data.refreshAt}},
                      {new: true}, refreshSocket_cb);
     })
-
-/*
-    socket.on('refreshCheck', function(data) {
-
-      console.log('at refreshCheck');
-
-      if (data === 'adDashboard') {
-        console.log(data);
-        refreshSocket_cb(null, 'adDashboard');
-      }
-    })
-    */
 
    /** su note */
    socket.on('suNote', function(data) {
