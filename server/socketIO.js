@@ -257,6 +257,40 @@ module.exports = function socketIO(socket) {
                      {new: true}, refreshSocket_cb);
     })
 
+
+    function logOut_cb(err, doc) {
+
+      if (err) throw err;
+
+      console.log(doc);
+
+      db.collection('realTimeUser')
+      .find({'userRole': 'default',
+             'status': 'live'}).count(countUser_cb);
+
+      db.collection('realTimeUser')
+      .find({'userRole': 'su',
+             'status': 'live'}).count(countSu_cb);
+
+      db.collection('realTimeUser')
+      .find({'userRole': 'ad',
+             'status': 'live'}).count(countAd_cb);
+
+    }
+
+    socket.on('logOut', function(data) {
+
+      console.log('logOut: '+ data);
+
+      db.collection('realTimeUser')
+      .findAndModify({'userID': data},
+                     [],
+                     {$set:{'userRole': 'default',
+                            'logOutAt': Date.now()}},
+                     {new: true}, logOut_cb);
+    })
+
+
    /** su note */
    socket.on('suNote', function(data) {
 

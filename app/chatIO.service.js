@@ -58,6 +58,9 @@ function chatIOService($rootScope, $window) {
             }
           });
         })
+      },
+      socketID: function() {
+        return chatIO.id;
       }
     }
   }

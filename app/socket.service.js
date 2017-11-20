@@ -51,6 +51,9 @@ function socketService($rootScope, $window) {
             }
           });
         })
+      },
+      socketID: function() {
+        return socket.id;
       }
     }
   }

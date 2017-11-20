@@ -2,11 +2,19 @@
 angular.module('app')
 .controller('logOutCtrl',
            ['$scope', '$window', '$rootScope',
-            'fbLogInStatus',
+            'fbLogInStatus', 'socketService', 'chatIOService',
              logOutCtrl]);
 
 function logOutCtrl($scope, $window, $rootScope,
-                    fbLogInStatus) {
+                    fbLogInStatus,
+                    socketService, chatIOService) {
+
+    /** log out */
+    socketService.emit('logOut', $window.sessionStorage.userID);
+    chatIOService.emit('logOut', $window.sessionStorage.userID);
+
+    console.log(socketService.socketID());
+    console.log(chatIOService.socketID());
 
     // To implement asynchronous function before pass message to view
     $window.sessionStorage.clear();
@@ -28,4 +36,6 @@ function logOutCtrl($scope, $window, $rootScope,
     $rootScope.showChatPanel = false;
     $rootScope.showNotePanel = false;
     $rootScope.message = null;
+
+
   }

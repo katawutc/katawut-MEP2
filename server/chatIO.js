@@ -139,6 +139,29 @@ module.exports = function chatIO(socket) {
                    {new: true}, refreshChatSocket_cb);
   })
 
+
+  function logOut_cb(err, doc) {
+
+    if (err) throw err;
+
+    console.log(doc);
+    
+    db.collection('suChatSocket')
+    .find({'userRole': 'su',
+           'status': 'live'}).toArray(liveSu_cb);
+  }
+
+  socket.on('logOut', function(data) {
+
+    console.log('log out: '+ data);
+    db.collection('suChatSocket')
+    .findAndModify({'userID': data},
+                   [],
+                   {$set:{'userRole': 'default',
+                          'logOutAt': Date.now()}},
+                   {new: true}, logOut_cb);
+  })
+
   /** **/
 
   socket.on('chat', function(data) {
