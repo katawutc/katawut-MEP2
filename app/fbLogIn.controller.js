@@ -2,12 +2,12 @@ angular.module('app')
 .controller('fbLogInCtrl',
            ['$http', '$routeParams', '$window', '$rootScope',
             '$location',
-            'socketService',
+            'socketService', 'chatIOService',
              fbLogInCtrl]);
 
 function fbLogInCtrl ($http, $routeParams, $window, $rootScope,
                       $location,
-                      socketService) {
+                      socketService, chatIOService) {
 
     var fbID = {fbID: $routeParams.fbID};
 
@@ -44,6 +44,8 @@ function fbLogInCtrl ($http, $routeParams, $window, $rootScope,
                     'socketID': $rootScope.defaultSocketID}
 
         $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
+
+        $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 
         socketService.emit('suConnect', data);
 

@@ -11,9 +11,11 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams, $rootS
                           socketService,
                           suSecondNavBarMessageService) {
 
+    /*
     if ($rootScope.defaultSocketID !== $window.sessionStorage.defaultSocketID) {
       console.log('refresh page ?');
     }
+    */
 
     /** set suSecondNavBarMessage */
     var message = 'สวัสดี '+ $window.sessionStorage.userName +

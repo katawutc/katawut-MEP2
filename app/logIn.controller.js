@@ -2,11 +2,11 @@
 angular.module('app')
 .controller('logInCtrl',
            ['$scope', '$http', '$location', '$window', '$rootScope',
-            'socketService',
+            'socketService', 'chatIOService',
              logInCtrl]);
 
 function logInCtrl ($scope, $http, $location, $window, $rootScope,
-                    socketService) {
+                    socketService, chatIOService) {
 
   /** to focus on Email input */
   $scope.inputEmailFocus = true;
@@ -43,6 +43,8 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
 
           $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
 
+          $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
+
           socketService.emit('suConnect', data);
         }
         else if (response.data.userRole === 'ad') {
@@ -52,7 +54,9 @@ function logInCtrl ($scope, $http, $location, $window, $rootScope,
                       'userID': $window.sessionStorage.userID,
                       'socketID': $rootScope.defaultSocketID}
 
-          $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;                      
+          $window.sessionStorage.defaultSocketID = $rootScope.defaultSocketID;
+
+          $window.sessionStorage.chatSocketID = $rootScope.chatSocketID;
 
           socketService.emit('adConnect', data);
         }
