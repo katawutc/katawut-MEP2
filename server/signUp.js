@@ -7,29 +7,30 @@ module.exports = function signUp(req, res) {
 
   var nodemailer = require('nodemailer');
   var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'modernedu17@gmail.com',
-      pass: 'Kwfahahcf75!#$'
+    'service': 'gmail',
+    'auth': {
+      'user': 'modernedu17@gmail.com',
+      'pass': 'Kwfahahcf75!#$'
     }
   });
 
   // create hashActivate to insert to DB
   var hashActivate = md5(  Math.floor(Math.random() * (1000)) );
 
-  db.collection('user').insert({userName: null,
-                               userEmail: req.body.email,
-                               userHashedPassword: null,
-                               userRole: 'su', /* subscribed user by default */
-                               hashActivate: hashActivate,
-                               activate: false},
-                               cb);
+  db.collection('user')
+  .insert({'userName': null,
+           'userEmail': req.body.email,
+           'userHashedPassword': null,
+           'userRole': 'su', /* subscribed user by default */
+           'hashActivate': hashActivate,
+           'activate': false}, cb);
+
   function cb(err, result) {
     if (err) {
       if (err.name === 'MongoError' && err.code === 11000) {
       // duplicate userEMail
-      res.json({ success: false,
-                 message: 'user Email already exist!' });
+      res.json({'success': false,
+                'message': 'user Email already exist!' });
     }
       else {
         return res.status(500).send(err);
@@ -38,7 +39,8 @@ module.exports = function signUp(req, res) {
     else {
       var userID = result.insertedIds[0];
       var userIDString = result.insertedIds[0].toString();
-      db.collection('user').update({_id:userID}, {$set:{userID: userIDString}});
+      db.collection('user')
+      .update({'_id':userID}, {$set:{'userID': userIDString}});
 
         // activate url to have userID and hashActivate
 

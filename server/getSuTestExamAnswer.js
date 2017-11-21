@@ -4,11 +4,12 @@ module.exports = function getSuTestExamAnswer(req, res) {
   var db = mongo.getDB();
 
   //suTestHistory
-  db.collection('suTestAnswerSheet').findOne({userID: req.params.userID,
-                                            suTestID: req.params.suTestID,
-                                            suTestMode:'exam',
-                                            suTestStartAt: req.params.suTestStartAt,
-                                            suTestQuestionNumber: req.params.suTestQuestionNumber}, cb);
+  db.collection('suTestAnswerSheet')
+  .findOne({'userID': req.params.userID,
+            'suTestID': req.params.suTestID,
+            'suTestMode': 'exam',
+            'suTestStartAt': req.params.suTestStartAt,
+            'suTestQuestionNumber': req.params.suTestQuestionNumber}, cb);
 
   function cb(err, doc) {
     if (err) throw err;

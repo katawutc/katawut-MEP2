@@ -3,17 +3,6 @@ module.exports = function postTestComment(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log('at server: postSuTestComment');
-
-/*
-var comment = {
-                'testID': reviewUnSubscribeTest.solutionID,
-                'questionNumber': reviewUnSubscribeTest.solQuestionNumber,
-                'commentTime': Date.now(),
-                'comment': $scope.testComment
-              }
-  */
-
   function postComment_cb(err, doc) {
 
     if (err) throw err;

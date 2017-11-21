@@ -301,19 +301,20 @@ module.exports = function socketIO(socket) {
      // to save new note into the DB here
      if (data.title || data.note) {
 
-       db.collection('suNote').update({'userID': data.userID,
-                                       'noteTimeStart': data.noteTimeStart},
-                                      {$set:{'userID': data.userID,
-                                             'noteTimeStart': data.noteTimeStart,
-                                             'noteTime': data.noteTime,
-                                             'title': data.title,
-                                             'note': data.note}},
-                                      { upsert: true}, function(err, record) {
-                                        if (err) throw err;
-                                        //console.log(record);
-                                      })
-                                    }
-                                  })
+       db.collection('suNote')
+       .update({'userID': data.userID,
+               'noteTimeStart': data.noteTimeStart},
+              {$set:{'userID': data.userID,
+                     'noteTimeStart': data.noteTimeStart,
+                     'noteTime': data.noteTime,
+                     'title': data.title,
+                     'note': data.note}},
+              { upsert: true}, function(err, record) {
+                if (err) throw err;
+                //console.log(record);
+              })
+      }
+    })
 
    socket.on('editSuNote', function(data) {
 
@@ -323,18 +324,19 @@ module.exports = function socketIO(socket) {
 
         console.log(data);
 
-        db.collection('suNote').update({'userID': data.userID,
-                                        'noteTimeStart': data.noteTimeStart},
-                                      //  'noteTime': data.previousNoteTime},
-                                        {$set:{'noteTime': data.noteTime,
-                                               'title': data.title,
-                                               'note': data.note}},
-                                              { upsert: true}, function(err, record) {
-                                                if (err) throw err;
-                                                //console.log(record);
-                                              })
-                                            }
-                                          })
+        db.collection('suNote')
+        .update({'userID': data.userID,
+                  'noteTimeStart': data.noteTimeStart},
+                //  'noteTime': data.previousNoteTime},
+                  {$set:{'noteTime': data.noteTime,
+                         'title': data.title,
+                         'note': data.note}},
+                        { upsert: true}, function(err, record) {
+                          if (err) throw err;
+                          //console.log(record);
+                        })
+                      }
+                    })
 
     socket.on('createSuNote', function(data) {
 
@@ -345,19 +347,18 @@ module.exports = function socketIO(socket) {
       // to save new note into the DB here
       if (data.title || data.note) {
 
-        db.collection('suNote').update({'userID': data.userID,
-                                        'noteTimeStart': data.noteTimeStart},
-                                       {$set:{'userID': data.userID,
-                                              'noteTimeStart': data.noteTimeStart,
-                                              'noteTime': data.noteTime,
-                                              'title': data.title,
-                                              'note': data.note}},
-                                       { upsert: true}, function(err, record) {
-                                         if (err) throw err;
-                                         //console.log(record);
-                                       })
-                                     }
-                                   })
-
-
-}
+        db.collection('suNote')
+        .update({'userID': data.userID,
+                'noteTimeStart': data.noteTimeStart},
+               {$set:{'userID': data.userID,
+                      'noteTimeStart': data.noteTimeStart,
+                      'noteTime': data.noteTime,
+                      'title': data.title,
+                      'note': data.note}},
+               { upsert: true}, function(err, record) {
+                 if (err) throw err;
+                 //console.log(record);
+               })
+             }
+           })
+         }

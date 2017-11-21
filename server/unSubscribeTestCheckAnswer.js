@@ -16,9 +16,10 @@ module.exports = function unSubscribeTestCheckAnswer(req, res) {
 
   if (req.body.testMode === 'tutorial') {
    // Retrieve Solution from the DB
-    db.collection('unSubscribeSolutionContent').findOne({solutionID: solutionID,
-                                             solQuestionNumber: questionNumber},
-                                             cb); /*function (err, doc) {*/
+    db.collection('unSubscribeSolutionContent')
+    .findOne({'solutionID': solutionID,
+              'solQuestionNumber': questionNumber}, cb); /*function (err, doc) {*/
+
      function cb(err, doc) {
        if (err) throw err;
 
@@ -30,36 +31,36 @@ module.exports = function unSubscribeTestCheckAnswer(req, res) {
          if (userAnswer === solution) {
 
            db.collection('unSubscribeUserTestResult')
-             .insert({userName: req.body.userName,
-                     userID: req.body.userID,
-                     testID: req.body.testID,
-                     testMode: req.body.testMode,
-                     testStartAt: req.body.testStartAt,
-                     questionStartAt: req.body.currentQuestionStartAt,
-                     questionFinishAt: req.body.currentQuestionFinishAt,
-                     questionNumber: req.body.questionNumber,
-                     userAnswer:req.body.answer,
-                     result: 'correct'});
+             .insert({'userName': req.body.userName,
+                      'userID': req.body.userID,
+                      'testID': req.body.testID,
+                      'testMode': req.body.testMode,
+                      'testStartAt': req.body.testStartAt,
+                      'questionStartAt': req.body.currentQuestionStartAt,
+                      'questionFinishAt': req.body.currentQuestionFinishAt,
+                      'questionNumber': req.body.questionNumber,
+                      'userAnswer':req.body.answer,
+                      'result': 'correct'});
 
-                     res.json({result: 'Correct',
-                     explanation: doc.explanation});
+                     res.json({'result': 'Correct',
+                               'explanation': doc.explanation});
                    }
                    else {
 
                      db.collection('unSubscribeUserTestResult')
-                     .insert({userName: req.body.userName,
-                       userID: req.body.userID,
-                       testID: req.body.testID,
-                       testMode: req.body.testMode,
-                       testStartAt: req.body.testStartAt,
-                       questionStartAt: req.body.currentQuestionStartAt,
-                       questionFinishAt: req.body.currentQuestionFinishAt,
-                       questionNumber: req.body.questionNumber,
-                       userAnswer:req.body.answer,
-                       result: 'wrong'});
+                     .insert({'userName': req.body.userName,
+                              'userID': req.body.userID,
+                              'testID': req.body.testID,
+                              'testMode': req.body.testMode,
+                              'testStartAt': req.body.testStartAt,
+                              'questionStartAt': req.body.currentQuestionStartAt,
+                              'questionFinishAt': req.body.currentQuestionFinishAt,
+                              'questionNumber': req.body.questionNumber,
+                              'userAnswer':req.body.answer,
+                              'result': 'wrong'});
 
-                       res.json({result: 'Wrong',
-                       explanation: doc.explanation});
+                       res.json({'result': 'Wrong',
+                                 'explanation': doc.explanation});
                      }
                    }
                    else {res.json('solution not found')};

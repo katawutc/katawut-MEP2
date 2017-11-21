@@ -16,7 +16,8 @@ module.exports = function suAccountData(req, res) {
   /** to implement what DB collection to access to get information for the dashboard */
   // access dashboard related DB for dashboard information
   // use session storage for name
-    db.collection('user').findOne(query, function(err, doc) {
+    db.collection('user')
+    .findOne(query, function(err, doc) {
       if (err) {
         res.json(err);
       }

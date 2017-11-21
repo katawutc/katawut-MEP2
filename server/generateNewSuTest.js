@@ -34,27 +34,27 @@ module.exports = function generateNewSuTest(req, res) {
       }
 
       db.collection('suTestQuestionExclude')
-      .update({userID: req.params.userID,
-               testID: req.params.testID},
+      .update({'userID': req.params.userID,
+               'testID': req.params.testID},
                {
                  $push: { questionExclude: { $each: questionTaken}}
                }, insertSuTest_cb);
 
      function insertSuTest_cb(err, count, doc) {
        db.collection('newSuTest')
-       .insert({userID:req.params.userID,
-                 suTestID: suTestID,
-                 suTestSize: 3,
-                 suTest: suTest}, suTestInsertion_cb);
+       .insert({'userID':req.params.userID,
+                'suTestID': suTestID,
+                'suTestSize': 3,
+                'suTest': suTest}, suTestInsertion_cb);
      }
    }
 
   function generateNewSuTest(questionExclude) {
     // aggregate->project->match testID->sample
     db.collection('suTestContent')
-    .aggregate([{$project: {testID: 1, questionNumber: 1}},
-                {$match:{testID:req.params.testID,
-                         questionNumber: {$nin: questionExclude}}},
+    .aggregate([{$project: {'testID': 1, 'questionNumber': 1}},
+                {$match:{'testID':req.params.testID,
+                         'questionNumber': {$nin: questionExclude}}},
                          {$sample:{size:3}}]).toArray(manageNewSuTest_cb);
   }
 
@@ -74,24 +74,24 @@ module.exports = function generateNewSuTest(req, res) {
       }
       else if (excludeQuestionList === null) {
         db.collection('suTestQuestionExclude')
-        .insert({userID: req.params.userID,
-                   testID: req.params.testID,
-                   questionExclude: []}, generateNewSuTest_cb);
+        .insert({'userID': req.params.userID,
+                 'testID': req.params.testID,
+                 'questionExclude': []}, generateNewSuTest_cb);
 
       }
     }
 
   function checkSuTestQuestionExclude() {
     db.collection('suTestQuestionExclude')
-    .findOne({userID: req.params.userID,
-               testID: req.params.testID}, manageSuTestQuestionExclude_cb);
+    .findOne({'userID': req.params.userID,
+              'testID': req.params.testID}, manageSuTestQuestionExclude_cb);
   }
 
   function checkSuTestExisting_cb(err, doc) {
     if (err) throw err;
     if (doc !== null) {
-      res.json({suTestID: req.params.testID+'-'+req.params.testRunningNumber,
-                suTestSize: 3});
+      res.json({'suTestID': req.params.testID+'-'+req.params.testRunningNumber,
+                'suTestSize': 3});
     }
     else if (doc === null) {
 
@@ -107,7 +107,7 @@ module.exports = function generateNewSuTest(req, res) {
    /** main entry of this module */
    /** 1. to check if suTestID is already generated ? */
    db.collection('newSuTest')
-   .findOne({userID: req.params.userID,
-              suTestID: suTestID}, checkSuTestExisting_cb);
+   .findOne({'userID': req.params.userID,
+             'suTestID': suTestID}, checkSuTestExisting_cb);
 
  }

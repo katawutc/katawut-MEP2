@@ -3,10 +3,8 @@ module.exports = function getSuTestHistory(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log('at server: getSuTestHistory');
-
   db.collection('suTestHistory')
-  .find({userID: req.params.userID})
+  .find({'userID': req.params.userID})
   .sort({$natural: -1})
   .toArray(function(err, doc) {
 

@@ -11,13 +11,14 @@ opts.secretOrKey = 'secret';
 
 var strategy = new JwtStrategy(opts, function(jwt_payload, next) {
 
-   var query = {userID: jwt_payload.userID,
-                userRole: jwt_payload.userRole};
+   var query = {'userID': jwt_payload.userID,
+                'userRole': jwt_payload.userRole};
 
     var mongo = require('./mongoDBConnect');
     var db = mongo.getDB();
 
-   db.collection('user').findOne(query, function(err, result) {
+   db.collection('user')
+   .findOne(query, function(err, result) {
      if (result) {
        next(null, result);
      } else {
@@ -44,49 +45,54 @@ module.exports = function fbLogIn(req, res) {
       // to check if not 1st time log in
       if (doc.userID) {
 
-        var payload = { userID: doc.userID,
-                        userRole: doc.userRole};
+        var payload = { 'userID': doc.userID,
+                        'userRole': doc.userRole};
         var token = jwt.sign(payload, opts.secretOrKey, {expiresIn: 60*60*3});
 
-        db.collection('loginHistory').insert({userID: doc.userID,
-                                                loginMethod: 'fb',
-                                                loginTime: Date().toString()}, cb);
+        db.collection('loginHistory')
+        .insert({'userID': doc.userID,
+                 'loginMethod': 'fb',
+                 'loginTime': Date().toString()}, cb);
 
         function cb(err, result) {
           if (err) throw err;
           else {
-            res.json({userName: doc.userName,
-                      userID: doc.userID,
-                      userRole: doc.userRole,
-                      token: token,
-                      activate: doc.activate, // to check 1st time setting
-                      message: 'login success'});
+            res.json({'userName': doc.userName,
+                      'userID': doc.userID,
+                      'userRole': doc.userRole,
+                      'token': token,
+                      'activate': doc.activate, // to check 1st time setting
+                      'message': 'login success'});
           }
         }
       }
       else {
       // need to refactor more when understand async
       // set the userID for 1st time fb log in
-      db.collection('user').update(query,
-                                  {$set: {userID: doc._id.toString() }}, cb);
+      db.collection('user')
+      .update(query,
+              {$set: {'userID': doc._id.toString() }}, cb);
 
         function cb(err, count, obj) {
 
-        var payload = { userID: doc._id.toString(),
-                        userRole: doc.userRole};
+        var payload = { 'userID': doc._id.toString(),
+                        'userRole': doc.userRole};
+
         var token = jwt.sign(payload, opts.secretOrKey);
 
-        db.collection('userSetting').insert({userID: doc._id.toString(),
-                                              userRole: doc.userRole}, fbCB);
+        db.collection('userSetting')
+        .insert({'userID': doc._id.toString(),
+                 'userRole': doc.userRole}, fbCB);
+
         function fbCB (err, setting) {
           if (err) throw err;
 
-          res.json({userName: doc.userName,
-                    userID: doc._id.toString(),
-                    userRole: doc.userRole,
-                    token: token,
-                    activate: doc.activate, // to check 1st time setting
-                    message: 'login success'});
+          res.json({'userName': doc.userName,
+                    'userID': doc._id.toString(),
+                    'userRole': doc.userRole,
+                    'token': token,
+                    'activate': doc.activate, // to check 1st time setting
+                    'message': 'login success'});
                 }
         }
       }

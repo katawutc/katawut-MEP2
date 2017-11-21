@@ -10,8 +10,9 @@ module.exports = function getAccountAdmin(req, res) {
   if (req.mepAdminAccess){
 
     // get user name
-    db.collection('user').findOne({userID: req.params.userID,
-                                    userRole: req.params.userRole}, getAccount);
+    db.collection('user')
+    .findOne({'userID': req.params.userID,
+              'userRole': req.params.userRole}, getAccount);
   }
 
   function getAccount(err, doc) {

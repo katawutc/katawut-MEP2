@@ -11,7 +11,7 @@ module.exports = function getSuTestQuestion(req, res) {
     // need to refactor for null and error case
 
     if (question) {
-      console.log(question);
+
       res.json(question);
     }
   }
@@ -23,15 +23,8 @@ module.exports = function getSuTestQuestion(req, res) {
   }
 
   function getTestQuestionNumber_cb(err, test) {
+
     if (test && test.suTest) {
-
-      console.log('at server: getTestQuestionNumber_cb');
-
-      console.log(test);
-
-      console.log(test.suTest[questionArrayIndex].testID);
-
-      console.log(test.suTest[questionArrayIndex]);
 
       getTestQuestion(test.suTest[questionArrayIndex].testID, test.suTest[questionArrayIndex]);
     }
@@ -39,8 +32,7 @@ module.exports = function getSuTestQuestion(req, res) {
 
   /** main entry of the module */
   db.collection('newSuTest')
-  .findOne({userID: req.params.userID,
-            suTestID: req.params.suTestID}, getTestQuestionNumber_cb);
+  .findOne({'userID': req.params.userID,
+            'suTestID': req.params.suTestID}, getTestQuestionNumber_cb);
 
-    console.log('at server: getSuTestQuestion');
   }

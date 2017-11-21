@@ -21,8 +21,8 @@ module.exports = function generateNewSuTestID(req, res) {
      function(err, doc) {
        if (err) throw err;
        if (doc) {
-         res.json({newTest1: doc.newTest[0],
-                   newTest2: doc.newTest[1]});
+         res.json({'newTest1': doc.newTest[0],
+                   'newTest2': doc.newTest[1]});
        }
      })
    }
@@ -32,8 +32,8 @@ module.exports = function generateNewSuTestID(req, res) {
 
      db.collection('newSuTestIDService')
      .findOne({'userID': userID}, function(err, doc) {
-       res.json({newTest1: doc.newTest[0],
-                 newTest2: doc.newTest[1]});
+       res.json({'newTest1': doc.newTest[0],
+                 'newTest2': doc.newTest[1]});
      })
    }
 
@@ -42,8 +42,8 @@ module.exports = function generateNewSuTestID(req, res) {
 
      db.collection('newSuTestIDService')
      .findOne({'userID': userID}, function(err, doc) {
-       res.json({newTest1: doc.newTest[0],
-                 newTest2: doc.newTest[1]});
+       res.json({'newTest1': doc.newTest[0],
+                 'newTest2': doc.newTest[1]});
      })
    }
 
@@ -69,8 +69,8 @@ module.exports = function generateNewSuTestID(req, res) {
          function(err, count, doc){
            if (err) throw err;
 
-           res.json({newTest1: newSuTest[0],
-                     newTest2: newSuTest[1]});
+           res.json({'newTest1': newSuTest[0],
+                     'newTest2': newSuTest[1]});
            })
     }
 
@@ -134,7 +134,7 @@ module.exports = function generateNewSuTestID(req, res) {
 
             db.collection('suTestIDHistory')
             .findOne({'userID': userID,
-                     'testID': suTestIDDoc.testID},
+                      'testID': suTestIDDoc.testID},
             function(err, doc){
 
               if (err) throw err;
@@ -164,8 +164,8 @@ module.exports = function generateNewSuTestID(req, res) {
      /** there will be 2 new tests presented at one time */
      if (existingTestIDDoc.testID === newTestID && existingTestIDDoc.newTest.length === 2) {
 
-         res.json({newTest1: existingTestIDDoc.newTest[0],
-                   newTest2: existingTestIDDoc.newTest[1]});
+         res.json({'newTest1': existingTestIDDoc.newTest[0],
+                   'newTest2': existingTestIDDoc.newTest[1]});
      }
 
      if (existingTestIDDoc.testID === newTestID && existingTestIDDoc.newTest.length === 1) {
@@ -235,8 +235,8 @@ module.exports = function generateNewSuTestID(req, res) {
               if (err) throw err;
               if (doc) {
 
-                var suNewTest = {newTest1: newSuTest.newTest[0],
-                                  newTest2: newSuTest.newTest[1]};
+                var suNewTest = {'newTest1': newSuTest.newTest[0],
+                                 'newTest2': newSuTest.newTest[1]};
                 res.json(suNewTest);
               }
             })
@@ -279,7 +279,7 @@ module.exports = function generateNewSuTestID(req, res) {
 
           // find the userID in the newSuTestIDService DB
           db.collection('newSuTestIDService')
-          .findOne({userID: req.params.userID}, generateNewSuTestID);
+          .findOne({'userID': req.params.userID}, generateNewSuTestID);
    }
  }
 
@@ -291,7 +291,7 @@ module.exports = function generateNewSuTestID(req, res) {
    if (req.mepSuAccess === true) {
      // 1. check setting
      db.collection('userSetting')
-     .findOne({userID: req.params.userID,
-               userRole: 'su'}, generateTestIDWithSetting);
+     .findOne({'userID': req.params.userID,
+               'userRole': 'su'}, generateTestIDWithSetting);
     }
   }

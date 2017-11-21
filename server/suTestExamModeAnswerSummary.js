@@ -4,18 +4,17 @@ module.exports = function suTestExamModeAnswerSummary(req, res) {
   var db = mongo.getDB();
 
   //suTestHistory
-  db.collection('suTestAnswerSheet').find({userID: req.params.userID,
-                                            suTestID: req.params.suTestID,
-                                            suTestMode: 'exam',
-                                            suTestStartAt: req.params.suTestStartAt})
-                                            .sort({"suTestQuestionNumber":1}).toArray(cb);
-
-                                            // need to filter out only relevant fields
+  db.collection('suTestAnswerSheet')
+  .find({'userID': req.params.userID,
+         'suTestID': req.params.suTestID,
+         'suTestMode': 'exam',
+         'suTestStartAt': req.params.suTestStartAt})
+         .sort({"suTestQuestionNumber":1}).toArray(cb);
 
     function cb(err, doc) {
       if (err) throw err;
       else {
-        console.log(doc);
+
         res.json(doc);
       }
     }

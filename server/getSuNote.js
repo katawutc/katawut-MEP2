@@ -4,25 +4,14 @@ module.exports = function getSuNote(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  console.log('at server: getSuNote');
-
-  console.log(req.params.userID);
-  console.log(req.params.title);
-  console.log(req.params.noteTimeStart);
-  console.log(req.params.noteTime);
-
   var noteTimeStart = parseInt(req.params.noteTimeStart);
   var noteTime = parseInt(req.params.noteTime);
-
-  console.log(noteTime);
-
 
   function note_cb(err, note) {
 
     if (err) throw err;
 
     if (note) {
-      console.log(note);
 
       res.json(note);
     }

@@ -13,8 +13,9 @@ module.exports = function getSettingAdmin(req, res) {
   if (req.mepAdminAccess){
 
     // get user name
-    db.collection('userSetting').findOne({userID: req.params.userID,
-                                    userRole: req.params.userRole}, getSetting);
+    db.collection('userSetting')
+    .findOne({'userID': req.params.userID,
+              'userRole': req.params.userRole}, getSetting);
   }
 
   function getSetting(err, doc) {

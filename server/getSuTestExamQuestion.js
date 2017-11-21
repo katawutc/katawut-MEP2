@@ -23,37 +23,15 @@ module.exports = function getSuTestExamQuestion(req, res) {
               'questionNumber': suQuestion.questionNumber}, getTestQuestion_cb);
   }
 
-
   function getTestQuestionNumber_cb(err, test) {
     if (test && test.suTest) {
-
-      console.log('at server: getTestQuestionNumber_cb');
-
-      console.log(test);
-
-      console.log(test.suTest[questionArrayIndex].testID);
-
-      console.log(test.suTest[questionArrayIndex]);
 
       getTestQuestion(test.suTest[questionArrayIndex].testID, test.suTest[questionArrayIndex]);
     }
   }
 
-
   db.collection('newSuTest')
-  .findOne({userID: req.params.userID,
-            suTestID: req.params.suTestID}, getTestQuestionNumber_cb);
+  .findOne({'userID': req.params.userID,
+            'suTestID': req.params.suTestID}, getTestQuestionNumber_cb);
 
 }
-
-
-/*
-  db.collection('newSuTest').findOne({userID: req.params.userID,
-                                      suTestID: req.params.suTestID}, function(err, doc) {
-    if (err) throw err;
-    if (doc && doc.suTest) {
-      res.json(doc.suTest[questionArrayIndex]);
-    }
-  })
-}
-*/

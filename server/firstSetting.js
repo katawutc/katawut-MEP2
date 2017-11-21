@@ -8,7 +8,7 @@ module.exports = function firstSetting(req, res) {
     if (err) throw err;
 
     if (doc) {
-      console.log(doc);
+
       res.json('first setting is done at server');
     }
   }
@@ -17,13 +17,12 @@ module.exports = function firstSetting(req, res) {
     if (err) throw err;
 
     if (doc) {
-      console.log(doc);
 
       db.collection('user')
       .findAndModify({'userID': req.params.userID,
                       'userRole': req.params.userRole},
                       [],
-                     {$set: {activate: true}},
+                     {$set: {'activate': true}},
                      {new: true},
                      {upsert: true}, activateAccount_cb);
     }
@@ -31,12 +30,12 @@ module.exports = function firstSetting(req, res) {
 
   /** main entry point for firstSetting */
   db.collection('userSetting')
-  .findAndModify({userID: req.params.userID,
-                  userRole: req.params.userRole},
+  .findAndModify({'userID': req.params.userID,
+                  'userRole': req.params.userRole},
                   [],
-                 {$set: {userLevel: req.body.userLevel,
-                         userPreferTest: req.body.userPreferTest,
-                         userPreferSubject: req.body.userPreferSubject}},
+                 {$set: {'userLevel': req.body.userLevel,
+                         'userPreferTest': req.body.userPreferTest,
+                         'userPreferSubject': req.body.userPreferSubject}},
                  {new: true},
                  {upsert: true}, firstSetting_cb);
 

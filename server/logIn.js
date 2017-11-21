@@ -29,21 +29,22 @@ module.exports = function logIn(req, res) {
       bcrypt.compare(req.body.password, hashedPassword, function(err, pass) {
 
         if (pass) {
-          var payload = { userID: doc.userID,
-                          userRole: doc.userRole};
+          var payload = {'userID': doc.userID,
+                         'userRole': doc.userRole};
           var token = jwt.sign(payload, opts.secretOrKey, {expiresIn: 60*60*3});
 
-          db.collection('loginHistory').insert({userID: doc.userID,
-                                                  loginMethod: 'email',
-                                                  loginTime: Date().toString()}, cb);
+          db.collection('loginHistory')
+          .insert({'userID': doc.userID,
+                   'loginMethod': 'email',
+                   'loginTime': Date().toString()}, cb);
 
           function cb(err, result) {
-            res.json({userName: doc.userName,
-                      userID: doc.userID,
-                      userRole: doc.userRole,
-                      token: token,
-                      activate: doc.activate,
-                      message: 'login success'});
+            res.json({'userName': doc.userName,
+                      'userID': doc.userID,
+                      'userRole': doc.userRole,
+                      'token': token,
+                      'activate': doc.activate,
+                      'message': 'login success'});
                     }
         }
         // use FB to log in before

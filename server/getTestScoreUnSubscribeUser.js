@@ -12,10 +12,9 @@ module.exports = function getTestScoreUnSubscribeUser(req, res) {
   }
 
    db.collection('unSubscribeUserTestResult')
-   .find({userID: req.params.userID,
-          testID: req.params.testID,
-          testMode: req.params.testMode,
-          testStartAt: req.params.testStartAt,
-          result: 'correct'}).count(testScore_cb);
-
+   .find({'userID': req.params.userID,
+          'testID': req.params.testID,
+          'testMode': req.params.testMode,
+          'testStartAt': req.params.testStartAt,
+          'result': 'correct'}).count(testScore_cb);
  }

@@ -6,17 +6,16 @@ module.exports = function userList(req, res) {
 
   // to put the authority checking here
 
-  console.log('at server: userList');
-
   if (req.user.userRole !== 'ad' ||
         req.user.userID !== req.params.userID) {
 
-          res.json({errorMessage: 'no authority'});
+          res.json({'errorMessage': 'no authority'});
         }
   else if (req.user.userRole === 'ad' &&
         req.user.userID === req.params.userID) {
 
-          db.collection('user').find({}, {userID:1, userName:1, userRole:1, _id:0}).toArray(function(err, doc) {
+          db.collection('user')
+          .find({}, {'userID':1, 'userName':1, 'userRole':1, '_id':0}).toArray(function(err, doc) {
             if (err) throw err;
             // to send a list of userID, userName, userRole
             else {
@@ -26,6 +25,6 @@ module.exports = function userList(req, res) {
           })
   }
   else {
-    res.json({errorMessage: 'no authority'});
+    res.json({'errorMessage': 'no authority'});
   }
 }

@@ -18,12 +18,13 @@ module.exports = function activateAccount(req, res) {
   var salt = bcrypt.genSaltSync(saltRounds);
   var hash = bcrypt.hashSync(plainPassword, salt);
 
-  db.collection('user').update({userID: req.params.userID,
-                                hashActivate: req.params.hashActivate},
-                                {$set: { userName: req.body.userName,
-                                          userHashedPassword: hash,
-                                          activate: true,
-                                          hashActivate: null}}, cb);
+  db.collection('user')
+  .update({'userID': req.params.userID,
+           'hashActivate': req.params.hashActivate},
+          {$set: {'userName': req.body.userName,
+                  'userHashedPassword': hash,
+                  'activate': true,
+                  'hashActivate': null}}, cb);
 
   function cb(err, count, status) {
     if (err) throw err;
@@ -40,8 +41,9 @@ module.exports = function activateAccount(req, res) {
     var mongo = require('./mongoDBConnect');
     var db = mongo.getDB();
 
-    db.collection('userSetting').insert({userID: uID,
-                                          userRole: 'su'}, cb);
+    db.collection('userSetting')
+    .insert({'userID': uID,
+             'userRole': 'su'}, cb);
 
     function cb() {
       res.json('account is activated and 1st setting is up');

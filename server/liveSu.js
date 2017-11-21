@@ -10,8 +10,6 @@ module.exports = function liveSu(req, res) {
 
     if (doc) {
 
-      console.log(doc);
-
       res.json(doc);
     }
 

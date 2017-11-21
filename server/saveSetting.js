@@ -5,28 +5,22 @@ module.exports = function saveSetting(req, res) {
   var mongo = require('./mongoDBConnect');
   var db = mongo.getDB();
 
-  /**
-    * 1. find and update usersetting
-    * 2. update user activate status
-    */
-
     function updateSetting_cb(err, doc) {
       if (err) throw err;
 
       if (doc) {
-        console.log(doc);
+
         res.json('setting is updated at server');
       }
     }
 
   db.collection('userSetting')
-  .findAndModify({userID: req.params.userID,
-                  userRole: req.params.userRole},
+  .findAndModify({'userID': req.params.userID,
+                  'userRole': req.params.userRole},
                   [],
-                 {$set: {userLevel: req.body.userLevel,
-                         userPreferTest: req.body.userPreferTest,
-                         userPreferSubject: req.body.userPreferSubject}},
+                 {$set: {'userLevel': req.body.userLevel,
+                         'userPreferTest': req.body.userPreferTest,
+                         'userPreferSubject': req.body.userPreferSubject}},
                  {new: true},
                  {upsert: true}, updateSetting_cb);
-
 }

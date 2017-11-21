@@ -7,8 +7,9 @@ module.exports = function preferenceSetting(req, res) {
 
   if (req.mepSuAccess) {
 
-    db.collection('userSetting').findOne({userID: req.params.userID,
-                                          userRole: 'su'}, cb);
+    db.collection('userSetting')
+    .findOne({'userID': req.params.userID,
+              'userRole': 'su'}, cb);
 
     function cb(err, doc) {
       if (err) throw err;
@@ -16,6 +17,6 @@ module.exports = function preferenceSetting(req, res) {
       }
     }
     else {
-      res.json({errorMessage: 'no authority'});
+      res.json({'errorMessage': 'no authority'});
     }
 }

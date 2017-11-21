@@ -18,23 +18,27 @@ passport.use(new FacebookStrategy({
       var db = mongo.getDB();
 
       /** need to check if (profile) here */
-      db.collection('user').findOne({fbID: profile.id}, function(err, doc) {
+      db.collection('user')
+      .findOne({'fbID': profile.id}, function(err, doc) {
         if (err) throw err;
         if (doc) {
           cb(err, doc);
         }
         else {
           // no fbID in the DB before; now insert it
-          db.collection('user').insert({fbID: profile.id,
-                                          userName: profile.displayName,
-                                          userEmail: profile.emails[0].value,
-                                          userRole: 'su',
-                                          activate: false}, insertCallback);
+          db.collection('user')
+          .insert({'fbID': profile.id,
+                   'userName': profile.displayName,
+                   'userEmail': profile.emails[0].value,
+                   'userRole': 'su',
+                   'activate': false}, insertCallback);
 
           function insertCallback(err, doc) {
             if (err) throw err;
 
-            db.collection('user').findOne({fbID: profile.id}, function(err, doc2) {
+            db.collection('user')
+            .findOne({'fbID': profile.id}, function(err, doc2) {
+              
             if (err) throw err;
             if (doc2) {
               cb(err, doc2);

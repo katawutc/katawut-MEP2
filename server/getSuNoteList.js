@@ -15,7 +15,7 @@ module.exports = function getSuNoteList(req, res) {
   }
 
   db.collection('suNote')
-  .find({userID: req.params.userID})
+  .find({'userID': req.params.userID})
   .sort({$natural: -1})
   .toArray(suNote_cb);
 
