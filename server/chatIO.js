@@ -55,6 +55,11 @@ module.exports = function chatIO(socket) {
 
       socket.join('adminRoom');
     }
+    // make su chat socket join the userID room
+    else if (data.userRole === 'su') {
+
+      socket.join(data.userID);
+    }
 
     // to record chat socket ID
      db.collection('suChatSocket')
@@ -145,7 +150,7 @@ module.exports = function chatIO(socket) {
     if (err) throw err;
 
     console.log(doc);
-    
+
     db.collection('suChatSocket')
     .find({'userRole': 'su',
            'status': 'live'}).toArray(liveSu_cb);
@@ -203,7 +208,11 @@ module.exports = function chatIO(socket) {
 
       console.log(data);
 
-      socket.broadcast.emit('fromSu', data);
+      // emit to everyone in chatIO
+      //socket.broadcast.emit('fromSu', data);
+
+      // emit to admin room
+      socket.to('adminRoom').emit('fromSu', data);
     }
     else if (data.userRole === 'ad' && data.suSocketID) {
 
