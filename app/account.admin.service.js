@@ -7,7 +7,7 @@ function accountAdminService($http, $route, $q, $window) {
      getAccountAdmin : function() {
 
        var userAccountUrl = '/admin/account/'+$route.current.params.userRole+
-                         '/'+$route.current.params.userID;
+                            '/'+$route.current.params.userID;
 
        var deferred = $q.defer();
 

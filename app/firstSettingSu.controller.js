@@ -19,9 +19,9 @@ function firstSettingSuCtrl ($scope, $http, $window,
 
   $scope.saveSetting = function(){
 
-    $scope.settingData = {userLevel: $scope.selectedLevel,
-                          userPreferTest: $scope.selectedTest,
-                          userPreferSubject: $scope.selectedSubject}
+    $scope.settingData = {'userLevel': $scope.selectedLevel,
+                          'userPreferTest': $scope.selectedTest,
+                          'userPreferSubject': $scope.selectedSubject}
 
     var firstSettingUrl = 'firstSetting/'+$window.sessionStorage.userRole+'/'+
                           $window.sessionStorage.userID

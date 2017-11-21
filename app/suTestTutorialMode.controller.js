@@ -6,7 +6,8 @@ angular.module('app')
              suTestTutorialModeCtrl]);
 
 function suTestTutorialModeCtrl($scope, $http, $route,
-                                $window, $location, suTestQuestion, registerSuTestHistory) {
+                                $window, $location,
+                                suTestQuestion, registerSuTestHistory) {
 
   if (registerSuTestHistory !== 'registered') {
     console.log('cannot registerSuTestHistory');
@@ -58,15 +59,15 @@ function suTestTutorialModeCtrl($scope, $http, $route,
   // handle submit answer
   $scope.submitAnswer = function() {
 
-      var answerJSON = {userID: $window.sessionStorage.userID,
-                        testID: $scope.testID, // main testID
-                        suTestNumber: $window.sessionStorage.suTestNumber,
-                        suTestID: $window.sessionStorage.suTestID,
-                        suTestMode: $window.sessionStorage.suTestMode,
-                        suTestStartAt : $window.sessionStorage.suTestStartAt,
-                        suTestQuestionNumber: $route.current.params.suTestQuestionNumber,
-                        questionNumber: $scope.questionNumber,
-                        answer: $scope.formData.answer};
+      var answerJSON = {'userID': $window.sessionStorage.userID,
+                        'testID': $scope.testID, // main testID
+                        'suTestNumber': $window.sessionStorage.suTestNumber,
+                        'suTestID': $window.sessionStorage.suTestID,
+                        'suTestMode': $window.sessionStorage.suTestMode,
+                        'suTestStartAt' : $window.sessionStorage.suTestStartAt,
+                        'suTestQuestionNumber': $route.current.params.suTestQuestionNumber,
+                        'questionNumber': $scope.questionNumber,
+                        'answer': $scope.formData.answer};
 
       var suTestCheckAnswerUrl = '/suTest/checkAnswer/'+$window.sessionStorage.userID;
 

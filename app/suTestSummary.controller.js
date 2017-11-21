@@ -6,7 +6,8 @@ angular.module('app')
              suTestSummaryCtrl]);
 
 function suTestSummaryCtrl($scope, $http, $routeParams,
-                           $window, $location, suTestSummary, suTestScore) {
+                           $window, $location,
+                           suTestSummary, suTestScore) {
 
   var retakeTestUrl;
 

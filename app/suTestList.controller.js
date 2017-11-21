@@ -29,11 +29,6 @@ function suTestListCtrl ($scope,
                               suDashboardTest.userPreferTest+'-'+
                               suDashboardTest.userPreferSubject+'-02';
     }
-    /*
-    else if (suDashboardTest.errorMessage) {
-      $window.sessionStorage.setItem('errorMessage', suDashboardTest.errorMessage);
-      $location.path('/errorPage');
-    }*/
     else {
       // other error case
     }

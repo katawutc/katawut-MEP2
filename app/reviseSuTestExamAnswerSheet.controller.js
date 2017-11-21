@@ -32,19 +32,19 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
 
   $scope.submitAnswerExamMode = function() {
 
-    var answerJSON = {userID: $window.sessionStorage.userID,
-                      suTestID: $window.sessionStorage.suTestID,
-                      suTestMode: $window.sessionStorage.suTestMode,
-                      suTestStartAt: $window.sessionStorage.suTestStartAt,
-                      suTestQuestionNumber: suTestCurrentQuestionNumber,
-                      suTestQuestionStatus: 'answered',
-                      suTestAnswer: $scope.formData.answer,
-                      testID: $scope.testID,
-                      questionNumber: $scope.questionNumber};
+    var answerJSON = {'userID': $window.sessionStorage.userID,
+                      'suTestID': $window.sessionStorage.suTestID,
+                      'suTestMode': $window.sessionStorage.suTestMode,
+                      'suTestStartAt': $window.sessionStorage.suTestStartAt,
+                      'suTestQuestionNumber': suTestCurrentQuestionNumber,
+                      'suTestQuestionStatus': 'answered',
+                      'suTestAnswer': $scope.formData.answer,
+                      'testID': $scope.testID,
+                      'questionNumber': $scope.questionNumber};
 
     var submitAnswerSuTestExamMode = '/submitAnswerSuTestExamMode/'+$window.sessionStorage.userID+'/'+
-                                        $window.sessionStorage.suTestID+'/'+
-                                        suTestCurrentQuestionNumber;
+                                       $window.sessionStorage.suTestID+'/'+
+                                       suTestCurrentQuestionNumber;
 
     $http({
     url: submitAnswerSuTestExamMode,
@@ -71,8 +71,8 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
       else {
 
         var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
-                                                $window.sessionStorage.suTestID+'/'+
-                                                $window.sessionStorage.suTestStartAt;
+                                               $window.sessionStorage.suTestID+'/'+
+                                               $window.sessionStorage.suTestStartAt;
 
         $location.path(suTestExamModeAnswerSummaryUrl);
 
@@ -92,8 +92,8 @@ function reviseSuTestExamAnswerSheetCtrl($scope, $http, $route,
     $scope.answerSheetSummary = function() {
 
       var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
-                                              $window.sessionStorage.suTestID+'/'+
-                                              $window.sessionStorage.suTestStartAt;
+                                             $window.sessionStorage.suTestID+'/'+
+                                             $window.sessionStorage.suTestStartAt;
 
       $location.path(suTestExamModeAnswerSummaryUrl);
     }

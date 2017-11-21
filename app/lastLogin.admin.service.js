@@ -7,7 +7,7 @@ function lastLoginAdminService($http, $route, $q, $window) {
      getLastLoginAdmin : function() {
 
        var userLastLoginUrl = '/admin/lastLogin/'+$route.current.params.userRole+
-                         '/'+$route.current.params.userID;
+                              '/'+$route.current.params.userID;
 
        var deferred = $q.defer();
 

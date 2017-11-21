@@ -9,7 +9,8 @@ function suTestExamModeAnswerSummaryService($http, $q, $window) {
 
      getAnswerSummary : function() {
 
-       var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+$window.sessionStorage.userID+'/'+
+       var suTestExamModeAnswerSummaryUrl = '/suTestExamModeAnswerSummary/'+
+                                              $window.sessionStorage.userID+'/'+
                                               $window.sessionStorage.suTestID+'/'+
                                               $window.sessionStorage.suTestStartAt;
 

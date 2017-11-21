@@ -32,20 +32,10 @@ function chatAdminService($http, $route, $q, $window, $rootScope) {
 
        selectUserToChat : function(id) {
 
-         console.log('at adminSelectChatService: selectUserToChat');
-
          $rootScope.selectedUserID = id;
-
-         console.log(typeof $rootScope.selectedUserID);
-
-         console.log($rootScope.selectedUserID);
      },
 
        getUserToChat : function() {
-
-         console.log('at adminSelectChatService: getUserToChat');
-
-         console.log($rootScope.selectedUserID);
 
          return $rootScope.selectedUserID;
      }

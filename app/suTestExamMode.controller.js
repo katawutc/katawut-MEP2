@@ -41,17 +41,17 @@ function suTestExamModeCtrl($scope, $http, $route,
 
   $scope.submitAnswerExamMode = function() {
 
-    var answerJSON = {userID: $window.sessionStorage.userID,
-                      testID: $window.sessionStorage.testID,
-                      suTestNumber: $window.sessionStorage.suTestNumber,
-                      suTestID: $window.sessionStorage.suTestID,
-                      suTestMode: $window.sessionStorage.suTestMode,
-                      suTestStartAt: $window.sessionStorage.suTestStartAt,
-                      suTestQuestionNumber: suTestCurrentQuestionNumber,
-                      suTestQuestionStatus: 'answered',
-                      suTestAnswer: $scope.formData.answer,
-                      testID: $scope.testID,
-                      questionNumber: $scope.questionNumber};
+    var answerJSON = {'userID': $window.sessionStorage.userID,
+                      'testID': $window.sessionStorage.testID,
+                      'suTestNumber': $window.sessionStorage.suTestNumber,
+                      'suTestID': $window.sessionStorage.suTestID,
+                      'suTestMode': $window.sessionStorage.suTestMode,
+                      'suTestStartAt': $window.sessionStorage.suTestStartAt,
+                      'suTestQuestionNumber': suTestCurrentQuestionNumber,
+                      'suTestQuestionStatus': 'answered',
+                      'suTestAnswer': $scope.formData.answer,
+                      'testID': $scope.testID,
+                      'questionNumber': $scope.questionNumber};
 
     var submitAnswerSuTestExamMode = '/submitAnswerSuTestExamMode/'+$window.sessionStorage.userID+'/'+
                                         $window.sessionStorage.suTestID+'/'+

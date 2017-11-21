@@ -4,7 +4,8 @@ angular.module('app')
             'testScore', 'testSummary',
              testSummaryUnSubscribeUserCtrl]);
 
-function testSummaryUnSubscribeUserCtrl ($scope, testScore, testSummary) {
+function testSummaryUnSubscribeUserCtrl ($scope,
+                                         testScore, testSummary) {
 
   $scope.score = testScore;
 

@@ -7,8 +7,6 @@ angular.module('app')
 function adminUserListCtrl($scope, $location, $window,
                            userList) {
 
-    console.log(userList);
-
     /** get user list data*/
     if (userList && userList.errorMessage) {
       $window.sessionStorage.setItem('errorMessage', userList.errorMessage);

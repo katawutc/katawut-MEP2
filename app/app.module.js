@@ -27,8 +27,6 @@ function FBAsyncInit($window, $rootScope) {
 
     $rootScope.fbSdkLoaded = true;
 
-    console.log('fb sdk is loaded');
-
   };
 }
 

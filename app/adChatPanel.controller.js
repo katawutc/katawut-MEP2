@@ -21,8 +21,6 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
         if (!$rootScope.suSocketID) {
 
-        console.log('adminChatTo: '+chatAdminService.getUserToChat());
-
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
                        'adminChatTo': chatAdminService.getUserToChat(),
@@ -55,22 +53,18 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
     chatIOService.on('toAdmin', function(message) {
 
-      console.log(message);
-
       $scope.adSentMessage.push(message);
 
     })
 
     chatIOService.on('fromSu', function(data) {
 
-      console.log(data);
-
       $rootScope.showAdChatPanel = true;
 
       $scope.adSentMessage.push('su: '+data.message);
 
       $rootScope.suSocketID = data.suSocketID;
-      console.log($rootScope.suSocketID);
+
     })
 
 }

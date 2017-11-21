@@ -2,15 +2,12 @@ angular.module('app')
 .controller('suNewTestCtrl',
            ['$scope', '$http', '$route',
             '$window', '$location',
-            'suNewTestInfo', 'suNewTestHeader',
-            'newSuTest',
+            'suNewTestInfo', 'suNewTestHeader', 'newSuTest',
              suNewTestCtrl]);
 
 function suNewTestCtrl($scope, $http, $route,
-                          $window, $location,
-                          suNewTestInfo, suNewTestHeader, newSuTest) {
-
-    console.log('at suNewTestCtrl');
+                       $window, $location,
+                       suNewTestInfo, suNewTestHeader, newSuTest) {
 
     // to separate testID and test running number
     $scope.testID = $route.current.params.testID;
@@ -20,8 +17,6 @@ function suNewTestCtrl($scope, $http, $route,
     $scope.suTestNumber = $route.current.params.testRunningNumber;
 
     if (newSuTest) {
-
-      console.log(newSuTest);
 
       $scope.suTestID = newSuTest.suTestID;
     }
@@ -60,13 +55,9 @@ function suNewTestCtrl($scope, $http, $route,
             }
          }).then(function successCallback(response) {
 
-           console.log(response);
-
            // go to the 1st question after empty answer sheet is created
            var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
-                                       $scope.suTestID+'/'+1;
-
-           console.log(suTestTutorialUrl);
+                                     $scope.suTestID+'/'+1;
 
            $location.path(suTestTutorialUrl);
 
@@ -94,13 +85,13 @@ function suNewTestCtrl($scope, $http, $route,
        */
        function createAnswerSheetExam() {
 
-         var suAnswerSheetExamData = {userID: $window.sessionStorage.userID,
-                                      testID: $window.sessionStorage.testID,
-                                      suTestNumber: $window.sessionStorage.suTestNumber,
-                                      suTestID: $window.sessionStorage.suTestID,
-                                      suTestSize: $window.sessionStorage.suTestSize,
-                                      suTestMode: $window.sessionStorage.suTestMode,
-                                      suTestStartAt: $window.sessionStorage.suTestStartAt};
+         var suAnswerSheetExamData = {'userID': $window.sessionStorage.userID,
+                                      'testID': $window.sessionStorage.testID,
+                                      'suTestNumber': $window.sessionStorage.suTestNumber,
+                                      'suTestID': $window.sessionStorage.suTestID,
+                                      'suTestSize': $window.sessionStorage.suTestSize,
+                                      'suTestMode': $window.sessionStorage.suTestMode,
+                                      'suTestStartAt': $window.sessionStorage.suTestStartAt};
 
          // create su exam sheet in the suTestHistory collection DB
          var suExamSheetUrl = '/createSuExamSheet/'+$window.sessionStorage.userID+'/'+

@@ -7,8 +7,6 @@ angular.module('app')
 function reviewUnSubscribeTestCtrl($scope, $location, $http, $q,
                                    reviewUnSubscribeTest) {
 
-  console.log(reviewUnSubscribeTest);
-
   $scope.questionNumber = reviewUnSubscribeTest.solQuestionNumber;
   $scope.question = reviewUnSubscribeTest.question;
   $scope.solution = reviewUnSubscribeTest.solution;

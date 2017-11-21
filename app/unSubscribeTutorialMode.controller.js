@@ -1,9 +1,12 @@
 angular.module('app')
 .controller('unSubscribeTutorialModeCtrl',
            ['$scope', '$http', '$routeParams', '$window',
-            '$location', 'testQuestion', unSubscribeTutorialModeCtrl]);
+            '$location',
+            'testQuestion', unSubscribeTutorialModeCtrl]);
 
-function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
+function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window,
+                                     $location,
+                                     testQuestion) {
 
   // use for showing submit answer or next question button
   $scope.submitted = true;
@@ -43,15 +46,15 @@ function unSubscribeTutorialModeCtrl($scope, $http, $routeParams, $window, $loca
       // where to clock question finishes ?
       $window.sessionStorage.setItem('currentQuestionFinishAt', Date.now());
 
-      var answerJSON = {userName: 'unSubscribe',
-                        userID: $window.sessionStorage.userID,
-                        testID: $window.sessionStorage.testID,
-                        testMode: $window.sessionStorage.testMode,
-                        testStartAt: $window.sessionStorage.testStartAt,
-                        questionNumber: $routeParams.questionNumber,
-                        answer: $scope.formData.answer,
-                        currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
-                        currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
+      var answerJSON = {'userName': 'unSubscribe',
+                        'userID': $window.sessionStorage.userID,
+                        'testID': $window.sessionStorage.testID,
+                        'testMode': $window.sessionStorage.testMode,
+                        'testStartAt': $window.sessionStorage.testStartAt,
+                        'questionNumber': $routeParams.questionNumber,
+                        'answer': $scope.formData.answer,
+                        'currentQuestionStartAt': $window.sessionStorage.currentQuestionStartAt,
+                        'currentQuestionFinishAt': $window.sessionStorage.currentQuestionFinishAt};
 
       // use service to check the answer on the server
       // http get to retrieve Exam question

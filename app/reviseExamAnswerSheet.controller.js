@@ -29,16 +29,16 @@ function reviseExamAnswerSheetCtrl($scope, $http, $routeParams, $window,
        // clock question finishes
        $window.sessionStorage.setItem('currentQuestionFinishAt', Date.now());
 
-       var answerJSON = {userName: $window.sessionStorage.userName,
-                         userID: $window.sessionStorage.userID,
-                         testID: $routeParams.testID,
-                         testMode: $window.sessionStorage.testMode,
-                         testStartAt: $window.sessionStorage.testStartAt,
-                         questionNumber: $routeParams.questionNumber,
-                         status: 'answered',
-                         answer: $scope.formData.answer,
-                         currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
-                         currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
+       var answerJSON = {'userName': $window.sessionStorage.userName,
+                         'userID': $window.sessionStorage.userID,
+                         'testID': $routeParams.testID,
+                         'testMode': $window.sessionStorage.testMode,
+                         'testStartAt': $window.sessionStorage.testStartAt,
+                         'questionNumber': $routeParams.questionNumber,
+                         'status': 'answered',
+                         'answer': $scope.formData.answer,
+                         'currentQuestionStartAt': $window.sessionStorage.currentQuestionStartAt,
+                         'currentQuestionFinishAt': $window.sessionStorage.currentQuestionFinishAt};
 
        var examAnswerSummaryUrl = '/examAnswerSummary';
 

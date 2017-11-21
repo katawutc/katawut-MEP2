@@ -6,7 +6,7 @@ angular.module('app')
 function suTestSummaryService($http, $route, $q, $window) {
 
    return {
-     
+
      getSuTestSummary : function() {
 
        $window.sessionStorage.suTestID = $route.current.params.suTestID;
@@ -14,9 +14,9 @@ function suTestSummaryService($http, $route, $q, $window) {
        $window.sessionStorage.suTestStartAt = $route.current.params.suTestStartAt;
 
        var suTestSummaryUrl = '/getSuTestSummary/'+$window.sessionStorage.userID+'/'+
-                                 $route.current.params.suTestID+'/'+
-                                 $route.current.params.suTestMode+'/'+
-                                 $route.current.params.suTestStartAt;
+                                $route.current.params.suTestID+'/'+
+                                $route.current.params.suTestMode+'/'+
+                                $route.current.params.suTestStartAt;
 
        var deferred = $q.defer();
 

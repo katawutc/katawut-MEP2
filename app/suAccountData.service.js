@@ -7,8 +7,6 @@ function suAccountDataService($http, $route, $q, $window) {
   return {
       getSuAccountData : function() {
 
-        console.log('at suAccountDataService: getSuAccountData');
-
         var suAccountDataUrl = '/accountData/su/'+$route.current.params.userID;
 
         var deferred = $q.defer();

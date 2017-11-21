@@ -6,25 +6,19 @@ angular.module('app')
              logOutCtrl]);
 
 function logOutCtrl($scope, $window, $rootScope,
-                    fbLogInStatus,
-                    socketService, chatIOService) {
+                    fbLogInStatus, socketService, chatIOService) {
 
     /** log out */
     socketService.emit('logOut', $window.sessionStorage.userID);
     chatIOService.emit('logOut', $window.sessionStorage.userID);
 
-    console.log(socketService.socketID());
-    console.log(chatIOService.socketID());
-
     // To implement asynchronous function before pass message to view
     $window.sessionStorage.clear();
-
-    console.log(fbLogInStatus);
 
     if (fbLogInStatus === 'connected') {
       FB.logout(function(response) {
       // user is now logged out both MEP and FB
-      console.log(response);
+
       });
     }
 

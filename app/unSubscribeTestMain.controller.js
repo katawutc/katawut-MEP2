@@ -1,11 +1,13 @@
 angular.module('app')
 .controller('unSubscribeTestMainCtrl',
            ['$scope', '$http',
-            '$window', '$location', 'testHeader',
+            '$window', '$location',
+            'testHeader',
              unSubscribeTestMainCtrl]);
 
 function unSubscribeTestMainCtrl($scope, $http,
-                                 $window, $location, testHeader) {
+                                 $window, $location,
+                                 testHeader) {
 
   // write the testHeader information after resolve
   // need to check null of testHeader
@@ -26,9 +28,9 @@ function unSubscribeTestMainCtrl($scope, $http,
     // clock in test starts
     $window.sessionStorage.setItem('testStartAt', Date.now());
 
-    var registerData = { testID: $window.sessionStorage.testID,
-                         testMode: $window.sessionStorage.testMode,
-                         accessTime: $window.sessionStorage.testStartAt
+    var registerData = { 'testID': $window.sessionStorage.testID,
+                         'testMode': $window.sessionStorage.testMode,
+                         'accessTime': $window.sessionStorage.testStartAt
                         }
 
     $http({
@@ -60,9 +62,9 @@ function unSubscribeTestMainCtrl($scope, $http,
     // clock in test starts
     $window.sessionStorage.setItem('testStartAt', Date.now());
 
-    var registerData = { testID: $window.sessionStorage.testID,
-                         testMode: $window.sessionStorage.testMode,
-                         accessTime: $window.sessionStorage.testStartAt
+    var registerData = { 'testID': $window.sessionStorage.testID,
+                         'testMode': $window.sessionStorage.testMode,
+                         'accessTime': $window.sessionStorage.testStartAt
                         }
    /**
     * should register the unSubscribeUser here to get the user ID here \
@@ -90,12 +92,12 @@ function unSubscribeTestMainCtrl($scope, $http,
      */
      function createAnswerSheetExam() {
 
-       var answerSheetExamData = {userName: $window.sessionStorage.userName,
-                                    userID: $window.sessionStorage.userID,
-                                    testID: $window.sessionStorage.testID,
-                                    numberOfQuestion: $window.sessionStorage.numberOfQuestion,
-                                    testMode: $window.sessionStorage.testMode,
-                                    testStartAt: $window.sessionStorage.testStartAt};
+       var answerSheetExamData = {'userName': $window.sessionStorage.userName,
+                                  'userID': $window.sessionStorage.userID,
+                                  'testID': $window.sessionStorage.testID,
+                                  'numberOfQuestion': $window.sessionStorage.numberOfQuestion,
+                                  'testMode': $window.sessionStorage.testMode,
+                                  'testStartAt': $window.sessionStorage.testStartAt};
 
        $http({
        url: 'createAnswerSheetExam',

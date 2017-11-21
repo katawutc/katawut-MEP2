@@ -9,9 +9,10 @@ function suTestScoreService($http, $q, $window) {
      getSuTestScore : function() {
 
        var suTestScoreUrl = '/getSuTestScore/'+$window.sessionStorage.userID+'/'+
-                                 $window.sessionStorage.suTestID+'/'+
-                                 $window.sessionStorage.suTestMode+'/'+
-                                 $window.sessionStorage.suTestStartAt;
+                              $window.sessionStorage.suTestID+'/'+
+                              $window.sessionStorage.suTestMode+'/'+
+                              $window.sessionStorage.suTestStartAt;
+                              
        var deferred = $q.defer();
 
        $http({

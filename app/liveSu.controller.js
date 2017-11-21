@@ -20,8 +20,6 @@ function liveSuCtrl($scope, $http, $routeParams,
     /** get user list data*/
     if (liveSu) {
 
-      console.log(liveSu);
-
       $scope.liveSu = liveSu;
     }
     else {
@@ -32,17 +30,11 @@ function liveSuCtrl($scope, $http, $routeParams,
 
     chatIOService.on('liveSu', function(data) {
 
-      console.log('new live su');
-      console.log(data);
-
       $scope.liveSu = data;
 
     })
 
     chatIOService.on('offSu', function(data) {
-
-      console.log('off su');
-      console.log(data);
 
       $scope.liveSu = data;
 

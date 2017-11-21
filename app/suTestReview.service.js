@@ -6,12 +6,12 @@ angular.module('app')
 function suTestReviewService($http, $route, $q, $window) {
 
    return {
-     
+
      getSuTestReview : function() {
 
        var suTestReviewUrl = '/getSuTestReview/'+$window.sessionStorage.userID+'/'+
-                                $route.current.params.suTestID+'/'+
-                                $route.current.params.suTestQuestionNumber;
+                               $route.current.params.suTestID+'/'+
+                               $route.current.params.suTestQuestionNumber;
 
        var deferred = $q.defer();
 

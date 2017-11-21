@@ -8,13 +8,7 @@ function userListService($http, $window, $q) {
 
       getUserList : function() {
 
-        console.log('at userListService');
-
-        console.log($window.sessionStorage.userID);
-
         var userListUrl = '/dashboard/ad/'+$window.sessionStorage.userID+'/userList';
-
-        console.log(userListUrl);
 
         var deferred = $q.defer();
 
@@ -26,8 +20,6 @@ function userListService($http, $window, $q) {
             'Authorization': 'JWT ' + $window.sessionStorage.token
             }
         }).then(function successCallback(response) {
-
-          console.log(response.data);
 
           deferred.resolve(response.data);
 

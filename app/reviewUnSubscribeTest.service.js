@@ -9,8 +9,8 @@ function reviewUnSubscribeTestService($http, $route, $q) {
     getReviewQuestion : function() {
 
       var reviewUnSubscribeTestUrl = '/reviewUnSubscribeTest/'+
-                                        $route.current.params.testID+'/'+
-                                        $route.current.params.questionNumber;
+                                       $route.current.params.testID+'/'+
+                                       $route.current.params.questionNumber;
 
       var deferred = $q.defer();
 

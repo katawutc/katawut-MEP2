@@ -12,17 +12,9 @@ function chatIOService($rootScope, $window) {
 
       $rootScope.chatSocketID = chatIO.id;
 
-      console.log('$rootScope.chatSocketID: '+$rootScope.chatSocketID);
-
       if ($window.sessionStorage.chatSocketID) {
 
         if ($rootScope.chatSocketID !== $window.sessionStorage.chatSocketID) {
-
-          console.log('page refresh ?');
-
-          console.log($window.sessionStorage.chatSocketID);
-
-          console.log($rootScope.chatSocketID);
 
         var chatSocketData = {'previousChatSocket': $window.sessionStorage.chatSocketID,
                               'newChatSocket': $rootScope.chatSocketID,

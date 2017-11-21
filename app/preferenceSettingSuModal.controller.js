@@ -20,8 +20,8 @@ function preferenceSettingSuModalCtrl ($scope, $uibModalInstance, $window,
   $ctrl.save = function () {
 
   $scope.newSettingData = {userLevel: $scope.selectedLevel,
-                            userPreferTest: $scope.selectedTest,
-                            userPreferSubject: $scope.selectedSubject}
+                           userPreferTest: $scope.selectedTest,
+                           userPreferSubject: $scope.selectedSubject}
 
   /** save new setting into the DB */
 

@@ -1,15 +1,15 @@
-angular.module('app').factory('loginHistoryAdminService',
-  ['$http', '$route', '$q', '$window', loginHistoryAdminService]);
+angular.module('app')
+.factory('loginHistoryAdminService',
+        ['$http', '$route', '$q', '$window',
+          loginHistoryAdminService]);
 
 function loginHistoryAdminService($http, $route, $q, $window) {
 
    return {
      getLoginHistoryAdmin : function() {
 
-       console.log('at getLoginHistoryAdmin');
-
        var loginHistoryUrl = '/admin/loginHistory/'+$route.current.params.userRole+
-                         '/'+$route.current.params.userID;
+                             '/'+$route.current.params.userID;
 
        var deferred = $q.defer();
 

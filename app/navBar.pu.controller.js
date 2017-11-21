@@ -1,5 +1,7 @@
-angular.module('app').controller('navBarPuController',
-  ['$scope', '$http', '$location', '$window', navBarPuController]);
+angular.module('app')
+.controller('navBarPuController',
+           ['$scope', '$http', '$location', '$window',
+             navBarPuController]);
 
 function navBarPuController ($scope, $http, $location, $window) {
     $scope.logIn = false;

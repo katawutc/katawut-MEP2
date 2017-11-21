@@ -28,23 +28,17 @@ function dashboardAdCtrl($scope, $window, $rootScope,
     /** for adding and counting default user visit MEP */
     socketService.on('defaultVisit', function(data) {
 
-        console.log(data);
-
         $scope.userVisitMEP = data;
     })
 
     /** for adding and counting su visit MEP */
     socketService.on('suVisit', function(data) {
 
-        console.log(data);
-
         $scope.suVisitMEP = data;
     })
 
     /** for adding and counting admin visit MEP */
     socketService.on('adVisit', function(data) {
-
-        console.log(data);
 
         $scope.adVisitMEP = data;
     })

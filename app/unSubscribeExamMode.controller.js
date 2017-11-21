@@ -1,9 +1,11 @@
 angular.module('app')
 .controller('unSubscribeExamModeCtrl',
            ['$scope', '$http', '$routeParams', '$window', '$location',
-            'testQuestion', unSubscribeExamModeCtrl]);
+            'testQuestion',
+             unSubscribeExamModeCtrl]);
 
-function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location, testQuestion) {
+function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location,
+                                 testQuestion) {
 
   $scope.testID = $routeParams.testID;
   $scope.questionNo = $routeParams.questionNo;
@@ -26,16 +28,16 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
       // clock question finishes
       $window.sessionStorage.setItem('currentQuestionFinishAt', Date.now());
 
-      var answerJSON = {userName: $window.sessionStorage.userName,
-                        userID: $window.sessionStorage.userID,
-                        testID: $routeParams.testID,
-                        testMode: $window.sessionStorage.testMode,
-                        testStartAt: $window.sessionStorage.testStartAt,
-                        questionNumber: $routeParams.questionNumber,
-                        status: 'answered',
-                        answer: $scope.formData.answer,
-                        currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
-                        currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
+      var answerJSON = {'userName': $window.sessionStorage.userName,
+                        'userID': $window.sessionStorage.userID,
+                        'testID': $routeParams.testID,
+                        'testMode': $window.sessionStorage.testMode,
+                        'testStartAt': $window.sessionStorage.testStartAt,
+                        'questionNumber': $routeParams.questionNumber,
+                        'status': 'answered',
+                        'answer': $scope.formData.answer,
+                        'currentQuestionStartAt': $window.sessionStorage.currentQuestionStartAt,
+                        'currentQuestionFinishAt': $window.sessionStorage.currentQuestionFinishAt};
 
       var examAnswerSummaryUrl = '/examAnswerSummary';
 
@@ -74,16 +76,16 @@ function unSubscribeExamModeCtrl($scope, $http, $routeParams, $window, $location
        * $scope.formData.answer = 'unAnswered';
        */
 
-       var answerJSON = {userName: $window.sessionStorage.userName,
-                         userID: $window.sessionStorage.userID,
-                         testID: $routeParams.testID,
-                         testMode: $window.sessionStorage.testMode,
-                         testStartAt: $window.sessionStorage.testStartAt,
-                         questionNumber: $routeParams.questionNumber,
-                         status: 'marked',
-                         answer: $scope.formData.answer,
-                         currentQuestionStartAt: $window.sessionStorage.currentQuestionStartAt,
-                         currentQuestionFinishAt: $window.sessionStorage.currentQuestionFinishAt};
+       var answerJSON = {'userName': $window.sessionStorage.userName,
+                         'userID': $window.sessionStorage.userID,
+                         'testID': $routeParams.testID,
+                         'testMode': $window.sessionStorage.testMode,
+                         'testStartAt': $window.sessionStorage.testStartAt,
+                         'questionNumber': $routeParams.questionNumber,
+                         'status': 'marked',
+                         'answer': $scope.formData.answer,
+                         'currentQuestionStartAt': $window.sessionStorage.currentQuestionStartAt,
+                         'currentQuestionFinishAt': $window.sessionStorage.currentQuestionFinishAt};
 
         var examAnswerSummaryUrl = '/examAnswerSummary';
 

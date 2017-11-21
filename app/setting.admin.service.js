@@ -1,5 +1,7 @@
-angular.module('app').factory('settingAdminService',
-  ['$http', '$route', '$q', '$window', settingAdminService]);
+angular.module('app')
+.factory('settingAdminService',
+        ['$http', '$route', '$q', '$window',
+          settingAdminService]);
 
 function settingAdminService($http, $route, $q, $window) {
 
@@ -7,7 +9,7 @@ function settingAdminService($http, $route, $q, $window) {
      getSettingAdmin : function() {
 
        var userSettingUrl = '/admin/setting/'+$route.current.params.userRole+
-                         '/'+$route.current.params.userID;
+                            '/'+$route.current.params.userID;
 
        var deferred = $q.defer();
 
