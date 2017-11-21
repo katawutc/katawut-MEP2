@@ -283,7 +283,8 @@ module.exports = function socketIO(socket) {
       console.log('logOut: '+ data);
 
       db.collection('realTimeUser')
-      .findAndModify({'userID': data},
+      .findAndModify({'userID': data,
+                      'socketID': socket.id},
                      [],
                      {$set:{'userRole': 'default',
                             'logOutAt': Date.now()}},

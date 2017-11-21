@@ -160,7 +160,8 @@ module.exports = function chatIO(socket) {
 
     console.log('log out: '+ data);
     db.collection('suChatSocket')
-    .findAndModify({'userID': data},
+    .findAndModify({'userID': data,
+                    'chatSocketID': socket.id}, // userID is not enough; need to use socketID
                    [],
                    {$set:{'userRole': 'default',
                           'status': 'off',
