@@ -1,9 +1,9 @@
 angular.module('app')
 .factory('suTestHistoryService',
-        ['$http', '$q', '$window',
+        ['$http', '$q', '$window', '$route',
           suTestHistoryService]);
 
-function suTestHistoryService($http, $q, $window) {
+function suTestHistoryService($http, $q, $window, $route) {
 
    return {
      registerSuTestHistory : function() {

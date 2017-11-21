@@ -30,6 +30,7 @@ module.exports = function registerSuTestHistory(req, res) {
     if (err) throw err;
 
     if (doc) {
+
       removeSuTestIDFromNewSuTest();
     }
   }

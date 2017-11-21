@@ -8,8 +8,6 @@ angular.module('app')
 function suTestTutorialModeCtrl($scope, $http, $route,
                                 $window, $location, suTestQuestion, registerSuTestHistory) {
 
-  console.log(registerSuTestHistory);
-
   if (registerSuTestHistory !== 'registered') {
     console.log('cannot registerSuTestHistory');
 
@@ -102,7 +100,6 @@ function suTestTutorialModeCtrl($scope, $http, $route,
       ,function errorCallback(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
-        console.log(response.status);
         $location.path('/errorPage');
       };
     }

@@ -6,6 +6,7 @@ angular.module('app')
 function suTestQuestionService($http, $route, $q, $window) {
 
    return {
+
      getSuTestQuestion : function() {
 
        var suTestQuestionUrl = '/getSuTestQuestion/'+

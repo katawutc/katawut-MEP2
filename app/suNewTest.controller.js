@@ -10,6 +10,8 @@ function suNewTestCtrl($scope, $http, $route,
                           $window, $location,
                           suNewTestInfo, suNewTestHeader, newSuTest) {
 
+    console.log('at suNewTestCtrl');
+
     // to separate testID and test running number
     $scope.testID = $route.current.params.testID;
     //$scope.suTestID = suNewTestInfo.suTestID;
@@ -18,6 +20,8 @@ function suNewTestCtrl($scope, $http, $route,
     $scope.suTestNumber = $route.current.params.testRunningNumber;
 
     if (newSuTest) {
+
+      console.log(newSuTest);
 
       $scope.suTestID = newSuTest.suTestID;
     }
@@ -35,13 +39,13 @@ function suNewTestCtrl($scope, $http, $route,
 
       function createAnswerSheetTutorial() {
 
-        var suAnswerSheetTutorialData = {userID: $window.sessionStorage.userID,
-                                          testID: $window.sessionStorage.testID,
-                                          suTestNumber: $window.sessionStorage.suTestNumber,
-                                          suTestID: $window.sessionStorage.suTestID,
-                                          suTestSize: $window.sessionStorage.suTestSize,
-                                          suTestMode: $window.sessionStorage.suTestMode,
-                                          suTestStartAt: $window.sessionStorage.suTestStartAt};
+        var suAnswerSheetTutorialData = {'userID': $window.sessionStorage.userID,
+                                         'testID': $window.sessionStorage.testID,
+                                         'suTestNumber': $window.sessionStorage.suTestNumber,
+                                         'suTestID': $window.sessionStorage.suTestID,
+                                         'suTestSize': $window.sessionStorage.suTestSize,
+                                         'suTestMode': $window.sessionStorage.suTestMode,
+                                         'suTestStartAt': $window.sessionStorage.suTestStartAt};
 
         // create su exam sheet in the suTestHistory collection DB
         var suExamSheetUrl = '/createSuExamSheet/'+$window.sessionStorage.userID+'/'+
@@ -56,9 +60,13 @@ function suNewTestCtrl($scope, $http, $route,
             }
          }).then(function successCallback(response) {
 
+           console.log(response);
+
            // go to the 1st question after empty answer sheet is created
            var suTestTutorialUrl = '/suTest/tutorialMode/'+$window.sessionStorage.userID+'/'+
                                        $scope.suTestID+'/'+1;
+
+           console.log(suTestTutorialUrl);
 
            $location.path(suTestTutorialUrl);
 

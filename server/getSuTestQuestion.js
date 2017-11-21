@@ -12,6 +12,8 @@ module.exports = function getSuTestQuestion(req, res) {
 
     if (question) {
 
+      console.log(question);
+
       res.json(question);
     }
   }
