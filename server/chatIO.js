@@ -163,6 +163,7 @@ module.exports = function chatIO(socket) {
     .findAndModify({'userID': data},
                    [],
                    {$set:{'userRole': 'default',
+                          'status': 'off',
                           'logOutAt': Date.now()}},
                    {new: true}, logOut_cb);
   })

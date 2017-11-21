@@ -30,11 +30,15 @@ function liveSuCtrl($scope, $http, $routeParams,
 
     chatIOService.on('liveSu', function(data) {
 
+      console.log(data);
+
       $scope.liveSu = data;
 
     })
 
     chatIOService.on('offSu', function(data) {
+
+      console.log(data);
 
       $scope.liveSu = data;
 
