@@ -9,21 +9,30 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
     $rootScope.openChatPanel = function() {
 
       $rootScope.showChatPanel = !$rootScope.showChatPanel;
-
   }
 
     $rootScope.newChat = function() {
 
       console.log('new chat');
+      $rootScope.chatStartAt = Date.now();
+      console.log($rootScope.chatStartAt);
     }
 
     $scope.sendMessage = function() {
+
+        /** need to find chat start at time for suChat recording */
+        if ($rootScope.sentMessage.length === 0) {
+
+          $rootScope.chatStartAt = Date.now();
+          console.log($rootScope.chatStartAt);
+        }
 
         if ($rootScope.adminSocketID) {
 
           var message = {'userID': $window.sessionStorage.userID,
                          'userRole': $window.sessionStorage.userRole,
-                         'adminSocketID': $rootScope.adminSocketID,
+                         'adminSocketID': $rootScope.adminSocketID, // need to change to admin userID
+                         'chatStartAt': $rootScope.chatStartAt,
                          'sentTime': Date.now(),
                          'message': $scope.message}
 
@@ -37,6 +46,7 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
+                       'chatStartAt': $rootScope.chatStartAt,
                        'sentTime': Date.now(),
                        'message': $scope.message}
 

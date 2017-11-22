@@ -171,6 +171,14 @@ module.exports = function chatIO(socket) {
 
   /** **/
 
+  function saveSuChat_cb(err, doc) {
+
+    if (err) throw err;
+
+    console.log('save su chat');
+    console.log(doc);
+  }
+
   socket.on('chat', function(data) {
 
     /** the data received should have logic to differentiate \
@@ -215,6 +223,14 @@ module.exports = function chatIO(socket) {
 
       // emit to admin room
       socket.to('adminRoom').emit('fromSu', data);
+
+      db.collection('suChat')
+      .findAndModify({'userID': data.userID,
+                      'chatStartAt': data.chatStartAt},
+                      [],
+                      {$push: {'message': data}},
+                      {new: true, upsert: true}, saveSuChat_cb);
+
     }
     else if (data.userRole === 'ad' && data.suSocketID) {
 
