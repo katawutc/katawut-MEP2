@@ -8,9 +8,14 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     $rootScope.openChatPanel = function() {
 
-    $rootScope.showChatPanel = !$rootScope.showChatPanel;
+      $rootScope.showChatPanel = !$rootScope.showChatPanel;
 
   }
+
+    $rootScope.newChat = function() {
+
+      console.log('new chat');
+    }
 
     $scope.sendMessage = function() {
 
