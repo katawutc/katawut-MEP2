@@ -48,7 +48,8 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
                        'userRole': $window.sessionStorage.userRole,
                        'chatStartAt': $rootScope.chatStartAt,
                        'sentTime': Date.now(),
-                       'message': $scope.message}
+                       'message': $scope.message,
+                       'adminReceive': false}
 
         chatIOService.emit('chat', message);
 
