@@ -49,7 +49,7 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
                        'chatStartAt': $rootScope.chatStartAt,
                        'sentTime': Date.now(),
                        'message': $scope.message,
-                       'adminReceive': false}
+                       'sentSuccess': false}
 
         chatIOService.emit('chat', message);
 
