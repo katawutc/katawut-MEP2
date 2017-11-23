@@ -27,14 +27,17 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
           console.log($rootScope.chatStartAt);
         }
 
-        if ($rootScope.adminSocketID) {
+        //if ($rootScope.adminSocketID) {
+        if ($rootScope.adID) {
 
           var message = {'userID': $window.sessionStorage.userID,
                          'userRole': $window.sessionStorage.userRole,
-                         'adminSocketID': $rootScope.adminSocketID, // need to change to admin userID
+                      /* 'adminSocketID': $rootScope.adminSocketID, // need to change to admin userID */
+                         'adID': $rootScope.adID,
                          'chatStartAt': $rootScope.chatStartAt,
                          'sentTime': Date.now(),
-                         'message': $scope.message}
+                         'message': $scope.message,
+                         'sentSuccess': false}
 
           chatIOService.emit('chat', message);
 
@@ -42,7 +45,7 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
           $scope.message = null;
       }
-      else {
+      else if (!$rootScope.adID){
 
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
@@ -62,9 +65,15 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     chatIOService.on($window.sessionStorage.userID, function(data) {
 
-      $rootScope.adminSocketID = data.adminSocketID;
+      //$rootScope.adminSocketID = data.adminSocketID;
 
       $rootScope.sentMessage.push('Admin: '+data.message);
+
+      // implement message received acknowledge
+      $rootScope.adID = data.userID;
+      data.sentSuccess = true;
+      console.log(data);
+      chatIOService.emit('adMessageReceive', data);
     })
 
     chatIOService.on('fromAdmin', function(data) {

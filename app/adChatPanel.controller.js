@@ -25,9 +25,12 @@ function adChatPanelCtrl($rootScope, $scope, $window,
                        'userRole': $window.sessionStorage.userRole,
                        'adminChatTo': chatAdminService.getUserToChat(),
                        'sentTime': Date.now(),
-                       'message': $scope.message}
+                       'message': $scope.message,
+                       'sentSuccess': false}
 
         chatIOService.emit('chat', message);
+
+        /** admin sent message need to keep for various su */
 
         $scope.adSentMessage.push('You: '+$scope.message);
 
@@ -63,13 +66,7 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
       $scope.adSentMessage.push('su: '+data.message);
 
-      //$rootScope.suSocketID = data.suSocketID;
-
       $rootScope.suID = data.userID;
-
-      // for su userID chatStartAt
-      /*$rootScope.chatStartAt.push({'userID': data.userID,
-                                   'chatStartAt': data.chatStartAt}); */
 
       /** implement message received acknowledgement */
       data.sentSuccess = true;

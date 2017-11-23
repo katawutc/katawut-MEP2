@@ -194,11 +194,9 @@ module.exports = function chatIO(socket) {
         data.adminSocketID = socket.id;
         console.log(data);
 
-        //socket.broadcast.emit(data.adminChatTo, data);
-
         socket.to(data.adminChatTo).emit(data.adminChatTo, data);
     }
-    else if (data.userRole === 'su' && data.adminSocketID) {
+    else if (data.userRole === 'su' && data.adID) {
 
         console.log(typeof data.userID);
         console.log(data.userID);
@@ -213,12 +211,12 @@ module.exports = function chatIO(socket) {
     }
 
     /** su chat to the admin first */
-    if (data.userRole === 'su' && !data.adminSocketID) {
+    if (data.userRole === 'su' && !data.adID) {
 
       console.log('su chat to the admin first');
 
-      data.suSocketID = socket.id;
-      console.log(data.suSocketID);
+      //data.suSocketID = socket.id;
+      //console.log(data.suSocketID);
 
       console.log(data);
 
@@ -273,7 +271,13 @@ module.exports = function chatIO(socket) {
                       {$set: {'message.$.sentSuccess': true}},
                       {new: true}, saveSuChat_cb);
     }
-
-
   })
+
+  socket.on('adMessageReceive', function(data) {
+
+    if (data.sentSuccess === true) {
+
+    }
+  })
+
 }
