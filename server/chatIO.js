@@ -119,6 +119,8 @@ module.exports = function chatIO(socket) {
     .find({'userRole': 'su',
            'status': 'live'}).toArray(liveSu_cb);
 
+    // socket need to rejoin room after refreshing
+
   }
 
   socket.on('refreshChatSocket', function(data) {
@@ -142,6 +144,18 @@ module.exports = function chatIO(socket) {
                           'previousChatSocketID': data.previousChatSocket,
                           'refreshAt': data.refreshAt}},
                    {new: true}, refreshChatSocket_cb);
+
+    // socket need to rejoin room after refreshing
+    // make admin room for admin socket to join
+    if (data.userRole === 'ad') {
+
+      socket.join('adminRoom');
+    }
+    // make su chat socket join the userID room
+    else if (data.userRole === 'su') {
+
+      socket.join(data.userID);
+    }
   })
 
 

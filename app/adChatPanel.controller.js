@@ -9,6 +9,7 @@ function adChatPanelCtrl($rootScope, $scope, $window,
                          chatIOService,
                          chatAdminService) {
 
+    /** need to implement $scope.adSentMessage to channel for each su user */
     $scope.adSentMessage = [];
 
     /** close the admin chat panel */
