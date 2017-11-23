@@ -5,6 +5,8 @@ angular.module('app')
 
 function chatAdminService($http, $route, $q, $window, $rootScope) {
 
+    $rootScope.adChatStartAt = {};
+
      return {
        getChatUser : function() {
 
@@ -32,12 +34,19 @@ function chatAdminService($http, $route, $q, $window, $rootScope) {
 
        selectUserToChat : function(id) {
 
-         $rootScope.selectedUserID = id;
+         $rootScope.selectedSuID = id;
+
+         // to keep tract of chat start at from ad min 1st to chat
+         $rootScope.adChatStartAt[id] = Date.now();
+
+         console.log($rootScope.adChatStartAt);
+
+         console.log($rootScope.adChatStartAt[id]);
      },
 
-       getUserToChat : function() {
+       getSuToChat : function() {
 
-         return $rootScope.selectedUserID;
+         return $rootScope.selectedSuID;
      }
 
    }

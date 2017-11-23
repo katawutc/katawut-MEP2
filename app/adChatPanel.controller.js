@@ -17,13 +17,23 @@ function adChatPanelCtrl($rootScope, $scope, $window,
       $rootScope.showAdChatPanel = false;
     }
 
+    $rootScope.adNewChat = function() {
+
+      console.log('admin new chat');
+      $rootScope.adChatStartAt[$rootScope.selectedSuID] = Date.now();
+
+      console.log($rootScope.adChatStartAt);
+      console.log($rootScope.adChatStartAt[$rootScope.selectedSuID]);
+
+    }
+
     $scope.sendMessage = function() {
 
         if (!$rootScope.suID) {
 
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
-                       'adminChatTo': chatAdminService.getUserToChat(),
+                       'adminChatTo': chatAdminService.getSuToChat(),
                        'sentTime': Date.now(),
                        'message': $scope.message,
                        'sentSuccess': false}
