@@ -240,10 +240,10 @@ module.exports = function chatIO(socket) {
       });
 
     }
-    else if (data.userRole === 'ad' && data.suSocketID) {
+    else if (data.userRole === 'ad' && data.suID) {
 
       console.log(data);
-      socket.to(data.suSocketID).emit('fromAdmin', 'admin: '+data.message);
+      socket.to(data.suID).emit('fromAdmin', 'admin: '+data.message);
     }
   })
 
