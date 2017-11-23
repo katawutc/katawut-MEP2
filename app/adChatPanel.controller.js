@@ -66,8 +66,15 @@ function adChatPanelCtrl($rootScope, $scope, $window,
       $rootScope.suSocketID = data.suSocketID;
 
       // for su userID chatStartAt
-      $rootScope.chatStartAt.push({'userID': data.userID,
-                                   'chatStartAt': data.chatStartAt});
+      /*$rootScope.chatStartAt.push({'userID': data.userID,
+                                   'chatStartAt': data.chatStartAt}); */
+
+      /** implement message received acknowledgement */
+      data.sentSuccess = true;
+
+      console.log(data);
+
+      chatIOService.emit('suMessageReceive', data);
 
     })
 

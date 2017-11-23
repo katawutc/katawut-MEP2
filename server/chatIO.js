@@ -218,18 +218,22 @@ module.exports = function chatIO(socket) {
 
       console.log(data);
 
-      // emit to everyone in chatIO
-      //socket.broadcast.emit('fromSu', data);
-
-      // emit to admin room
-      socket.to('adminRoom').emit('fromSu', data);
-
+      // save chat 1st before emitting event
       db.collection('suChat')
       .findAndModify({'userID': data.userID,
                       'chatStartAt': data.chatStartAt},
                       [],
                       {$push: {'message': data}},
-                      {new: true, upsert: true}, saveSuChat_cb);
+                      {new: true, upsert: true}, /*saveSuChat_cb*/
+      function(err, doc) {
+        if (err) throw err;
+
+        console.log('save su chat');
+        console.log(doc);
+
+        // emit to admin room
+        socket.to('adminRoom').emit('fromSu', data);
+      });
 
     }
     else if (data.userRole === 'ad' && data.suSocketID) {
@@ -237,9 +241,35 @@ module.exports = function chatIO(socket) {
       console.log(data);
       socket.to(data.suSocketID).emit('fromAdmin', 'admin: '+data.message);
     }
+  })
 
+  socket.on('suMessageReceive', function(data) {
+
+    if (data.sentSuccess === true) {
+
+      console.log('at server: suMessageReceive');
+
+      console.log(data);
+
+      /**
+      var message = {'userID': $window.sessionStorage.userID,
+                     'userRole': $window.sessionStorage.userRole,
+                     'chatStartAt': $rootScope.chatStartAt,
+                     'sentTime': Date.now(),
+                     'message': $scope.message,
+                     'sentSuccess': false}
+      */
+
+      db.collection('suChat')
+      .findAndModify({'userID': data.userID,
+                      'chatStartAt': data.chatStartAt,
+                      'message':{$elemMatch:{'userRole': 'su',
+                                             'sentTime': data.sentTime}}},
+                      [],
+                      {$set: {'message.$.sentSuccess': true}},
+                      {new: true}, saveSuChat_cb);
+    }
 
 
   })
-
 }
