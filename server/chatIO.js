@@ -194,7 +194,9 @@ module.exports = function chatIO(socket) {
         data.adminSocketID = socket.id;
         console.log(data);
 
-        socket.broadcast.emit(data.adminChatTo, data);
+        //socket.broadcast.emit(data.adminChatTo, data);
+
+        socket.to(data.adminChatTo).emit(data.adminChatTo, data);
     }
     else if (data.userRole === 'su' && data.adminSocketID) {
 
@@ -204,7 +206,9 @@ module.exports = function chatIO(socket) {
         console.log(typeof data.adminSocketID);
         console.log(data.adminSocketID);
 
-        socket.to(data.adminSocketID).emit('toAdmin', 'su: '+ data.message);
+        //socket.to(data.adminSocketID).emit('toAdmin', 'su: '+ data.message);
+
+        socket.to('adminRoom').emit('toAdmin', 'su: '+ data.message);
 
     }
 
