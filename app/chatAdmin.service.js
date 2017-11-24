@@ -5,6 +5,7 @@ angular.module('app')
 
 function chatAdminService($http, $route, $q, $window, $rootScope) {
 
+    /** to keep track of chat start time when admin chat first */
     $rootScope.adChatStartAt = {};
 
      return {
@@ -37,11 +38,14 @@ function chatAdminService($http, $route, $q, $window, $rootScope) {
          $rootScope.selectedSuID = id;
 
          // to keep tract of chat start at from ad min 1st to chat
-         $rootScope.adChatStartAt[id] = Date.now();
+         if (!$rootScope.adChatStartAt[id]) {
 
-         console.log($rootScope.adChatStartAt);
+           $rootScope.adChatStartAt[id] = Date.now();
 
-         console.log($rootScope.adChatStartAt[id]);
+           console.log($rootScope.adChatStartAt);
+
+           console.log($rootScope.adChatStartAt[id]);
+       }
      },
 
        getSuToChat : function() {

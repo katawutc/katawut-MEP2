@@ -12,9 +12,6 @@ function adChatPanelCtrl($rootScope, $scope, $window,
     /** need to implement $scope.adSentMessage to channel for each su user */
     $scope.adSentMessage = [];
 
-    // to keep track on chat start at when su sent message 1st
-    $rootScope.ChatStartAt = {};
-
     /** close the admin chat panel */
     $scope.closeChatPanel = function() {
 
@@ -33,6 +30,27 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
     $scope.sendMessage = function() {
 
+      if ($rootScope.selectedSuID) {
+
+        var message = {'userID': $window.sessionStorage.userID,
+                       'userRole': $window.sessionStorage.userRole,
+                       'suID': $rootScope.selectedSuID,
+                       'chatStartAt': $rootScope.adChatStartAt[$rootScope.selectedSuID],
+                       'sentTime': Date.now(),
+                       'message': $scope.message,
+                       'sentSuccess': false}
+
+         chatIOService.emit('chat', message);
+
+         $scope.adSentMessage.push('You: '+$scope.message);
+
+         $scope.message = null;
+      }
+
+
+
+      /*
+
         if (!$rootScope.suID) {
 
         var message = {'userID': $window.sessionStorage.userID,
@@ -45,6 +63,7 @@ function adChatPanelCtrl($rootScope, $scope, $window,
         chatIOService.emit('chat', message);
 
         /** admin sent message need to keep for various su */
+        /*
 
         $scope.adSentMessage.push('You: '+$scope.message);
 
@@ -66,8 +85,26 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
         $scope.message = null;
       }
+      */
 
     }
+
+
+
+    chatIOService.on($window.sessionStorage.userID, function(data) {
+
+      $scope.adSentMessage.push('su: '+data.message);
+
+      // implement message received acknowledge
+      data.sentSuccess = true;
+      console.log(data);
+      chatIOService.emit('suMessageReceive', data);
+    })
+
+
+
+
+
 
 
     chatIOService.on('toAdmin', function(message) {

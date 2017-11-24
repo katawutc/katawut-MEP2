@@ -200,24 +200,53 @@ module.exports = function chatIO(socket) {
       */
 
     /** admin chat to the user first */
-    if (data.userRole === 'ad' && data.adminChatTo) { //adminChatTo is userID admin chats to
+    //if (data.userRole === 'ad' && data.adminChatTo) { //adminChatTo is userID admin chats to
+    if (data.userRole === 'ad' && data.suID) {
 
         console.log('at adminChatTo block');
-        console.log(data.adminChatTo);
-        console.log(socket.id);
-        data.adminSocketID = socket.id;
+        console.log(data.suID);
+        console.log(socket.id); //admin socketID
+
         console.log(data);
 
-        socket.to(data.adminChatTo).emit(data.adminChatTo, data);
+        db.collection('suChat')
+        .findAndModify({'userID': data.suID,
+                        'chatStartAt': data.chatStartAt},
+                        [],
+                        {$push: {'message': data}},
+                        {new: true, upsert: true}, /*saveSuChat_cb*/
+        function(err, doc) {
+          if (err) throw err;
+
+          console.log('save su chat');
+          console.log(doc);
+
+
+        socket.to(data.suID).emit(data.suID, data);
+      })
     }
     else if (data.userRole === 'su' && data.adID) {
 
       console.log('su and adID');
 
-        //socket.to(data.adminSocketID).emit('toAdmin', 'su: '+ data.message);
+      console.log(data);
 
-        socket.to('adminRoom').emit('toAdmin', 'su: '+ data.message);
+      db.collection('suChat')
+      .findAndModify({'userID': data.userID,
+                      'chatStartAt': data.chatStartAt},
+                      [],
+                      {$push: {'message': data}},
+                      {new: true, upsert: true}, /*saveSuChat_cb*/
+      function(err, doc) {
+        if (err) throw err;
 
+        console.log('save su chat');
+        console.log(doc);
+
+      //socket.to('adminRoom').emit('toAdmin', 'su: '+ data.message);
+      socket.to('adminRoom').emit(data.adID, data);
+
+    })
     }
 
     /** su chat to the admin first */
@@ -246,17 +275,20 @@ module.exports = function chatIO(socket) {
       });
 
     }
+    /*
     else if (data.userRole === 'ad' && data.suID) {
 
       console.log(data);
 
       /** to save chat message from admin and emit acknowledgement here */
+      /*
       db.collection('suChat')
       .findAndModify({'userID': data.suID,
                       'chatStartAt': data.chatStartAt},
                       [],
                       {$push: {'message': data}},
                       {new: true, upsert: true}, /*saveSuChat_cb*/
+                      /*
       function(err, doc) {
         if (err) throw err;
 
@@ -271,7 +303,7 @@ module.exports = function chatIO(socket) {
 
 
 
-    }
+    } */
   })
 
   socket.on('suMessageReceive', function(data) {

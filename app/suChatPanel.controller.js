@@ -77,13 +77,17 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     chatIOService.on($window.sessionStorage.userID, function(data) {
 
-      //$rootScope.sentMessage.push('Admin: '+data.message);
       $rootScope.chatMessage.push('Admin: '+data.message);
 
       // implement message received acknowledge
       $rootScope.adID = data.userID;
+
+      $rootScope.chatStartAt = data.chatStartAt;
+
       data.sentSuccess = true;
+
       console.log(data);
+      
       chatIOService.emit('adMessageReceive', data);
     })
 
