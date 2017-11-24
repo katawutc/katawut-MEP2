@@ -6,8 +6,8 @@ angular.module('app')
 
 function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
-    /** test initializing chatMessage keeping in sessionStorage */
-    $window.sessionStorage.setItem('chatMessage', []);
+    /** root scope chat message to keep chat  */
+    $rootScope.chatMessage = [];
 
     $rootScope.openChatPanel = function() {
 
@@ -19,12 +19,16 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
       console.log('new chat');
       $rootScope.chatStartAt = Date.now();
       console.log($rootScope.chatStartAt);
+
+      /** new chat clear up chatMessage in sessionStorage */
+      $rootScope.chatMessage = [];
     }
 
     $scope.sendMessage = function() {
 
         /** need to find chat start at time for suChat recording */
-        if ($rootScope.sentMessage.length === 0) {
+        //if ($rootScope.sentMessage.length === 0) {
+        if ($rootScope.chatMessage.length === 0) {
 
           $rootScope.chatStartAt = Date.now();
           console.log($rootScope.chatStartAt);
@@ -44,7 +48,8 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
           chatIOService.emit('chat', message);
 
-          $rootScope.sentMessage.push('You: '+$scope.message);
+          //$rootScope.sentMessage.push('You: '+$scope.message);
+          $rootScope.chatMessage.push('You: '+$scope.message);
 
           $scope.message = null;
       }
@@ -59,7 +64,8 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
         chatIOService.emit('chat', message);
 
-        $rootScope.sentMessage.push('You: '+$scope.message);
+        //$rootScope.sentMessage.push('You: '+$scope.message);
+        $rootScope.chatMessage.push('You: '+$scope.message);
 
         $scope.message = null;
       }
@@ -68,9 +74,8 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     chatIOService.on($window.sessionStorage.userID, function(data) {
 
-      //$rootScope.adminSocketID = data.adminSocketID;
-
-      $rootScope.sentMessage.push('Admin: '+data.message);
+      //$rootScope.sentMessage.push('Admin: '+data.message);
+      $rootScope.chatMessage.push('Admin: '+data.message);
 
       // implement message received acknowledge
       $rootScope.adID = data.userID;
@@ -81,7 +86,8 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     chatIOService.on('fromAdmin', function(data) {
 
-      $rootScope.sentMessage.push(data);
+      //$rootScope.sentMessage.push(data);
+      $rootScope.chatMessage.push(data);
 
     })
 }
