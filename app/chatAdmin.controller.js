@@ -48,5 +48,9 @@ function chatAdminCtrl($scope, $http, $routeParams,
       /** select the user to chat to */
       chatAdminService.selectUserToChat(userID);
 
+      // test keep chat messages in sessionStorage
+      var chatWith = 'chat'+userID;
+      $window.sessionStorage.setItem(chatWith,[]);
+
     }
 }
