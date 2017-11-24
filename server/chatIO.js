@@ -271,7 +271,9 @@ module.exports = function chatIO(socket) {
         console.log(doc);
 
         // emit to admin room
-        socket.to('adminRoom').emit('fromSu', data);
+        //socket.to('adminRoom').emit('fromSu', data);
+        socket.to('adminRoom').emit('toAllAdmin', data);
+
       });
 
     }

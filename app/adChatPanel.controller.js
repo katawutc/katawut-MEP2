@@ -101,25 +101,23 @@ function adChatPanelCtrl($rootScope, $scope, $window,
       chatIOService.emit('suMessageReceive', data);
     })
 
-
-
-
-
-
-
+    /*
     chatIOService.on('toAdmin', function(message) {
 
       $scope.adSentMessage.push(message);
 
     })
+    */
 
-    chatIOService.on('fromSu', function(data) {
+    //chatIOService.on('fromSu', function(data) {
+    chatIOService.on('toAllAdmin', function(data) {
 
       $rootScope.showAdChatPanel = true;
 
       $scope.adSentMessage.push('su: '+data.message);
 
-      $rootScope.suID = data.userID;
+      $rootScope.selectedSuID = data.userID;
+      //$rootScope.suID = data.userID;
 
       /** implement message received acknowledgement */
       data.sentSuccess = true;
@@ -127,8 +125,8 @@ function adChatPanelCtrl($rootScope, $scope, $window,
       console.log(data);
 
       // to keep chat start at
-      $rootScope.ChatStartAt[$rootScope.suID] = data.chatStartAt;
-      console.log($rootScope.ChatStartAt);
+      $rootScope.adChatStartAt[data.userID] = data.chatStartAt;
+      console.log($rootScope.adChatStartAt);
 
       chatIOService.emit('suMessageReceive', data);
 
