@@ -264,7 +264,8 @@ module.exports = function chatIO(socket) {
         console.log(doc);
 
         // emit to admin room
-        socket.to(data.suID).emit('fromAdmin', 'admin: '+data.message);
+        //socket.to(data.suID).emit('fromAdmin', 'admin: '+data.message);
+        socket.to(data.suID).emit('fromAdmin', data);
         //socket.to(data.suID).emit(data.suID, data);
       });
 
@@ -304,6 +305,19 @@ module.exports = function chatIO(socket) {
   socket.on('adMessageReceive', function(data) {
 
     if (data.sentSuccess === true) {
+
+      console.log('at server: adMessageReceive');
+
+      console.log(data);
+
+      db.collection('suChat')
+      .findAndModify({'userID': data.suID,
+                      'chatStartAt': data.chatStartAt,
+                      'message':{$elemMatch:{'userRole': 'ad',
+                                             'sentTime': data.sentTime}}},
+                      [],
+                      {$set: {'message.$.sentSuccess': true}},
+                      {new: true}, saveSuChat_cb);
 
     }
   })

@@ -89,8 +89,11 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     chatIOService.on('fromAdmin', function(data) {
 
-      //$rootScope.sentMessage.push(data);
-      $rootScope.chatMessage.push(data);
+      data.sentSuccess = true;
+      console.log(data);
+      chatIOService.emit('adMessageReceive', data);
+
+      $rootScope.chatMessage.push('Admin: '+data.message);
 
     })
 }
