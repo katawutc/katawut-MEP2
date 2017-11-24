@@ -6,6 +6,9 @@ angular.module('app')
 
 function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
+    /** test initializing chatMessage keeping in sessionStorage */
+    $window.sessionStorage.setItem('chatMessage', []);
+
     $rootScope.openChatPanel = function() {
 
       $rootScope.showChatPanel = !$rootScope.showChatPanel;
