@@ -67,6 +67,9 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
         //$rootScope.sentMessage.push('You: '+$scope.message);
         $rootScope.chatMessage.push('You: '+$scope.message);
 
+        console.log('no adID');
+        console.log(message);
+
         $scope.message = null;
       }
 

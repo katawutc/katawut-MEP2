@@ -57,7 +57,8 @@ function adChatPanelCtrl($rootScope, $scope, $window,
                        'suID': $rootScope.suID,
                        'chatStartAt': $rootScope.ChatStartAt[$rootScope.suID],
                        'sentTime': Date.now(),
-                       'message': $scope.message}
+                       'message': $scope.message,
+                       'sentSuccess': false}
 
         chatIOService.emit('chat', message);
 

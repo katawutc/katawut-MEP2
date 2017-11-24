@@ -212,11 +212,7 @@ module.exports = function chatIO(socket) {
     }
     else if (data.userRole === 'su' && data.adID) {
 
-        console.log(typeof data.userID);
-        console.log(data.userID);
-
-        console.log(typeof data.adminSocketID);
-        console.log(data.adminSocketID);
+      console.log('su and adID');
 
         //socket.to(data.adminSocketID).emit('toAdmin', 'su: '+ data.message);
 
@@ -228,9 +224,7 @@ module.exports = function chatIO(socket) {
     if (data.userRole === 'su' && !data.adID) {
 
       console.log('su chat to the admin first');
-
-      //data.suSocketID = socket.id;
-      //console.log(data.suSocketID);
+      console.log('su and no adID');
 
       console.log(data);
 
@@ -271,6 +265,7 @@ module.exports = function chatIO(socket) {
 
         // emit to admin room
         socket.to(data.suID).emit('fromAdmin', 'admin: '+data.message);
+        //socket.to(data.suID).emit(data.suID, data);
       });
 
 
