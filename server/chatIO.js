@@ -255,7 +255,26 @@ module.exports = function chatIO(socket) {
     else if (data.userRole === 'ad' && data.suID) {
 
       console.log(data);
-      socket.to(data.suID).emit('fromAdmin', 'admin: '+data.message);
+
+      /** to save chat message from admin and emit acknowledgement here */
+      db.collection('suChat')
+      .findAndModify({'userID': data.suID,
+                      'chatStartAt': data.chatStartAt},
+                      [],
+                      {$push: {'message': data}},
+                      {new: true, upsert: true}, /*saveSuChat_cb*/
+      function(err, doc) {
+        if (err) throw err;
+
+        console.log('save su chat');
+        console.log(doc);
+
+        // emit to admin room
+        socket.to(data.suID).emit('fromAdmin', 'admin: '+data.message);
+      });
+
+
+
     }
   })
 
