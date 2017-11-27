@@ -9,6 +9,14 @@ function loginHistoryAdminCtrl($scope, $http, $routeParams,
                                $window, $location,
                                loginHistoryAdmin, accountAdmin) {
 
-  $scope.loginHistory = loginHistoryAdmin;
-  $scope.userAccount = accountAdmin;
+  if (loginHistoryAdmin !== null) {
+
+    $scope.loginHistory = loginHistoryAdmin;
+  }
+
+  if (accountAdmin !== null) {
+    
+    $scope.userAccount = accountAdmin;
+  }
+
 }

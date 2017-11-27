@@ -1,5 +1,7 @@
-angular.module('app').factory('accountAdminService',
-  ['$http', '$route', '$q', '$window', accountAdminService]);
+angular.module('app')
+.factory('accountAdminService',
+        ['$http', '$route', '$q', '$window',
+          accountAdminService]);
 
 function accountAdminService($http, $route, $q, $window) {
 
