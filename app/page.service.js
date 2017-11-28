@@ -53,10 +53,7 @@ function pageService() {
          startIndex: startIndex,
          endIndex: endIndex,
          page: page
-};
-
-
-
+       };
      }
    }
  }

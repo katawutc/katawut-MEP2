@@ -1,12 +1,10 @@
 angular.module('app')
 .controller('loginHistoryAdminCtrl',
-           ['$scope', '$http', '$routeParams',
-            '$window', '$location',
+           ['$scope', '$log',
             'loginHistoryAdmin', 'accountAdmin',
              loginHistoryAdminCtrl]);
 
-function loginHistoryAdminCtrl($scope, $http, $routeParams,
-                               $window, $location,
+function loginHistoryAdminCtrl($scope, $log,
                                loginHistoryAdmin, accountAdmin) {
 
   if (loginHistoryAdmin !== null) {
@@ -15,8 +13,25 @@ function loginHistoryAdminCtrl($scope, $http, $routeParams,
   }
 
   if (accountAdmin !== null) {
-    
+
     $scope.userAccount = accountAdmin;
   }
+
+
+  $scope.totalItems = 64;
+  $scope.currentPage = 4;
+
+  $scope.setPage = function (pageNo) {
+    $scope.currentPage = pageNo;
+  };
+
+  $scope.pageChanged = function() {
+    $log.log('Page changed to: ' + $scope.currentPage);
+  };
+
+  $scope.maxSize = 5;
+  $scope.bigTotalItems = 175;
+  $scope.bigCurrentPage = 1;
+
 
 }
