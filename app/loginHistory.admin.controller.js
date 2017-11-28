@@ -1,10 +1,12 @@
 angular.module('app')
 .controller('loginHistoryAdminCtrl',
            ['$scope',
+            'loginHistoryAdminService',
             'loginHistoryAdmin', 'accountAdmin', 'loginHistoryCount',
              loginHistoryAdminCtrl]);
 
 function loginHistoryAdminCtrl($scope,
+                               loginHistoryAdminService,
                                loginHistoryAdmin, accountAdmin, loginHistoryCount) {
 
   // last ID of the current page
@@ -49,10 +51,13 @@ function loginHistoryAdminCtrl($scope,
 
     console.log('Fetch data to display');
 
+    var pageData = loginHistoryAdminService.getPageData(lastIDCurrentpage,
+                                                        previousPage,
+                                                        $scope.bigCurrentPage);
+
+    console.log(pageData);
+
     previousPage = $scope.bigCurrentPage;
-
-
-
 
   };
 

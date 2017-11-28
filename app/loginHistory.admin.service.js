@@ -47,6 +47,36 @@ function loginHistoryAdminService($http, $route, $q, $window) {
 
         });
         return  deferred.promise;
+     },
+     getPageData : function(lastIDCurrentpage, previousPage, newPage) {
+
+       console.log('at getPageData');
+
+       console.log(lastIDCurrentpage);
+
+       console.log('previous page: '+ previousPage);
+
+       console.log('new page: '+ newPage);
+
+       var previousPage = parseInt(previousPage);
+       var newPage = parseInt(newPage);
+
+       console.log(typeof(previousPage));
+       console.log(typeof(newPage));
+
+       console.log(previousPage);
+       console.log(newPage);
+
+       /**
+         * 1. if page change is next to the previous one
+         * 1a. if page is greater than the previous one
+         * 1b. if page is lesser than the previous one
+         * 2. if page change is not next to the previous one
+         */
+
+
+
+       return 'pageData';
      }
    }
  }
