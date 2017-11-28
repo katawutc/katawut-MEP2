@@ -208,6 +208,11 @@ app.get('/admin/loginHistory/:userRole/:userID', passport.authenticate('jwt', {s
   require('./server/checkAdminAuthority'),
   require('./server/getLoginHistoryAdmin'));
 
+/** get usr login history count */
+app.get('/admin/loginHistoryCount/:userRole/:userID', passport.authenticate('jwt', {session: false}),
+  require('./server/checkAdminAuthority'),
+  require('./server/getLoginHistoryCountAdmin'));
+
 /** get su new test info */
 app.get('/getSuNewTestInfo/:userID/:testID/:testRunningNumber', passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),

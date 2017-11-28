@@ -282,6 +282,9 @@ angular.module('app')
         },
         loginHistoryAdmin : function(loginHistoryAdminService) {
           return loginHistoryAdminService.getLoginHistoryAdmin();
+        },
+        loginHistoryCount : function(loginHistoryAdminService) {
+          return loginHistoryAdminService.getLoginHistoryCountAdmin();
         }
       }
     })

@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('loginHistoryAdminCtrl',
            ['$scope', '$log',
-            'loginHistoryAdmin', 'accountAdmin',
+            'loginHistoryAdmin', 'accountAdmin', 'loginHistoryCount',
              loginHistoryAdminCtrl]);
 
 function loginHistoryAdminCtrl($scope, $log,
-                               loginHistoryAdmin, accountAdmin) {
+                               loginHistoryAdmin, accountAdmin, loginHistoryCount) {
 
   if (loginHistoryAdmin !== null) {
 
@@ -16,6 +16,8 @@ function loginHistoryAdminCtrl($scope, $log,
 
     $scope.userAccount = accountAdmin;
   }
+
+  console.log(loginHistoryCount);
 
 
   $scope.totalItems = 64;
