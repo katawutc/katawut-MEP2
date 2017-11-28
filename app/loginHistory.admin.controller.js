@@ -20,20 +20,24 @@ function loginHistoryAdminCtrl($scope, $log,
   console.log(loginHistoryCount);
 
 
-  $scope.totalItems = 64;
-  $scope.currentPage = 4;
+  //$scope.totalItems = 64;
+  //$scope.currentPage = 4;
 
   $scope.setPage = function (pageNo) {
     $scope.currentPage = pageNo;
   };
 
   $scope.pageChanged = function() {
-    $log.log('Page changed to: ' + $scope.currentPage);
+
+    console.log('Page changed to: ' + $scope.bigCurrentPage);
   };
 
   $scope.maxSize = 5;
-  $scope.bigTotalItems = 175;
+  $scope.bigTotalItems = loginHistoryCount;
   $scope.bigCurrentPage = 1;
+
+  console.log($scope.bigCurrentPage);
+  console.log($scope.numPages);
 
 
 }

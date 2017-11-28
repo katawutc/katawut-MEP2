@@ -31,9 +31,10 @@
 
   <div class="col-sm-1"></div>
 
-  <ul uib-pagination total-items="bigTotalItems"
-      ng-model="bigCurrentPage" max-size="maxSize"
-      class="pagination-sm" boundary-links="true"
-      force-ellipses="true"></ul>
+    <ul uib-pagination total-items="bigTotalItems"
+    ng-model="bigCurrentPage" max-size="maxSize"
+    class="pagination-sm" boundary-links="true"
+    num-pages="numPages"
+    ng-change='pageChanged()'></ul>
 
 </div>
