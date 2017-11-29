@@ -46,8 +46,9 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
-           '_id': {$lt: objectID(req.params.markIDCurrentPage)}},
-          {sort:{$natural:-1}, limit: 10}).toArray(loginHistoryPage_cb);
+           '_id': {$lt: objectID(req.params.markIDCurrentPage)}})
+    .sort({'_id':-1})
+    .limit(10).toArray(loginHistoryPage_cb);
   }
   else if (newPage < previousPage && ( (previousPage-newPage) === 1) ) {
 
@@ -55,8 +56,9 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
-           '_id': {$gt: objectID(req.params.markIDCurrentPage)}},
-          {sort:{$natural:1}, limit: 10}).toArray(loginHistoryPageReverse_cb);
+           '_id': {$gt: objectID(req.params.markIDCurrentPage)}})
+    .sort({'_id':1})
+    .limit(10).toArray(loginHistoryPageReverse_cb);
   }
 
 }

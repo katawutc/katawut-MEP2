@@ -1,4 +1,3 @@
-var async = require('async');
 
 module.exports = function getLoginHistoryAdmin(req, res) {
 
@@ -9,19 +8,20 @@ module.exports = function getLoginHistoryAdmin(req, res) {
     res.json({errorMessage : 'no authority'});
   }
 
+  function getLastHistory_cb(err, loginHistory) {
+
+    if (err) throw err;
+
+    console.log(loginHistory);
+
+    res.json(loginHistory);
+  }
+
   if (req.mepAdminAccess){
 
     db.collection('loginHistory')
-    .find({'userID': req.params.userID},
-          {sort:{$natural:-1}, limit: 10}).toArray(getLastHistory);
-}
-
-  function getLastHistory(err, doc) {
-    if (err) throw err;
-    if(doc) {
-
-      loginHistory = doc;
-    }
-      res.json(loginHistory);
+    .find({'userID': req.params.userID})
+    .sort({'_id': -1})
+    .limit(10).toArray(getLastHistory_cb);
   }
 }
