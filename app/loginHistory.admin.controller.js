@@ -42,34 +42,15 @@ function loginHistoryAdminCtrl($scope, $route, $http, $window,
 
     console.log('Page changed to: ' + $scope.bigCurrentPage);
 
-    /**
-      * 1. if page change is next to the previous one
-      * 1a. if page is greater than the previous one
-      * 1b. if page is lesser than the previous one
-      * 2. if page change is not next to the previous one
-      */
-
     console.log('Fetch data to display');
-
-    /*
-
-    var pageData = loginHistoryAdminService.getPageData(lastIDCurrentpage,
-                                                        previousPage,
-                                                        $scope.bigCurrentPage);
-
-    console.log(pageData);
-
-    if (pageData) {
-
-      $scope.loginHistory = pageData.$$state.value;
-    }
-    */
 
     var loginHistoryPageUrl = '/admin/loginHistoryPage/'+$route.current.params.userRole+'/'+
                                 $route.current.params.userID+'/'+
-                                lastIDCurrentpage;
+                                lastIDCurrentpage+'/'+
+                                previousPage+'/'+
+                                $scope.bigCurrentPage;
 
-    //var deferred = $q.defer();
+    console.log(loginHistoryPageUrl);
 
     $http({
       method: 'GET',
@@ -79,14 +60,11 @@ function loginHistoryAdminCtrl($scope, $route, $http, $window,
         }
     }).then(function successCallback(response) {
 
-      //deferred.resolve(response.data);
-
       $scope.loginHistory = response.data;
 
     },function errorCallback(response){
 
     });
-
 
     previousPage = $scope.bigCurrentPage;
 
