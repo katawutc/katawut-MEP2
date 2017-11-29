@@ -7,13 +7,22 @@ module.exports = function getLoginHistoryPage(req, res) {
 
   console.log(req.params.userID);
 
-  console.log(req.params.lastIDCurrentpage);
+  console.log(req.params.markIDCurrentPage);
 
   function loginHistoryPage_cb(err, loginHistoryPage) {
 
     if (err) throw err;
 
     console.log(loginHistoryPage);
+
+    res.json(loginHistoryPage);
+  }
+
+  function loginHistoryPageReverse_cb(err, loginHistoryPage) {
+
+    if (err) throw err;
+
+    console.log(loginHistoryPage.reverse());
 
     res.json(loginHistoryPage);
   }
@@ -33,17 +42,21 @@ module.exports = function getLoginHistoryPage(req, res) {
 
   if (newPage > previousPage && ( (newPage-previousPage) === 1) ) {
 
+    console.log('at newPage > previousPage && ( (newPage-previousPage) === 1)');
+
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
-           '_id': {$lt: objectID(req.params.lastIDCurrentpage)}},
+           '_id': {$lt: objectID(req.params.markIDCurrentPage)}},
           {sort:{$natural:-1}, limit: 10}).toArray(loginHistoryPage_cb);
   }
   else if (newPage < previousPage && ( (previousPage-newPage) === 1) ) {
 
+    console.log('newPage < previousPage && ( (previousPage-newPage) === 1)');
+
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
-           '_id': {$gt: objectID(req.params.lastIDCurrentpage)}},
-          {sort:{$natural:-1}, limit: 10}).toArray(loginHistoryPage_cb);
+           '_id': {$gt: objectID(req.params.markIDCurrentPage)}},
+          {sort:{$natural:1}, limit: 10}).toArray(loginHistoryPageReverse_cb);
   }
 
 }

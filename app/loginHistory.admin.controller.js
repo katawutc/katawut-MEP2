@@ -10,7 +10,9 @@ function loginHistoryAdminCtrl($scope, $route, $http, $window,
                                loginHistoryAdmin, accountAdmin, loginHistoryCount) {
 
   // last ID of the current page
-  var lastIDCurrentpage;
+  var lastIDCurrentPage;
+  var firstIDCurrentPage;
+  var markIDCurrentPage;
   var previousPage;
 
   $scope.maxSize = 5;
@@ -18,13 +20,17 @@ function loginHistoryAdminCtrl($scope, $route, $http, $window,
   $scope.bigCurrentPage = 1;
   previousPage = $scope.bigCurrentPage;
 
+  // 1st page up logic
   if (loginHistoryAdmin !== null) {
 
     $scope.loginHistory = loginHistoryAdmin;
     console.log(loginHistoryAdmin[loginHistoryAdmin.length-1]);
 
-    lastIDCurrentpage = loginHistoryAdmin[loginHistoryAdmin.length-1]._id;
-    console.log(lastIDCurrentpage);
+    firstIDCurrentPage = loginHistoryAdmin[0]._id;
+    console.log(firstIDCurrentPage);
+
+    lastIDCurrentPage = loginHistoryAdmin[loginHistoryAdmin.length-1]._id;
+    console.log(lastIDCurrentPage);
 
   }
 
@@ -44,9 +50,20 @@ function loginHistoryAdminCtrl($scope, $route, $http, $window,
 
     console.log('Fetch data to display');
 
+    if (parseInt($scope.bigCurrentPage) > parseInt(previousPage)) {
+
+      markIDCurrentPage = lastIDCurrentPage;
+    }
+    else if (parseInt($scope.bigCurrentPage) < parseInt(previousPage)) {
+
+      markIDCurrentPage = firstIDCurrentPage;
+    }
+
+
+
     var loginHistoryPageUrl = '/admin/loginHistoryPage/'+$route.current.params.userRole+'/'+
                                 $route.current.params.userID+'/'+
-                                lastIDCurrentpage+'/'+
+                                markIDCurrentPage+'/'+
                                 previousPage+'/'+
                                 $scope.bigCurrentPage;
 
@@ -62,10 +79,15 @@ function loginHistoryAdminCtrl($scope, $route, $http, $window,
 
       $scope.loginHistory = response.data;
 
+      console.log($scope.loginHistory);
+
       previousPage = $scope.bigCurrentPage;
 
-      lastIDCurrentpage = $scope.loginHistory[$scope.loginHistory.length-1]._id;
-      console.log(lastIDCurrentpage);
+      firstIDCurrentPage = $scope.loginHistory[0]._id;
+      console.log(firstIDCurrentPage);
+
+      lastIDCurrentPage = $scope.loginHistory[$scope.loginHistory.length-1]._id;
+      console.log(lastIDCurrentPage);
 
     },function errorCallback(response){
 

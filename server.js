@@ -214,7 +214,7 @@ app.get('/admin/loginHistoryCount/:userRole/:userID', passport.authenticate('jwt
   require('./server/getLoginHistoryCountAdmin'));
 
 /** get usr login history pagination */
-app.get('/admin/loginHistoryPage/:userRole/:userID/:lastIDCurrentpage/:previousPage/:newPage',
+app.get('/admin/loginHistoryPage/:userRole/:userID/:markIDCurrentPage/:previousPage/:newPage',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
   require('./server/getLoginHistoryPage'));
