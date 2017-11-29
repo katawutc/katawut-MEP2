@@ -57,6 +57,11 @@ function loginHistoryAdminCtrl($scope,
 
     console.log(pageData);
 
+    if (pageData) {
+
+      $scope.loginHistory = pageData.$$state.value;
+    }
+
     previousPage = $scope.bigCurrentPage;
 
   };

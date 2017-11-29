@@ -74,9 +74,26 @@ function loginHistoryAdminService($http, $route, $q, $window) {
          * 2. if page change is not next to the previous one
          */
 
+         var loginHistoryPageUrl = '/admin/loginHistoryPage/'+$route.current.params.userRole+'/'+
+                                     $route.current.params.userID+'/'+
+                                     lastIDCurrentpage;
 
+         var deferred = $q.defer();
 
-       return 'pageData';
+         $http({
+           method: 'GET',
+           url: loginHistoryPageUrl,
+           headers: {
+             'Authorization': 'JWT ' + $window.sessionStorage.token
+             }
+         }).then(function successCallback(response) {
+           
+           deferred.resolve(response.data);
+         },function errorCallback(response){
+
+         });
+         return  deferred.promise;
+
      }
    }
  }

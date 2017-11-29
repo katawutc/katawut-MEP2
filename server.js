@@ -213,6 +213,11 @@ app.get('/admin/loginHistoryCount/:userRole/:userID', passport.authenticate('jwt
   require('./server/checkAdminAuthority'),
   require('./server/getLoginHistoryCountAdmin'));
 
+/** get usr login history pagination */
+app.get('/admin/loginHistoryPage/:userRole/:userID/:lastIDCurrentpage', passport.authenticate('jwt', {session: false}),
+  require('./server/checkAdminAuthority'),
+  require('./server/getLoginHistoryPage'));
+
 /** get su new test info */
 app.get('/getSuNewTestInfo/:userID/:testID/:testRunningNumber', passport.authenticate('jwt', {session: false}),
   require('./server/checkSuAuthority'),
