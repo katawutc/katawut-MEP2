@@ -1,11 +1,11 @@
 angular.module('app')
 .controller('loginHistoryAdminCtrl',
-           ['$scope',
+           ['$scope', '$route', '$http', '$window',
             'loginHistoryAdminService',
             'loginHistoryAdmin', 'accountAdmin', 'loginHistoryCount',
              loginHistoryAdminCtrl]);
 
-function loginHistoryAdminCtrl($scope,
+function loginHistoryAdminCtrl($scope, $route, $http, $window,
                                loginHistoryAdminService,
                                loginHistoryAdmin, accountAdmin, loginHistoryCount) {
 
@@ -51,6 +51,8 @@ function loginHistoryAdminCtrl($scope,
 
     console.log('Fetch data to display');
 
+    /*
+
     var pageData = loginHistoryAdminService.getPageData(lastIDCurrentpage,
                                                         previousPage,
                                                         $scope.bigCurrentPage);
@@ -61,11 +63,32 @@ function loginHistoryAdminCtrl($scope,
 
       $scope.loginHistory = pageData.$$state.value;
     }
+    */
+
+    var loginHistoryPageUrl = '/admin/loginHistoryPage/'+$route.current.params.userRole+'/'+
+                                $route.current.params.userID+'/'+
+                                lastIDCurrentpage;
+
+    //var deferred = $q.defer();
+
+    $http({
+      method: 'GET',
+      url: loginHistoryPageUrl,
+      headers: {
+        'Authorization': 'JWT ' + $window.sessionStorage.token
+        }
+    }).then(function successCallback(response) {
+
+      //deferred.resolve(response.data);
+
+      $scope.loginHistory = response.data;
+
+    },function errorCallback(response){
+
+    });
+
 
     previousPage = $scope.bigCurrentPage;
 
-  };
-
-
-
+  }
 }
