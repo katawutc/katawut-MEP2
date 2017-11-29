@@ -62,11 +62,14 @@ function loginHistoryAdminCtrl($scope, $route, $http, $window,
 
       $scope.loginHistory = response.data;
 
+      previousPage = $scope.bigCurrentPage;
+
+      lastIDCurrentpage = $scope.loginHistory[$scope.loginHistory.length-1]._id;
+      console.log(lastIDCurrentpage);
+
     },function errorCallback(response){
 
     });
-
-    previousPage = $scope.bigCurrentPage;
 
   }
 }

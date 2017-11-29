@@ -31,14 +31,14 @@ module.exports = function getLoginHistoryPage(req, res) {
   var previousPage = parseInt(req.params.previousPage);
   console.log(previousPage);
 
-  if (newPage > previousPage) {
+  if (newPage > previousPage && ( (newPage-previousPage) === 1) ) {
 
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
            '_id': {$lt: objectID(req.params.lastIDCurrentpage)}},
           {sort:{$natural:-1}, limit: 10}).toArray(loginHistoryPage_cb);
   }
-  else if (newPage < previousPage) {
+  else if (newPage < previousPage && ( (previousPage-newPage) === 1) ) {
 
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
