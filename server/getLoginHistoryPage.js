@@ -15,7 +15,18 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     console.log(loginHistoryPage);
 
-    res.json(loginHistoryPage);
+    if (loginHistoryPage.length === 10) {
+
+      res.json(loginHistoryPage);
+    }
+    else if (loginHistoryPage.length > 10) {
+
+      loginHistoryPage.splice(0, 10);
+
+      console.log(loginHistoryPage);
+
+      res.json(loginHistoryPage);
+    }
   }
 
   function loginHistoryPageReverse_cb(err, loginHistoryPage) {
@@ -50,6 +61,21 @@ module.exports = function getLoginHistoryPage(req, res) {
     .sort({'_id':-1})
     .limit(10).toArray(loginHistoryPage_cb);
   }
+  else if (newPage > previousPage && ( (newPage-previousPage) !== 1) ) {
+
+    console.log('at newPage > previousPage && ( (newPage-previousPage) !== 1)');
+
+    var pageDiff = newPage-previousPage;
+
+    console.log(pageDiff);
+
+    db.collection('loginHistory')
+    .find({'userID': req.params.userID,
+           '_id': {$lt: objectID(req.params.markIDCurrentPage)}})
+    .sort({'_id':-1})
+    .limit(pageDiff*10).toArray(loginHistoryPage_cb);
+
+  }
   else if (newPage < previousPage && ( (previousPage-newPage) === 1) ) {
 
     console.log('newPage < previousPage && ( (previousPage-newPage) === 1)');
@@ -59,6 +85,12 @@ module.exports = function getLoginHistoryPage(req, res) {
            '_id': {$gt: objectID(req.params.markIDCurrentPage)}})
     .sort({'_id':1})
     .limit(10).toArray(loginHistoryPageReverse_cb);
+  }
+  else if (newPage < previousPage && ( (previousPage-newPage) !== 1) ) {
+
+    console.log('at newPage < previousPage && ( (newPage-previousPage) !== 1)');
+
+    console.log(previousPage-newPage);
   }
 
 }
