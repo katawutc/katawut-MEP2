@@ -5,9 +5,9 @@ module.exports = function getLoginHistoryPage(req, res) {
 
   var objectID = require('mongodb').ObjectID;
 
-  console.log(req.params.userID);
+  console.log('userID: '+req.params.userID);
 
-  console.log(req.params.markIDCurrentPage);
+  console.log('markIDCurrentPage: '+req.params.markIDCurrentPage);
 
   function loginHistoryPage_cb(err, loginHistoryPage) {
 
@@ -15,37 +15,44 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     console.log(loginHistoryPage);
 
-    /*
-    if (loginHistoryPage.length === 10) {
-
-      res.json(loginHistoryPage);
-    }*/
-
     // less than 10 case
     var quotient = Math.floor((loginHistoryPage.length)/10);
 
     var remainder = loginHistoryPage.length % 10;
 
-    console.log(quotient);
+    console.log('quotient: '+quotient);
 
-    console.log(remainder);
+    console.log('remainder: '+remainder);
 
     if (quotient === 0) {
+
+      console.log('at loginHistoryPage_cb: quotient === 0');
+
+      console.log(loginHistoryPage);
 
       res.json(loginHistoryPage);
     }
     else if (quotient === 1 && remainder === 0) {
 
-      //loginHistoryPage.splice(0, 10);
+      console.log('at loginHistoryPage_cb: quotient === 1 && remainder === 0');
+
+      console.log(loginHistoryPage);
 
       res.json(loginHistoryPage);
     }
     else if (quotient === 1 && remainder > 0) {
 
+      console.log('at loginHistoryPage_cb: quotient === 1 && remainder > 0');
+
       loginHistoryPage.splice(0, 10);
+
+      console.log(loginHistoryPage);
+
       res.json(loginHistoryPage);
     }
     else if (quotient > 1 && remainder === 0) {
+
+      console.log('at loginHistoryPage_cb: quotient > 1 && remainder === 0');
 
       loginHistoryPage.splice(0, 10*(quotient-1));
 
@@ -54,6 +61,8 @@ module.exports = function getLoginHistoryPage(req, res) {
       res.json(loginHistoryPage);
     }
     else if (quotient > 1 && remainder > 0) {
+
+      console.log('at loginHistoryPage_cb: quotient > 1 && remainder > 0');
 
       loginHistoryPage.splice(0, 10*quotient);
 
@@ -69,12 +78,7 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     loginHistoryPage.reverse();
 
-    /*
-    if (loginHistoryPage.length === 10) {
-
-      res.json(loginHistoryPage);
-    }
-    */
+    console.log(loginHistoryPage);
 
     // less than 10 case
     var quotient = Math.floor((loginHistoryPage.length)/10);
@@ -87,28 +91,25 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     if (quotient === 0) {
 
-      res.json(loginHistoryPage);
-    }
-    else if (quotient === 1 && remainder === 0) {
-
-      res.json(loginHistoryPage);
-    }
-    else if (quotient === 1 && remainder > 0) {
-
-      loginHistoryPage.splice(0, 10);
-      res.json(loginHistoryPage);
-    }
-    else if (quotient > 1 && remainder === 0) {
-
-      loginHistoryPage.splice(0, 10*(quotient-1));
+      console.log('at loginHistoryPageReverse_cb: quotient === 0');
 
       console.log(loginHistoryPage);
 
       res.json(loginHistoryPage);
     }
-    else if (quotient > 1 && remainder > 0) {
+    else if (quotient === 1 && remainder === 0) {
 
-      loginHistoryPage.splice(0, 10*quotient);
+      console.log('at loginHistoryPageReverse_cb: quotient === 1 && remainder === 0');
+
+      console.log(loginHistoryPage);
+
+      res.json(loginHistoryPage);
+    }
+    else if (quotient > 1 && remainder === 0) {
+
+      console.log('at loginHistoryPageReverse_cb: quotient > 1 && remainder === 0');
+
+      loginHistoryPage.splice(((quotient-1)*10)-1, 10*(quotient-1));
 
       console.log(loginHistoryPage);
 
@@ -124,10 +125,10 @@ module.exports = function getLoginHistoryPage(req, res) {
     */
 
   var newPage = parseInt(req.params.newPage);
-  console.log(newPage);
+  console.log('newPage: '+newPage);
 
   var previousPage = parseInt(req.params.previousPage);
-  console.log(previousPage);
+  console.log('previousPage: '+previousPage);
 
   if (newPage > previousPage && ( (newPage-previousPage) === 1) ) {
 
@@ -145,7 +146,7 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     var pageDiff = newPage-previousPage;
 
-    console.log(pageDiff);
+    console.log('pageDiff: '+pageDiff);
 
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
@@ -170,7 +171,7 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     var pageDiff = previousPage-newPage;
 
-    console.log(pageDiff);
+    console.log('pageDiff :'+pageDiff);
 
     db.collection('loginHistory')
     .find({'userID': req.params.userID,
