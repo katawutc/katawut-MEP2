@@ -85,9 +85,9 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     var remainder = loginHistoryPage.length % 10;
 
-    console.log(quotient);
+    console.log('quotient: '+quotient);
 
-    console.log(remainder);
+    console.log('remainder: '+remainder);
 
     if (quotient === 0) {
 
@@ -109,7 +109,7 @@ module.exports = function getLoginHistoryPage(req, res) {
 
       console.log('at loginHistoryPageReverse_cb: quotient > 1 && remainder === 0');
 
-      loginHistoryPage.splice(((quotient-1)*10)-1, 10*(quotient-1));
+      loginHistoryPage.splice(((quotient-1)*10), 10*(quotient-1));
 
       console.log(loginHistoryPage);
 
