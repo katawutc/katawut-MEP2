@@ -15,13 +15,47 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     console.log(loginHistoryPage);
 
+    /*
     if (loginHistoryPage.length === 10) {
 
       res.json(loginHistoryPage);
+    }*/
+
+    // less than 10 case
+    var quotient = Math.floor((loginHistoryPage.length)/10);
+
+    var remainder = loginHistoryPage.length % 10;
+
+    console.log(quotient);
+
+    console.log(remainder);
+
+    if (quotient === 0) {
+
+      res.json(loginHistoryPage);
     }
-    else if (loginHistoryPage.length > 10) {
+    else if (quotient === 1 && remainder === 0) {
+
+      //loginHistoryPage.splice(0, 10);
+
+      res.json(loginHistoryPage);
+    }
+    else if (quotient === 1 && remainder > 0) {
 
       loginHistoryPage.splice(0, 10);
+      res.json(loginHistoryPage);
+    }
+    else if (quotient > 1 && remainder === 0) {
+
+      loginHistoryPage.splice(0, 10*(quotient-1));
+
+      console.log(loginHistoryPage);
+
+      res.json(loginHistoryPage);
+    }
+    else if (quotient > 1 && remainder > 0) {
+
+      loginHistoryPage.splice(0, 10*quotient);
 
       console.log(loginHistoryPage);
 
@@ -33,9 +67,53 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     if (err) throw err;
 
-    console.log(loginHistoryPage.reverse());
+    loginHistoryPage.reverse();
 
-    res.json(loginHistoryPage);
+    /*
+    if (loginHistoryPage.length === 10) {
+
+      res.json(loginHistoryPage);
+    }
+    */
+
+    // less than 10 case
+    var quotient = Math.floor((loginHistoryPage.length)/10);
+
+    var remainder = loginHistoryPage.length % 10;
+
+    console.log(quotient);
+
+    console.log(remainder);
+
+    if (quotient === 0) {
+
+      res.json(loginHistoryPage);
+    }
+    else if (quotient === 1 && remainder === 0) {
+
+      res.json(loginHistoryPage);
+    }
+    else if (quotient === 1 && remainder > 0) {
+
+      loginHistoryPage.splice(0, 10);
+      res.json(loginHistoryPage);
+    }
+    else if (quotient > 1 && remainder === 0) {
+
+      loginHistoryPage.splice(0, 10*(quotient-1));
+
+      console.log(loginHistoryPage);
+
+      res.json(loginHistoryPage);
+    }
+    else if (quotient > 1 && remainder > 0) {
+
+      loginHistoryPage.splice(0, 10*quotient);
+
+      console.log(loginHistoryPage);
+
+      res.json(loginHistoryPage);
+    }
   }
 
   /**
@@ -90,7 +168,15 @@ module.exports = function getLoginHistoryPage(req, res) {
 
     console.log('at newPage < previousPage && ( (newPage-previousPage) !== 1)');
 
-    console.log(previousPage-newPage);
+    var pageDiff = previousPage-newPage;
+
+    console.log(pageDiff);
+
+    db.collection('loginHistory')
+    .find({'userID': req.params.userID,
+           '_id': {$gt: objectID(req.params.markIDCurrentPage)}})
+    .sort({'_id':1})
+    .limit(pageDiff*10).toArray(loginHistoryPageReverse_cb);
   }
 
 }
