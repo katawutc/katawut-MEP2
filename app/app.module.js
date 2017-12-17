@@ -17,12 +17,12 @@ function FBAsyncInit($window, $rootScope) {
 
   $window.fbAsyncInit = function() {
     FB.init({
-      appId      : '141198316480017',
+      appId      : '948325255322737',
       status     : true,
       cookie     : true,  // enable cookies to allow the server to access
                       // the session
       xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.8' // use graph api version 2.8
+      version    : 'v2.11' // use graph api version 2.8
     });
 
     $rootScope.fbSdkLoaded = true;
