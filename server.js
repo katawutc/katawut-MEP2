@@ -58,8 +58,11 @@ app.use(helmet());
  */
 app.use(express.static('app'));
 app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.use(express.static('public/html'));
+app.use(express.static(__dirname + '/public/html'));
 app.use(express.static('public/image'));
+app.use(express.static(__dirname + '/public/image'));
 app.use(express.static('dist'));
 app.use(express.static('dist/js'));
 app.use(express.static('bower_components/ng-scroll-glue/dist'));
