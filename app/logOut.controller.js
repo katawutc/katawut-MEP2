@@ -21,6 +21,9 @@ function logOutCtrl($scope, $window, $rootScope,
 
       });
     }
+    else if (fbLogInStatus === 'fb sdk not loaded') {
+
+    }
 
     $scope.message = 'You have successfully logged out.';
 

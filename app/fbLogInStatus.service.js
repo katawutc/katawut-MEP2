@@ -9,6 +9,10 @@ function fbLogInStatusService($window, $q, $rootScope) {
 
           var deferred = $q.defer();
 
+          // need to check if FB is available to getLoginStatus
+
+          if ($rootScope.fbSdkLoaded) {
+
           FB.getLoginStatus(function(response) {
             if (response.status) {
               deferred.resolve(response.status);
@@ -16,6 +20,10 @@ function fbLogInStatusService($window, $q, $rootScope) {
           })
           return deferred.promise;
 
+        }
+        else if (!$rootScope.fbSdkLoaded) {
+          return 'fb sdk not loaded';
+        }
       }
     }
   }
