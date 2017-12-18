@@ -73,8 +73,8 @@
   position: fixed;
   width: 24%; /* 100% width */
   left: 75%;
-  height: 330px;
-  top: 135px;
+  height: 325px;
+  top: 120px;
   /*text-align: left; Centered text/links */
   z-index: 20;
   box-sizing:border-box;
@@ -109,8 +109,8 @@
   position: fixed;
   width: 24%;
   left: 75%;
-  bottom: 10px;
-  height: 330px;
+  bottom: 25px;
+  height: 325px;
   z-index: 20;
 }
 
