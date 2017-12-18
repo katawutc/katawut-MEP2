@@ -290,7 +290,7 @@ angular.module('app')
     })
     /** su new test access */
     .when('/suNewTest/:userID/:testID/:testRunningNumber', {
-      templateUrl : 'suNewTest.html',
+      templateUrl : 'aasuNewTest.html',
       controller : 'suNewTestCtrl',
       resolve : {
         suNewTestInfo : function(suNewTestInfoService) {
