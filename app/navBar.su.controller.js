@@ -24,7 +24,7 @@ function navBarSuController ($scope, $window) {
       FB.ui(
         {
           method: 'share',
-          href: 'https://tranquil-chamber-47085.herokuapp.com',
+          href: 'https://sheltered-anchorage-14909.herokuapp.com',
         },
         // callback
         function(response) {
