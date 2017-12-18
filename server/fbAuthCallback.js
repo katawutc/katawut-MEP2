@@ -8,7 +8,7 @@ passport.use(new FacebookStrategy({
     clientID: '948325255322737',
     clientSecret: '615b50da6a3f4c61c48bcd75f79ac1cb',
     //callbackURL: "http://localhost:5000/auth/facebook/callback",
-    callbackURL: "https://tranquil-chamber-47085.herokuapp.com/auth/facebook/callback",
+    callbackURL: "https://sheltered-anchorage-14909.herokuapp.com/auth/facebook/callback",
     //passReqToCallback : true, /* what is this? */
     profileFields: ['id', 'emails', 'name', 'displayName'] //This
   },
