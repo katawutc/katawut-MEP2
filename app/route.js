@@ -432,8 +432,4 @@ angular.module('app')
         }
       }
     })
-    /** privacy for facebook */
-    .when('/privacypolicy', {
-      templateUrl : 'privacypolicy.html'
-    })
 });
