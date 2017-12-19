@@ -20,12 +20,7 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
     $rootScope.adNewChat = function() {
 
-      console.log('admin new chat');
       $rootScope.adChatStartAt[$rootScope.selectedSuID] = Date.now();
-
-      console.log($rootScope.adChatStartAt);
-      console.log($rootScope.adChatStartAt[$rootScope.selectedSuID]);
-
     }
 
     $scope.sendMessage = function() {
@@ -46,47 +41,6 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
          $scope.message = null;
       }
-
-
-
-      /*
-
-        if (!$rootScope.suID) {
-
-        var message = {'userID': $window.sessionStorage.userID,
-                       'userRole': $window.sessionStorage.userRole,
-                       'adminChatTo': chatAdminService.getSuToChat(),
-                       'sentTime': Date.now(),
-                       'message': $scope.message,
-                       'sentSuccess': false}
-
-        chatIOService.emit('chat', message);
-
-        /** admin sent message need to keep for various su */
-        /*
-
-        $scope.adSentMessage.push('You: '+$scope.message);
-
-        $scope.message = null;
-      }
-      else if ($rootScope.suID) {
-
-        var message = {'userID': $window.sessionStorage.userID,
-                       'userRole': $window.sessionStorage.userRole,
-                       'suID': $rootScope.suID,
-                       'chatStartAt': $rootScope.ChatStartAt[$rootScope.suID],
-                       'sentTime': Date.now(),
-                       'message': $scope.message,
-                       'sentSuccess': false}
-
-        chatIOService.emit('chat', message);
-
-        $scope.adSentMessage.push('You: '+$scope.message);
-
-        $scope.message = null;
-      }
-      */
-
     }
 
 
@@ -97,17 +51,9 @@ function adChatPanelCtrl($rootScope, $scope, $window,
 
       // implement message received acknowledge
       data.sentSuccess = true;
-      console.log(data);
+
       chatIOService.emit('suMessageReceive', data);
     })
-
-    /*
-    chatIOService.on('toAdmin', function(message) {
-
-      $scope.adSentMessage.push(message);
-
-    })
-    */
 
     //chatIOService.on('fromSu', function(data) {
     chatIOService.on('toAllAdmin', function(data) {
@@ -122,14 +68,10 @@ function adChatPanelCtrl($rootScope, $scope, $window,
       /** implement message received acknowledgement */
       data.sentSuccess = true;
 
-      console.log(data);
-
       // to keep chat start at
       $rootScope.adChatStartAt[data.userID] = data.chatStartAt;
-      console.log($rootScope.adChatStartAt);
 
       chatIOService.emit('suMessageReceive', data);
 
     })
-
 }

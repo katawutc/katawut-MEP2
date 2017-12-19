@@ -12,9 +12,6 @@ module.exports = function socketIO(socket) {
 
       if (err) throw err;
 
-      console.log('at countUser_cb');
-
-      console.log('default: '+count);
       socket.broadcast.emit('defaultVisit', count);
     }
 
@@ -52,8 +49,6 @@ module.exports = function socketIO(socket) {
     function countAd_cb(err, count) {
       if (err) throw err;
 
-      console.log('admin: '+count);
-
       socket.emit('adVisit', count);
     }
 
@@ -63,8 +58,6 @@ module.exports = function socketIO(socket) {
       if (err) throw err;
 
       if (doc) {
-
-        console.log(doc);
 
         db.collection('realTimeUser')
         .find({'userRole': 'default',
@@ -82,10 +75,6 @@ module.exports = function socketIO(socket) {
     }
 
     socket.on('adConnect', function(data) {
-
-      console.log('ad: '+ data.socketID + ' connected to the server.');
-      console.log(data.socketID);
-      console.log(data);
 
       db.collection('realTimeUser')
       .findAndModify({'socketID': data.socketID},
@@ -113,8 +102,6 @@ module.exports = function socketIO(socket) {
 
       if (doc) {
 
-        console.log(doc);
-
         db.collection('realTimeUser')
         .find({'userRole': 'su',
                'status': 'live'}).count(countSu_cb);
@@ -132,8 +119,6 @@ module.exports = function socketIO(socket) {
 
       if (doc) {
 
-        console.log(doc);
-
         db.collection('realTimeUser')
         .find({'userRole': 'su',
                'status': 'live'}).count(countSu_cb);
@@ -146,10 +131,6 @@ module.exports = function socketIO(socket) {
     }
 
     socket.on('suConnect', function(data) {
-
-      console.log('su: '+ data.socketID + ' connected to the server.');
-      console.log(data.socketID);
-      console.log(data);
 
       if (data.method === 'email') {
 
@@ -181,8 +162,6 @@ module.exports = function socketIO(socket) {
       if (err) throw err;
 
       if (doc) {
-
-        console.log(doc);
 
         db.collection('realTimeUser')
         .find({'userRole': 'default',
@@ -218,9 +197,6 @@ module.exports = function socketIO(socket) {
 
       if (doc) {
 
-        console.log('at refreshSocket_cb');
-        console.log(doc);
-
         db.collection('realTimeUser')
         .find({'userRole': 'default',
                'status': 'live'}).count(countUser_cb);
@@ -236,9 +212,6 @@ module.exports = function socketIO(socket) {
     }
 
     socket.on('refreshSocket', function(data) {
-
-      console.log('at server: refreshSocket');
-      console.log(data);
 
       /** set off status to previousSocket */
       db.collection('realTimeUser')
@@ -262,8 +235,6 @@ module.exports = function socketIO(socket) {
 
       if (err) throw err;
 
-      console.log(doc);
-
       db.collection('realTimeUser')
       .find({'userRole': 'default',
              'status': 'live'}).count(countUser_cb);
@@ -280,8 +251,6 @@ module.exports = function socketIO(socket) {
 
     socket.on('logOut', function(data) {
 
-      console.log('logOut: '+ data);
-
       db.collection('realTimeUser')
       .findAndModify({'userID': data,
                       'socketID': socket.id},
@@ -294,8 +263,6 @@ module.exports = function socketIO(socket) {
 
    /** su note */
    socket.on('suNote', function(data) {
-
-     console.log(data);
 
      if (data.title === '') { data.title = 'untitled';}
 
@@ -323,8 +290,6 @@ module.exports = function socketIO(socket) {
 
       if (data.title || data.note) {
 
-        console.log(data);
-
         db.collection('suNote')
         .update({'userID': data.userID,
                   'noteTimeStart': data.noteTimeStart},
@@ -340,8 +305,6 @@ module.exports = function socketIO(socket) {
                     })
 
     socket.on('createSuNote', function(data) {
-
-      console.log(data);
 
       if (data.title === '') { data.title = 'untitled';}
 

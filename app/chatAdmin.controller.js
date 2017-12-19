@@ -34,7 +34,6 @@ function chatAdminCtrl($scope, $http, $routeParams,
     }
 
     /** implement admin select user to chat to */
-
     $scope.adminChatTo = function(userName, userID) {
 
       /** set suSecondNavBarMessage */
@@ -47,6 +46,12 @@ function chatAdminCtrl($scope, $http, $routeParams,
 
       /** select the user to chat to */
       chatAdminService.selectUserToChat(userID);
-
     }
+
+    /** find way to check if there is false sentSuccess message in the DB */
+    /**
+      * 1. to display different button type in the chatUserList 
+      */
+
+
 }

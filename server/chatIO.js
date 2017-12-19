@@ -106,14 +106,9 @@ module.exports = function chatIO(socket) {
 
   });
 
-
-
   function refreshChatSocket_cb(err, doc) {
 
     if (err) throw err;
-
-    console.log('at refreshChatSocket_cb');
-    console.log(doc);
 
     db.collection('suChatSocket')
     .find({'userRole': 'su',
@@ -124,9 +119,6 @@ module.exports = function chatIO(socket) {
   }
 
   socket.on('refreshChatSocket', function(data) {
-
-    console.log('at server: refreshChatSocket');
-    console.log(data);
 
     /** set off status to previousSocket */
     db.collection('suChatSocket')
@@ -195,19 +187,8 @@ module.exports = function chatIO(socket) {
 
   socket.on('chat', function(data) {
 
-    /** the data received should have logic to differentiate \
-      * the admin and su to emit the su ID event
-      */
-
     /** admin chat to the user first */
-    //if (data.userRole === 'ad' && data.adminChatTo) { //adminChatTo is userID admin chats to
     if (data.userRole === 'ad' && data.suID) {
-
-        console.log('at adminChatTo block');
-        console.log(data.suID);
-        console.log(socket.id); //admin socketID
-
-        console.log(data);
 
         db.collection('suChat')
         .findAndModify({'userID': data.suID,
@@ -218,18 +199,10 @@ module.exports = function chatIO(socket) {
         function(err, doc) {
           if (err) throw err;
 
-          console.log('save su chat');
-          console.log(doc);
-
-
-        socket.to(data.suID).emit(data.suID, data);
+          socket.to(data.suID).emit(data.suID, data);
       })
     }
     else if (data.userRole === 'su' && data.adID) {
-
-      console.log('su and adID');
-
-      console.log(data);
 
       db.collection('suChat')
       .findAndModify({'userID': data.userID,
@@ -238,24 +211,16 @@ module.exports = function chatIO(socket) {
                       {$push: {'message': data}},
                       {new: true, upsert: true}, /*saveSuChat_cb*/
       function(err, doc) {
+
         if (err) throw err;
 
-        console.log('save su chat');
-        console.log(doc);
+        socket.to('adminRoom').emit(data.adID, data);
 
-      //socket.to('adminRoom').emit('toAdmin', 'su: '+ data.message);
-      socket.to('adminRoom').emit(data.adID, data);
-
-    })
+      })
     }
 
     /** su chat to the admin first */
     if (data.userRole === 'su' && !data.adID) {
-
-      console.log('su chat to the admin first');
-      console.log('su and no adID');
-
-      console.log(data);
 
       // save chat 1st before emitting event
       db.collection('suChat')
@@ -267,63 +232,17 @@ module.exports = function chatIO(socket) {
       function(err, doc) {
         if (err) throw err;
 
-        console.log('save su chat');
-        console.log(doc);
-
         // emit to admin room
-        //socket.to('adminRoom').emit('fromSu', data);
         socket.to('adminRoom').emit('toAllAdmin', data);
 
       });
 
     }
-    /*
-    else if (data.userRole === 'ad' && data.suID) {
-
-      console.log(data);
-
-      /** to save chat message from admin and emit acknowledgement here */
-      /*
-      db.collection('suChat')
-      .findAndModify({'userID': data.suID,
-                      'chatStartAt': data.chatStartAt},
-                      [],
-                      {$push: {'message': data}},
-                      {new: true, upsert: true}, /*saveSuChat_cb*/
-                      /*
-      function(err, doc) {
-        if (err) throw err;
-
-        console.log('save su chat');
-        console.log(doc);
-
-        // emit to admin room
-        //socket.to(data.suID).emit('fromAdmin', 'admin: '+data.message);
-        socket.to(data.suID).emit('fromAdmin', data);
-        //socket.to(data.suID).emit(data.suID, data);
-      });
-
-
-
-    } */
   })
 
   socket.on('suMessageReceive', function(data) {
 
     if (data.sentSuccess === true) {
-
-      console.log('at server: suMessageReceive');
-
-      console.log(data);
-
-      /**
-      var message = {'userID': $window.sessionStorage.userID,
-                     'userRole': $window.sessionStorage.userRole,
-                     'chatStartAt': $rootScope.chatStartAt,
-                     'sentTime': Date.now(),
-                     'message': $scope.message,
-                     'sentSuccess': false}
-      */
 
       db.collection('suChat')
       .findAndModify({'userID': data.userID,
@@ -339,10 +258,6 @@ module.exports = function chatIO(socket) {
   socket.on('adMessageReceive', function(data) {
 
     if (data.sentSuccess === true) {
-
-      console.log('at server: adMessageReceive');
-
-      console.log(data);
 
       db.collection('suChat')
       .findAndModify({'userID': data.suID,

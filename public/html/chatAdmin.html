@@ -21,6 +21,8 @@
           <td>{{ user.userName }}</td>
           <td>{{ user.userID }}</td>
           <td>{{ user.userRole }}</td>
+          <!-- to check here if there are messages false sentSuccess -->
+          <!-- then display different button type with message label -->
           <td><button ng-click='adminChatTo(user.userName, user.userID)'>chat</button>
         </tr>
       </tbody>

@@ -6,6 +6,8 @@ module.exports = function getAdminChatUserList(req, res) {
 
   // to put the authority checking here
 
+  /** to do pagination similar to getLoginHistoryPage.js */
+
   if (req.user.userRole !== 'ad' ||
         req.user.userID !== req.params.userID) {
 

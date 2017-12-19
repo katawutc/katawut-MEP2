@@ -16,9 +16,7 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
     $rootScope.newChat = function() {
 
-      console.log('new chat');
       $rootScope.chatStartAt = Date.now();
-      console.log($rootScope.chatStartAt);
 
       /** new chat clear up chatMessage in sessionStorage */
       $rootScope.chatMessage = [];
@@ -27,19 +25,15 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
     $scope.sendMessage = function() {
 
         /** need to find chat start at time for suChat recording */
-        //if ($rootScope.sentMessage.length === 0) {
         if ($rootScope.chatMessage.length === 0) {
 
           $rootScope.chatStartAt = Date.now();
-          console.log($rootScope.chatStartAt);
         }
 
-        //if ($rootScope.adminSocketID) {
         if ($rootScope.adID) {
 
           var message = {'userID': $window.sessionStorage.userID,
                          'userRole': $window.sessionStorage.userRole,
-                      /* 'adminSocketID': $rootScope.adminSocketID, // need to change to admin userID */
                          'adID': $rootScope.adID,
                          'chatStartAt': $rootScope.chatStartAt,
                          'sentTime': Date.now(),
@@ -48,7 +42,6 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
           chatIOService.emit('chat', message);
 
-          //$rootScope.sentMessage.push('You: '+$scope.message);
           $rootScope.chatMessage.push('You: '+$scope.message);
 
           $scope.message = null;
@@ -64,11 +57,7 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
         chatIOService.emit('chat', message);
 
-        //$rootScope.sentMessage.push('You: '+$scope.message);
         $rootScope.chatMessage.push('You: '+$scope.message);
-
-        console.log('no adID');
-        console.log(message);
 
         $scope.message = null;
       }
@@ -86,15 +75,13 @@ function suChatPanelCtrl($rootScope, $scope, $window, chatIOService) {
 
       data.sentSuccess = true;
 
-      console.log(data);
-      
       chatIOService.emit('adMessageReceive', data);
     })
 
     chatIOService.on('fromAdmin', function(data) {
 
       data.sentSuccess = true;
-      console.log(data);
+
       chatIOService.emit('adMessageReceive', data);
 
       $rootScope.chatMessage.push('Admin: '+data.message);
