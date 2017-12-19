@@ -359,3 +359,9 @@ app.get('/liveSu/:userID',
   passport.authenticate('jwt', {session: false}),
   require('./server/checkAdminAuthority'),
   require('./server/liveSu'));
+
+/** get adminToReply list */
+app.get('/adminToReply/:userID',
+  passport.authenticate('jwt', {session: false}),
+  require('./server/checkAdminAuthority'),
+  require('./server/getAdminToReplyList'));

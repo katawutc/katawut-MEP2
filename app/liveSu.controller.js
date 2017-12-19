@@ -10,7 +10,7 @@ function liveSuCtrl($scope, $http, $routeParams,
                     $window, $location, $rootScope,
                     liveSu,
                     chatIOService,
-                       adSecondNavBarMessageService) {
+                    adSecondNavBarMessageService) {
 
      /** set suSecondNavBarMessage */
      var message = 'LIVE users';
