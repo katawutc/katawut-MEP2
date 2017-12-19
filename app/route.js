@@ -432,4 +432,14 @@ angular.module('app')
         }
       }
     })
+    /** admin to reply false sentSuccess message from su*/
+    .when('/adminToReply', {
+      templateUrl : 'adminToReply.html',
+      controller : 'adminToReplyCtrl',
+      resolve : {
+        toReplyList : function(adminToReplyService) {
+          return adminToReplyService.getToReplyList();
+        }
+      }
+    })
 });
