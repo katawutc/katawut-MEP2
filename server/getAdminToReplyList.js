@@ -13,6 +13,6 @@ module.exports = function getAdminToReplyList(req, res) {
   }
 
   db.collection('suChat')
-  .find({'message': {$elemMatch:{'sentSuccess': false}}})
+  .find({'message': {$elemMatch:{'sentSuccess': false}}}, {'userID':1})
   .toArray(getAdminToReplyList_cb);
 }

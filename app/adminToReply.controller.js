@@ -13,4 +13,6 @@ function adminToReplyCtrl($scope,
   /** */
 
   console.log(toReplyList);
+
+  $scope.toReplyList = toReplyList;
 }

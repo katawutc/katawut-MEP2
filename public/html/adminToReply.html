@@ -7,6 +7,21 @@
 
   <div class="col-sm-10">
 
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>user ID</th>
+          <th>reply</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in toReplyList">
+          <td>{{ user.userID }}</td>
+          <td><button ng-click=''>reply</button>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
 
 <div class="col-sm-1"></div>
