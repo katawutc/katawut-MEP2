@@ -96,6 +96,7 @@ angular.module('app')
         newSuTestID : function (newSuTestIDService){
           return newSuTestIDService.generateNewSuTestID();
         }
+        // to add resolve on false sentSuccess admin messages
       }
     })
     .when("/dashboard/pu/:userID", {
