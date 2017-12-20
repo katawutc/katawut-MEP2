@@ -19,6 +19,8 @@ function dashboardAdCtrl($scope, $window, $rootScope,
 
     /** initialize admin chat panel */
     $rootScope.showAdChatPanel = false;
+    $rootScope.adSentMessage = [];
+    /** */
 
     /** initialize dashboard real time user data */
     $scope.userVisitMEP = defaultUser;
