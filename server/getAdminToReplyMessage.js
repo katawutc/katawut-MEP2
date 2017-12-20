@@ -12,7 +12,7 @@ module.exports = function getAdminToReplyMessage(req, res) {
 
   db.collection('suChat')
   .find({'userID': req.params.suID,
-         'chatStartAt': parseInt(req.params.chatStartAt)}, {'message': 1})
+         'chatStartAt': parseInt(req.params.chatStartAt)})
   .toArray(getAdminToReplyMessage_cb);
 
 }

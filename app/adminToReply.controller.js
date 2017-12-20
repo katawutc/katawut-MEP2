@@ -2,12 +2,12 @@ angular.module('app')
 .controller('adminToReplyCtrl',
            ['$scope', '$window', '$http', '$rootScope',
             'toReplyList', 'adSecondNavBarMessageService',
-            'chatIOService',
+            'chatIOService', 'adminToReplyService',
              adminToReplyCtrl]);
 
 function adminToReplyCtrl($scope, $window, $http, $rootScope,
                           toReplyList, adSecondNavBarMessageService,
-                          chatIOService) {
+                          chatIOService, adminToReplyService) {
 
   /** need to implement $scope.adSentMessage to channel for each su user */
   //$scope.adSentMessage = [];
@@ -43,11 +43,15 @@ function adminToReplyCtrl($scope, $window, $http, $rootScope,
           // open the admin chat dialog
           $rootScope.showAdChatPanel = true;
 
+          console.log(response.data[0].userID);
+
+          // set adminReplySuID and chatStartAt
+          $rootScope.adminReplySuID = response.data[0].userID;
+          $rootScope.adChatStartAt[$rootScope.adminReplySuID] = response.data[0].chatStartAt;
+
           var message = response.data[0].message;
 
           // populate the message
-          // $scope.adSentMessage.push('You: '+$scope.message);
-
           for (var i = 0; i<message.length; i++) {
 
             if (message[i].userRole === 'su') {
@@ -66,6 +70,10 @@ function adminToReplyCtrl($scope, $window, $http, $rootScope,
               message[i].sentSuccess = true;
               chatIOService.emit('adMessageReceive', message[i]);
             }
+
+            // to update the adminToReply list
+
+
           }
 
         },function errorCallback(response){

@@ -33,7 +33,26 @@ function adChatPanelCtrl($rootScope, $scope, $window,
         var message = {'userID': $window.sessionStorage.userID,
                        'userRole': $window.sessionStorage.userRole,
                        'suID': $rootScope.selectedSuID,
-                       'chatStartAt': $rootScope.adChatStartAt[$rootScope.selectedSuID],
+                       'chatStartAt': $rootScope.adChatStartAt[$rootScope.selectedSuID], // still a puzzle !
+                       'sentTime': Date.now(),
+                       'message': $scope.message,
+                       'sentSuccess': false}
+
+         chatIOService.emit('chat', message);
+
+         //$scope.adSentMessage.push('You: '+$scope.message);
+         $rootScope.adSentMessage.push('You: '+$scope.message);
+
+         $scope.message = null;
+
+         // to add logic on false sentSuccess adminToReply
+      }
+      else if ($rootScope.adminReplySuID) {
+
+        var message = {'userID': $window.sessionStorage.userID,
+                       'userRole': $window.sessionStorage.userRole,
+                       'suID': $rootScope.adminReplySuID,
+                       'chatStartAt': $rootScope.adChatStartAt[$rootScope.adminReplySuID], // still a puzzle !
                        'sentTime': Date.now(),
                        'message': $scope.message,
                        'sentSuccess': false}
