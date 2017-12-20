@@ -1,10 +1,10 @@
 angular.module('app')
 .controller('adminToReplyCtrl',
-           ['$scope',
+           ['$scope', '$window', '$http',
             'toReplyList', 'adSecondNavBarMessageService',
              adminToReplyCtrl]);
 
-function adminToReplyCtrl($scope,
+function adminToReplyCtrl($scope, $window, $http,
                           toReplyList, adSecondNavBarMessageService) {
 
   /** set suSecondNavBarMessage */
@@ -26,5 +26,25 @@ function adminToReplyCtrl($scope,
       * 2. open chat dialog to reply
       * 3. set message as true sentSuccess
       */
+
+        var getMessageUrl = '/adminToReply/message/'+
+                              $window.sessionStorage.userID+'/'+  // adID
+                              userID+'/'+                         // suID
+                              chatStartAt;
+
+        $http({
+          url: getMessageUrl,
+          method: 'GET',
+          headers: {
+            'Authorization': 'JWT ' + $window.sessionStorage.token
+            }
+        }).then(function successCallback(response) {
+
+          console.log(response.data);
+
+        },function errorCallback(response){
+
+        });
+
   }
 }
