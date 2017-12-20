@@ -17,6 +17,10 @@ function dashboardSuCtrl($scope, $http, $location, $window, $routeParams, $rootS
     suSecondNavBarMessageService.setMessage(message);
     /** */
 
+    /** to implement logic false sentSuccess messages from admin */
+
+    /** */
+
 
     /** dashboardData service duplicate with account.admn.service
      *  refactor to a new service name to be generic e.g. suAccountData service

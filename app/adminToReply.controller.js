@@ -40,10 +40,11 @@ function adminToReplyCtrl($scope, $window, $http, $rootScope,
             }
         }).then(function successCallback(response) {
 
+          // set 2nd nav bar message
+          adSecondNavBarMessageService.setMessage('Replying to: '+response.data[0].userID);
+
           // open the admin chat dialog
           $rootScope.showAdChatPanel = true;
-
-          console.log(response.data[0].userID);
 
           // set adminReplySuID and chatStartAt
           $rootScope.adminReplySuID = response.data[0].userID;
