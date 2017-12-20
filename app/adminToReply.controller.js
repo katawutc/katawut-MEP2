@@ -2,10 +2,12 @@ angular.module('app')
 .controller('adminToReplyCtrl',
            ['$scope', '$window', '$http', '$rootScope',
             'toReplyList', 'adSecondNavBarMessageService',
+            'chatIOService',
              adminToReplyCtrl]);
 
 function adminToReplyCtrl($scope, $window, $http, $rootScope,
-                          toReplyList, adSecondNavBarMessageService) {
+                          toReplyList, adSecondNavBarMessageService,
+                          chatIOService) {
 
   /** need to implement $scope.adSentMessage to channel for each su user */
   //$scope.adSentMessage = [];
@@ -38,6 +40,9 @@ function adminToReplyCtrl($scope, $window, $http, $rootScope,
             }
         }).then(function successCallback(response) {
 
+          // open the admin chat dialog
+          $rootScope.showAdChatPanel = true;
+
           var message = response.data[0].message;
 
           // populate the message
@@ -47,20 +52,21 @@ function adminToReplyCtrl($scope, $window, $http, $rootScope,
 
             if (message[i].userRole === 'su') {
 
-              console.log(message[i].message);
-
               $rootScope.adSentMessage.push('su: '+message[i].message);
+
+              // to update the sentSuccess status
+              message[i].sentSuccess = true;
+              chatIOService.emit('suMessageReceive', message[i]);
             }
             else if (message[i].userRole === 'ad') {
 
-              console.log(message[i].message);
-
               $rootScope.adSentMessage.push('You: '+message[i].message);
+
+              // to update the sentSuccess status
+              message[i].sentSuccess = true;
+              chatIOService.emit('adMessageReceive', message[i]);
             }
           }
-
-          // open the admin chat dialog
-          $rootScope.showAdChatPanel = true;
 
         },function errorCallback(response){
 
