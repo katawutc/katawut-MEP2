@@ -17,7 +17,8 @@
       <tbody>
         <tr ng-repeat="user in toReplyList">
           <td>{{ user.userID }}</td>
-          <td><button ng-click=''>reply</button>
+          <td><button type="button" class="btn btn-success"
+              ng-click='adminReply(user.userID, user.chatStartAt)'>reply</button>
         </tr>
       </tbody>
     </table>
